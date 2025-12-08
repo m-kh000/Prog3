@@ -41,4 +41,100 @@ public class Task {
 
     // public void cancelTask() {
     // }
+
+    // GETTERS : 
+
+    public ProductLine getAssignedLine() {
+        return assignedLine;
+    }
+
+    public double getCompletionPercentage() {
+        return completionPercentage;
+    }
+    
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public Factory getFactory() {
+        return factory;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static int getNextId() {
+        return nextId;
+    }
+    
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getReady() {
+        return ready;
+    }
+
+    public int getRequiredQuantity() {
+        return requiredQuantity;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    // SETTERS : 
+
+    public void setAssignedLine(ProductLine assignedLine) {
+        this.assignedLine = assignedLine;
+    }
+
+    public void setCompletionPercentage(double completionPercentage) {
+        this.completionPercentage = completionPercentage;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public void setFactory(Factory factory) {
+        this.factory = factory;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static void setNextId(int nextId) {
+        Task.nextId = nextId;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setRequiredQuantity(int requiredQuantity) {
+        this.requiredQuantity = requiredQuantity;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

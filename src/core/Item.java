@@ -51,4 +51,56 @@ public class Item {
     public boolean isUnderMin() { 
         return quantityAvailable < minQuantity;
     }
+
+    // GETTERS : 
+
+    public StringBuffer getCategory() {
+        return category;
+    }
+
+    public StringBuffer getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getMinQuantity() {
+        return minQuantity;
+    }
+
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
+    }
+
+    // SETTERS : 
+
+    public void setCategory(StringBuffer category) {
+        this.category = category;
+    }
+
+    public void setMinQuantity(int minQuantity) {
+        this.minQuantity = minQuantity;
+    }
+
+    public void setName(StringBuffer name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setQuantityAvailable(int quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
+    }
 }

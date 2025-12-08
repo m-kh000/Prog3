@@ -18,6 +18,13 @@ public class Product {
         this.orderedIn = new HashSet<>();
         this.tasks = new HashSet<>();
     }
+    public Product(String name,HashMap<Item, Integer> requiredItems,HashSet<LocalDate> orderedIn,HashSet<Task> tasks){
+        this.id = nextId++;
+        this.name = name;
+        this.orderedIn = orderedIn;
+        this.requiredItems = requiredItems;
+        this.tasks = tasks;
+    }
 
     public void addItem(Item i, int quantity) {
         requiredItems.put(i, quantity);
@@ -30,7 +37,39 @@ public class Product {
             return false;
         }
 
+    // PREVIEWS : 
     public Object[] previewTasks() {
         return tasks.toArray();
+    }
+    // GETTERS : 
+    
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public HashSet<LocalDate> getOrderedIn() {
+        return orderedIn;
+    }
+
+    public HashMap<Item, Integer> getRequiredItems() {
+        return requiredItems;
+    }
+
+    public HashSet<Task> getTasks() {
+        return tasks;
+    }
+
+    // SETTERS : 
+    
+    public void setName(String name) {
+        this.name = name;
     }
 }

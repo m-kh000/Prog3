@@ -14,6 +14,12 @@ public class Factory {
         this.allLines = new HashSet<>();
         this.notes = new StringBuffer();
     }
+    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,StringBuffer notes) {
+        this.allItems = allItems;
+        this.allProducts = allProducts;
+        this.allLines = allLines;
+        this.notes = notes;
+    }
 
     synchronized public void add(Product p) {
         allProducts.add(p);
@@ -34,6 +40,8 @@ public class Factory {
     public void changeStatusOfLine(String newStatus) { 
         // this is also yours
     }
+    
+    // PREVIEWS : 
 
     synchronized public ProductLine[] previewLines() {
         return allLines.toArray(new ProductLine[allLines.size()]);
@@ -61,6 +69,30 @@ public class Factory {
 
     synchronized public void previewTasks(Product p) {
         p.previewTasks();
+    }
+    
+    // GETTERS : 
+
+    public HashSet<Item> getAllItems() {
+        return allItems;
+    }
+
+    public HashSet<ProductLine> getAllLines() {
+        return allLines;
+    }
+
+    public HashSet<Product> getAllProducts() {
+        return allProducts;
+    }
+
+    public StringBuffer getNotes() {
+        return notes;
+    }
+
+    // SETTERS :
+
+    public void setNotes(StringBuffer notes) {
+        this.notes = notes;
     }
 
     // TODO : discuss resetting items
