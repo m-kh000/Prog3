@@ -8,7 +8,7 @@ public class Login {
 
         //fetch
         String managerpass = "1234";//passwords
-        String supervisorpass = "123";
+        String supervisorpass = "123";;
 
         Dimension p = new Dimension(100, 100);
 
