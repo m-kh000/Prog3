@@ -82,6 +82,15 @@ public class Item {
         return quantityAvailable;
     }
 
+    public String getFileFormat() {
+        return this.getId() + ", "
+                + this.getName() + ", "
+                + this.getCategory() + ", "
+                + this.getPrice() + ", "
+                + this.getQuantityAvailable() + ", "
+                + this.getMinQuantity();
+    }
+
     // SETTERS : 
 
     public void setCategory(StringBuffer category) {
