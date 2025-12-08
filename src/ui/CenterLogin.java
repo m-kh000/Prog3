@@ -63,7 +63,7 @@ public class CenterLogin extends JPanel {
         loginButton.addActionListener(e -> {
             if (manager.isSelected() && managerpass.equals(new String(passwordbox.getPassword()))) {
                 frame.getContentPane().remove(this);
-                frame.add(new CenterManager(), BorderLayout.CENTER);
+                frame.add(new CenterManager(frame), BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 JOptionPane.showMessageDialog(null, "Welcome Manager!");
@@ -80,3 +80,7 @@ public class CenterLogin extends JPanel {
         });
     }
 }
+/*
+in addproductline add lableboxes as follows(name,status())
+in addproduct add lableboxes as follows()
+*/
