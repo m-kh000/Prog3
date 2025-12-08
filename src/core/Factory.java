@@ -15,78 +15,93 @@ public class Factory {
         this.notes = new StringBuffer();
     }
 
-    public void add(Product p) {
+    synchronized public void add(Product p) {
+        allProducts.add(p);
     }
 
-    public void add(Item i) {
+    synchronized public void add(Item i) {
+        allItems.add(i);
     }
 
-    public void add(Task t) {
+    public void add(Task t) { 
+        // joseph this is yours to deal with, take it to your class
     }
 
-    public void add(ProductLine pl) {
+    synchronized public void add(ProductLine pl) {
+        allLines.add(pl);
     }
 
-    public void changeStatusOfLine(String newStatus) {
+    public void changeStatusOfLine(String newStatus) { 
+        // this is also yours
     }
 
-    public void previewLines() {
+    synchronized public ProductLine[] previewLines() {
+        return allLines.toArray(new ProductLine[allLines.size()]);
     }
 
-    public void previewNotes() {
+    synchronized public StringBuffer previewNotes() {
+        return notes;
     }
 
-    public void previewItems() {
+    synchronized public Item[] previewItems() {
+        return allItems.toArray(new Item[allItems.size()]);
     }
 
-    public void previewProducts() {
+    synchronized public Product[] previewProducts() {
+        return allProducts.toArray(new Product[allProducts.size()]);
     }
 
-    public void previewProducts(ProductLine pl) {
+    synchronized public void previewProducts(ProductLine pl) {
+        pl.previewProducts();
     }
 
-    public void previewTasks(ProductLine pl) {
+    synchronized public void previewTasks(ProductLine pl) {
+        pl.previewTasks();
     }
 
-    public void previewTasks(Product p) {
+    synchronized public void previewTasks(Product p) {
+        p.previewTasks();
     }
 
-    public void resetItem() {
+    // TODO : discuss resetting items
+        public void resetItem() {
+        }
+
+    synchronized public void deleteItem(Item i) {
+        allItems.remove(i);
     }
 
-    public void deleteItem(Item i) {
+    public void cancelTask(Task t) { 
+        // this is also yours
     }
+    // TODO : discuss filtering
+        public void filterItemsByName() {
+        }
 
-    public void cancelTask(Task t) {
-    }
+        public void filterItemsByCategory() {
+        }
 
-    public void filterItemsByName() {
-    }
+        public void filterItemsByAvailable() {
+        }
 
-    public void filterItemsByCategory() {
-    }
+        public void filterItemsByOut() {
+        }
 
-    public void filterItemsByAvailable() {
-    }
+        public void filterItemsByUnderMin() {
+        }
 
-    public void filterItemsByOut() {
-    }
+        public void filterTasksByInprogress() {
+        }
 
-    public void filterItemsByUnderMin() {
-    }
+        public void filterTasksByCompleted() {
+        }
 
-    public void filterTasksByInprogress() {
-    }
-
-    public void filterTasksByCompleted() {
-    }
-
-    public void filterLinesByProduct(Product p) {
-    }
-
-    public void exportToFile() {
-    }
-
-    public void topOrderBetween(Date date1, Date date2) {
-    }
+        public void filterLinesByProduct(Product p) {
+        }
+    // TODO : discuss the method of I/O intended
+        public void exportToFile() {
+        }
+    // TODO : demand clarification on the purpose of this method
+        public void topOrderBetween(Date date1, Date date2) {
+        }
 }

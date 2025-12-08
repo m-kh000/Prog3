@@ -19,11 +19,18 @@ public class Product {
         this.tasks = new HashSet<>();
     }
 
-    public void add(int quantity) {}
+    public void addItem(Item i, int quantity) {
+        requiredItems.put(i, quantity);
+    }
 
     public void order(LocalDate date) {}
 
-    public boolean wasOrderedBetween(LocalDate start, LocalDate end) { return false; }
+    // TODO : discuss the purpose of this method
+        public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
+            return false;
+        }
 
-    public void previewTasks() {}
+    public Object[] previewTasks() {
+        return tasks.toArray();
+    }
 }

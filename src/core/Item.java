@@ -2,13 +2,13 @@ package core;
 public class Item {
     private static int nextId = 1;
     private int id;
-    private String name;
-    private String category;
+    private StringBuffer name;
+    private StringBuffer category;
     private double price;
     private int quantityAvailable;
     private int minQuantity;
 
-    public Item(String name, String category, double price, int quantityAvailable, int minQuantity) {
+    public Item(StringBuffer name, StringBuffer category, double price, int quantityAvailable, int minQuantity) {
         this.id = nextId++;
         this.name = name;
         this.category = category;
@@ -17,25 +17,38 @@ public class Item {
         this.minQuantity = minQuantity;
     }
 
-    public void take(int quantity) {}
+    public void take(int quantity) {
+        if(!canTake(quantity)){
+            return;
+        }
+        quantityAvailable -= quantity;
+    }
 
-    public boolean canTake(int quantity) { return false; }
+    public boolean canTake(int quantity) {
+        return quantity <= quantityAvailable;
+    }
 
-    public boolean add(int quantity) { return false; }
+    public void add(int quantity) {
+        quantityAvailable += quantity;
+    }
+    // TODO : discuss this methods purpose
+        public void preview() {
+            
+        }
 
-    public boolean preview() { return false; }
+    public void resetCategoryPriceMinQuantity(int newQuantity) { 
+        minQuantity = newQuantity;
+    }
 
-    public boolean resetCategoryPriceMinQuantity() { return false; }
+    public boolean isAvailable() { 
+        return quantityAvailable != 0;
+    }
 
-    public boolean delete() { return false; }
+    public boolean isOut() { 
+        return quantityAvailable == 0;
+    }
 
-    public boolean isName(String name) { return false; }
-
-    public boolean isCategory(String category) { return false; }
-
-    public boolean isAvailable() { return false; }
-
-    public boolean isOut() { return false; }
-
-    public boolean isUnderMin() { return false; }
+    public boolean isUnderMin() { 
+        return quantityAvailable < minQuantity;
+    }
 }
