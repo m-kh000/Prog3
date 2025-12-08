@@ -1,3 +1,4 @@
+package ui;
 
 import java.awt.*;
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class UI {
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 
+        // Add padding panels
         JPanel paddings1 = new JPanel();
         JPanel paddings2 = new JPanel();
         JPanel paddings3 = new JPanel();
@@ -27,7 +29,10 @@ public class UI {
         frame.add(paddings3, BorderLayout.EAST);
         frame.add(paddings4, BorderLayout.WEST);
 
+        // Add login panel to center
         frame.add(new CenterLogin(frame), BorderLayout.CENTER);
         frame.setVisible(true);
     }
+
 }
+

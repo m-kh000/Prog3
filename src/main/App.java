@@ -1,6 +1,6 @@
 package main;
 
-import ui.Login;
+import ui.UI;
 
 public class App {
     public static void main(String[] args) throws Exception {
