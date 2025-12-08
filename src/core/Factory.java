@@ -14,79 +14,126 @@ public class Factory {
         this.allLines = new HashSet<>();
         this.notes = new StringBuffer();
     }
-
-    public void add(Product p) {
+    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,StringBuffer notes) {
+        this.allItems = allItems;
+        this.allProducts = allProducts;
+        this.allLines = allLines;
+        this.notes = notes;
     }
 
-    public void add(Item i) {
+    synchronized public void add(Product p) {
+        allProducts.add(p);
     }
 
-    public void add(Task t) {
+    synchronized public void add(Item i) {
+        allItems.add(i);
     }
 
-    public void add(ProductLine pl) {
+    public void add(Task t) { 
+        // joseph this is yours to deal with, take it to your class
     }
 
-    public void changeStatusOfLine(String newStatus) {
+    synchronized public void add(ProductLine pl) {
+        allLines.add(pl);
     }
 
-    public void previewLines() {
+    public void changeStatusOfLine(String newStatus) { 
+        // this is also yours
+    }
+    
+    // PREVIEWS : 
+
+    synchronized public ProductLine[] previewLines() {
+        return allLines.toArray(new ProductLine[allLines.size()]);
     }
 
-    public void previewNotes() {
+    synchronized public StringBuffer previewNotes() {
+        return notes;
     }
 
-    public void previewItems() {
+    synchronized public Item[] previewItems() {
+        return allItems.toArray(new Item[allItems.size()]);
     }
 
-    public void previewProducts() {
+    synchronized public Product[] previewProducts() {
+        return allProducts.toArray(new Product[allProducts.size()]);
     }
 
-    public void previewProducts(ProductLine pl) {
+    synchronized public void previewProducts(ProductLine pl) {
+        pl.previewProducts();
     }
 
-    public void previewTasks(ProductLine pl) {
+    synchronized public void previewTasks(ProductLine pl) {
+        pl.previewTasks();
     }
 
-    public void previewTasks(Product p) {
+    synchronized public void previewTasks(Product p) {
+        p.previewTasks();
+    }
+    
+    // GETTERS : 
+
+    public HashSet<Item> getAllItems() {
+        return allItems;
     }
 
-    public void resetItem() {
+    public HashSet<ProductLine> getAllLines() {
+        return allLines;
     }
 
-    public void deleteItem(Item i) {
+    public HashSet<Product> getAllProducts() {
+        return allProducts;
     }
 
-    public void cancelTask(Task t) {
+    public StringBuffer getNotes() {
+        return notes;
     }
 
-    public void filterItemsByName() {
+    // SETTERS :
+
+    public void setNotes(StringBuffer notes) {
+        this.notes = notes;
     }
 
-    public void filterItemsByCategory() {
+    // TODO : discuss resetting items
+        public void resetItem() {
+        }
+
+    synchronized public void deleteItem(Item i) {
+        allItems.remove(i);
     }
 
-    public void filterItemsByAvailable() {
+    public void cancelTask(Task t) { 
+        // this is also yours
     }
+    // TODO : discuss filtering
+        public void filterItemsByName() {
+        }
 
-    public void filterItemsByOut() {
-    }
+        public void filterItemsByCategory() {
+        }
 
-    public void filterItemsByUnderMin() {
-    }
+        public void filterItemsByAvailable() {
+        }
 
-    public void filterTasksByInprogress() {
-    }
+        public void filterItemsByOut() {
+        }
 
-    public void filterTasksByCompleted() {
-    }
+        public void filterItemsByUnderMin() {
+        }
 
-    public void filterLinesByProduct(Product p) {
-    }
+        public void filterTasksByInprogress() {
+        }
 
-    public void exportToFile() {
-    }
+        public void filterTasksByCompleted() {
+        }
 
-    public void topOrderBetween(Date date1, Date date2) {
-    }
+        public void filterLinesByProduct(Product p) {
+        }
+    // TODO : discuss the method of I/O intended
+        public void exportToFile() {
+        }
+    // TODO : demand clarification on the purpose of this method
+        public void topOrderBetween(Date date1, Date date2) {
+        }
 }
