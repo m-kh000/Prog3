@@ -1,3 +1,4 @@
+package core;
 public class Item {
     private static int nextId = 1;
     private int id;
