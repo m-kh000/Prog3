@@ -1,23 +1,28 @@
 package core;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 public class Factory {
     private HashSet<Item> allItems;
     private HashSet<Product> allProducts;
     private HashSet<ProductLine> allLines;
+    private List<User> users;
     private StringBuffer notes;
 
     public Factory() {
         this.allItems = new HashSet<>();
         this.allProducts = new HashSet<>();
         this.allLines = new HashSet<>();
+        this.users = new ArrayList<>();
         this.notes = new StringBuffer();
     }
-    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,StringBuffer notes) {
+    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,StringBuffer notes) {
         this.allItems = allItems;
         this.allProducts = allProducts;
         this.allLines = allLines;
+        this.users = users;
         this.notes = notes;
     }
 
@@ -32,7 +37,11 @@ public class Factory {
     public void add(Task t) { 
         // joseph this is yours to deal with, take it to your class
     }
-
+    
+    public void addUser(User u){
+        users.add(u);
+    }
+    
     synchronized public void add(ProductLine pl) {
         allLines.add(pl);
     }
@@ -62,7 +71,7 @@ public class Factory {
     synchronized public void previewProducts(ProductLine pl) {
         pl.previewProducts();
     }
-
+    
     synchronized public void previewTasks(ProductLine pl) {
         pl.previewTasks();
     }
@@ -85,9 +94,14 @@ public class Factory {
         return allProducts;
     }
 
+    public List<User> getUsersList() {
+        return this.users;
+    }
+
     public StringBuffer getNotes() {
         return notes;
     }
+    
 
     // SETTERS :
 
