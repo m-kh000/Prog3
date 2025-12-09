@@ -1,15 +1,23 @@
 package utils;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
+import core.Factory;
+import core.Item;
+import core.User;
+
 public class FileUtils {
-    /**
+    private static final Object FILE_LOCK = new Object();
+
+    private static final File USERS_FILE = new File("./files/Users.txt");
+    private static final File ITEMS_FILE = new File("./files/Items.txt");
+
+    /*
      * Reads the data from a provided file.
      * 
      * @param file the path to the file
@@ -19,7 +27,8 @@ public class FileUtils {
      * 
      * @throws FileNotFoundException if there is no file with the provided path
      */
-    public static List<String> readFile(String filePath) throws FileNotFoundException {
+    /*
+    public static List<String> readFile(String filePath, Class<?> type) throws FileNotFoundException {
         File file = new File(filePath);
         
         if (!file.exists())
@@ -40,38 +49,71 @@ public class FileUtils {
             return null;
         }
     }
+    */
 
     /**
-     * Creates a file and write the specified data on it 
-     * or append the data to an existing file.
+     * This method saves all users in the users list in the provided factory.
+     * 
      * <p>
-     *      The writing process is atomic, if any exception happend then
-     *      no data will be added to the file at all.
+     * Writes the data to ./files/Users.txt using a {@code BufferedWriter} that wraps a {@code FileWriter}
+     * in a class level synchronization to make the writing process thread safe.
+     * </p>
+     * <p>
+     * This method automatically creates the Users.txt file with its parent directories 
+     * if it does not exist.
      * </p>
      * 
-     * @param filePath the path to the file
-     * @param data the data to write
+     * @param factory the factory that holds the users list
      */
-    public static void saveFile(String filePath, String data) {
-        /* 
-         *                     ------------ IMPORTANT ------------
-         * Atomic File Replacement: For ensuring that a file is either fully updated 
-         * with new content or remains with its old content (without an intermediate state),
-         * a common pattern is to write the new content to a temporary file and then 
-         * atomically rename the temporary file to replace the original. 
-         * This approach is often used for configuration files or data files 
-         * where consistency is crucial.
-         */
-        File file = new File(filePath);
-
-        try {
-            if (file.createNewFile()) {
-                //TODO write data to the file directly
-            } else {
-                //TODO append data to the existing file
+    public static void saveUsers(Factory factory) throws IOException {
+        synchronized (FILE_LOCK) {
+            List<User> users = factory.getUsersList();
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE))) {
+                USERS_FILE.getParentFile().mkdirs();
+    
+                if (!USERS_FILE.exists()) {
+                    USERS_FILE.createNewFile();
+                }
+    
+                for (User u : users) {
+                    writer.write(u.getFileFormat());
+                    writer.newLine();                
+                }
             }
-        } catch (IOException e) {
+        }
+    }
 
+    /**
+     * This method saves all items in the items hashmap in the provided factory.
+     * 
+     * <p>
+     * Writes the data to ./files/Items.txt using a {@code BufferedWriter} that wraps a {@code FileWriter}
+     * in a class level synchronization to make the writing process thread safe.
+     * </p>
+     * <p>
+     * This method automatically creates the Items.txt file with its parent directories
+     * if it does not exist.
+     * </p>
+     * 
+     * @param factory the factory that holds the users list
+     */
+    public static void saveItems(Factory factory) throws IOException {
+        synchronized (FILE_LOCK) {
+            HashSet<Item> items = factory.getAllItems();
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(ITEMS_FILE))) {
+                ITEMS_FILE.getParentFile().mkdirs();
+
+                if (!ITEMS_FILE.exists()) {
+                    ITEMS_FILE.createNewFile();
+                }
+    
+                for (Item i : items) {
+                    writer.write(i.getFileFormat());
+                    writer.newLine();
+                }
+            }
         }
     }
 }
