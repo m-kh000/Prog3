@@ -5,24 +5,18 @@ import ui.components.ProductPanel;
 import core.Factory;
 
 public class Products extends FunctionPanel {
-    public Products(JFrame frame, Factory factory) {
+    public Products(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
-        
-        JPanel topPanel = new JPanel(new BorderLayout());
-        JLabel title = new JLabel("View All Products");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
-        title.setHorizontalAlignment(JLabel.CENTER);
-        topPanel.add(title, BorderLayout.CENTER);
-        topPanel.add(createBackButton(frame, factory, "supervisor"), BorderLayout.WEST);
-        add(topPanel, BorderLayout.NORTH);
-        
-        JPanel productsPanel = new JPanel();
-        productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS));
-        
+        add(createTopPanel("View All Products", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        add(new JScrollPane(createProductsPanel(factory)), BorderLayout.CENTER);
+    }
+    
+    private JPanel createProductsPanel(Factory factory) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (core.Product product : factory.previewProducts()) {
-            productsPanel.add(new ProductPanel(product));
+            panel.add(new ProductPanel(product));
         }
-        
-        add(new JScrollPane(productsPanel), BorderLayout.CENTER);
+        return panel;
     }
 }

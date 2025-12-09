@@ -5,10 +5,10 @@ import ui.LabelBox;
 import core.Factory;
 
 public class AddItem extends FunctionPanel {
-    public AddItem(JFrame frame, core.Factory factory) {
+    public AddItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
         setLayout(new GridLayout(8, 1, 10, 10));
         
-        add(createBackButton(frame, factory, "supervisor"));
+        add(createBackButton(centerPanel, frame, factory, "supervisor"));
         
         JLabel title = new JLabel("Add Item");
         title.setFont(new Font("Arial", Font.BOLD, 30));

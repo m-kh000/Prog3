@@ -5,10 +5,13 @@ import java.awt.*;
 public class ProductLinePanel extends JPanel {
     public ProductLinePanel(core.ProductLine line) {
         setLayout(new GridLayout(1, 6, 10, 0));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
         add(new JLabel("ID: " + line.getId()));
-        add(new JLabel(new ImageIcon("pl.png")));
+        ImageIcon icon = new ImageIcon("pl.png");
+        Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        add(new JLabel(new ImageIcon(img)));
         add(new JLabel(line.getName()));
         
         JLabel completedLabel = new JLabel("Done: " + line.getCompleted().size());

@@ -5,10 +5,10 @@ import ui.LabelBox;
 import core.Factory;
 
 public class AddProductionLine extends FunctionPanel {
-    public AddProductionLine(JFrame frame, Factory factory) {
+    public AddProductionLine(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new GridLayout(5, 1, 20, 20));
         
-        add(createBackButton(frame, factory, "manager"));
+        add(createBackButton(centerPanel, frame, factory, "manager"));
         
         JLabel title = new JLabel("Add Production Line");
         title.setFont(new Font("Arial", Font.BOLD, 30));

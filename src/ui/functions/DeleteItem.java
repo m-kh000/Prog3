@@ -4,10 +4,10 @@ import java.awt.*;
 import core.Factory;
 
 public class DeleteItem extends FunctionPanel {
-    public DeleteItem(JFrame frame, core.Factory factory) {
+    public DeleteItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
         setLayout(new GridLayout(4, 1, 20, 20));
         
-        add(createBackButton(frame, factory, "supervisor"));
+        add(createBackButton(centerPanel, frame, factory, "supervisor"));
         
         JLabel title = new JLabel("Delete Item");
         title.setFont(new Font("Arial", Font.BOLD, 30));

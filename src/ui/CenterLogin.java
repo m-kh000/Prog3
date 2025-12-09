@@ -5,7 +5,7 @@ import core.Factory;
 
 public class CenterLogin extends JPanel {
 
-    public CenterLogin(JFrame frame, Factory factory) {
+    public CenterLogin(JPanel centerPanel, JFrame frame, Factory factory) {
         String managerpass = "1234";
         String supervisorpass = "123";
         Color bg = frame.getBackground();
@@ -63,16 +63,10 @@ public class CenterLogin extends JPanel {
 
         loginButton.addActionListener(e -> {
             if (manager.isSelected() && managerpass.equals(new String(passwordbox.getPassword()))) {
-                frame.getContentPane().remove(this);
-                frame.add(new CenterManager(frame, factory), BorderLayout.CENTER);
-                frame.revalidate();
-                frame.repaint();
+                UI.switchContent(new CenterManager(centerPanel, frame, factory));
                 JOptionPane.showMessageDialog(null, "Welcome Manager!");
             } else if (supervisor.isSelected() && supervisorpass.equals(new String(passwordbox.getPassword()))) {
-                frame.getContentPane().remove(this);
-                frame.add(new CenterSupervisor(frame, factory), BorderLayout.CENTER);
-                frame.revalidate();
-                frame.repaint();
+                UI.switchContent(new CenterSupervisor(centerPanel, frame, factory));
                 JOptionPane.showMessageDialog(null, "Welcome supervisor!");
             } else {
                 JOptionPane.showMessageDialog(frame, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);

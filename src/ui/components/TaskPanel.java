@@ -1,16 +1,19 @@
 package ui.components;
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class TaskPanel extends JPanel {
     public TaskPanel(core.Task task) {
         setLayout(new GridLayout(1, 5, 10, 0));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
         JLabel idLabel = new JLabel("ID: " + task.getId());
         add(idLabel);
         
-        JLabel iconLabel = new JLabel(new ImageIcon("tsk.png"));
+        ImageIcon icon = new ImageIcon("task.png");
+        Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        JLabel iconLabel = new JLabel(new ImageIcon(img));
         add(iconLabel);
         
         JLabel productLabel = new JLabel(task.getProduct().getName());

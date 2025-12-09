@@ -4,9 +4,9 @@ import java.awt.*;
 import core.Factory;
 
 public class SaveStatusToTXT extends FunctionPanel {
-    public SaveStatusToTXT(JFrame frame, core.Factory factory) {
+    public SaveStatusToTXT(JPanel centerPanel, JFrame frame, core.Factory factory) {
         setLayout(new GridLayout(2, 1, 20, 20));
-        add(createBackButton(frame, factory, "supervisor"));
+        add(createBackButton(centerPanel, frame, factory, "supervisor"));
         add(new JLabel("Save Status to TXT"));
     }
 }
