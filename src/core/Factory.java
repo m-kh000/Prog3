@@ -9,16 +9,16 @@ public class Factory {
     private HashSet<Product> allProducts;
     private HashSet<ProductLine> allLines;
     private List<User> users;
-    private StringBuffer notes;
+    private String notes;
 
     public Factory() {
         this.allItems = new HashSet<>();
         this.allProducts = new HashSet<>();
         this.allLines = new HashSet<>();
         this.users = new ArrayList<>();
-        this.notes = new StringBuffer();
+        this.notes = new String();
     }
-    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,StringBuffer notes) {
+    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,String notes) {
         this.allItems = allItems;
         this.allProducts = allProducts;
         this.allLines = allLines;
@@ -33,17 +33,13 @@ public class Factory {
     synchronized public void add(Item i) {
         allItems.add(i);
     }
-
-    public void add(Task t) { 
-        // joseph this is yours to deal with, take it to your class
+    
+    public void addUser(User u){
+        users.add(u);
     }
 
     synchronized public void add(ProductLine pl) {
         allLines.add(pl);
-    }
-
-    public void changeStatusOfLine(String newStatus) { 
-        // this is also yours
     }
     
     // PREVIEWS : 
@@ -52,7 +48,7 @@ public class Factory {
         return allLines.toArray(new ProductLine[allLines.size()]);
     }
 
-    synchronized public StringBuffer previewNotes() {
+    synchronized public String previewNotes() {
         return notes;
     }
 
@@ -67,7 +63,7 @@ public class Factory {
     synchronized public void previewProducts(ProductLine pl) {
         pl.previewProducts();
     }
-
+    
     synchronized public void previewTasks(ProductLine pl) {
         pl.previewTasks();
     }
@@ -94,51 +90,103 @@ public class Factory {
         return this.users;
     }
 
-    public StringBuffer getNotes() {
+    public String getNotes() {
         return notes;
     }
+    
 
     // SETTERS :
 
-    public void setNotes(StringBuffer notes) {
+    public void setNotes(String notes) {
         this.notes = notes;
     }
 
-    // TODO : discuss resetting items
-        public void resetItem() {
-        }
+    public void resetItem(Item i,String name, String category, double price, int quantityAvailable, int minQuantity) {
+        if(!allItems.contains(i)) return;
+        i.setName(name);
+        i.setCategory(category);
+        i.setPrice(price);
+        i.setQuantityAvailable(quantityAvailable);
+        i.setMinQuantity(minQuantity);
+    }
 
     synchronized public void deleteItem(Item i) {
         allItems.remove(i);
     }
 
-    public void cancelTask(Task t) { 
-        // this is also yours
+    public List<Item> filterItemsByName(String filter) {
+        List<Item> filteredList = new ArrayList<>();
+        for(Item i:allItems){
+            if(i.getName().equals(filter)){
+                filteredList.add(i);
+            }
+        }
+        return filteredList;
     }
-    // TODO : discuss filtering
-        public void filterItemsByName() {
-        }
 
-        public void filterItemsByCategory() {
+    public List<Item> filterItemsByCategory(String filter) {
+        List<Item> filteredList = new ArrayList<>();
+        for(Item i:allItems){
+            if(i.getName().equals(filter)){
+                filteredList.add(i);
+            }
         }
+        return filteredList;
+    }
 
-        public void filterItemsByAvailable() {
+    public List<Item> filterItemsByAvailable() {
+        List<Item> filteredList = new ArrayList<>();
+        for(Item i:allItems){
+            if(i.isAvailable()){
+                filteredList.add(i);
+            }
         }
+        return filteredList;
+    }
 
-        public void filterItemsByOut() {
+    public List<Item> filterItemsByOut() {
+        List<Item> filteredList = new ArrayList<>();
+        for(Item i:allItems){
+            if(i.isOut()){
+                filteredList.add(i);
+            }
         }
+        return filteredList;
+    }
 
-        public void filterItemsByUnderMin() {
+    public List<Item> filterItemsByUnderMin() {
+        List<Item> filteredList = new ArrayList<>();
+        for(Item i:allItems){
+            if(i.isUnderMin()){
+                filteredList.add(i);
+            }
         }
+        return filteredList;
+    }
+    
+    // public void filterTasksByInprogress() {
+        
+    // }
 
-        public void filterTasksByInprogress() {
-        }
+    // public void filterTasksByCompleted() {
 
-        public void filterTasksByCompleted() {
-        }
+    // }
 
-        public void filterLinesByProduct(Product p) {
-        }
+    // public List<ProductLine> filterLinesByProduct(Product filter) {
+    //     List<ProductLine> filteredList = new ArrayList<>();
+    //     for(ProductLine pl : allLines){
+    //         Product[] p = pl.previewProducts();
+    //         boolean add = false;
+    //         for(Product x : p){
+    //             if(x.equals(filter)){
+    //                 add = true;
+    //                 break;
+    //             }
+    //         }
+    //         if(add) filteredList.add(pl);
+    //     }
+    //     return filteredList;
+    // }
     // TODO : discuss the method of I/O intended
         public void exportToFile() {
         }
