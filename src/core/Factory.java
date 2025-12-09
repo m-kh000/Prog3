@@ -37,7 +37,11 @@ public class Factory {
     public void add(Task t) { 
         // joseph this is yours to deal with, take it to your class
     }
-
+    
+    public void addUser(User u){
+        users.add(u);
+    }
+    
     synchronized public void add(ProductLine pl) {
         allLines.add(pl);
     }
@@ -67,7 +71,7 @@ public class Factory {
     synchronized public void previewProducts(ProductLine pl) {
         pl.previewProducts();
     }
-
+    
     synchronized public void previewTasks(ProductLine pl) {
         pl.previewTasks();
     }
@@ -97,7 +101,8 @@ public class Factory {
     public StringBuffer getNotes() {
         return notes;
     }
-    //TODO: addUser(User u)
+    
+
     // SETTERS :
 
     public void setNotes(StringBuffer notes) {
