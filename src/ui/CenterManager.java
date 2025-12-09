@@ -1,10 +1,11 @@
 package ui;
-import javax.swing.*;
+import core.Factory;
 import java.awt.*;
+import javax.swing.*;
 import ui.functions.*;
 
 public class CenterManager extends JPanel {
-    public CenterManager(JFrame frame) {
+    public CenterManager(JFrame frame, Factory factory) {
         setLayout(new GridLayout(4, 1, 0, 20));
         JLabel title = new JLabel("Manager");
         title.setFont(new Font("Arial", Font.BOLD, 40));
@@ -14,24 +15,24 @@ public class CenterManager extends JPanel {
 
         JButton addLine = createStyledButton("Add Production Line", buttonColor);
         addLine.addActionListener(e -> {
-            frame.getContentPane().removeAll();
-            frame.add(new AddProductionLine(frame), BorderLayout.CENTER);
+            frame.getContentPane().remove(this);
+            frame.add(new AddProductionLine(frame, factory), BorderLayout.CENTER);
             frame.revalidate();
             frame.repaint();
         });
 
         JButton modifyStatus = createStyledButton("Modify Status of a Production Line", buttonColor);
         modifyStatus.addActionListener(e -> {
-            frame.getContentPane().removeAll();
-            frame.add(new ModifyStatusOfAProductionLine(frame), BorderLayout.CENTER);
+            frame.getContentPane().remove(this);
+            frame.add(new ModifyStatusOfAProductionLine(frame, factory), BorderLayout.CENTER);
             frame.revalidate();
             frame.repaint();
         });
 
         JButton viewPerformance = createStyledButton("View Performance", buttonColor);
         viewPerformance.addActionListener(e -> {
-            frame.getContentPane().removeAll();
-            frame.add(new ViewPerformance(frame), BorderLayout.CENTER);
+            frame.getContentPane().remove(this);
+            frame.add(new ViewPerformance(frame, factory), BorderLayout.CENTER);
             frame.revalidate();
             frame.repaint();
         });

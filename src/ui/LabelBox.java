@@ -6,17 +6,25 @@ public class LabelBox extends JPanel {
     private JTextField textField;
 
     public LabelBox(String labelText) {
+        this(labelText, true);
+    }
+    
+    public LabelBox(String labelText, boolean isPassword) {
         setLayout(new GridLayout(1, 2, 0, 0));
         
         JLabel label = new JLabel(labelText);
         label.setFont(new Font("Arial", Font.PLAIN, 20));
         add(label);
         
-        textField = new JPasswordField();
+        if (isPassword) {
+            textField = new JPasswordField();
+            ((JPasswordField) textField).setEchoChar('*');
+        } else {
+            textField = new JTextField();
+        }
         textField.setPreferredSize(new Dimension(10, 10));
         textField.setFont(new Font("Arial", Font.PLAIN, 20));
         textField.setBorder(null);
-        ((JPasswordField) textField).setEchoChar('*');
         textField.setBackground(UIManager.getColor("Panel.background"));
         add(textField);
     }

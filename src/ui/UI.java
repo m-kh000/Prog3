@@ -2,14 +2,10 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
+import core.Factory;
 
 public class UI {
-/*
-git checkout MKs-Brach
-git fetch origin 
-*/
-//
-    public UI() {
+    public UI(Factory factory) {
         int bigp = 450, smallp = 80;
 
         JFrame frame = new JFrame("Login");
@@ -34,7 +30,7 @@ git fetch origin
         frame.add(paddings4, BorderLayout.WEST);
 
         // Add login panel to center
-        frame.add(new CenterLogin(frame), BorderLayout.CENTER);
+        frame.add(new CenterLogin(frame, factory), BorderLayout.CENTER);
         frame.setVisible(true);
     }
 

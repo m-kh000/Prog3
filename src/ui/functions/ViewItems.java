@@ -1,28 +1,28 @@
 package ui.functions;
 import javax.swing.*;
 import java.awt.*;
-import ui.components.ProductPanel;
+import ui.components.ItemPanel;
 import core.Factory;
 
-public class Products extends FunctionPanel {
-    public Products(JFrame frame, Factory factory) {
+public class ViewItems extends FunctionPanel {
+    public ViewItems(JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
         
         JPanel topPanel = new JPanel(new BorderLayout());
-        JLabel title = new JLabel("View All Products");
+        JLabel title = new JLabel("View All Items");
         title.setFont(new Font("Arial", Font.BOLD, 30));
         title.setHorizontalAlignment(JLabel.CENTER);
         topPanel.add(title, BorderLayout.CENTER);
         topPanel.add(createBackButton(frame, factory, "supervisor"), BorderLayout.WEST);
         add(topPanel, BorderLayout.NORTH);
         
-        JPanel productsPanel = new JPanel();
-        productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS));
+        JPanel itemsPanel = new JPanel();
+        itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
         
-        for (core.Product product : factory.previewProducts()) {
-            productsPanel.add(new ProductPanel(product));
+        for (core.Item item : factory.previewItems()) {
+            itemsPanel.add(new ItemPanel(item));
         }
         
-        add(new JScrollPane(productsPanel), BorderLayout.CENTER);
+        add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
     }
 }

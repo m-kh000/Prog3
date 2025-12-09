@@ -1,10 +1,11 @@
 package ui;
 import java.awt.*;
 import javax.swing.*;
+import core.Factory;
 
 public class CenterLogin extends JPanel {
 
-    public CenterLogin(JFrame frame) {
+    public CenterLogin(JFrame frame, Factory factory) {
         String managerpass = "1234";
         String supervisorpass = "123";
         Color bg = frame.getBackground();
@@ -63,13 +64,13 @@ public class CenterLogin extends JPanel {
         loginButton.addActionListener(e -> {
             if (manager.isSelected() && managerpass.equals(new String(passwordbox.getPassword()))) {
                 frame.getContentPane().remove(this);
-                frame.add(new CenterManager(frame), BorderLayout.CENTER);
+                frame.add(new CenterManager(frame, factory), BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 JOptionPane.showMessageDialog(null, "Welcome Manager!");
             } else if (supervisor.isSelected() && supervisorpass.equals(new String(passwordbox.getPassword()))) {
                 frame.getContentPane().remove(this);
-                frame.add(new CenterSupervisor(frame), BorderLayout.CENTER);
+                frame.add(new CenterSupervisor(frame, factory), BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 JOptionPane.showMessageDialog(null, "Welcome supervisor!");
@@ -81,6 +82,9 @@ public class CenterLogin extends JPanel {
     }
 }
 /*
-in addproductline add lableboxes as follows(name,status())
-in addproduct add lableboxes as follows()
+
+*/
+/*
+git pull origin main
+git push -u origin MKs-Branch
 */
