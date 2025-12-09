@@ -97,7 +97,7 @@ public class Factory {
     public StringBuffer getNotes() {
         return notes;
     }
-
+    //TODO: addUser(User u)
     // SETTERS :
 
     public void setNotes(StringBuffer notes) {
