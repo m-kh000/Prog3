@@ -6,7 +6,7 @@ public class LabelBox extends JPanel {
     private JTextField textField;
 
     public LabelBox(String labelText) {
-        this(labelText, true);
+        this(labelText, false);
     }
     
     public LabelBox(String labelText, boolean isPassword) {
