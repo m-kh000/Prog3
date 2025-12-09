@@ -14,9 +14,8 @@ public class Task {
     private String status;
     private ProductLine assignedLine;
     private double completionPercentage;
-    private Factory factory;
 
-    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status, ProductLine assignedLine, double completionPercentage, Factory factory) {
+    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status, ProductLine assignedLine, double completionPercentage) {
         this.id = nextId++;
         this.product = product;
         this.requiredQuantity = requiredQuantity;
@@ -27,7 +26,6 @@ public class Task {
         this.status = status;
         this.assignedLine = assignedLine;
         this.completionPercentage = completionPercentage;
-        this.factory = factory;
     }
 
     // public boolean doTask() {
@@ -58,10 +56,6 @@ public class Task {
 
     public LocalDate getDeliveryDate() {
         return deliveryDate;
-    }
-
-    public Factory getFactory() {
-        return factory;
     }
 
     public int getId() {
@@ -108,10 +102,6 @@ public class Task {
 
     public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
-    }
-
-    public void setFactory(Factory factory) {
-        this.factory = factory;
     }
 
     public void setId(int id) {
