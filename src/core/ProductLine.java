@@ -38,4 +38,24 @@ public class ProductLine implements Runnable {
 
     public void cancelTask(Task task) {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Task> getCompleted() {
+        return completed;
+    }
+
+    public ArrayList<Task> getInprogress() {
+        return inprogress;
+    }
+
+    public ArrayList<Task> getCanceled() {
+        return canceled;
+    }
 }

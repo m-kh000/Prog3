@@ -2,14 +2,12 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
+import core.Factory;
 
 public class UI {
-/*
-git checkout MKs-Brach
-git fetch origin 
-*/
-//
-    public UI() {
+    private static JPanel centerPanel;
+    
+    public UI(Factory factory) {
         int bigp = 450, smallp = 80;
 
         JFrame frame = new JFrame("Login");
@@ -19,7 +17,6 @@ git fetch origin
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 
-        // Add padding panels
         JPanel paddings1 = new JPanel();
         JPanel paddings2 = new JPanel();
         JPanel paddings3 = new JPanel();
@@ -33,10 +30,17 @@ git fetch origin
         frame.add(paddings3, BorderLayout.EAST);
         frame.add(paddings4, BorderLayout.WEST);
 
-        // Add login panel to center
-        frame.add(new CenterLogin(frame), BorderLayout.CENTER);
+        centerPanel = new JPanel(new BorderLayout());
+        centerPanel.add(new CenterLogin(centerPanel, frame, factory));
+        frame.add(centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
-
+    
+    public static void switchContent(JPanel newPanel) {
+        centerPanel.removeAll();
+        centerPanel.add(newPanel);
+        centerPanel.revalidate();
+        centerPanel.repaint();
+    }
 }
 
