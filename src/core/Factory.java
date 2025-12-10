@@ -168,13 +168,21 @@ public class Factory {
         return filteredList;
     }
     
-    // public void filterTasksByInprogress() {
-        
-    // }
+    public List<Task> filterTasksByInprogress() {
+        List<Task> filteredList = new ArrayList<>();
+        for(ProductLine pl : allLines){
+            filteredList.addAll(pl.getInprogress());
+        }
+        return filteredList;
+    }
 
-    // public void filterTasksByCompleted() {
-
-    // }
+    public List<Task> filterTasksByCompleted() {
+        List<Task> filteredList = new ArrayList<>();
+        for(ProductLine pl : allLines){
+            filteredList.addAll(pl.getCompleted());
+        }
+        return filteredList;
+    }
 
     // public List<ProductLine> filterLinesByProduct(Product filter) {
     //     List<ProductLine> filteredList = new ArrayList<>();
