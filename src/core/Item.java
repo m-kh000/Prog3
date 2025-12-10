@@ -2,13 +2,13 @@ package core;
 public class Item {
     private static int nextId = 1;
     private int id;
-    private StringBuffer name;
-    private StringBuffer category;
+    private String name;
+    private String category;
     private double price;
     private int quantityAvailable;
     private int minQuantity;
 
-    public Item(StringBuffer name, StringBuffer category, double price, int quantityAvailable, int minQuantity) {
+    public Item(String name, String category, double price, int quantityAvailable, int minQuantity) {
         this.id = nextId++;
         this.name = name;
         this.category = category;
@@ -54,11 +54,11 @@ public class Item {
 
     // GETTERS : 
 
-    public StringBuffer getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public StringBuffer getName() {
+    public String getName() {
         return name;
     }
 
@@ -93,7 +93,7 @@ public class Item {
 
     // SETTERS : 
 
-    public void setCategory(StringBuffer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -101,7 +101,7 @@ public class Item {
         this.minQuantity = minQuantity;
     }
 
-    public void setName(StringBuffer name) {
+    public void setName(String name) {
         this.name = name;
     }
 
