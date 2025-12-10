@@ -2,12 +2,12 @@ package ui;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+import jsonParser.JsonParser;
+import utils.Validator;
 
 public class CenterLogin extends JPanel {
 
     public CenterLogin(JPanel centerPanel, JFrame frame, Factory factory) {
-        String managerpass = "1234";
-        String supervisorpass = "123";
         Color bg = frame.getBackground();
 
         setLayout(new GridLayout(4, 1, 30, 0));
@@ -52,7 +52,7 @@ public class CenterLogin extends JPanel {
         add(loginButton);
 
         loginButton.addActionListener(e -> {
-            //try {
+            try {
 
 
             //     int x = utils.Validator.validateEmail(emailbox.getText(),passwordbox.getText(), factory);
@@ -88,22 +88,24 @@ public class CenterLogin extends JPanel {
             // }
             
 
-            //     core.User u = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText(), factory);
-            //     if (u.isManager){
-            //         centerPanel.removeAll();
-            //         centerPanel.add(new CenterManager(centerPanel, frame, factory));
-            //         centerPanel.revalidate();
-            //         centerPanel.repaint();
+                String response = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText(), factory);
+                Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
+                if ()
+                if (r.getRole()=="manager"){
+                    centerPanel.removeAll();
+                    centerPanel.add(new CenterManager(centerPanel, frame, factory));
+                    centerPanel.revalidate();
+                    centerPanel.repaint();
                 
-            //     }else{
-            //         centerPanel.removeAll();
-            //         centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
-            //         centerPanel.revalidate();
-            //         centerPanel.repaint();
-            //     }
-            // }catch(Exception ex){
-            //     JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",3);
-            // }
+                }else{
+                    centerPanel.removeAll();
+                    centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
+                    centerPanel.revalidate();
+                    centerPanel.repaint();
+                }
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",3);
+            }
         });
     }
 }
