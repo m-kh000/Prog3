@@ -7,6 +7,7 @@ public class Product {
     private static int nextId = 1;
     private int id;
     private String name;
+    private int quantityAvailable;
     private HashMap<Item, Integer> requiredItems;
     private HashSet<LocalDate> orderedIn;
     private HashSet<Task> tasks;
@@ -67,6 +68,10 @@ public class Product {
 
     public HashSet<Task> getTasks() {
         return tasks;
+    }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
     }
 
     // SETTERS : 
