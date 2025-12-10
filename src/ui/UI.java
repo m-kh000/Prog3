@@ -1,15 +1,15 @@
 package ui;
 
+import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-import core.Factory;
 
 public class UI {
     private static JPanel centerPanel;
     
     public UI(Factory factory) {
         int bigp = 450, smallp = 80;
-
+        
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -31,7 +31,8 @@ public class UI {
         frame.add(paddings4, BorderLayout.WEST);
 
         centerPanel = new JPanel(new BorderLayout());
-        centerPanel.add(new CenterLogin(centerPanel, frame, factory));
+        //centerPanel.add(new CenterLogin(centerPanel, frame, factory));
+        centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }

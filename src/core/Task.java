@@ -15,6 +15,8 @@ public class Task {
     private ProductLine assignedLine;
     private double completionPercentage;
 
+    public Task() {}
+    
     public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status, ProductLine assignedLine, double completionPercentage) {
         this.id = nextId++;
         this.product = product;

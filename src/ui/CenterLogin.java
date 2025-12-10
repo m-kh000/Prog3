@@ -1,7 +1,7 @@
 package ui;
+import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-import core.Factory;
 
 public class CenterLogin extends JPanel {
 
@@ -12,9 +12,9 @@ public class CenterLogin extends JPanel {
 
         setLayout(new GridLayout(4, 1, 30, 0));
 
-        JLabel title = new JLabel("Login");
+        JPanel title = new JPanel();
         title.setFont(new Font("Arial", Font.BOLD, 40));
-        title.setHorizontalAlignment(JLabel.CENTER);
+    
         add(title);
 
         JRadioButton manager = new JRadioButton("Manager");
@@ -38,18 +38,8 @@ public class CenterLogin extends JPanel {
         role.add(m_spanel);
         add(role);
 
-        JPasswordField passwordbox = new JPasswordField();
-        passwordbox.setPreferredSize(new Dimension(10, 10));
-        passwordbox.setFont(new Font("Arial", Font.PLAIN, 20));
-        passwordbox.setBorder(null);
-        passwordbox.setEchoChar('*');
-        passwordbox.setBackground(bg);
-        JPanel password = new JPanel(new GridLayout(1, 2, 0, 0));
-        JLabel passLable = new JLabel("Password:");
-        passLable.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.add(passLable);
-        password.add(passwordbox);
-        add(password);
+        LabelBox emailbox = new LabelBox("Email:");
+        LabelBox passwordbox = new LabelBox("Password:", true);
 
         JButton loginButton = new JButton();
         loginButton.setIcon(new ImageIcon("l3.png"));
@@ -62,16 +52,58 @@ public class CenterLogin extends JPanel {
         add(loginButton);
 
         loginButton.addActionListener(e -> {
-            if (manager.isSelected() && managerpass.equals(new String(passwordbox.getPassword()))) {
-                UI.switchContent(new CenterManager(centerPanel, frame, factory));
-                JOptionPane.showMessageDialog(null, "Welcome Manager!");
-            } else if (supervisor.isSelected() && supervisorpass.equals(new String(passwordbox.getPassword()))) {
-                UI.switchContent(new CenterSupervisor(centerPanel, frame, factory));
-                JOptionPane.showMessageDialog(null, "Welcome supervisor!");
-            } else {
-                JOptionPane.showMessageDialog(frame, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
-                passwordbox.setText("");
-            }
+            //try {
+
+
+            //     int x = utils.Validator.validateEmail(emailbox.getText(),passwordbox.getText(), factory);
+            //     if (x == -1) {
+            //         JOptionPane.showMessageDialog(null, "User not found.\nyou need to sign up", "Error", JOptionPane.ERROR_MESSAGE);
+            //         centerPanel.removeAll();
+            //         centerPanel.add(new CenterSignup(centerPanel, frame, factory));
+            //     } else if (x == 0) {
+            //         JOptionPane.showMessageDialog(null, "Incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
+            //         passwordbox.setText("");
+            //     } else {
+            //         if (manager.isSelected()) {
+            //                 centerPanel.removeAll();
+            //                 centerPanel.add(new ManagerPanel(centerPanel, frame, factory));
+            //                 centerPanel.revalidate();
+            //                 centerPanel.repaint();
+            //         } else if (supervisor.isSelected()) {
+            //             if (passwordbox.getText().equals(supervisorpass)) {
+            //                 centerPanel.removeAll();
+            //                 centerPanel.add(new SupervisorPanel(centerPanel, frame, factory));
+            //                 centerPanel.revalidate();
+            //                 centerPanel.repaint();
+            //             } else {
+            //                 JOptionPane.showMessageDialog(null, "Incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
+            //             }
+            //         } else {
+            //             JOptionPane.showMessageDialog(null, "Please select a role", "Error", JOptionPane.ERROR_MESSAGE);
+            //         }
+            //     }
+            // } catch (InvalidEmailException e1) {
+            //     // TODO Auto-generated catch block
+            //     e1.printStackTrace();
+            // }
+            
+
+            //     core.User u = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText(), factory);
+            //     if (u.isManager){
+            //         centerPanel.removeAll();
+            //         centerPanel.add(new CenterManager(centerPanel, frame, factory));
+            //         centerPanel.revalidate();
+            //         centerPanel.repaint();
+                
+            //     }else{
+            //         centerPanel.removeAll();
+            //         centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
+            //         centerPanel.revalidate();
+            //         centerPanel.repaint();
+            //     }
+            // }catch(Exception ex){
+            //     JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",3);
+            // }
         });
     }
 }
@@ -80,5 +112,5 @@ public class CenterLogin extends JPanel {
 */
 /*
 git pull origin main
-git push -u origin MKs-Branch
+git push -u origin MKs-branch
 */
