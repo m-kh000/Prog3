@@ -64,13 +64,7 @@ public class Factory {
         return allProducts.toArray(new Product[allProducts.size()]);
     }
 
-    synchronized public void previewProducts(ProductLine pl) {
-        pl.previewProducts();
-    }
-
-    synchronized public void previewTasks(ProductLine pl) {
-        pl.previewTasks();
-    }
+    /* Removed previewProducts and previewTasks methods */
 
     synchronized public void previewTasks(Product p) {
         p.previewTasks();
