@@ -1,6 +1,6 @@
 package core;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Factory {
         this.users = new ArrayList<>();
         this.notes = new String();
     }
-    
+
     public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,String notes,Warehouse warehouse) {
         this.allItems = allItems;
         this.allProducts = allProducts;
@@ -184,25 +184,13 @@ public class Factory {
         return filteredList;
     }
 
-    // public List<ProductLine> filterLinesByProduct(Product filter) {
-    //     List<ProductLine> filteredList = new ArrayList<>();
-    //     for(ProductLine pl : allLines){
-    //         Product[] p = pl.previewProducts();
-    //         boolean add = false;
-    //         for(Product x : p){
-    //             if(x.equals(filter)){
-    //                 add = true;
-    //                 break;
-    //             }
-    //         }
-    //         if(add) filteredList.add(pl);
-    //     }
-    //     return filteredList;
-    // }
-    // TODO : discuss the method of I/O intended
-        public void exportToFile() {
+    public List<Product> topOrderBetween(LocalDate start, LocalDate end) {
+        List<Product> list = new ArrayList<>();
+        for(Product p:allProducts){
+            if(p.wasOrderedBetween(start, end)){
+                list.add(p);
+            }
         }
-    // TODO : demand clarification on the purpose of this method
-        public void topOrderBetween(Date date1, Date date2) {
-        }
+        return list;
+    }
 }
