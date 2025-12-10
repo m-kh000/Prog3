@@ -33,11 +33,7 @@ public class Item {
     public void add(int quantity) {
         quantityAvailable += quantity;
     }
-    // TODO : discuss this methods purpose
-        public void preview() {
-            
-        }
-
+    
     public void resetCategoryPriceMinQuantity(int newQuantity) { 
         minQuantity = newQuantity;
     }

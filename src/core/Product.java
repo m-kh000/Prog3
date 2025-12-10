@@ -2,6 +2,7 @@ package core;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
+import utils.Dates;
 
 public class Product {
     private static int nextId = 1;
@@ -35,10 +36,14 @@ public class Product {
 
     public void order(LocalDate date) {}
 
-    // TODO : discuss the purpose of this method
-        public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
-            return false;
+    public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
+        for(LocalDate l:getOrderedIn()){
+            if(Dates.isBetween(l, start, end)){
+                return true;
+            }
         }
+        return false;
+    }
 
     // PREVIEWS : 
     public Object[] previewTasks() {
