@@ -1,12 +1,11 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.Factory;
 import core.User;
 import exceptions.InvalidEmailException;
 import exceptions.InvalidPasswordException;
+import java.util.ArrayList;
+import java.util.List;
 import jsonParser.JsonParser;
 
 public class Validator {
@@ -26,8 +25,8 @@ public class Validator {
      */
     public static String validateEmail(String email, String password, Factory factory) throws InvalidEmailException, InvalidPasswordException {
         try {
-            if (email == null || password == null || factory == null) {
-                return JsonParser.toJson(new Response("Invalid input parameters", null));
+            if (email == null || password == null || email.equals("") || password.equals("")) {
+                return JsonParser.toJson(new Response("please fill all fields", null));
             }
 
             email = email.trim();
@@ -36,15 +35,11 @@ public class Validator {
             if (!email.matches("^[a-zA-Z0-9_]+@gmail\\.com$")) {
                 throw new InvalidEmailException("Invalid Email Format.");
             }
-
-            if (password.isEmpty()) {
-                throw new InvalidPasswordException("Password cannot be empty.");
-            }
             
             List<User> users = new ArrayList<>(factory.getUsersList());
 
             if (users.isEmpty()) {
-                return JsonParser.toJson(new Response("No user with the provided email", null));
+                return JsonParser.toJson(new Response("No users signedup", "signup"));
             }
 
             User foundUser = null;
@@ -57,7 +52,7 @@ public class Validator {
             }
 
             if (foundUser == null) {
-                return JsonParser.toJson(new Response("No user with the provided email", null));
+                return JsonParser.toJson(new Response("No user with the provided email", "signup"));
             }
 
             if (foundUser.getPassword() == null || !foundUser.getPassword().equals(password)) {
@@ -65,7 +60,7 @@ public class Validator {
             }
 
             String role = foundUser.isManager() ? "Manager" : "Supervisor";
-            return JsonParser.toJson(new Response("Authentication successful", role));
+            return JsonParser.toJson(new Response("Welcome "+role, role));
         } catch (IllegalAccessException e) {
             return null;
         } 
