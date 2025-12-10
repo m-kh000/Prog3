@@ -117,8 +117,9 @@ public class FileUtils {
         synchronized (FILE_LOCK) {
             List<User> users = factory.getUsersList();
     
+            USERS_FILE.getParentFile().mkdirs();
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE))) {
-                USERS_FILE.getParentFile().mkdirs();
     
                 if (!USERS_FILE.exists()) {
                     USERS_FILE.createNewFile();
@@ -144,15 +145,15 @@ public class FileUtils {
      * if it does not exist.
      * </p>
      * 
-     * @param factory the factory that holds the users list
+     * @param factory the factory that holds the items list
      */
     public static void saveItems(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
             HashSet<Item> items = factory.getAllItems();
     
+            ITEMS_FILE.getParentFile().mkdirs();
             
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(ITEMS_FILE))) {
-                ITEMS_FILE.getParentFile().mkdirs();
                 
                 String itemsJson = JsonParser.toJson(items);
 
@@ -160,9 +161,42 @@ public class FileUtils {
                     ITEMS_FILE.createNewFile();
                 }
                 
-                for (Item i : items) {
-                    writer.write(itemsJson);
+                writer.write(itemsJson);
+            } catch (IllegalAccessException e) {
+                /* log the exception to Exceptions.txt */
+            }
+        }
+    }
+
+    /**
+     * This method saves all products in the products hashmap in the provided factory.
+     * 
+     * <p>
+     * Writes the data to ./files/Products.txt using a {@code BufferedWriter} that wraps a {@code FileWriter}
+     * in a class level synchronization to make the writing process thread safe.
+     * </p>
+     * <p>
+     * This method automatically creates the Products.txt file with its parent directories
+     * if it does not exist.
+     * </p>
+     * 
+     * @param factory the factory that holds the products list
+     */
+    public static void saveProducts(Factory factory) throws IOException {
+        synchronized (FILE_LOCK) {
+            HashSet<Product> products = factory.getAllProducts();
+
+            PRODUCTS_FILE.getParentFile().mkdirs();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(PRODUCTS_FILE))) {
+
+                String productsJson = JsonParser.toJson(products);
+
+                if (!PRODUCTS_FILE.exists()) {
+                    PRODUCTS_FILE.createNewFile();
                 }
+
+                writer.write(productsJson);
             } catch (IllegalAccessException e) {
                 /* log the exception to Exceptions.txt */
             }

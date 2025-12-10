@@ -2,6 +2,7 @@ package core;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Product {
     private static int nextId = 1;
@@ -10,7 +11,6 @@ public class Product {
     private int quantityAvailable;
     private HashMap<Item, Integer> requiredItems;
     private HashSet<LocalDate> orderedIn;
-    private HashSet<Task> tasks;
 
     public Product() {}
     
@@ -19,14 +19,12 @@ public class Product {
         this.name = name;
         this.requiredItems = new HashMap<>();
         this.orderedIn = new HashSet<>();
-        this.tasks = new HashSet<>();
     }
-    public Product(String name,HashMap<Item, Integer> requiredItems,HashSet<LocalDate> orderedIn,HashSet<Task> tasks){
+    public Product(String name,HashMap<Item, Integer> requiredItems,HashSet<LocalDate> orderedIn){
         this.id = nextId++;
         this.name = name;
         this.orderedIn = orderedIn;
         this.requiredItems = requiredItems;
-        this.tasks = tasks;
     }
 
     public void addItem(Item i, int quantity) {
@@ -41,9 +39,7 @@ public class Product {
         }
 
     // PREVIEWS : 
-    public Object[] previewTasks() {
-        return tasks.toArray();
-    }
+
     // GETTERS : 
     
     public int getId() {
@@ -63,11 +59,7 @@ public class Product {
     }
 
     public HashMap<Item, Integer> getRequiredItems() {
-        return requiredItems;
-    }
-
-    public HashSet<Task> getTasks() {
-        return tasks;
+        return new HashMap<>(requiredItems);
     }
 
     public int getQuantityAvailable() {
