@@ -19,7 +19,7 @@ public class Factory {
         this.users = new ArrayList<>();
         this.notes = new String();
     }
-    
+
     public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,String notes,Warehouse warehouse) {
         this.allItems = allItems;
         this.allProducts = allProducts;
@@ -188,21 +188,6 @@ public class Factory {
         return filteredList;
     }
 
-    // public List<ProductLine> filterLinesByProduct(Product filter) {
-    //     List<ProductLine> filteredList = new ArrayList<>();
-    //     for(ProductLine pl : allLines){
-    //         Product[] p = pl.previewProducts();
-    //         boolean add = false;
-    //         for(Product x : p){
-    //             if(x.equals(filter)){
-    //                 add = true;
-    //                 break;
-    //             }
-    //         }
-    //         if(add) filteredList.add(pl);
-    //     }
-    //     return filteredList;
-    // }
     // TODO : discuss the method of I/O intended
         public void exportToFile() {
         }
