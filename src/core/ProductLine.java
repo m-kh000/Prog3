@@ -13,7 +13,7 @@ public class ProductLine implements Runnable {
     private List<Task> canceled;
 
     public ProductLine() {}
-    
+
     public ProductLine(String name, String status) {
         this.id = nextId++;
         this.name = name;
@@ -89,5 +89,25 @@ public class ProductLine implements Runnable {
     }
     public List<Task> getCanceledTasks() {
         return this.canceled;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Task> getCompleted() {
+        return new ArrayList<>(completed);
+    }
+
+    public ArrayList<Task> getInprogress() {
+        return new ArrayList<>(inprogress);
+    }
+
+    public ArrayList<Task> getCanceled() {
+        return new ArrayList<>(canceled);
     }
 }
