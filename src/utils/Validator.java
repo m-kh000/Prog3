@@ -3,7 +3,7 @@ package utils;
 import core.Factory;
 import core.User;
 import exceptions.InvalidEmailException;
-import exceptions.InvalidPasswordException;
+import exceptions.EmptyFieldException;
 import java.util.ArrayList;
 import java.util.List;
 import jsonParser.JsonParser;
@@ -21,12 +21,11 @@ public class Validator {
      *         If the user is not found then the role will be null. 
      * 
      * @throws InvalidEmailException if the email format is incorrect
-     * @throws InvalidPasswordException if the password is empty
      */
-    public static String validateEmail(String email, String password, Factory factory) throws InvalidEmailException, InvalidPasswordException {
+    public static String validateEmail(String email, String password, Factory factory) throws InvalidEmailException, EmptyFieldException{
         try {
             if (email == null || password == null || email.equals("") || password.equals("")) {
-                return JsonParser.toJson(new Response("please fill all fields", null));
+                throw new EmptyFieldException();
             }
 
             email = email.trim();

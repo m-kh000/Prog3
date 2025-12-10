@@ -31,8 +31,8 @@ public class UI {
         frame.add(paddings4, BorderLayout.WEST);
 
         centerPanel = new JPanel(new BorderLayout());
-        //centerPanel.add(new CenterLogin(centerPanel, frame, factory));
-        centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
+        centerPanel.add(new CenterLogin(centerPanel, frame, factory));
+        // centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
