@@ -5,6 +5,8 @@ public class User {
     private String password;
     private boolean isManager;
 
+    public User() {}
+    
     public User(String email, String password, boolean isManager) {
         this.email = email;
         this.password = password;

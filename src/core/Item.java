@@ -8,6 +8,8 @@ public class Item {
     private int quantityAvailable;
     private int minQuantity;
 
+    public Item() {}
+    
     public Item(String name, String category, double price, int quantityAvailable, int minQuantity) {
         this.id = nextId++;
         this.name = name;

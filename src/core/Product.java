@@ -11,6 +11,8 @@ public class Product {
     private HashSet<LocalDate> orderedIn;
     private HashSet<Task> tasks;
 
+    public Product() {}
+    
     public Product(String name) {
         this.id = nextId++;
         this.name = name;
