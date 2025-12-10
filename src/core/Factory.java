@@ -10,6 +10,7 @@ public class Factory {
     private HashSet<ProductLine> allLines;
     private List<User> users;
     private String notes;
+    private Warehouse warehouse;
 
     public Factory() {
         this.allItems = new HashSet<>();
@@ -18,12 +19,14 @@ public class Factory {
         this.users = new ArrayList<>();
         this.notes = new String();
     }
-    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,String notes) {
+    
+    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,String notes,Warehouse warehouse) {
         this.allItems = allItems;
         this.allProducts = allProducts;
         this.allLines = allLines;
         this.users = users;
         this.notes = notes;
+        this.warehouse = warehouse;
     }
 
     synchronized public void add(Product p) {
@@ -88,6 +91,13 @@ public class Factory {
         return notes;
     }
     
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
 
     // SETTERS :
 
