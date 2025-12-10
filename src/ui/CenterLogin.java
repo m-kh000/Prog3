@@ -53,55 +53,27 @@ public class CenterLogin extends JPanel {
 
         loginButton.addActionListener(e -> {
             try {
-
-
-            //     int x = utils.Validator.validateEmail(emailbox.getText(),passwordbox.getText(), factory);
-            //     if (x == -1) {
-            //         JOptionPane.showMessageDialog(null, "User not found.\nyou need to sign up", "Error", JOptionPane.ERROR_MESSAGE);
-            //         centerPanel.removeAll();
-            //         centerPanel.add(new CenterSignup(centerPanel, frame, factory));
-            //     } else if (x == 0) {
-            //         JOptionPane.showMessageDialog(null, "Incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
-            //         passwordbox.setText("");
-            //     } else {
-            //         if (manager.isSelected()) {
-            //                 centerPanel.removeAll();
-            //                 centerPanel.add(new ManagerPanel(centerPanel, frame, factory));
-            //                 centerPanel.revalidate();
-            //                 centerPanel.repaint();
-            //         } else if (supervisor.isSelected()) {
-            //             if (passwordbox.getText().equals(supervisorpass)) {
-            //                 centerPanel.removeAll();
-            //                 centerPanel.add(new SupervisorPanel(centerPanel, frame, factory));
-            //                 centerPanel.revalidate();
-            //                 centerPanel.repaint();
-            //             } else {
-            //                 JOptionPane.showMessageDialog(null, "Incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
-            //             }
-            //         } else {
-            //             JOptionPane.showMessageDialog(null, "Please select a role", "Error", JOptionPane.ERROR_MESSAGE);
-            //         }
-            //     }
-            // } catch (InvalidEmailException e1) {
-            //     // TODO Auto-generated catch block
-            //     e1.printStackTrace();
-            // }
-            
-
                 String response = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText(), factory);
                 Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
-                if ()
-                if (r.getRole()=="manager"){
-                    centerPanel.removeAll();
-                    centerPanel.add(new CenterManager(centerPanel, frame, factory));
+                if (null==r.getRole()){
+                    JOptionPane.showMessageDialog(null, r.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                        centerPanel.removeAll();
+                    switch (r.getRole()) {
+                    case "manager":
+                        centerPanel.add(new CenterManager(centerPanel, frame, factory));
+                        break;
+                    case "Supervisor":
+                        centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
+                        break;
+                    case "signun":
+                        centerPanel.add(new CenterSignup(centerPanel, frame, factory));
+                        break;
+                }
                     centerPanel.revalidate();
                     centerPanel.repaint();
-                
-                }else{
-                    centerPanel.removeAll();
-                    centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
-                    centerPanel.revalidate();
-                    centerPanel.repaint();
+                    JOptionPane.showMessageDialog(null, r.getMessage());
                 }
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",3);
