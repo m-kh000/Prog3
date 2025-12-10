@@ -1,5 +1,11 @@
 package main;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
 import core.*;
 import utils.*;
 import ui.UI;
@@ -18,5 +24,17 @@ public class App {
         factory.add(table);
         
         new UI(factory);
+        
+        // Factory f = new Factory();
+        // Map<Item, Integer> hm = new HashMap<>();
+        // hm.put(new Item("flour", "test", 500, 1000, 100), 10);
+        // HashSet<LocalDate> hs = new HashSet<>();
+        // LocalDate l = LocalDate.now();
+        // hs.add(l);
+        // f.add(new Product("bread", hm, hs));
+
+        // FileUtils.saveProducts(f);
+        
+        // List<Product> p = FileUtils.readProducts();
     }
 }
