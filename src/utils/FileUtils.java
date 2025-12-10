@@ -13,14 +13,16 @@ import java.util.List;
 
 import core.Factory;
 import core.Item;
+import core.Product;
 import core.User;
 import jsonParser.*;
 
 public class FileUtils {
     private static final Object FILE_LOCK = new Object();
 
-    private static final File USERS_FILE = new File("./files/Users.txt");
+    private static final File USERS_FILE = new File("./files/Users.json");
     private static final File ITEMS_FILE = new File("./files/Items.json");
+    private static final File PRODUCTS_FILE = new File("./files/Products.json");
 
     /*
      * Reads the data from a provided file.
@@ -71,6 +73,26 @@ public class FileUtils {
                 }
 
                 Item[] i = JsonParser.fromJson(sb.toString(), Item[].class);
+
+                return new ArrayList<>(Arrays.asList(i));
+            }
+        }
+    }
+    public static List<Product> readProducts() throws IOException {
+        synchronized (FILE_LOCK) {
+            if (!PRODUCTS_FILE.exists()) {
+                return new ArrayList<>();
+            }
+            
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(PRODUCTS_FILE))) {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                Product[] i = JsonParser.fromJson(sb.toString(), Product[].class);
 
                 return new ArrayList<>(Arrays.asList(i));
             }

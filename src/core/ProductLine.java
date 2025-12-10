@@ -12,6 +12,8 @@ public class ProductLine implements Runnable {
     private List<Task> inline;
     private List<Task> canceled;
 
+    public ProductLine() {}
+    
     public ProductLine(String name, String status) {
         this.id = nextId++;
         this.name = name;
