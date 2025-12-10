@@ -115,6 +115,8 @@ public class Factory {
     }
 
     public List<Item> filterItemsByName(String filter) {
+        filter = filter.trim();
+        filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for(Item i:allItems){
             if(i.getName().equals(filter)){
@@ -123,8 +125,10 @@ public class Factory {
         }
         return filteredList;
     }
-
+    
     public List<Item> filterItemsByCategory(String filter) {
+        filter = filter.trim();
+        filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for(Item i:allItems){
             if(i.getName().equals(filter)){
