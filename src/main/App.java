@@ -1,6 +1,7 @@
 package main;
 
 import core.*;
+import utils.*;
 import ui.UI;
 
 public class App {
