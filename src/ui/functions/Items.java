@@ -3,6 +3,7 @@ package ui.functions;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+import ui.Manager;
 import ui.UI;
 
 public class Items extends FunctionPanel {
@@ -33,7 +34,7 @@ public class Items extends FunctionPanel {
 
     private JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFont(Manager.defaultFont(true, false));
         button.setForeground(Color.WHITE);
         button.setBackground(bgColor);
         button.setFocusPainted(false);

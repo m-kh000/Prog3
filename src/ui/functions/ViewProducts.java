@@ -1,11 +1,11 @@
 package ui.functions;
-import javax.swing.*;
-import java.awt.*;
-import ui.components.ProductPanel;
 import core.Factory;
+import java.awt.*;
+import javax.swing.*;
+import ui.components.ProductPanel;
 
-public class Products extends FunctionPanel {
-    public Products(JPanel centerPanel, JFrame frame, Factory factory) {
+public class ViewProducts extends FunctionPanel {
+    public ViewProducts(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
         add(createTopPanel("View All Products", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
         add(new JScrollPane(createProductsPanel(factory)), BorderLayout.CENTER);

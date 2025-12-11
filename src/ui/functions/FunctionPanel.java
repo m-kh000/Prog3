@@ -12,7 +12,7 @@ public abstract class FunctionPanel extends JPanel {
         ImageIcon backIcon = new ImageIcon("back.png");
         Image img = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         backBtn.setIcon(new ImageIcon(img));
-        backBtn.setFont(new Font("Arial", Font.BOLD, 16));
+        backBtn.setFont(Manager.defaultFont(true, false));
         backBtn.setBackground(Color.GRAY);
         backBtn.setForeground(Color.WHITE);
         backBtn.setFocusPainted(false);
@@ -25,7 +25,7 @@ public abstract class FunctionPanel extends JPanel {
     protected JPanel createTopPanel(String titleText, JPanel centerPanel, JFrame frame, Factory factory, String role) {
         JPanel topPanel = new JPanel(new BorderLayout());
         JLabel title = new JLabel(titleText);
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
         topPanel.add(title, BorderLayout.CENTER);
         topPanel.add(BackBtn(centerPanel, frame, factory, role), BorderLayout.WEST);

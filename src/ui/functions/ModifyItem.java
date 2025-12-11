@@ -1,11 +1,9 @@
 package ui.functions;
 
-import javax.swing.*;
-import java.awt.*;
-import ui.LabelBox;
-import core.Factory;
 import core.Item;
-import java.util.List;
+import java.awt.*;
+import javax.swing.*;
+import ui.LabelBox;
 
 public class ModifyItem extends FunctionPanel {
 
@@ -31,8 +29,7 @@ public class ModifyItem extends FunctionPanel {
         LabelBox quan = new LabelBox("Name:", false);
         LabelBox minquan = new LabelBox("Name:", false);
         itemCombo.addActionListener(e -> {
-            List<Item> itemarr = factory.filterItemsByName((String)itemCombo.getSelectedItem());
-            Item item = itemarr.getFirst();
+            Item item = factory.filterItemsByName((String)itemCombo.getSelectedItem()).get(0);
             name.setText(item.getName());
             cat.setText(item.getCategory());
             price.setText(""+item.getPrice());
@@ -48,6 +45,25 @@ public class ModifyItem extends FunctionPanel {
         JButton updateBtn = new JButton("Update");
         updateBtn.setFont(new Font("Arial", Font.BOLD, 20));
         boxws.add(updateBtn);
+        updateBtn.addActionListener(e -> {
+            if (name.getText().isEmpty() || cat.getText().isEmpty() || price.getText().isEmpty() || quan.getText().isEmpty() || minquan.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill all the fields");
+                return;
+            }
+            Item item = factory.filterItemsByName((String)itemCombo.getSelectedItem()).get(0);
+            item.setName(name.getText());
+            item.setCategory(cat.getText());
+            item.setPrice(Double.parseDouble(price.getText()));
+            item.setQuantityAvailable(Integer.parseInt(quan.getText()));
+            item.setMinQuantity(Integer.parseInt(minquan.getText()));
+            name.setText("");
+            cat.setText("");
+            price.setText("");
+            quan.setText("");
+            minquan.setText("");
+            JOptionPane.showMessageDialog(null, "Item updated successfully");
+
+        });
         add(boxws);
     }
 }

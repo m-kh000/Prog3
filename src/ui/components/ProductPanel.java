@@ -1,6 +1,6 @@
 package ui.components;
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class ProductPanel extends JPanel {
     public ProductPanel(core.Product product) {
@@ -11,7 +11,7 @@ public class ProductPanel extends JPanel {
         JLabel idLabel = new JLabel("ID: " + product.getId());
         add(idLabel);
         
-        ImageIcon icon = new ImageIcon("prod.png");
+        ImageIcon icon = new ImageIcon("product.png");
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         JLabel iconLabel = new JLabel(new ImageIcon(img));
         add(iconLabel);

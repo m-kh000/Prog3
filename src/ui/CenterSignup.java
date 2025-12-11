@@ -17,7 +17,7 @@ public class CenterSignup extends JPanel {
         
         JPanel title = new JPanel(new BorderLayout());
         JButton loginButton = new JButton("Login");
-        loginButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        loginButton.setFont(Manager.defaultFont(false, true));
         loginButton.setForeground(new Color(0xaabbff));
         loginButton.setBorder(BorderFactory.createLineBorder(new Color(0xaabbff), 2));
         loginButton.setBackground(bg);
@@ -26,7 +26,7 @@ public class CenterSignup extends JPanel {
         loginButton.addActionListener(e -> UI.switchContent(new CenterLogin(centerPanel, frame, factory)));
         title.add(loginButton, BorderLayout.WEST);
         JLabel titleLabel = new JLabel("Sign Up");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setFont(Manager.defaultFont(true, true));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         title.add(titleLabel, BorderLayout.CENTER);
         add(title, BorderLayout.NORTH);
@@ -36,10 +36,10 @@ public class CenterSignup extends JPanel {
         JRadioButton manager = new JRadioButton("Manager");
         JRadioButton supervisor = new JRadioButton("Supervisor");
         ButtonGroup m_sGroup = new ButtonGroup();
-        manager.setFont(new Font("Arial", Font.BOLD, 20));
+        manager.setFont(Manager.defaultFont(true, true));
         manager.setBorder(null);
         manager.setFocusable(false);
-        supervisor.setFont(new Font("Arial", Font.BOLD, 20));
+        supervisor.setFont(Manager.defaultFont(true, true));
         supervisor.setBorder(null);
         supervisor.setFocusable(false);
         m_sGroup.add(manager);
@@ -49,7 +49,7 @@ public class CenterSignup extends JPanel {
         m_spanel.add(supervisor);
         JPanel role = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel roleLable = new JLabel("Role:");
-        roleLable.setFont(new Font("Arial", Font.PLAIN, 20));
+        roleLable.setFont(Manager.defaultFont(false, true));
         role.add(roleLable);
         role.add(m_spanel);
         boxes.add(role);

@@ -11,7 +11,7 @@ public class CenterSupervisor extends JPanel {
         Color buttonColor = Color.decode("#5294ff");
 
         JLabel title = new JLabel("Supervisor");
-        title.setFont(new Font("Arial", Font.BOLD, 40));
+        title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
         add(title);
 
@@ -26,7 +26,7 @@ public class CenterSupervisor extends JPanel {
 
         JPanel row2 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton tasksBtn = createStyledButton("Tasks", buttonColor);
-        tasksBtn.addActionListener(e -> UI.switchContent(new Tasks(centerPanel, frame, factory)));
+        tasksBtn.addActionListener(e -> UI.switchContent(new ViewTasks(centerPanel, frame, factory)));
         JButton filterTasksBtn = createStyledButton("Filter Tasks", buttonColor);
         filterTasksBtn.addActionListener(e -> UI.switchContent(new FilterTasks(centerPanel, frame, factory)));
         row2.add(tasksBtn);
@@ -35,7 +35,7 @@ public class CenterSupervisor extends JPanel {
 
         JPanel row3 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton productsBtn = createStyledButton("Products", buttonColor);
-        productsBtn.addActionListener(e -> UI.switchContent(new Products(centerPanel, frame, factory)));
+        productsBtn.addActionListener(e -> UI.switchContent(new ViewProducts(centerPanel, frame, factory)));
         JButton filterProductsBtn = createStyledButton("Filter Products", buttonColor);
         filterProductsBtn.addActionListener(e -> UI.switchContent(new FilterProducts(centerPanel, frame, factory)));
         row3.add(productsBtn);
@@ -58,7 +58,7 @@ public class CenterSupervisor extends JPanel {
 
     private JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFont(Manager.defaultFont(true, false));
         button.setForeground(Color.WHITE);
         button.setBackground(bgColor);
         button.setFocusPainted(false);
