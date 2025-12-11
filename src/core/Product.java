@@ -66,6 +66,19 @@ public class Product {
         return new HashMap<>(requiredItems);
     }
 
+    private Item getItem(String name) {
+        for (Item i : requiredItems.keySet()) {
+            if (name.equals(i.getName())) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public int getRequiredQuantityOf(String name) {
+        return requiredItems.get(getItem(name));
+    }
+
     public int getQuantityAvailable() {
         return quantityAvailable;
     }
