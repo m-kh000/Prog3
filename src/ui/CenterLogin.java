@@ -2,7 +2,6 @@ package ui;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import jsonParser.JsonParser;
 import utils.Validator;
 
@@ -52,12 +51,11 @@ public class CenterLogin extends JPanel {
                 }
                 else {
                         centerPanel.removeAll();
-                    switch (r.getRole()) {
+                    switch (r.getRole().toLowerCase()) {
                     case "manager":
-                        System.out.println("mira is manager");
                         centerPanel.add(new CenterManager(centerPanel, frame, factory));
                         break;
-                    case "Supervisor":
+                    case "supervisor":
                         centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
                         break;
                     case "signup":
