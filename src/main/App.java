@@ -26,15 +26,16 @@ public class App {
         new UI(factory);
         
         // Factory f = new Factory();
-        // Map<Item, Integer> hm = new HashMap<>();
+        // HashMap<Item, Integer> hm = new HashMap<>();
         // hm.put(new Item("flour", "test", 500, 1000, 100), 10);
         // HashSet<LocalDate> hs = new HashSet<>();
-        // LocalDate l = LocalDate.now();
+        // LocalDate l = LocalDate.of(2006, 4, 11);
         // hs.add(l);
         // f.add(new Product("bread", hm, hs));
 
         // FileUtils.saveProducts(f);
         
         // List<Product> p = FileUtils.readProducts();
+        // System.out.println(p.get(0).getRequiredItems());
     }
 }

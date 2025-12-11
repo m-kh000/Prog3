@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,6 @@ import jsonParser.exceptions.JsonParsingException;
 public class JsonParser {
 
                             /*  User Visible Part  */
-    
     public static String toJson(Object obj) throws IllegalAccessException {
         Set<Object> visited = Collections.newSetFromMap(new IdentityHashMap<>());
 
@@ -38,6 +38,27 @@ public class JsonParser {
     public static <T> T fromJson(String jsonString, Class<T> clazz) {
         try {
             Parser p = new Parser(jsonString);
+            @SuppressWarnings("unchecked")
+            T obj = (T) p.parseValueAs(clazz);
+            return obj;
+        } catch (Exception e) {
+                throw new JsonParsingException("Failed to parse JSON: " + e.getMessage(), e);
+        }
+    }
+    public static <T> T fromJson(String jsonString, Class<T> clazz,
+                                Class<?> mapKeyType, Class<?> mapValueType, Class<?> collectionElementType) {
+        try {
+            Parser p = new Parser(jsonString, mapKeyType, mapValueType, collectionElementType);
+            @SuppressWarnings("unchecked")
+            T obj = (T) p.parseValueAs(clazz);
+            return obj;
+        } catch (Exception e) {
+            throw new JsonParsingException("Failed to parse JSON: " + e.getMessage(), e);
+        }
+    }
+    public static <T> T fromJson(String jsonString, Class<T> clazz, Class<?> collectionElementType) {
+        try {
+            Parser p = new Parser(jsonString, null, null, collectionElementType);
             @SuppressWarnings("unchecked")
             T obj = (T) p.parseValueAs(clazz);
             return obj;
@@ -61,11 +82,20 @@ public class JsonParser {
             double.class, Double.class,
             Number.class
         );
+        private final Class<?> mapKeyType;
+        private final Class<?> mapValueType;
+        private final Class<?> collectionElementType;
 
         Parser(String input) {
+            this(input, null, null, null);
+        }
+        Parser(String input, Class<?> mapKeyType, Class<?> mapValueType, Class<?> collectionElementType) {
             this.input = ((input == null) ? "" : input);
             this.pos = 0;
             this.len = this.input.length();
+            this.mapKeyType = mapKeyType;
+            this.mapValueType = mapValueType;
+            this.collectionElementType = collectionElementType;
         }
 
         private void skipWhiteSpace() {
@@ -314,8 +344,9 @@ public class JsonParser {
             else if (c == '[') {
                 if (target == null) {
                     return parseArray(ArrayList.class);
-                }
-                else {
+                } else if (target != null && Map.class.isAssignableFrom(target)) {
+                    return parseMapFromPairs(target);
+                } else {
                     return parseArray(target);
                 }
             }
@@ -401,25 +432,107 @@ public class JsonParser {
             return instance;
         }
         @SuppressWarnings("unchecked")
-        private Object parseMap(Class<?> target) {
-            expect('{');
+        private Object parseMapFromPairs(Class<?> target) {
+            expect('[');
             skipWhiteSpace();
-            
-            Map<String, Object> map;
+
+            Map<Object, Object> map;
             try {
                 if (target == Map.class || target == Object.class)
                     map = new HashMap<>();
                 else
-                    map = (Map<String, Object>) target.getDeclaredConstructor().newInstance();
+                    map = (Map<Object, Object>) target.getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                throw new JsonParsingException("Failed to create Map instance", e);
+            }
+
+            // empty array -> return empty map
+            if (peek() == ']') {
+                next();
+                return map;
+            }
+
+            while (true) {
+                skipWhiteSpace();
+                expect('{');
+                skipWhiteSpace();
+
+                Object key = null;
+                Object value = null;
+
+                // parse fields inside the pair object
+                while (true) {
+                    String fieldName = parseString();
+                    expect(':');
+                    skipWhiteSpace();
+
+                    if ("key".equals(fieldName)) {
+                        key = parseValueAs(this.mapKeyType);
+                    } else if ("value".equals(fieldName)) {
+                        value = parseValueAs(this.mapValueType);
+                    } else {
+                        // ignore unknown fields inside pair object
+                        skipValue();
+                    }
+
+                    skipWhiteSpace();
+                    if (peek() == '}') {
+                        next();
+                        break;
+                    } else if (peek() == ',') {
+                        next();
+                        skipWhiteSpace();
+                    } else {
+                        throw new IllegalArgumentException("Expected ',' or '}' inside pair object");
+                    }
+                }
+
+                map.put(key, value);
+
+                skipWhiteSpace();
+                if (peek() == ']') {
+                    next();
+                    break;
+                } else if (peek() == ',') {
+                    next();
+                    skipWhiteSpace();
+                    continue;
+                } else {
+                    throw new IllegalArgumentException("Expected ',' or ']' after pair element");
+                }
+            }
+
+            return map;
+        }
+        @SuppressWarnings("unchecked")
+        private Object parseMap(Class<?> target) {
+            expect('{');
+            skipWhiteSpace();
+            
+            Map<Object, Object> map;
+            try {
+                if (target == Map.class || target == Object.class)
+                    map = new HashMap<>();
+                else
+                    map = (Map<Object, Object>) target.getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                 throw new JsonParsingException("Failed to create Map instance", e);
             }
 
             while (peek() != '}') {
-                String key = parseString();
+                String keyStr = parseString();
                 expect(':');
-                Object value = parseValueAs(null);
-                map.put(key, value);
+
+                // convert key string into requested key type if provided
+                Object keyObj = keyStr;
+                if (this.mapKeyType != null && this.mapKeyType != String.class) {
+                    keyObj = convertStringToTarget(keyStr, this.mapKeyType);
+                }
+
+                // parse value using provided mapValueType (may be null)
+                Object value = parseValueAs(this.mapValueType);
+
+                map.put(keyObj, value);
 
                 skipWhiteSpace();
                 if (peek() == ',') {
@@ -447,6 +560,13 @@ public class JsonParser {
                         return target.getDeclaredConstructor().newInstance();
                     } catch (Exception e) {
                         return new ArrayList<>();
+                    }
+                }
+                else if (Set.class.isAssignableFrom(target)) {
+                    try {
+                        return target.getDeclaredConstructor().newInstance();
+                    } catch (Exception e) {
+                        return new java.util.LinkedHashSet<>();
                     }
                 }
                 else {
@@ -486,8 +606,8 @@ public class JsonParser {
                 }
 
                 while (true) {
-                    //add support for Type tokens in the future versions
-                    list.add(parseValueAs(null));
+                    // add support for Type tokens in the future versions
+                    list.add(parseValueAs(this.collectionElementType));
                     skipWhiteSpace();
 
                     if (peek() == ',') {
@@ -503,6 +623,32 @@ public class JsonParser {
                     }
                 }
                 return list;
+            }
+            else if (Set.class.isAssignableFrom(target)) {
+                Set<Object> set;
+                try {
+                    set = (Set<Object>) target.getDeclaredConstructor().newInstance();
+                } catch (Exception e) {
+                    set = new LinkedHashSet<>();
+                }
+
+                while (true) {
+                    set.add(parseValueAs(this.collectionElementType));   // elements parsed with target==null (no generics)
+                    skipWhiteSpace();
+
+                    if (peek() == ',') {
+                        next();
+                        skipWhiteSpace();
+                    }
+                    else if (peek() == ']') {
+                        next();
+                        break;
+                    }
+                    else {
+                        throw new IllegalArgumentException("Expected ',' or ']' in array");
+                    }
+                }
+                return set;
             }
             else {
                 throw new IllegalArgumentException("Expected array or list type at position " 
@@ -761,7 +907,19 @@ public class JsonParser {
         
         StringBuilder sb = new StringBuilder();
 
-        if (obj instanceof Number || obj instanceof Boolean) {
+        if (obj instanceof Enum<?>) {
+            return "\"" + ((Enum<?>) obj).name() + "\"";
+        }
+        else if (obj instanceof LocalDate) {
+            return "\"" + ((LocalDate) obj).format(DateTimeFormatter.ISO_LOCAL_DATE) + "\"";
+        }
+        else if (obj instanceof LocalTime) {
+            return "\"" + ((LocalTime) obj).format(DateTimeFormatter.ISO_LOCAL_TIME) + "\"";
+        }
+        else if (obj instanceof LocalDateTime) {
+            return "\"" + ((LocalDateTime) obj).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\"";
+        }
+        else if (obj instanceof Number || obj instanceof Boolean) {
             return obj.toString();
         }
         else if (obj instanceof String) {
@@ -887,46 +1045,49 @@ public class JsonParser {
                 "Circular reference detected in " + map.getClass().getName() + 
                 "@" + System.identityHashCode(map)
             );
-        
-        visited.add(map);
 
+        visited.add(map);
         try {
-            sb.append("{");
-            for (Map.Entry<?, ?> entry : map.entrySet()) {
-                Object key = entry.getKey();
-                Object value = entry.getValue();
+            // serialize as array of {"key": <keyJson>, "value": <valueJson>}
+            sb.append("[");
+            Iterator<? extends Map.Entry<?, ?>> it = map.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<?, ?> entry = it.next();
 
                 indentation(depth+1, sb, false);
+                sb.append("{");
 
-                if (key == null)
-                    sb.append("\"null\": ");
-                else {
-                    sb.append("\"");
-                    escapeString(String.valueOf(key), sb);
-                    sb.append("\": ");
-                }
-
-                if (value == null) {
+                // key
+                indentation(depth+2, sb, false);
+                sb.append("\"key\": ");
+                Object key = entry.getKey();
+                if (key == null) {
                     sb.append("null");
-                }
-                else if (value instanceof String) {
-                    sb.append("\"");
-                    escapeString((String)value, sb);
-                    sb.append("\"");
-                }
-                else if (value instanceof Enum<?> || value instanceof Number || value instanceof Boolean) {
-                    sb.append(((value instanceof Enum<?>) ? ("\"" + value + "\"") : value));
-                }
-                else {
-                    sb.append(JsonParser.toJson(value, visited, depth+1));
+                } else {
+                    sb.append(JsonParser.toJson(key, visited, depth+2));
                 }
                 sb.append(",");
+
+                // value
+                indentation(depth+2, sb, false);
+                sb.append("\"value\": ");
+                Object value = entry.getValue();
+                if (value == null) {
+                    sb.append("null");
+                } else {
+                    sb.append(JsonParser.toJson(value, visited, depth+2));
+                }
+
+                indentation(depth+1, sb, false);
+                sb.append("}");
+
+                if (it.hasNext())
+                    sb.append(",");
             }
-            if (sb.charAt(sb.length()-1) == ',')
-                sb.deleteCharAt(sb.length()-1);
-            
-            indentation(depth, sb, false);
-            sb.append("}");
+
+            if (!map.isEmpty())
+                indentation(depth, sb, false);
+            sb.append("]");
         } finally {
             visited.remove(map);
         }
