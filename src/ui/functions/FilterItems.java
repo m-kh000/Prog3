@@ -15,13 +15,20 @@ public class FilterItems extends FunctionPanel {
         JPanel filterPanel = new JPanel(new GridLayout(1,4));
         JLabel filterLabel = new JLabel("Filter by:");
         filterLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        JComboBox<String> filterCombo = new JComboBox<>(new String[]{"Name", "Category", "Available"});
+        JComboBox<String> filterCombo = new JComboBox<>(new String[]{"Name", "Category", "Available","Under min","Out"});
         filterCombo.setFont(new Font("Arial", Font.PLAIN, 16));
         JTextField filterField = new JTextField(20);
         filterField.setFont(new Font("Arial", Font.PLAIN, 16));
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(new Font("Arial", Font.BOLD, 16));
-        
+        filterCombo.addActionListener(e->{
+            if(((String)filterCombo.getSelectedItem()).equals("Available")||((String)filterCombo.getSelectedItem()).equals("Under min")||((String)filterCombo.getSelectedItem()).equals("Out")){
+                filterField.setEnabled(false);
+            }
+            else{
+                filterField.setEnabled(true);
+            }
+        });
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = filterField.getText();
@@ -50,6 +57,8 @@ public class FilterItems extends FunctionPanel {
             case "Name" -> items = factory.filterItemsByName(filterValue);
             case "Category" -> items = factory.filterItemsByCategory(filterValue);
             case "Available" -> items = factory.filterItemsByAvailable();
+            case "Under min" -> items = factory.filterItemsByUnderMin();
+            case "Out" -> items = factory.filterItemsByOut();
         }
         
         if(items != null) {

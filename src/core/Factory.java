@@ -181,4 +181,12 @@ public class Factory {
         }
         return list;
     }
+
+    public String[] getItemsNames() {
+        List<String> names = new ArrayList<>();
+        for(Item i : warehouse.getItems()){
+            names.add(i.getName());
+        }
+        return names.toArray(new String[names.size()]);
+    }
 }
