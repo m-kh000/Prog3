@@ -57,6 +57,12 @@ public class Warehouse {
         
         return null;
     }
+    public List<Item> getItems() {
+        return items;
+    }
+    public List<Product> getProducts() {
+        return products;
+    }
     /**
      * @param productName the name of the product
      * @return the wanted product if found or else null

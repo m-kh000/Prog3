@@ -11,7 +11,7 @@ public abstract class FunctionPanel extends JPanel {
         JButton backBtn = new JButton();
         ImageIcon backIcon = new ImageIcon("back.png");
         Image img = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        backBtn.setIcon(new ImageIcon("back.png"));
+        backBtn.setIcon(new ImageIcon(img));
         backBtn.setFont(new Font("Arial", Font.BOLD, 16));
         backBtn.setBackground(Color.GRAY);
         backBtn.setForeground(Color.WHITE);

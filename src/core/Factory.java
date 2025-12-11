@@ -5,24 +5,19 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Factory {
-    private HashSet<Item> allItems;
-    private HashSet<Product> allProducts;
     private HashSet<ProductLine> allLines;
     private List<User> users;
     private String notes;
     private Warehouse warehouse;
 
     public Factory() {
-        this.allItems = new HashSet<>();
-        this.allProducts = new HashSet<>();
         this.allLines = new HashSet<>();
         this.users = new ArrayList<>();
         this.notes = new String();
+        this.warehouse = new Warehouse();
     }
 
-    public Factory(HashSet <Item> allItems,HashSet<Product> allProducts,HashSet<ProductLine> allLines,List<User> users,String notes,Warehouse warehouse) {
-        this.allItems = allItems;
-        this.allProducts = allProducts;
+    public Factory(HashSet<ProductLine> allLines,List<User> users,String notes,Warehouse warehouse) {
         this.allLines = allLines;
         this.users = users;
         this.notes = notes;
@@ -30,11 +25,12 @@ public class Factory {
     }
 
     synchronized public void add(Product p) {
-        allProducts.add(p);
+        warehouse.addProduct(p);
     }
 
     synchronized public void add(Item i) {
-        allItems.add(i);
+        i.setName(i.getName().trim());
+        warehouse.addItem(i);
     }
     
     public void addUser(User u){
@@ -56,27 +52,19 @@ public class Factory {
     }
 
     synchronized public Item[] previewItems() {
-        return allItems.toArray(new Item[allItems.size()]);
+        return warehouse.getItems().toArray(new Item[warehouse.getItems().size()]);
     }
 
     synchronized public Product[] previewProducts() {
-        return allProducts.toArray(new Product[allProducts.size()]);
+        return warehouse.getProducts().toArray(new Product[warehouse.getProducts().size()]);
     }
 
     /* Removed previewProducts and previewTasks methods */
 
     // GETTERS : 
 
-    public HashSet<Item> getAllItems() {
-        return allItems;
-    }
-
     public HashSet<ProductLine> getAllLines() {
         return allLines;
-    }
-
-    public HashSet<Product> getAllProducts() {
-        return allProducts;
     }
 
     public List<User> getUsersList() {
@@ -102,7 +90,7 @@ public class Factory {
     }
 
     public void resetItem(Item i,String name, String category, double price, int quantityAvailable, int minQuantity) {
-        if(!allItems.contains(i)) return;
+        if(!warehouse.getItems().contains(i)) return;
         i.setName(name);
         i.setCategory(category);
         i.setPrice(price);
@@ -110,16 +98,16 @@ public class Factory {
         i.setMinQuantity(minQuantity);
     }
 
-    synchronized public void deleteItem(Item i) {
-        allItems.remove(i);
+    synchronized public void deleteItem(String name) {
+        warehouse.removeItem(name);
     }
 
     public List<Item> filterItemsByName(String filter) {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:allItems){
-            if(i.getName().equals(filter)){
+        for(Item i:warehouse.getItems()){
+            if(i.getName().toLowerCase().contains(filter)){
                 filteredList.add(i);
             }
         }
@@ -130,8 +118,8 @@ public class Factory {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:allItems){
-            if(i.getName().equals(filter)){
+        for(Item i:warehouse.getItems()){
+            if(i.getName().toLowerCase().contains(filter)){
                 filteredList.add(i);
             }
         }
@@ -140,7 +128,7 @@ public class Factory {
 
     public List<Item> filterItemsByAvailable() {
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:allItems){
+        for(Item i:warehouse.getItems()){
             if(i.isAvailable()){
                 filteredList.add(i);
             }
@@ -150,7 +138,7 @@ public class Factory {
 
     public List<Item> filterItemsByOut() {
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:allItems){
+        for(Item i:warehouse.getItems()){
             if(i.isOut()){
                 filteredList.add(i);
             }
@@ -160,7 +148,7 @@ public class Factory {
 
     public List<Item> filterItemsByUnderMin() {
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:allItems){
+        for(Item i:warehouse.getItems()){
             if(i.isUnderMin()){
                 filteredList.add(i);
             }
@@ -186,7 +174,7 @@ public class Factory {
 
     public List<Product> topOrderBetween(LocalDate start, LocalDate end) {
         List<Product> list = new ArrayList<>();
-        for(Product p:allProducts){
+        for(Product p:warehouse.getProducts()){
             if(p.wasOrderedBetween(start, end)){
                 list.add(p);
             }

@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import core.Factory;
@@ -149,7 +148,7 @@ public class FileUtils {
      */
     public static void saveItems(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
-            HashSet<Item> items = factory.getAllItems();
+            List<Item> items = new ArrayList<>(factory.getWarehouse().getItems());
     
             ITEMS_FILE.getParentFile().mkdirs();
             
@@ -184,7 +183,7 @@ public class FileUtils {
      */
     public static void saveProducts(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
-            HashSet<Product> products = factory.getAllProducts();
+            List<Product> products = new ArrayList<>(factory.getWarehouse().getProducts());
 
             PRODUCTS_FILE.getParentFile().mkdirs();
 
