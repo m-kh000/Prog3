@@ -326,9 +326,9 @@ public class JsonParser {
             skipWhiteSpace();
             char c = peek();
 
-            if (c == '\"') {
-                String str = parseString();
-                return convertStringToTarget(str, target);
+            if (isDigit(c) || c == '-') {
+                String numberStr = parseNumberText();
+                return convertNumberTextToTarget(numberStr, target);
             }
             else if (c == 't' || c == 'f') {
                 Boolean bool = parseBoolean();
@@ -338,9 +338,9 @@ public class JsonParser {
                 parseNull();
                 return null;
             }
-            else if (isDigit(c) || c == '-') {
-                String numberStr = parseNumberText();
-                return convertNumberTextToTarget(numberStr, target);
+            else if (c == '\"') {
+                String str = parseString();
+                return convertStringToTarget(str, target);
             }
             else if (c == '[') {
                 if (target == null) {
@@ -356,10 +356,10 @@ public class JsonParser {
                     return parseMap(HashMap.class);
                 }
                 else if (target != null && Map.class.isAssignableFrom(target)) {
-                        return parseMap(target);
-                    }
+                    return parseMap(target);
+                }
                 else {
-                        return parseObjectAs(target);
+                    return parseObjectAs(target);
                 }
             }
             else {
@@ -525,7 +525,7 @@ public class JsonParser {
                 expect(':');
 
                 // parse value using provided mapValueType (may be null)
-                Object value = parseValueAs(this.mapValueType);
+                Object value = parseValueAs(null);
 
                 map.put(keyStr, value);
 
