@@ -62,10 +62,6 @@ public class Factory {
 
     /* Removed previewProducts and previewTasks methods */
 
-    synchronized public void previewTasks(Product p) {
-        p.previewTasks();
-    }
-    
     // GETTERS : 
 
     public HashSet<Item> getAllItems() {
