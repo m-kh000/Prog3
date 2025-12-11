@@ -8,7 +8,8 @@ public class Product {
     private static int nextId = 1;
     private int id;
     private String name;
-    private Map<Item, Integer> requiredItems;
+    private int quantityAvailable;
+    private HashMap<Item, Integer> requiredItems;
     private HashSet<LocalDate> orderedIn;
 
     public Product() {}
@@ -19,7 +20,7 @@ public class Product {
         this.requiredItems = new HashMap<>();
         this.orderedIn = new HashSet<>();
     }
-    public Product(String name,Map<Item, Integer> requiredItems,HashSet<LocalDate> orderedIn){
+    public Product(String name,HashMap<Item, Integer> requiredItems,HashSet<LocalDate> orderedIn){
         this.id = nextId++;
         this.name = name;
         this.orderedIn = orderedIn;
@@ -59,6 +60,10 @@ public class Product {
 
     public HashMap<Item, Integer> getRequiredItems() {
         return new HashMap<>(requiredItems);
+    }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
     }
 
     // SETTERS : 
