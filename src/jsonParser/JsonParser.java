@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -523,16 +524,10 @@ public class JsonParser {
                 String keyStr = parseString();
                 expect(':');
 
-                // convert key string into requested key type if provided
-                Object keyObj = keyStr;
-                if (this.mapKeyType != null && this.mapKeyType != String.class) {
-                    keyObj = convertStringToTarget(keyStr, this.mapKeyType);
-                }
-
                 // parse value using provided mapValueType (may be null)
                 Object value = parseValueAs(this.mapValueType);
 
-                map.put(keyObj, value);
+                map.put(keyStr, value);
 
                 skipWhiteSpace();
                 if (peek() == ',') {
@@ -1126,7 +1121,9 @@ public class JsonParser {
                 Field f = fields[i];
                 if (f.getDeclaringClass().getName().startsWith("java."))
                     continue;
-                else if (f.isAnnotationPresent(JsonIgnore.class))
+                if (Modifier.isStatic(f.getModifiers()))
+                    continue;
+                if (f.isAnnotationPresent(JsonIgnore.class))
                     continue;
                 
                 f.setAccessible(true);
