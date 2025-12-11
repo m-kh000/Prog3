@@ -1,34 +1,46 @@
 package ui.functions;
 
-import javax.swing.*;
 import java.awt.*;
-import core.Factory;
+import javax.swing.*;
+import ui.Manager;
 
 public class DeleteItem extends FunctionPanel {
 
     public DeleteItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
-        setLayout(new GridLayout(4, 1, 20, 20));
+        setLayout(new BorderLayout());
+        add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        
+        JPanel boxes = new JPanel(new GridLayout(6, 1, 20, 20));
 
-        add(BackBtn(centerPanel, frame, factory, "supervisor"));
-
-        JLabel title = new JLabel("Delete Item");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
-        title.setHorizontalAlignment(JLabel.CENTER);
-        add(title);
-
+        JPanel emp = new JPanel();
+        JPanel emp2 = new JPanel();
+        JPanel emp3 = new JPanel();
+        JPanel emp4 = new JPanel();
+        boxes.add(emp);
+        
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
-        JLabel selectLabel = new JLabel("Select Item:");
-        selectLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        JComboBox<String> itemCombo = new JComboBox<>(new String[]{"Item 1", "Item 2", "Item 3"});
-        itemCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-        selectPanel.add(selectLabel);
-        selectPanel.add(itemCombo);
-        add(selectPanel);
+            JLabel selectLabel = new JLabel("Select Item:");
+            selectLabel.setFont(Manager.defaultFont(false, false));
+            JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
+            itemCombo.setFont(Manager.defaultFont(false, false));
+            itemCombo.setSelectedItem(null);
+            selectPanel.add(selectLabel);
+            selectPanel.add(itemCombo);
+            boxes.add(selectPanel);
 
+        boxes.add(emp2);
+        boxes.add(emp3);
+        boxes.add(emp4);
         JButton deleteBtn = new JButton("Delete");
-        deleteBtn.setFont(new Font("Arial", Font.BOLD, 20));
+        deleteBtn.setFont(Manager.defaultFont(true, true));
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setForeground(Color.WHITE);
-        add(deleteBtn);
+        boxes.add(deleteBtn);
+        deleteBtn.addActionListener(e -> {
+            factory.deleteItem((String)itemCombo.getSelectedItem());
+            itemCombo.setSelectedItem(null);
+            JOptionPane.showMessageDialog(null, "Item deleted successfully");
+        });
+        add(boxes);
     }
 }

@@ -14,7 +14,7 @@ public class CenterLogin extends JPanel {
 
         JPanel title = new JPanel(new BorderLayout());
         JButton signupButton = new JButton("Sign Up");
-        signupButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        signupButton.setFont(Manager.defaultFont(false, true));
         signupButton.setForeground(new Color(0xaabbff));
         signupButton.setBorder(BorderFactory.createLineBorder(new Color(0xaabbff), 2));
         signupButton.setBackground(bg);
@@ -23,7 +23,7 @@ public class CenterLogin extends JPanel {
         signupButton.addActionListener(e -> UI.switchContent(new CenterSignup(centerPanel, frame, factory)));
         title.add(signupButton, BorderLayout.WEST);
         JLabel titleLable = new JLabel("Login");
-        titleLable.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLable.setFont(Manager.defaultFont(true, true));
         titleLable.setHorizontalAlignment(JLabel.CENTER);
         title.add(titleLable, BorderLayout.CENTER);
         add(title,BorderLayout.NORTH);

@@ -8,7 +8,7 @@ public class CenterManager extends JPanel {
     public CenterManager(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new GridLayout(4, 1, 0, 20));
         JLabel title = new JLabel("Manager");
-        title.setFont(new Font("Arial", Font.BOLD, 40));
+        title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
         add(title);
         Color buttonColor = Color.decode("#5294ff");
@@ -29,7 +29,7 @@ public class CenterManager extends JPanel {
 
     private JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFont(Manager.defaultFont(true, false));
         button.setForeground(Color.WHITE);
         button.setBackground(bgColor);
         button.setFocusPainted(false);

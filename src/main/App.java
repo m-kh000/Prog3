@@ -1,14 +1,6 @@
 package main;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
 import core.*;
-import jsonParser.JsonParser;
-import utils.*;
 import ui.UI;
 
 public class App {
@@ -21,8 +13,9 @@ public class App {
         
         Product chair = new Product("Chair");
         Product table = new Product("Table");
-        // factory.add(chair);
-        // factory.add(table);
+        
+        factory.add(chair);
+        factory.add(table);
         
         new UI(factory);
         

@@ -59,6 +59,17 @@ public class Factory {
         return warehouse.getProducts().toArray(new Product[warehouse.getProducts().size()]);
     }
 
+    synchronized public Task[] previewTasks() {
+        List<Task> tasks = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            tasks.addAll(pl.getCompleted());
+            tasks.addAll(pl.getInprogress());
+            tasks.addAll(pl.getCanceled());
+        }
+        return tasks.toArray(new Task[tasks.size()]);
+    }
+
+    
     /* Removed previewProducts and previewTasks methods */
 
     // GETTERS : 
