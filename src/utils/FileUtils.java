@@ -8,11 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import core.Factory;
 import core.Item;
 import core.Product;
+import core.ProductLine;
 import core.User;
 import jsonParser.*;
 
@@ -22,6 +24,21 @@ public class FileUtils {
     private static final File USERS_FILE = new File("./files/Users.json");
     private static final File ITEMS_FILE = new File("./files/Items.json");
     private static final File PRODUCTS_FILE = new File("./files/Products.json");
+    private static final File PRODUCTLINES_FILE = new File("./files/ProductLines.json");
+
+    private static class ProductLinesPaths {
+        private List<String> productLinesPaths;
+
+        public ProductLinesPaths() {}
+
+        public ProductLinesPaths(List<String> l) {
+            this.productLinesPaths = l;
+        }
+
+        public String[] getProductLinesPaths() {
+            return this.productLinesPaths.toArray(new String[this.productLinesPaths.size()]);
+        }
+    }
 
     /*
      * Reads the data from a provided file.
@@ -91,9 +108,30 @@ public class FileUtils {
                     sb.append(line);
                 }
 
-                Product[] i = JsonParser.fromJson(sb.toString(), Product[].class);
+                Product[] p = JsonParser.fromJson(sb.toString(), Product[].class, Item.class, Integer.class, null);
 
-                return new ArrayList<>(Arrays.asList(i));
+                return new ArrayList<>(Arrays.asList(p));
+            }
+        }
+    }
+
+    public static HashSet<ProductLine> readProductLines() throws IOException {
+        synchronized (FILE_LOCK) {
+            if (!PRODUCTLINES_FILE.exists()) {
+                return new HashSet<>();
+            }
+
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(PRODUCTLINES_FILE))) {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                ProductLine[] pl = JsonParser.fromJson(sb.toString(), ProductLine[].class, Item.class, Integer.class, null);
+                
+                return new HashSet<>(Arrays.asList(pl));
             }
         }
     }
@@ -114,7 +152,7 @@ public class FileUtils {
      */
     public static void saveUsers(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
-            List<User> users = factory.getUsersList();
+            List<User> users = factory.getUsers();
     
             USERS_FILE.getParentFile().mkdirs();
 
@@ -199,6 +237,33 @@ public class FileUtils {
             } catch (IllegalAccessException e) {
                 /* log the exception to Exceptions.txt */
             }
+        }
+    }
+
+    public static void saveProductLines(Factory factory) throws IOException {
+        synchronized (FILE_LOCK) {
+            HashSet<ProductLine> productLines = new HashSet<>(factory.getAllLines());
+
+            PRODUCTLINES_FILE.getParentFile().mkdirs();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(PRODUCTLINES_FILE))) {
+                
+                String productLinesJson = JsonParser.toJson(productLines);
+
+                if (!PRODUCTLINES_FILE.exists()) {
+                    PRODUCTLINES_FILE.createNewFile();
+                }
+
+                writer.write(productLinesJson);
+            } catch (IllegalAccessException e) {
+                /* log the exception to Exceptions.txt */
+            }
+        }
+    }
+
+    public static void saveTasks(ProductLine productLine) {
+        synchronized (FILE_LOCK) {
+            
         }
     }
 }

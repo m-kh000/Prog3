@@ -1,6 +1,7 @@
 package core;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.StorageInitializationException;
@@ -18,6 +19,10 @@ public class Warehouse {
             // TODO: log the exception in Exceptions.txt
             throw new StorageInitializationException("Failed to initialize Warehouse.");
         }
+    }
+    public Warehouse(List<Item> items, List<Product> products) {
+        this.items = new ArrayList<>(items);
+        this.products = new ArrayList<>(products);
     }
 
     public void addItem(Item item) {
@@ -87,14 +92,4 @@ public class Warehouse {
 
         return ((temp == null) ? false : (temp.getQuantityAvailable() > 0) ? true : false);
     }
-    // /**
-    //  * @param productName the name of the product
-    //  * @return {@code true} if the products list contains a {@code Product} with the given name
-    //  *      and the available quantity is greater than zero or false otherwise
-    //  */
-    // public boolean isProductAvailable(String productName) {
-    //     Product temp = this.getProduct(productName);
-
-    //     return ((temp == null) ? false : (temp.getQuantityAvailable() > 0) ? true : false);
-    // }
 }

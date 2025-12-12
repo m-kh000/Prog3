@@ -12,12 +12,11 @@ public class Task {
     private LocalDate startDate;
     private LocalDate deliveryDate;
     private String status;
-    private ProductLine assignedLine;
     private double completionPercentage;
 
     public Task() {}
     
-    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status, ProductLine assignedLine, double completionPercentage) {
+    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status, double completionPercentage) {
         this.id = nextId++;
         this.product = product;
         this.requiredQuantity = requiredQuantity;
@@ -26,7 +25,6 @@ public class Task {
         this.startDate = startDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
-        this.assignedLine = assignedLine;
         this.completionPercentage = completionPercentage;
     }
 
@@ -43,10 +41,6 @@ public class Task {
     // }
 
     // GETTERS : 
-
-    public ProductLine getAssignedLine() {
-        return assignedLine;
-    }
 
     public double getCompletionPercentage() {
         return completionPercentage;
@@ -89,10 +83,6 @@ public class Task {
     }
 
     // SETTERS : 
-
-    public void setAssignedLine(ProductLine assignedLine) {
-        this.assignedLine = assignedLine;
-    }
 
     public void setCompletionPercentage(double completionPercentage) {
         this.completionPercentage = completionPercentage;
