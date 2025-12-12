@@ -76,7 +76,8 @@ public class Product {
     }
 
     public int getRequiredQuantityOf(String name) {
-        return requiredItems.get(getItem(name));
+        Integer temp = requiredItems.get(getItem(name));
+        return (temp == null) ? 0 : temp;
     }
 
     public int getQuantityAvailable() {

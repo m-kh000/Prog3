@@ -78,10 +78,6 @@ public class Factory {
         return allLines;
     }
 
-    public List<User> getUsersList() {
-        return this.users;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -94,13 +90,23 @@ public class Factory {
         return warehouse;
     }
 
+    public ProductLine getProductLine(String name) {
+        for (ProductLine pl : allLines) {
+            if (pl.getName().equals(name)) {
+                return pl;
+            }
+        }
+
+        return null;
+    }
+
     // SETTERS :
 
     public void setNotes(String notes) {
         this.notes = notes;
     }
 
-    public void resetItem(Item i,String name, String category, double price, int quantityAvailable, int minQuantity) {
+    public void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) {
         if(!warehouse.getItems().contains(i)) return;
         i.setName(name);
         i.setCategory(category);
@@ -113,12 +119,14 @@ public class Factory {
         warehouse.removeItem(name);
     }
 
+    // FILTERS :
+
     public List<Item> filterItemsByName(String filter) {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:warehouse.getItems()){
-            if(i.getName().toLowerCase().contains(filter)){
+        for (Item i : warehouse.getItems()) {
+            if (i.getName().toLowerCase().contains(filter)) {
                 filteredList.add(i);
             }
         }
@@ -129,8 +137,8 @@ public class Factory {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:warehouse.getItems()){
-            if(i.getName().toLowerCase().contains(filter)){
+        for (Item i : warehouse.getItems()) {
+            if (i.getName().toLowerCase().contains(filter)) {
                 filteredList.add(i);
             }
         }
@@ -139,8 +147,8 @@ public class Factory {
 
     public List<Item> filterItemsByAvailable() {
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:warehouse.getItems()){
-            if(i.isAvailable()){
+        for (Item i : warehouse.getItems()) {
+            if (i.isAvailable()) {
                 filteredList.add(i);
             }
         }
@@ -149,8 +157,8 @@ public class Factory {
 
     public List<Item> filterItemsByOut() {
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:warehouse.getItems()){
-            if(i.isOut()){
+        for (Item i : warehouse.getItems()) {
+            if (i.isOut()) {
                 filteredList.add(i);
             }
         }
@@ -159,8 +167,8 @@ public class Factory {
 
     public List<Item> filterItemsByUnderMin() {
         List<Item> filteredList = new ArrayList<>();
-        for(Item i:warehouse.getItems()){
-            if(i.isUnderMin()){
+        for (Item i : warehouse.getItems()) {
+            if (i.isUnderMin()) {
                 filteredList.add(i);
             }
         }
@@ -169,7 +177,7 @@ public class Factory {
     
     public List<Task> filterTasksByInprogress() {
         List<Task> filteredList = new ArrayList<>();
-        for(ProductLine pl : allLines){
+        for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getInprogress());
         }
         return filteredList;
@@ -177,7 +185,7 @@ public class Factory {
 
     public List<Task> filterTasksByCompleted() {
         List<Task> filteredList = new ArrayList<>();
-        for(ProductLine pl : allLines){
+        for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getCompleted());
         }
         return filteredList;
@@ -185,8 +193,8 @@ public class Factory {
 
     public List<Product> topOrderBetween(LocalDate start, LocalDate end) {
         List<Product> list = new ArrayList<>();
-        for(Product p:warehouse.getProducts()){
-            if(p.wasOrderedBetween(start, end)){
+        for (Product p : warehouse.getProducts()) {
+            if (p.wasOrderedBetween(start, end)) {
                 list.add(p);
             }
         }
@@ -195,7 +203,7 @@ public class Factory {
 
     public String[] getItemsNames() {
         List<String> names = new ArrayList<>();
-        for(Item i : warehouse.getItems()){
+        for (Item i : warehouse.getItems()) {
             names.add(i.getName());
         }
         return names.toArray(new String[names.size()]);

@@ -35,7 +35,7 @@ public class Validator {
                 throw new InvalidEmailException("Invalid Email Format.");
             }
             
-            List<User> users = new ArrayList<>(factory.getUsersList());
+            List<User> users = new ArrayList<>(factory.getUsers());
 
             if (users.isEmpty()) {
                 return JsonParser.toJson(new Response("No users signedup", "signup"));
@@ -59,7 +59,7 @@ public class Validator {
             }
 
             String role = foundUser.isManager() ? "Manager" : "Supervisor";
-            return JsonParser.toJson(new Response("Welcome "+role, role));
+            return JsonParser.toJson(new Response("Welcome " + role, role));
         } catch (IllegalAccessException e) {
             return null;
         } 

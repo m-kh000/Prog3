@@ -110,4 +110,8 @@ public class ProductLine implements Runnable {
     public ArrayList<Task> getCanceled() {
         return new ArrayList<>(canceled);
     }
+
+    public void addTask(Task task) {
+        this.inline.add(task);
+    }
 }
