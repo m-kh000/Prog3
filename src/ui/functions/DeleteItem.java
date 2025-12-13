@@ -10,7 +10,7 @@ public class DeleteItem extends FunctionPanel {
         setLayout(new BorderLayout());
         add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
         
-        JPanel boxes = new JPanel(new GridLayout(6, 1, 20, 20));
+        JPanel boxes = new JPanel(new GridLayout(7, 1, 20, 20));
 
         JPanel emp = new JPanel();
         JPanel emp2 = new JPanel();
@@ -35,9 +35,16 @@ public class DeleteItem extends FunctionPanel {
         deleteBtn.setFont(Manager.defaultFont(true, true));
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setForeground(Color.WHITE);
+        deleteBtn.setFocusPainted(false);
+        deleteBtn.setOpaque(true);
         boxes.add(deleteBtn);
+
         deleteBtn.addActionListener(e -> {
             factory.deleteItem((String)itemCombo.getSelectedItem());
+            itemCombo.removeAllItems();
+            for(String item : factory.getItemsNames()) {
+                itemCombo.addItem(item);
+            }
             itemCombo.setSelectedItem(null);
             JOptionPane.showMessageDialog(null, "Item deleted successfully");
         });

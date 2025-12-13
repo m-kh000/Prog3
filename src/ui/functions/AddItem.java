@@ -1,11 +1,9 @@
 package ui.functions;
 
-import javax.swing.*;
-import java.awt.*;
-import ui.LabelBox;
-import core.Factory;
 import core.Item;
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
+import ui.LabelBox;
 
 public class AddItem extends FunctionPanel {
 
@@ -41,12 +39,12 @@ public class AddItem extends FunctionPanel {
             }
             try {
                 factory.add(new Item(nameText, categoryText, Integer.parseInt(priceText), Integer.parseInt(quantityText), Integer.parseInt(minquantityText)));
-                JOptionPane.showMessageDialog(null, "Item added successfully");
                 name.setText("");
                 category.setText("");
                 price.setText("");
                 quantity.setText("");
                 minquantity.setText("");
+                JOptionPane.showMessageDialog(null, "Item added successfully");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }

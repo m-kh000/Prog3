@@ -2,8 +2,9 @@ package utils;
 
 import core.Factory;
 import core.User;
-import exceptions.InvalidEmailException;
 import exceptions.EmptyFieldException;
+import exceptions.InvalidEmailException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import jsonParser.JsonParser;
@@ -63,6 +64,14 @@ public class Validator {
         } catch (IllegalAccessException e) {
             return null;
         } 
+    }
+
+    public static LocalDate validateDate(String s){
+        //TODO 
+        //i will give string in format int-int-int 
+        //if is actual date and format is correct return LocalDate.of(int,int,int)
+        //if not throw new type of exception
+        return null;
     }
 
     public static class Response {

@@ -10,6 +10,10 @@ public class Factory {
     private String notes;
     private Warehouse warehouse;
 
+    //all task methods use test case instead of actual tasks
+    Task testcase = new Task(new Product("plname"), 1,"cus",LocalDate.now(),LocalDate.now(),"status",0.5);
+
+
     public Factory() {
         this.allLines = new HashSet<>();
         this.users = new ArrayList<>();
@@ -40,6 +44,13 @@ public class Factory {
     synchronized public void add(ProductLine pl) {
         allLines.add(pl);
     }
+
+
+    public void addTask(String nameText, String quantityText, String customerText, LocalDate startDate,LocalDate deliveryDate) {
+        // TODO Auto-generated method stub
+        //or add(task)
+    }
+    
     
     // PREVIEWS : 
 
@@ -66,7 +77,8 @@ public class Factory {
             tasks.addAll(pl.getInprogress());
             tasks.addAll(pl.getCanceled());
         }
-        return tasks.toArray(new Task[tasks.size()]);
+        return new Task[]{testcase};
+        //return tasks.toArray(new Task[tasks.size()]);
     }
 
     
@@ -179,6 +191,7 @@ public class Factory {
         List<Task> filteredList = new ArrayList<>();
         for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getInprogress());
+            filteredList.addAll(pl.getInlineTasks());
         }
         return filteredList;
     }
@@ -207,5 +220,28 @@ public class Factory {
             names.add(i.getName());
         }
         return names.toArray(new String[names.size()]);
+    }
+    //TODO filterTasksby
+
+    public String[] getTasksNames() {
+        List<String> names = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            for (Task t : pl.getCompleted()) {
+                names.add(t.getName());
+            }
+            for (Task t : pl.getInprogress()) {
+                names.add(t.getName());
+            }
+            for (Task t : pl.getCanceled()) {
+                names.add(t.getName());
+            }
+        }
+        return new String[]{testcase.getName()};        
+        //return names.toArray(new String[names.size()]);
+    }
+
+    public void cancelTask(String selectedItem) {
+        // TODO Auto-generated method stub
+        return;
     }
 }
