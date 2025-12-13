@@ -71,6 +71,7 @@ public class Validator {
         //i will give string in format int-int-int 
         //if is actual date and format is correct return LocalDate.of(int,int,int)
         //if not throw new type of exception
+        //ok
         return null;
     }
 
