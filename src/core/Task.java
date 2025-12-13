@@ -82,6 +82,10 @@ public class Task {
         return status;
     }
 
+    public String getName() {
+        return product.getName()+" "+requiredQuantity+" due to "+deliveryDate;
+    }
+
     // SETTERS : 
 
     public void setCompletionPercentage(double completionPercentage) {

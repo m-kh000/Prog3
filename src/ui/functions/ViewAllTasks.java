@@ -1,8 +1,9 @@
 package ui.functions;
-import javax.swing.*;
-import java.awt.*;
-import ui.components.TaskPanel;
 import core.Factory;
+import core.Task;
+import java.awt.*;
+import javax.swing.*;
+import ui.components.TaskPanel;
 
 public class ViewAllTasks extends FunctionPanel {
     public ViewAllTasks(JPanel centerPanel, JFrame frame, Factory factory) {
@@ -14,6 +15,9 @@ public class ViewAllTasks extends FunctionPanel {
     private JPanel createTasksPanel(Factory factory) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        for (Task task : factory.previewTasks()) {
+            panel.add(new TaskPanel(task));
+        } 
         return panel;
     }
 }

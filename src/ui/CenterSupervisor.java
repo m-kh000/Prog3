@@ -26,7 +26,7 @@ public class CenterSupervisor extends JPanel {
 
         JPanel row2 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton tasksBtn = createStyledButton("Tasks", buttonColor);
-        tasksBtn.addActionListener(e -> UI.switchContent(new ViewTasks(centerPanel, frame, factory)));
+        tasksBtn.addActionListener(e -> UI.switchContent(new Tasks(centerPanel, frame, factory)));
         JButton filterTasksBtn = createStyledButton("Filter Tasks", buttonColor);
         filterTasksBtn.addActionListener(e -> UI.switchContent(new FilterTasks(centerPanel, frame, factory)));
         row2.add(tasksBtn);

@@ -1,13 +1,13 @@
 package ui.functions;
-import javax.swing.*;
-import java.awt.*;
 import core.Factory;
-import ui.UI;
+import java.awt.*;
+import javax.swing.*;
 import ui.Manager;
+import ui.UI;
 
 public class Tasks extends FunctionPanel {
     public Tasks(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(4, 1, 20, 20));
+        setLayout(new GridLayout(6, 1, 20, 20));
         Color buttonColor = Color.decode("#5294ff");
         
         add(createTopPanel("Tasks", centerPanel, frame, factory, "supervisor"));

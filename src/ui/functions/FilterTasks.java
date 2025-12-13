@@ -1,10 +1,10 @@
 package ui.functions;
-import javax.swing.*;
-import java.awt.*;
-import ui.components.TaskPanel;
 import core.Factory;
-import ui.Manager;
+import java.awt.*;
 import java.util.List;
+import javax.swing.*;
+import ui.Manager;
+import ui.components.TaskPanel;
 
 public class FilterTasks extends FunctionPanel {
     private JPanel tasksPanel;
@@ -14,16 +14,21 @@ public class FilterTasks extends FunctionPanel {
         
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
         JLabel filterLabel = new JLabel("Filter by:");
-        filterLabel.setFont(Manager.defaultFont(false, true));
+        filterLabel.setFont(Manager.defaultFont(false, false));
         JComboBox<String> filterCombo = new JComboBox<>(new String[]{"ProductLine or Product", "InProgress", "Completed"});
-        filterCombo.setFont(Manager.defaultFont(false, true));
+        filterCombo.setFont(Manager.defaultFont(false, false));
         JTextField filterField = new JTextField(20);
-        filterField.setFont(Manager.defaultFont(false, true));
+        filterField.setFont(Manager.defaultFont(false, false));
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
         
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
+            if(filterType.equals("ProductLine or Product")) {
+                filterField.setEnabled(true);
+            } else {
+                filterField.setEnabled(false);
+            }
             String filterValue = filterField.getText();
             updateTasksPanel(factory, filterType, filterValue);
         });
@@ -47,7 +52,7 @@ public class FilterTasks extends FunctionPanel {
         
         List<core.Task> tasks = null;
         if(filterType.equals("ProductLine or Product")) {
-            tasks = factory.filterTasksByProduct(filterValue);
+            //tasks = factory.filterTasksByProduct(filterValue);
         } else if(filterType.equals("InProgress")) {
             tasks = factory.filterTasksByInprogress();
         } else if(filterType.equals("Completed")) {
