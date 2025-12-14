@@ -2,14 +2,20 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+import jsonParser.annotations.JsonIgnore;
+
 public class ProductLine implements Runnable {
     private static int nextId = 1;
     private int id;
     private String name;
     private String status;
+    @JsonIgnore
     private List<Task> completed;
+    @JsonIgnore
     private List<Task> inprogress;
+    @JsonIgnore
     private List<Task> inline;
+    @JsonIgnore
     private List<Task> canceled;
 
     public ProductLine() {}
