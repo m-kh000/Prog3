@@ -62,6 +62,7 @@ public class Validator {
             String role = foundUser.isManager() ? "Manager" : "Supervisor";
             return JsonParser.toJson(new Response("Welcome " + role, role));
         } catch (IllegalAccessException e) {
+            FileUtils.log(e);
             return null;
         } 
     }

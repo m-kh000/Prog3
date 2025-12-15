@@ -1,6 +1,7 @@
 package main;
 
 import core.*;
+import exceptions.InvalidEmailException;
 
 import java.io.File;
 import java.text.FieldPosition;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import ui.UI;
+import utils.FileUtils;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -26,11 +28,11 @@ public class App {
         // new UI(factory);
         
         //  Factory f = new Factory();
-        //   HashMap<Item, Integer> hm = new HashMap<>();
-        //   hm.put(new Item("flour", "test", 500, 1000, 100), 10);
-        //   HashSet<LocalDate> hs = new HashSet<>();
-        //   LocalDate l = LocalDate.of(2006, 4, 11);
-        //   hs.add(l);
+           HashMap<Item, Integer> hm = new HashMap<>();
+           hm.put(new Item("flour", "test", 500, 1000, 100), 10);
+           HashSet<LocalDate> hs = new HashSet<>();
+           LocalDate l = LocalDate.of(2006, 4, 11);
+           hs.add(l);
         // // f.add(new Product("bread", hm, hs));
 
         // // FileUtils.saveProducts(f);
@@ -42,7 +44,7 @@ public class App {
 
         // // w.addItem(new Item("Screws", "Hardware", 0.5, 100, 20));
         // // w.addItem(new Item("Bolts", "Hardware", 0.75, 50, 30));
-        //  Product c = new Product("Chair", hm, hs);
+          Product c = new Product("Chair", hm, hs);
         // // w.addProduct(c);
         // // w.addProduct(table);
 
@@ -61,8 +63,12 @@ public class App {
         
         // //  f.add(new ProductLine("test", "working"));
         // //  f.getProductLine("test").addTask(new Task(c, 10, "Joseph", LocalDate.now(), LocalDate.of(2029, 5, 1), "todo", 10));
-        File f = new File("./files"+"/"+"jj", "ProductLines" + "/j.json");
-        String fileString = f.toString();
-        System.out.println(fileString);
+
+        Factory f = new Factory();
+        ProductLine pl = new ProductLine("test", "working");
+        pl.addTask(new Task(c, 10, "Joseph", l, l, "good", 5));
+        f.add(pl);
+        
+        FileUtils.saveProductLines(f);
     }
 }

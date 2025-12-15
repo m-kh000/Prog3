@@ -26,40 +26,7 @@ public class FileUtils {
     private static final File ITEMS_FILE = new File("./files/Items.json");
     private static final File PRODUCTS_FILE = new File("./files/Products.json");
     private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
-
-    /*
-     * Reads the data from a provided file.
-     * 
-     * @param file the path to the file
-     * 
-     * @return {@code List<String>} where each element is a line from the file
-     *          or {@code null} if an {@code IOException} occurred.
-     * 
-     * @throws FileNotFoundException if there is no file with the provided path
-     */
-    /*
-    public static List<String> readFile(String filePath, Class<?> type) throws FileNotFoundException {
-        File file = new File(filePath);
-        
-        if (!file.exists())
-            throw new FileNotFoundException("No file with the provided path.");
-
-        List<String> lines = new ArrayList<>();
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-
-            return lines;
-        } catch (IOException e) {
-            System.err.println("I/O Error: " + e);
-            return null;
-        }
-    }
-    */
+    private static final File EXCEPTIONS_FILE = new File("./files/Exceptions.txt");
 
     public static List<Item> readItems() throws IOException {
         synchronized (FILE_LOCK) {
@@ -172,7 +139,7 @@ public class FileUtils {
                 
                 writer.write(itemsJson);
             } catch (IllegalAccessException e) {
-                /* log the exception to Exceptions.txt */
+                log(e);
             }
         }
     }
@@ -207,14 +174,15 @@ public class FileUtils {
 
                 writer.write(productsJson);
             } catch (IllegalAccessException e) {
-                /* log the exception to Exceptions.txt */
+                log(e);
             }
         }
     }
 
     /**
-     *                              !!!WARINING!!!
-     *                    <li>!!!UNCOMPLETED METHOD DON'T USE IT!!!!</li>
+     * 
+     * @param factorythe factory that holds the productlines set
+     * @throws IOException
      */
     public static void saveProductLines(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
@@ -229,12 +197,12 @@ public class FileUtils {
             } else {
                 String pathsJson = readData(PRODUCTLINESPATHS_FILE);
                 String[] temp = JsonParser.fromJson(pathsJson, String[].class);
-                productLinesPaths = Arrays.asList(temp);
+                productLinesPaths = new ArrayList<>(Arrays.asList(temp));
             }
 
             try {
                 for (ProductLine pl : productLines) {
-                    String plPath = FILES.toString() + "/" + pl.getLineName();
+                    String plPath = FILES.toString() + "\\" + pl.getLineName();
 
                     if (!productLinesPaths.contains(plPath)) {
                         productLinesPaths.add(plPath);
@@ -262,15 +230,25 @@ public class FileUtils {
                 }
                 writeData(PRODUCTLINESPATHS_FILE, JsonParser.toJson(productLinesPaths), false);
             } catch (IllegalAccessException e) {
-                /* log the exception to Exceptions.txt */
+                log(e);
             }
 
         }
     }
 
-    public static void saveTasks(ProductLine productLine) {
+    public static void log(Exception exception) {
         synchronized (FILE_LOCK) {
-            
+            try {
+                createFile(EXCEPTIONS_FILE);
+                String logString = exception.getClass().getSimpleName() 
+                                 + " occurred, Exception\'s message: "
+                                 + exception.getMessage()
+                                 + "\n";
+
+                writeData(EXCEPTIONS_FILE, logString, true);
+            } catch (Exception e) {
+                System.out.println("Exception occurred while logging the exception. LOL :)");
+            }
         }
     }
 
