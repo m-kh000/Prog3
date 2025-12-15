@@ -21,24 +21,11 @@ import jsonParser.*;
 public class FileUtils {
     private static final Object FILE_LOCK = new Object();
 
+    private static final File FILES = new File("./files/");
     private static final File USERS_FILE = new File("./files/Users.json");
     private static final File ITEMS_FILE = new File("./files/Items.json");
     private static final File PRODUCTS_FILE = new File("./files/Products.json");
-    private static final File PRODUCTLINES_FILE = new File("./files/ProductLines.json");
-
-    private static class ProductLinesPaths {
-        private List<String> productLinesPaths;
-
-        public ProductLinesPaths() {}
-
-        public ProductLinesPaths(List<String> l) {
-            this.productLinesPaths = l;
-        }
-
-        public String[] getProductLinesPaths() {
-            return this.productLinesPaths.toArray(new String[this.productLinesPaths.size()]);
-        }
-    }
+    private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
 
     /*
      * Reads the data from a provided file.
@@ -117,22 +104,7 @@ public class FileUtils {
 
     public static HashSet<ProductLine> readProductLines() throws IOException {
         synchronized (FILE_LOCK) {
-            if (!PRODUCTLINES_FILE.exists()) {
-                return new HashSet<>();
-            }
-
-            StringBuilder sb = new StringBuilder();
-            String line = "";
-
-            try (BufferedReader reader = new BufferedReader(new FileReader(PRODUCTLINES_FILE))) {
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-
-                ProductLine[] pl = JsonParser.fromJson(sb.toString(), ProductLine[].class, Item.class, Integer.class, null);
-                
-                return new HashSet<>(Arrays.asList(pl));
-            }
+            return new HashSet<>();
         }
     }
 
@@ -240,24 +212,59 @@ public class FileUtils {
         }
     }
 
+    /**
+     *                              !!!WARINING!!!
+     *                    <li>!!!UNCOMPLETED METHOD DON'T USE IT!!!!</li>
+     */
     public static void saveProductLines(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
             HashSet<ProductLine> productLines = new HashSet<>(factory.getAllLines());
 
-            PRODUCTLINES_FILE.getParentFile().mkdirs();
+            FILES.mkdirs();
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(PRODUCTLINES_FILE))) {
-                
-                String productLinesJson = JsonParser.toJson(productLines);
+            List<String> productLinesPaths;
+            if (!PRODUCTLINESPATHS_FILE.exists()) {
+                createFile(PRODUCTLINESPATHS_FILE);
+                productLinesPaths = new ArrayList<>();
+            } else {
+                String pathsJson = readData(PRODUCTLINESPATHS_FILE);
+                String[] temp = JsonParser.fromJson(pathsJson, String[].class);
+                productLinesPaths = Arrays.asList(temp);
+            }
 
-                if (!PRODUCTLINES_FILE.exists()) {
-                    PRODUCTLINES_FILE.createNewFile();
+            try {
+                for (ProductLine pl : productLines) {
+                    String plPath = FILES.toString() + "/" + pl.getLineName();
+
+                    if (!productLinesPaths.contains(plPath)) {
+                        productLinesPaths.add(plPath);
+                    }
+    
+                    File file = new File(plPath, "Productline.json");
+                    createFile(file);
+                    writeData(file, JsonParser.toJson(pl), false);
+    
+                    file = new File(plPath, "inline.json");
+                    createFile(file);
+                    writeData(file, JsonParser.toJson(pl.getInlineTasks()), false);
+    
+                    file = new File(plPath, "inprogress.json");
+                    createFile(file);
+                    writeData(file, JsonParser.toJson(pl.getInprogressTasks()), false);
+
+                    file = new File(plPath, "completed.json");
+                    createFile(file);
+                    writeData(file, JsonParser.toJson(pl.getCompletedTasks()), false);
+
+                    file = new File(plPath, "canceled.json");
+                    createFile(file);
+                    writeData(file, JsonParser.toJson(pl.getCanceledTasks()), false);
                 }
-
-                writer.write(productLinesJson);
+                writeData(PRODUCTLINESPATHS_FILE, JsonParser.toJson(productLinesPaths), false);
             } catch (IllegalAccessException e) {
                 /* log the exception to Exceptions.txt */
             }
+
         }
     }
 
@@ -265,5 +272,33 @@ public class FileUtils {
         synchronized (FILE_LOCK) {
             
         }
+    }
+
+
+    private static void createFile(File file) throws IOException{
+        if (file == null) return;
+
+        file.getParentFile().mkdirs();
+
+        if (!file.isDirectory() && !file.exists()) {
+            file.createNewFile();
+        }
+    }
+    private static void writeData(File file, String data, boolean append) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, append))) {
+            writer.write(data);
+        }
+    }
+    private static String readData(File file) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        String line = "";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        }
+
+        return sb.toString();
     }
 }
