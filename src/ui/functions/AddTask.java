@@ -1,6 +1,6 @@
 package ui.functions;
 import core.Factory;
-import utils.Validator;
+import exceptions.EmptyFieldException;
 import java.awt.*;
 import java.time.LocalDate;
 import javax.swing.*;
@@ -21,8 +21,8 @@ public class AddTask extends FunctionPanel {
         LabelBox name = new LabelBox("Product Name:");
         LabelBox quantity = new LabelBox("Required Quantity:");
         LabelBox customer = new LabelBox("Customer Name:");
-        LabelBox start = new LabelBox("Start Date:");
-        LabelBox delivery = new LabelBox("Delivery Date:");
+        LabelBox start = new LabelBox("Start Date:",false,true);
+        LabelBox delivery = new LabelBox("Delivery Date:",false,true);
         add(name);
         add(quantity);
         add(customer);
@@ -34,6 +34,10 @@ public class AddTask extends FunctionPanel {
         add(submitBtn);
 
         submitBtn.addActionListener(e -> {
+            try {
+            if (name.isEmpty() || quantity.isEmpty() || customer.isEmpty() || start.isEmpty() || delivery.isEmpty()) {
+                throw new EmptyFieldException();
+            }
             String nameText = name.getText();
             String quantityText = quantity.getText();
             String customerText = customer.getText();
@@ -42,13 +46,18 @@ public class AddTask extends FunctionPanel {
             LocalDate startDate = utils.Validator.validateDate(startText);
             LocalDate deliveryDate = utils.Validator.validateDate(deliveryText);
             factory.addTask(nameText, quantityText, customerText, startDate, deliveryDate);
-            name.setText("");
-            quantity.setText("");
-            customer.setText("");
-            customer.setText("");
-            start.setText("");
-            delivery.setText("");
+            name.setPlacehoder();
+            quantity.setPlacehoder();
+            customer.setPlacehoder();
+            customer.setPlacehoder();
+            start.setPlacehoder();
+            delivery.setPlacehoder();
             JOptionPane.showMessageDialog(frame, "Task added successfully");
+            } catch (EmptyFieldException ex) {
+                JOptionPane.showMessageDialog(frame, "Please fill all the fields");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, ex.getMessage());
+            }
         });
     }
 }
