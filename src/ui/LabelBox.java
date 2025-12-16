@@ -33,7 +33,7 @@ public class LabelBox extends JPanel {
         textField.setBackground(UIManager.getColor("Panel.background"));
 
         textField.setForeground(Color.GRAY);
-        placeholder = isDate ? "Enter YYYY-MM-DD" : "Enter " + labelText.toLowerCase().replace(":", "");
+        placeholder = isDate ? "Enter DD-MM-YYYY" : isPassword? "" : "Enter " + labelText.toLowerCase().replace(":", "");
         textField.setText(placeholder);
         textField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

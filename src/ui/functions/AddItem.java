@@ -28,15 +28,15 @@ public class AddItem extends FunctionPanel {
         add(submitBtn);
 
         submitBtn.addActionListener(e -> {
+            if (name.isEmpty() || category.isEmpty() || price.isEmpty() || quantity.isEmpty() || minquantity.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                return;
+            }
             String nameText = name.getText();
             String categoryText = category.getText();
             String priceText = price.getText();
             String quantityText = quantity.getText();
             String minquantityText = minquantity.getText();
-            if (nameText.isEmpty() || categoryText.isEmpty() || priceText.isEmpty() || quantityText.isEmpty() || minquantityText.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please fill in all fields");
-                return;
-            }
             try {
                 factory.add(new Item(nameText, categoryText, Integer.parseInt(priceText), Integer.parseInt(quantityText), Integer.parseInt(minquantityText)));
                 name.setText("");
