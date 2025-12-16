@@ -57,6 +57,10 @@ public class ProductLine implements Runnable {
     public Task[] previewInprogressTasks() {
         return inprogress.toArray(new Task[inprogress.size()]);
     }
+    public Task[] preview0PCInprogressTasks() {
+        //TODO filter the inprogress tasks to get only the 0PC tasks
+        return inprogress.toArray(new Task[inprogress.size()]);
+    }
     public Task[] previewInlineTasks() {
         return inline.toArray(new Task[inline.size()]);
     }
