@@ -1,5 +1,6 @@
 package core;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import jsonParser.annotations.JsonIgnore;
 
@@ -91,6 +92,9 @@ public class ProductLine implements Runnable {
         return this.completed;
     }
     public List<Task> getInprogressTasks() {
+        return this.inprogress;
+    }
+    public List<Task> get0PCInprogressTasks() {
         return this.inprogress;
     }
     public List<Task> getInlineTasks() {
