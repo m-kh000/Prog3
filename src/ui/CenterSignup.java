@@ -1,13 +1,10 @@
 package ui;
 
-import java.awt.*;
-import javax.swing.*;
 import core.Factory;
 import core.User;
 import exceptions.EmptyFieldException;
-import exceptions.InvalidEmailException;
-
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
 
 public class CenterSignup extends JPanel {
     
@@ -76,6 +73,9 @@ public class CenterSignup extends JPanel {
                     throw new EmptyFieldException();
                 }
                 boolean isManager = manager.isSelected();
+
+                //if alraedy is loged injust go to login
+
                 utils.Validator.validateEmail(email, password, factory);
             
                 factory.addUser(new User(email, password, isManager));

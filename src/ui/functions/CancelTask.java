@@ -20,7 +20,7 @@ public class CancelTask extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
             JLabel selectLabel = new JLabel("Select Task:");
             selectLabel.setFont(Manager.defaultFont(false, false));
-            JComboBox<String> taskCombo = new JComboBox<>(factory.getTasksNames());
+            JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
             taskCombo.setFont(Manager.defaultFont(false, false));
             taskCombo.setSelectedItem(null);
             selectPanel.add(selectLabel);
@@ -42,7 +42,7 @@ public class CancelTask extends FunctionPanel {
         cancelBtn.addActionListener(e -> {
             factory.cancelTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
-            for(String task : factory.getTasksNames()) {
+            for(String task : factory.get0PCTasksNames()) {
                 taskCombo.addItem(task);
             }
             taskCombo.setSelectedItem(null);

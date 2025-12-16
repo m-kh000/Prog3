@@ -78,7 +78,7 @@ public class Factory {
             tasks.addAll(pl.getCanceled());
         }
         return new Task[]{testcase};
-        //return tasks.toArray(new Task[tasks.size()]);
+        //return tasks.toArray(new Task[tasks.size()]);//TODO when you do all pls and tasks
     }
 
     
@@ -223,13 +223,10 @@ public class Factory {
     }
     //TODO filterTasksby
 
-    public String[] getTasksNames() {
+    public String[] get0PCTasksNames() {
         List<String> names = new ArrayList<>();
         for (ProductLine pl : allLines) {
-            for (Task t : pl.getCompleted()) {
-                names.add(t.getName());
-            }
-            for (Task t : pl.getInprogress()) {
+            for (Task t : pl.get0PCInprogress()) {
                 names.add(t.getName());
             }
             for (Task t : pl.getCanceled()) {
@@ -237,11 +234,14 @@ public class Factory {
             }
         }
         return new String[]{testcase.getName()};        
-        //return names.toArray(new String[names.size()]);
+        //return names.toArray(new String[names.size()]);//TODO when you do all pls and tasks
     }
 
     public void cancelTask(String selectedItem) {
         // TODO Auto-generated method stub
-        return;
+    }
+
+    public void saveToJSON() {
+        // TODO Auto-generated method stub
     }
 }

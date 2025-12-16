@@ -1,7 +1,7 @@
 package core;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 import jsonParser.annotations.JsonIgnore;
 
 public class ProductLine implements Runnable {
@@ -58,6 +58,10 @@ public class ProductLine implements Runnable {
     public Task[] previewInprogressTasks() {
         return inprogress.toArray(new Task[inprogress.size()]);
     }
+    public Task[] preview0PCInprogressTasks() {
+        //TODO filter the inprogress tasks to get only the 0PC tasks
+        return inprogress.toArray(new Task[inprogress.size()]);
+    }
     public Task[] previewInlineTasks() {
         return inline.toArray(new Task[inline.size()]);
     }
@@ -88,6 +92,9 @@ public class ProductLine implements Runnable {
         return this.completed;
     }
     public List<Task> getInprogressTasks() {
+        return this.inprogress;
+    }
+    public List<Task> get0PCInprogressTasks() {
         return this.inprogress;
     }
     public List<Task> getInlineTasks() {
@@ -133,4 +140,8 @@ public class ProductLine implements Runnable {
     public void setCanceled(List<Task> tasks) {
         this.canceled = tasks;
     } 
+
+    Collection<? extends Task> get0PCInprogress() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
