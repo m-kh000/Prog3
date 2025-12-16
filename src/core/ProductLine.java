@@ -1,6 +1,5 @@
 package core;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import jsonParser.annotations.JsonIgnore;
 
@@ -120,6 +119,19 @@ public class ProductLine implements Runnable {
     public void addTask(Task task) {
         this.inline.add(task);
     }
+
+    public void setInline(List<Task> tasks) {
+        this.inline = tasks;
+    } 
+    public void setInprogress(List<Task> tasks) {
+        this.inprogress = tasks;
+    } 
+    public void setCompleted(List<Task> tasks) {
+        this.completed = tasks;
+    } 
+    public void setCanceled(List<Task> tasks) {
+        this.canceled = tasks;
+    } 
 
     Collection<? extends Task> get0PCInprogress() {
         throw new UnsupportedOperationException("Not supported yet.");

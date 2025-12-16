@@ -3,8 +3,12 @@ package utils;
 import core.Factory;
 import core.User;
 import exceptions.EmptyFieldException;
+import exceptions.InvalidDateFormatException;
 import exceptions.InvalidEmailException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 import jsonParser.JsonParser;
@@ -62,17 +66,40 @@ public class Validator {
             String role = foundUser.isManager() ? "Manager" : "Supervisor";
             return JsonParser.toJson(new Response("Welcome " + role, role));
         } catch (IllegalAccessException e) {
+            FileUtils.log(e);
             return null;
         } 
     }
 
-    public static LocalDate validateDate(String s){
-        //TODO 
-        //i will give string in format int-int-int 
-        //if is actual date and format is correct return LocalDate.of(int,int,int)
-        //if not throw new type of exception
-        //ok
-        return null;
+    /**
+     * Validates a date String in the format of {@code DD-MM-YYYY}
+     * 
+     * @param date the string to validate
+     * @return a new {@code LocalDate} object of the sent String if the validation completed
+     * successfully
+     * @throws InvalidDateFormatException if there was any problem with the format
+     */
+    public static LocalDate validateDate(String date) throws InvalidDateFormatException {
+        if (date == null || date.trim().isEmpty()) {
+            throw new InvalidDateFormatException("Date cannot be null or empty.");
+        }
+
+        date = date.trim();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                                     .withResolverStyle(ResolverStyle.STRICT);
+        
+        try {
+            return LocalDate.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            if (e.getMessage().contains("Invalid date")) {
+                throw new InvalidDateFormatException("Invalid date.");
+            } else if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new InvalidDateFormatException("Must be exactly YYYY-MM-DD");
+            } else {
+                throw new InvalidDateFormatException("Invalid date format: " + e.getMessage());
+            }
+        }
     }
 
     public static class Response {
