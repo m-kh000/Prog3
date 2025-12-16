@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import core.Factory;
 import core.Item;
 import core.Product;
 import core.ProductLine;
+import core.Task;
 import core.User;
 import jsonParser.*;
 
@@ -27,6 +29,17 @@ public class FileUtils {
     private static final File PRODUCTS_FILE = new File("./files/Products.json");
     private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
     private static final File EXCEPTIONS_FILE = new File("./files/Exceptions.txt");
+
+    public static List<User> readUsers() throws IOException {
+        synchronized (FILE_LOCK) {
+            if (!USERS_FILE.exists()) {
+                return new ArrayList<>();
+            }
+
+            User[] users = JsonParser.fromJson(readData(USERS_FILE), User[].class);
+            return new ArrayList<>(Arrays.asList(users));
+        }
+    }
 
     public static List<Item> readItems() throws IOException {
         synchronized (FILE_LOCK) {
@@ -69,9 +82,70 @@ public class FileUtils {
         }
     }
 
-    public static HashSet<ProductLine> readProductLines() throws IOException {
+    public static HashSet<ProductLine> readProductLines() {
         synchronized (FILE_LOCK) {
-            return new HashSet<>();
+            try {
+                if (!PRODUCTLINESPATHS_FILE.exists()) {
+                    throw new IOException("Couldn\'t find the path: " + PRODUCTLINESPATHS_FILE.getAbsolutePath());
+                }
+
+                String[] productLinesPaths = JsonParser.fromJson(readData(PRODUCTLINESPATHS_FILE),
+                                                         String[].class);
+
+                HashSet<ProductLine> productLines = new HashSet<>();
+                
+                for (int i = 0; i < productLinesPaths.length; i++) {
+                    File file = new File(productLinesPaths[i]);
+                    if (!file.exists() || !file.isDirectory()) {
+                        throw new IOException("Path does not exist or is not a directory: " + file.getAbsolutePath());
+                    }
+                    
+                    File[] plFiles = file.listFiles();
+                    if (plFiles == null || plFiles.length <= 0) {
+                        throw new IOException("Couldn\'t find directory or directory is empty: " + file.getAbsolutePath());
+                    }
+
+                    ProductLine pl = new ProductLine();
+                    List<Task> inline = new ArrayList<>();
+                    List<Task> inprogress = new ArrayList<>();
+                    List<Task> completed = new ArrayList<>();
+                    List<Task> canceled = new ArrayList<>();
+                    for (File f : plFiles) {
+                        String fileName = f.getName();
+                        switch (fileName) {
+                            case "Productline.json":
+                                pl = JsonParser.fromJson(readData(f), ProductLine.class);
+                                break;
+                            case "inline.json":
+                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                inline = Arrays.asList(inlineArr);
+                                break;
+                            case "inprogress.json":
+                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                inprogress = Arrays.asList(inprogressArr);
+                                break;
+                            case "completed.json":
+                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                completed = Arrays.asList(completedArr);
+                                break;
+                            case "canceled.json":
+                                Task[] canceledArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                canceled = Arrays.asList(canceledArr);
+                                break;
+                        }
+                    }
+                    pl.setInline(inline);
+                    pl.setInprogress(inprogress);
+                    pl.setCompleted(completed);
+                    pl.setCanceled(canceled);
+
+                    productLines.add(pl);
+                }
+                return new HashSet<>(productLines);
+            } catch (IOException e) {
+                log(e);
+                return new HashSet<>();
+            }
         }
     }
 
@@ -92,19 +166,12 @@ public class FileUtils {
     public static void saveUsers(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
             List<User> users = factory.getUsers();
-    
-            USERS_FILE.getParentFile().mkdirs();
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE))) {
-    
-                if (!USERS_FILE.exists()) {
-                    USERS_FILE.createNewFile();
-                }
-    
-                for (User u : users) {
-                    writer.write(u.getFileFormat());
-                    writer.newLine();                
-                }
+            
+            try {
+                createFile(USERS_FILE);
+                writeData(USERS_FILE, JsonParser.toJson(users), false);                
+            } catch (IllegalAccessException e) {
+                log(e);
             }
         }
     }
@@ -126,18 +193,10 @@ public class FileUtils {
     public static void saveItems(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
             List<Item> items = new ArrayList<>(factory.getWarehouse().getItems());
-    
-            ITEMS_FILE.getParentFile().mkdirs();
             
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(ITEMS_FILE))) {
-                
-                String itemsJson = JsonParser.toJson(items);
-
-                if (!ITEMS_FILE.exists()) {
-                    ITEMS_FILE.createNewFile();
-                }
-                
-                writer.write(itemsJson);
+            try {
+                createFile(ITEMS_FILE);
+                writeData(ITEMS_FILE, JsonParser.toJson(items), false);
             } catch (IllegalAccessException e) {
                 log(e);
             }
@@ -157,22 +216,15 @@ public class FileUtils {
      * </p>
      * 
      * @param factory the factory that holds the products list
+     * @throws IOException
      */
     public static void saveProducts(Factory factory) throws IOException {
         synchronized (FILE_LOCK) {
             List<Product> products = new ArrayList<>(factory.getWarehouse().getProducts());
 
-            PRODUCTS_FILE.getParentFile().mkdirs();
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(PRODUCTS_FILE))) {
-
-                String productsJson = JsonParser.toJson(products);
-
-                if (!PRODUCTS_FILE.exists()) {
-                    PRODUCTS_FILE.createNewFile();
-                }
-
-                writer.write(productsJson);
+            try {
+                createFile(PRODUCTS_FILE);
+                writeData(PRODUCTS_FILE, JsonParser.toJson(products), false);
             } catch (IllegalAccessException e) {
                 log(e);
             }
@@ -180,8 +232,9 @@ public class FileUtils {
     }
 
     /**
-     * 
-     * @param factorythe factory that holds the productlines set
+     * Saves Productlines in ./files/[PL's name]: a file for the basic data of the productline,
+     * and a file for each tasks list.
+     * @param factory the factory that holds the productlines set
      * @throws IOException
      */
     public static void saveProductLines(Factory factory) throws IOException {
@@ -236,6 +289,10 @@ public class FileUtils {
         }
     }
 
+    /**
+     * Logs an {@code Exception} along with its message in ./files/Exceptions.txt
+     * @param exception the exception to log
+     */
     public static void log(Exception exception) {
         synchronized (FILE_LOCK) {
             try {
@@ -253,6 +310,11 @@ public class FileUtils {
     }
 
 
+    /**
+     * Creates the specified file along with its necessary directories.
+     * @param file
+     * @throws IOException
+     */
     private static void createFile(File file) throws IOException{
         if (file == null) return;
 
@@ -262,11 +324,32 @@ public class FileUtils {
             file.createNewFile();
         }
     }
+
+    /**
+     * Writes the sent data to the specified file.
+     * <p>
+     *  NOTE: this method does not checks for the existance of the file you must do it manually.
+     * </p> 
+     * @param file the file to write the data on
+     * @param data  the data to write
+     * @param append if {@code true}, the data will be appended to the file 
+     * @throws IOException
+     */
     private static void writeData(File file, String data, boolean append) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, append))) {
             writer.write(data);
         }
     }
+
+    /**
+     * Reads data from the specified file.
+     * <p>
+     *  NOTE: this method does not checks for the existance of the file you must do it manually.
+     * </p> 
+     * @param file the file to read from
+     * @return a {@code String} containing the data
+     * @throws IOException
+     */
     private static String readData(File file) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line = "";
