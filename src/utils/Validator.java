@@ -1,10 +1,11 @@
 package utils;
 
-import core.Factory;
 import core.User;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateFormatException;
 import exceptions.InvalidEmailException;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,15 +20,15 @@ public class Validator {
      * 
      * @param email the email to validate
      * @param password the password to check
-     * @param factory the factory you want to check for the user in
      * 
      * @return json string of a {@code Response} object which contains the response message
      *         and the role of the user if found.
      *         If the user is not found then the role will be null. 
      * 
      * @throws InvalidEmailException if the email format is incorrect
+     * @throws EmptyFieldException if either the email or the password was empty
      */
-    public static String validateEmail(String email, String password, Factory factory) throws InvalidEmailException, EmptyFieldException{
+    public static String validateEmail(String email, String password) throws InvalidEmailException, EmptyFieldException {
         try {
             if (email == null || password == null || email.equals("") || password.equals("")) {
                 throw new EmptyFieldException();
@@ -40,7 +41,13 @@ public class Validator {
                 throw new InvalidEmailException("Invalid Email Format.");
             }
             
-            List<User> users = new ArrayList<>(factory.getUsers());
+            List<User> users;
+            try {
+                users = new ArrayList<>(FileUtils.readUsers());
+            } catch (IOException e) {
+                FileUtils.log(e);
+                return JsonParser.toJson(new Response("Failed to read users from Users.json", null));
+            }
 
             if (users.isEmpty()) {
                 return JsonParser.toJson(new Response("No users signedup", "signup"));
