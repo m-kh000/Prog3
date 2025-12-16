@@ -244,4 +244,9 @@ public class Factory {
     public void saveToJSON() {
         // TODO Auto-generated method stub
     }
+
+    public boolean userExists(String email) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

@@ -8,6 +8,10 @@ import utils.Validator;
 public class CenterLogin extends JPanel {
 
     public CenterLogin(JPanel centerPanel, JFrame frame, Factory factory) {
+        this(centerPanel, frame, factory,"","");
+    }
+
+    public CenterLogin(JPanel centerPanel, JFrame frame, Factory factory,String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
         JPanel boxes = new JPanel(new GridLayout(3, 1, 30, 0));
@@ -30,6 +34,8 @@ public class CenterLogin extends JPanel {
 
         LabelBox emailbox = new LabelBox("Email:");
         LabelBox passwordbox = new LabelBox("Password:", true);
+        if(!autoEmail.equals(""))emailbox.setText(autoEmail);
+        passwordbox.setText(autoPassword);
 
         boxes.add(emailbox);
         boxes.add(passwordbox);
@@ -59,7 +65,7 @@ public class CenterLogin extends JPanel {
                         centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
                         break;
                     case "signup":
-                        centerPanel.add(new CenterSignup(centerPanel, frame, factory));
+                        centerPanel.add(new CenterSignup(centerPanel, frame, factory, emailbox.getText(), passwordbox.getText()));
                         break;
                 }
                     centerPanel.revalidate();

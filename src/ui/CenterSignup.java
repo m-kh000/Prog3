@@ -5,10 +5,14 @@ import core.User;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
+import utils.*;
 
 public class CenterSignup extends JPanel {
     
     public CenterSignup(JPanel centerPanel, JFrame frame, Factory factory) {
+        this(centerPanel, frame, factory,"","");
+    }
+    public CenterSignup(JPanel centerPanel, JFrame frame, Factory factory,String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
         
@@ -53,6 +57,9 @@ public class CenterSignup extends JPanel {
         
         LabelBox emailbox = new LabelBox("Email:");
         LabelBox passwordbox = new LabelBox("Password:",true);
+        if(!autoEmail.equals(""))emailbox.setText(autoEmail);
+        passwordbox.setText(autoPassword);
+
         boxes.add(emailbox);
         boxes.add(passwordbox);
         
@@ -74,11 +81,16 @@ public class CenterSignup extends JPanel {
                 }
                 boolean isManager = manager.isSelected();
 
-                //if alraedy is loged injust go to login
-
+                
                 utils.Validator.validateEmail(email, password, factory);
-            
+
+                if (factory.userExists(email)) {
+                    UI.switchContent(new CenterLogin(centerPanel, frame, factory, email, password));
+                    return;
+                }
+
                 factory.addUser(new User(email, password, isManager));
+                FileUtils.saveUsers(factory);
                 UI.switchContent(new CenterLogin(centerPanel, frame, factory));
                 JOptionPane.showMessageDialog(null, "Signup successful");
             } catch (Exception e1) {
