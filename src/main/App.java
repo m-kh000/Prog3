@@ -70,5 +70,17 @@ public class App {
         f.add(pl);
         
         FileUtils.saveProductLines(f);
+
+        HashSet<ProductLine> pls = FileUtils.readProductLines();
+
+        for (ProductLine p : pls) {
+          System.out.println(p.getName());
+          System.out.println(p.getId());
+          System.out.println(p.getLineStatus());
+          System.out.println(p.getInlineTasks().get(0));
+          System.out.println(p.getInprogress());
+          System.out.println(p.getCompletedTasks());
+          System.out.println(p.getCanceledTasks());
+        }
     }
 }

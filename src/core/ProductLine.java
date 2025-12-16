@@ -120,4 +120,17 @@ public class ProductLine implements Runnable {
     public void addTask(Task task) {
         this.inline.add(task);
     }
+
+    public void setInline(List<Task> tasks) {
+        this.inline = tasks;
+    } 
+    public void setInprogress(List<Task> tasks) {
+        this.inprogress = tasks;
+    } 
+    public void setCompleted(List<Task> tasks) {
+        this.completed = tasks;
+    } 
+    public void setCanceled(List<Task> tasks) {
+        this.canceled = tasks;
+    } 
 }
