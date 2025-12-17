@@ -16,7 +16,6 @@ public class Warehouse {
             items = FileUtils.readItems();
             products = FileUtils.readProducts();
         } catch (IOException e) {
-            // TODO: log the exception in Exceptions.txt
             throw new StorageInitializationException("Failed to initialize Warehouse.");
         }
     }
