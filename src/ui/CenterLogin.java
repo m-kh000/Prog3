@@ -52,12 +52,12 @@ public class CenterLogin extends JPanel {
             try {
                 String response = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText(), factory);
                 Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
-                if (null==r.getRole()){
+                if (null==r.getState()){
                     JOptionPane.showMessageDialog(null, r.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                         centerPanel.removeAll();
-                    switch (r.getRole().toLowerCase()) {
+                    switch (r.getState().toLowerCase()) {
                     case "manager":
                         centerPanel.add(new CenterManager(centerPanel, frame, factory));
                         break;

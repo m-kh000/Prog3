@@ -22,11 +22,11 @@ public class Validator {
      * @param password the password to check
      * 
      * @return json string of a {@code Response} object which contains the response message
-     *         and the role of the user if found.
+     *         and the state of the user if found which is (Manager) or (Supervisor).
      *         If the user is not found then the role will be null. 
      * 
      * @throws InvalidEmailException if the email format is incorrect
-     * @throws EmptyFieldException if either the email or the password was empty
+     * @throws EmptyFieldException if either the email or the password is empty
      */
     public static String validateEmail(String email, String password) throws InvalidEmailException, EmptyFieldException {
         try {
@@ -79,6 +79,95 @@ public class Validator {
     }
 
     /**
+     * Validates a sent email.
+     * 
+     * <p>
+     *  Checks if the sent email is valid for signing up or not.
+     * </p>
+     * 
+     * @param email the email to validate
+     * 
+     * @return json string of a {@code Response} object which contains the response message, 
+     *  with the state which can be either (available) if the email is valid or (unavailable) otherwise.
+     * 
+     * @throws InvalidEmailException if the email format is incorrect
+     * @throws EmptyFieldException if the email is empty
+     */
+    public static String validateSignupEmail(String email) throws InvalidEmailException, EmptyFieldException {
+        try {
+
+            if (email == null || email.trim().equals("")) {
+                throw new EmptyFieldException("Email cannot be empty.");
+            }
+    
+            email = email.trim();
+    
+            if (!email.matches("^[a-zA-Z0-9_]+@gmail\\.com$")) {
+                throw new InvalidEmailException("Invalid Email Format.");
+            }
+    
+            List<User> users;
+            try {
+                users = new ArrayList<>(FileUtils.readUsers());
+            } catch (IOException e) {
+                FileUtils.log(e);
+                return JsonParser.toJson(new Response("Failed to read users from Users.json", "unavailable"));
+            }
+
+            if (users.isEmpty()) {
+                return JsonParser.toJson(new Response("No user with the provided email", "available"));
+            }
+
+            User foundUser = null;
+
+            for (User u : users) {
+                if (u.getEmail() != null && u.getEmail().trim().equals(email)) {
+                    foundUser = u;
+                    break;
+                }
+            }
+
+            if (foundUser == null) {
+                return JsonParser.toJson(new Response("No user found with the provided email", "available"));
+            }
+
+            return JsonParser.toJson(new Response("Found user with the provided email", "unavailable"));
+        } catch (IllegalAccessException e) {
+            FileUtils.log(e);
+            return null;
+        }
+    }
+    /**
+     * Validates a sent password.
+     * 
+     * <p>
+     *  Password cannot be empty, must be 8 chars or more.
+     * </p>
+     * @param password the password to validate
+     * 
+     * @return json string of a {@code Response} object which contains the response message,
+     *         and the state which is (invalid) or (valid)
+     * 
+     * @throws EmptyFieldException if the password was empty
+     */
+    public static String validateSignupPassword(String password) throws EmptyFieldException {
+        try {
+            if (password == null || password.trim().equals("")) {
+                throw new EmptyFieldException("Password cannot be empty.");
+            }
+
+            if (password.length() < 8) {
+                return JsonParser.toJson(new Response("Password cannot be less than 8 characters.", "invalid"));
+            }
+
+            return JsonParser.toJson(new Response("Valid password.", "valid"));
+        } catch (IllegalAccessException e) {
+            FileUtils.log(e);
+            return null;
+        }
+    }
+
+    /**
      * Validates a date String in the format of {@code DD-MM-YYYY}
      * 
      * @param date the string to validate
@@ -111,20 +200,20 @@ public class Validator {
 
     public static class Response {
         private String message;
-        private String role;
+        private String state;
 
         public Response() {}
 
-        public Response(String message, String role) {
+        public Response(String message, String state) {
             this.message = message;
-            this.role = role;
+            this.state = state;
         }
 
         public String getMessage() {
             return this.message;
         }
-        public String getRole() {
-            return this.role;
+        public String getState() {
+            return this.state;
         }
     }
 }
