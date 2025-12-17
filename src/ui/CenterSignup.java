@@ -82,7 +82,7 @@ public class CenterSignup extends JPanel {
                 boolean isManager = manager.isSelected();
 
                 
-                utils.Validator.validateEmail(email, password, factory);
+                utils.Validator.validateEmail(email, password);
 
                 if (factory.userExists(email)) {
                     UI.switchContent(new CenterLogin(centerPanel, frame, factory, email, password));

@@ -50,7 +50,7 @@ public class CenterLogin extends JPanel {
         add(boxes, BorderLayout.CENTER);
         loginButton.addActionListener(e -> {
             try {
-                String response = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText(), factory);
+                String response = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText());
                 Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
                 if (null==r.getState()){
                     JOptionPane.showMessageDialog(null, r.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
