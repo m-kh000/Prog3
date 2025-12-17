@@ -214,13 +214,14 @@ public class FileUtils {
      * 
      * @param factory the factory that holds the users list
      */
-    public static void saveUsers(Factory factory) throws IOException {
+    public static void saveUsers(User newUser) throws IOException {
         synchronized (FILE_LOCK) {
-            List<User> users = factory.getUsers();
+            List<User> users = readUsers();
+            users.add(newUser);
             
             try {
                 createFile(USERS_FILE);
-                writeData(USERS_FILE, JsonParser.toJson(users), false);                
+                writeData(USERS_FILE, JsonParser.toJson(users), false);
             } catch (IllegalAccessException e) {
                 log(e);
             }

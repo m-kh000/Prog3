@@ -9,6 +9,7 @@ public class ProductLine implements Runnable {
     private int id;
     private String name;
     private String status;
+    private String note;
     @JsonIgnore
     private List<Task> completed;
     @JsonIgnore
@@ -51,6 +52,7 @@ public class ProductLine implements Runnable {
             // }
         }
     }
+
 
     public Task[] previewCompletedTasks() {
         return completed.toArray(new Task[completed.size()]);
@@ -103,7 +105,9 @@ public class ProductLine implements Runnable {
     public List<Task> getCanceledTasks() {
         return this.canceled;
     }
-
+    public String getNote() {
+        return this.note;
+    }
     public int getId() {
         return id;
     }
@@ -139,9 +143,12 @@ public class ProductLine implements Runnable {
     } 
     public void setCanceled(List<Task> tasks) {
         this.canceled = tasks;
-    } 
+    }
+    public void setNote(String note) {
+        this.note = note;
+    }
 
-    Collection<? extends Task> get0PCInprogress() {
+    Collection<Task> get0PCInprogress() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

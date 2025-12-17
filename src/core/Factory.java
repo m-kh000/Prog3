@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Factory {
     private HashSet<ProductLine> allLines;
-    private List<User> users;
     private String notes;
     private Warehouse warehouse;
 
@@ -16,14 +15,12 @@ public class Factory {
 
     public Factory() {
         this.allLines = new HashSet<>();
-        this.users = new ArrayList<>();
         this.notes = new String();
         this.warehouse = new Warehouse();
     }
 
-    public Factory(HashSet<ProductLine> allLines,List<User> users,String notes,Warehouse warehouse) {
+    public Factory(HashSet<ProductLine> allLines,String notes,Warehouse warehouse) {
         this.allLines = allLines;
-        this.users = users;
         this.notes = notes;
         this.warehouse = warehouse;
     }
@@ -37,10 +34,6 @@ public class Factory {
         warehouse.addItem(i);
     }
     
-    public void addUser(User u){
-        users.add(u);
-    }
-
     synchronized public void add(ProductLine pl) {
         allLines.add(pl);
     }
@@ -94,10 +87,6 @@ public class Factory {
         return notes;
     }
     
-    public List<User> getUsers() {
-        return users;
-    }
-
     public Warehouse getWarehouse() {
         return warehouse;
     }
@@ -245,8 +234,4 @@ public class Factory {
         // TODO Auto-generated method stub
     }
 
-    public boolean userExists(String email) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 }
