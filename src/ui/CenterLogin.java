@@ -56,7 +56,7 @@ public class CenterLogin extends JPanel {
                     JOptionPane.showMessageDialog(null, r.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                        centerPanel.removeAll();
+                    centerPanel.removeAll();
                     switch (r.getState().toLowerCase()) {
                     case "manager":
                         centerPanel.add(new CenterManager(centerPanel, frame, factory));
