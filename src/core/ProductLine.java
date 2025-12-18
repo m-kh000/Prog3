@@ -3,10 +3,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import jsonParser.annotations.JsonIgnore;
+import utils.ThreadManager;
 
 public class ProductLine implements Runnable {
     private static int nextId = 1;
     private int id;
+    private int priority;
     private String name;
     private String status;
     private String note;
@@ -21,8 +23,9 @@ public class ProductLine implements Runnable {
 
     public ProductLine() {}
 
-    public ProductLine(String name, String status) {
+    public ProductLine(String name, String status, int priority) {
         this.id = nextId++;
+        this.priority = priority;
         this.name = name;
         this.status = status;
         this.completed = new ArrayList<>();
@@ -51,6 +54,7 @@ public class ProductLine implements Runnable {
             //     inprogress.add(inline.removeFirst());
             // }
         }
+        ThreadManager.assign();
     }
 
 
@@ -83,6 +87,9 @@ public class ProductLine implements Runnable {
 
     public int getLineId() {
         return this.id;
+    }
+    public int getPriority() {
+        return this.priority;
     }
     public String getLineName() {
         return this.name;
@@ -146,6 +153,9 @@ public class ProductLine implements Runnable {
     }
     public void setNote(String note) {
         this.note = note;
+    }
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     Collection<Task> get0PCInprogress() {
