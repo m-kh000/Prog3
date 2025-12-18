@@ -1,0 +1,18 @@
+[
+    {
+        "id": 2,
+        "name": "1",
+        "category": "1",
+        "price": 1.0,
+        "quantityAvailable": 1,
+        "minQuantity": 1
+    },
+    {
+        "id": 3,
+        "name": "wood",
+        "category": "dk",
+        "price": 1000.0,
+        "quantityAvailable": 1,
+        "minQuantity": 20
+    }
+]

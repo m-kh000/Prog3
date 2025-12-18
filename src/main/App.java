@@ -1,10 +1,6 @@
 package main;
 
 import core.*;
-import exceptions.InvalidEmailException;
-
-import java.io.File;
-import java.text.FieldPosition;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,19 +9,7 @@ import utils.FileUtils;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Factory factory = new Factory();
-        
-        factory.add(new Item("Screws", "Hardware", 0.5, 100, 20));
-        factory.add(new Item("Bolts", "Hardware", 0.75, 50, 30));
-        factory.add(new Item("Wood", "Material", 10.0, 15, 25));
-        
-        Product chair = new Product("Chair");
-        Product table = new Product("Table");
-        
-        factory.add(chair);
-        factory.add(table);
-        
-        new UI(factory);
+        new UI();
         
         //  Factory f = new Factory();
            HashMap<Item, Integer> hm = new HashMap<>();

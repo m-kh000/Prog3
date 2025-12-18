@@ -1,17 +1,19 @@
 package ui;
 import core.Factory;
+import core.Warehouse;
 import java.awt.*;
 import javax.swing.*;
 import jsonParser.JsonParser;
+import utils.FileUtils;
 import utils.Validator;
 
 public class CenterLogin extends JPanel {
 
-    public CenterLogin(JPanel centerPanel, JFrame frame, Factory factory) {
-        this(centerPanel, frame, factory,"","");
+    public CenterLogin(JPanel centerPanel, JFrame frame) {
+        this(centerPanel, frame ,"","");
     }
 
-    public CenterLogin(JPanel centerPanel, JFrame frame, Factory factory,String autoEmail, String autoPassword) {
+    public CenterLogin(JPanel centerPanel, JFrame frame, String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
         JPanel boxes = new JPanel(new GridLayout(3, 1, 30, 0));
@@ -24,7 +26,7 @@ public class CenterLogin extends JPanel {
         signupButton.setBackground(bg);
         signupButton.setFocusable(false);
         signupButton.setContentAreaFilled(false);
-        signupButton.addActionListener(e -> UI.switchContent(new CenterSignup(centerPanel, frame, factory)));
+        signupButton.addActionListener(e -> UI.switchContent(new CenterSignup(centerPanel, frame )));
         title.add(signupButton, BorderLayout.WEST);
         JLabel titleLable = new JLabel("Login");
         titleLable.setFont(Manager.defaultFont(true, true));
@@ -50,30 +52,56 @@ public class CenterLogin extends JPanel {
         add(boxes, BorderLayout.CENTER);
         loginButton.addActionListener(e -> {
             try {
-                String response = utils.Validator.validateEmail(emailbox.getText(), passwordbox.getText());
+                String email = emailbox.getText();
+                String passord = passwordbox.getText();
+                String response = utils.Validator.validateEmail(email, passord);
                 Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
-                if (null==r.getState()){
-                    JOptionPane.showMessageDialog(null, r.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
                     centerPanel.removeAll();
+
                     switch (r.getState().toLowerCase()) {
                     case "manager":
-                        centerPanel.add(new CenterManager(centerPanel, frame, factory));
+                        Factory factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                        makeSaveOnClose(frame, factory);
+                        centerPanel.add(new CenterManager(centerPanel, frame ,factory));
                         break;
                     case "supervisor":
-                        centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
+                        Factory factory2 = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                        makeSaveOnClose(frame, factory2);
+                        centerPanel.add(new CenterSupervisor(centerPanel, frame ,factory2));
                         break;
                     case "signup":
-                        centerPanel.add(new CenterSignup(centerPanel, frame, factory, emailbox.getText(), passwordbox.getText()));
+                        centerPanel.add(new CenterSignup(centerPanel, frame ,email, passord));
                         break;
                 }
+                
                     centerPanel.revalidate();
                     centerPanel.repaint();
                     JOptionPane.showMessageDialog(null, r.getMessage());
-                }
+                
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",3);
+            }
+        });
+    }
+    public void makeSaveOnClose (JFrame frame, Factory factory) {
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                try{
+                int response = JOptionPane.showConfirmDialog(frame, "Do you want to save before exiting?", "Confirm Exit",
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    FileUtils.saveItems(factory);
+                    FileUtils.saveProductLines(factory);
+                    FileUtils.saveProducts(factory);
+                    System.exit(0);
+                } else if (response == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                }
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.getMessage(),"Error",3);                
+            }
             }
         });
     }
