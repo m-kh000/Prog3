@@ -13,5 +13,10 @@
         "email": "s@gmail.com",
         "password": "12345678",
         "isManager": false
+    },
+    {
+        "email": "j@gmail.com",
+        "password": "12345678910",
+        "isManager": false
     }
 ]
