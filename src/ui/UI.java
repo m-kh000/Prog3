@@ -13,8 +13,7 @@ public class UI {
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
-        frame.getContentPane().setBackground(new Color(0xf00000));
-
+        
         JPanel paddings1 = new JPanel();
         JPanel paddings2 = new JPanel();
         JPanel paddings3 = new JPanel();
