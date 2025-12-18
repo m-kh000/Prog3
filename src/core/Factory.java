@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Factory {
     private HashSet<ProductLine> allLines;
-    private String notes;
     private Warehouse warehouse;
 
     //all task methods use test case instead of actual tasks
@@ -15,13 +14,11 @@ public class Factory {
 
     public Factory() {
         this.allLines = new HashSet<>();
-        this.notes = new String();
         this.warehouse = new Warehouse();
     }
 
-    public Factory(HashSet<ProductLine> allLines,String notes,Warehouse warehouse) {
+    public Factory(HashSet<ProductLine> allLines,Warehouse warehouse) {
         this.allLines = allLines;
-        this.notes = notes;
         this.warehouse = warehouse;
     }
 
@@ -51,10 +48,6 @@ public class Factory {
         return allLines.toArray(new ProductLine[allLines.size()]);
     }
 
-    synchronized public String previewNotes() {
-        return notes;
-    }
-
     synchronized public Item[] previewItems() {
         return warehouse.getItems().toArray(new Item[warehouse.getItems().size()]);
     }
@@ -82,10 +75,6 @@ public class Factory {
     public HashSet<ProductLine> getAllLines() {
         return allLines;
     }
-
-    public String getNotes() {
-        return notes;
-    }
     
     public Warehouse getWarehouse() {
         return warehouse;
@@ -102,10 +91,6 @@ public class Factory {
     }
 
     // SETTERS :
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
 
     public void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) {
         if(!warehouse.getItems().contains(i)) return;
@@ -229,9 +214,4 @@ public class Factory {
     public void cancelTask(String selectedItem) {
         // TODO Auto-generated method stub
     }
-
-    public void saveToJSON() {
-        // TODO Auto-generated method stub
-    }
-
 }

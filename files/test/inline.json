@@ -1,0 +1,33 @@
+[
+    {
+        "id": 2,
+        "product": {
+            "id": 1,
+            "name": "Chair",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 1,
+                        "name": "flour",
+                        "category": "test",
+                        "price": 500.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 10
+                }
+            ],
+            "orderedIn": [
+                "2006-04-11"
+            ]
+        },
+        "requiredQuantity": 10,
+        "ready": 0,
+        "customerName": "Joseph",
+        "startDate": "2006-04-11",
+        "deliveryDate": "2006-04-11",
+        "status": "good",
+        "completionPercentage": 5.0
+    }
+]

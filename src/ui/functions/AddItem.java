@@ -39,11 +39,11 @@ public class AddItem extends FunctionPanel {
             String minquantityText = minquantity.getText();
             try {
                 factory.add(new Item(nameText, categoryText, Integer.parseInt(priceText), Integer.parseInt(quantityText), Integer.parseInt(minquantityText)));
-                name.setText("");
-                category.setText("");
-                price.setText("");
-                quantity.setText("");
-                minquantity.setText("");
+                name.reset();
+                category.reset();
+                price.reset();
+                quantity.reset();
+                minquantity.reset();
                 JOptionPane.showMessageDialog(null, "Item added successfully");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());

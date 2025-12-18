@@ -86,11 +86,11 @@ public class ModifyItem extends FunctionPanel {
                 itemCombo.setSelectedItem(null);
                 
                 // Clear fields
-                name.setText("");
-                cat.setText("");
-                price.setText("");
-                quan.setText("");
-                minquan.setText("");
+                name.reset();
+                cat.reset();
+                price.reset();
+                quan.reset();
+                minquan.reset();
                 
                 JOptionPane.showMessageDialog(null, "Item updated successfully!");
                 

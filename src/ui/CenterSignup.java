@@ -1,18 +1,18 @@
 package ui;
 
-import core.Factory;
 import core.User;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
-import utils.*;
+import jsonParser.JsonParser;
+import utils.Validator;
 
 public class CenterSignup extends JPanel {
     
-    public CenterSignup(JPanel centerPanel, JFrame frame, Factory factory) {
-        this(centerPanel, frame, factory,"","");
+    public CenterSignup(JPanel centerPanel, JFrame frame) {
+        this(centerPanel, frame,"","");
     }
-    public CenterSignup(JPanel centerPanel, JFrame frame, Factory factory,String autoEmail, String autoPassword) {
+    public CenterSignup(JPanel centerPanel, JFrame frame,String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
         
@@ -24,7 +24,7 @@ public class CenterSignup extends JPanel {
         loginButton.setBackground(bg);
         loginButton.setFocusable(false);
         loginButton.setContentAreaFilled(false);
-        loginButton.addActionListener(e -> UI.switchContent(new CenterLogin(centerPanel, frame, factory)));
+        loginButton.addActionListener(e -> UI.switchContent(new CenterLogin(centerPanel, frame)));
         title.add(loginButton, BorderLayout.WEST);
         JLabel titleLabel = new JLabel("Sign Up");
         titleLabel.setFont(Manager.defaultFont(true, true));
@@ -72,6 +72,8 @@ public class CenterSignup extends JPanel {
         boxes.add(signupButton);
         
         add(boxes, BorderLayout.CENTER);
+
+        //actions
         signupButton.addActionListener(e -> {
             String email = emailbox.getText();
             String password = passwordbox.getText();
@@ -79,19 +81,22 @@ public class CenterSignup extends JPanel {
                 if (!manager.isSelected() && !supervisor.isSelected()) {
                     throw new EmptyFieldException();
                 }
-                boolean isManager = manager.isSelected();
 
-                
-                utils.Validator.validateEmail(email, password);
-
-                if (factory.userExists(email)) {
-                    UI.switchContent(new CenterLogin(centerPanel, frame, factory, email, password));
-                    return;
+                String response =utils.Validator.validateSignupEmail(email);
+                if (JsonParser.fromJson(response, Validator.Response.class).getState().toLowerCase().equals("unavailable")) {
+                    JOptionPane.showMessageDialog(null, "Email is already in use");
+                UI.switchContent(new CenterLogin(centerPanel, frame, email,password));
+                return;
                 }
 
-                factory.addUser(new User(email, password, isManager));
-                FileUtils.saveUsers(factory);
-                UI.switchContent(new CenterLogin(centerPanel, frame, factory));
+                response = utils.Validator.validateSignupPassword(password);
+                if(JsonParser.fromJson(response, Validator.Response.class).getState().toLowerCase().equals("invalid")) {
+                    JOptionPane.showMessageDialog(null, "Password is too weak");
+                    return;
+                }
+                User newUser = new User(email, password, manager.isSelected());
+                utils.FileUtils.saveUsers(newUser);
+                UI.switchContent(new CenterLogin(centerPanel, frame));
                 JOptionPane.showMessageDialog(null, "Signup successful");
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

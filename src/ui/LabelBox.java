@@ -5,6 +5,9 @@ import javax.swing.*;
 public class LabelBox extends JPanel {
     private JTextField textField;
     String placeholder;
+    boolean isDate, isPassword;
+    String labelText;
+
 
     public LabelBox(String labelText) {
         this(labelText, false);
@@ -15,6 +18,9 @@ public class LabelBox extends JPanel {
     }
     
     public LabelBox(String labelText, boolean isPassword,boolean isDate) {
+        this.isDate = isDate;
+        this.isPassword = isPassword;
+        this.labelText = labelText;
         setLayout(new GridLayout(1, 2, 0, 0));
         
         JLabel label = new JLabel(labelText);
@@ -31,18 +37,8 @@ public class LabelBox extends JPanel {
         textField.setFont(new Font("Arial", Font.PLAIN, 20));
         textField.setBorder(null);
         textField.setBackground(UIManager.getColor("Panel.background"));
-
-        textField.setForeground(Color.GRAY);
-        placeholder = isDate ? "Enter DD-MM-YYYY" : isPassword? "" : "Enter " + labelText.toLowerCase().replace(":", "");
-        textField.setText(placeholder);
-        textField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (textField.getText().equals(placeholder)) {
-                    textField.setText("");
-                    textField.setForeground(Color.BLACK);
-                }
-            }
-        });
+        reset();
+        
         add(textField);
     }
 
@@ -63,5 +59,19 @@ public class LabelBox extends JPanel {
     public void setPlacehoder() {
         textField.setForeground(Color.GRAY);
         textField.setText(placeholder);
+    }
+
+    public void reset(){
+        textField.setForeground(Color.GRAY);
+        placeholder = isDate ? "Enter DD-MM-YYYY" : isPassword? "" : "Enter " + labelText.toLowerCase().replace(":", "");
+        textField.setText(placeholder);
+        textField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+        });
     }
 }

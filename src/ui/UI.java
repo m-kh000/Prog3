@@ -1,13 +1,11 @@
 package ui;
-
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 
 public class UI {
     private static JPanel centerPanel;
     
-    public UI(Factory factory) {
+    public UI() {
         int bigp = 450, smallp = 80;
         
         JFrame frame = new JFrame("Login");
@@ -15,21 +13,6 @@ public class UI {
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
-
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                int response = JOptionPane.showConfirmDialog(frame, "Do you want to save before exiting?", "Confirm Exit",
-                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.YES_OPTION) {
-                    factory.saveToJSON();
-                    System.exit(0);
-                } else if (response == JOptionPane.NO_OPTION) {
-                    System.exit(0);
-                }
-            }
-        });
 
         JPanel paddings1 = new JPanel();
         JPanel paddings2 = new JPanel();
@@ -45,8 +28,7 @@ public class UI {
         frame.add(paddings4, BorderLayout.WEST);
 
         centerPanel = new JPanel(new BorderLayout());
-        centerPanel.add(new CenterLogin(centerPanel, frame, factory));
-        // centerPanel.add(new CenterSupervisor(centerPanel, frame, factory));
+        centerPanel.add(new CenterLogin(centerPanel, frame));
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
