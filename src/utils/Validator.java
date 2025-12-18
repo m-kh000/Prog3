@@ -46,7 +46,7 @@ public class Validator {
                 users = new ArrayList<>(FileUtils.readUsers());
             } catch (IOException e) {
                 FileUtils.log(e);
-                return JsonParser.toJson(new Response("Failed to read users from Users.json", null));
+                return JsonParser.toJson(new Response("Failed to read users from Users.json", "null"));
             }
 
             if (users.isEmpty()) {
@@ -67,7 +67,7 @@ public class Validator {
             }
 
             if (foundUser.getPassword() == null || !foundUser.getPassword().equals(password)) {
-                return JsonParser.toJson(new Response("Wrong password", null));
+                return JsonParser.toJson(new Response("Wrong password", "nologin"));
             }
 
             String role = foundUser.isManager() ? "Manager" : "Supervisor";

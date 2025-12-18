@@ -1,5 +1,6 @@
 {
     "id": 1,
+    "priority": 5,
     "name": "test",
     "status": "working",
     "note": null

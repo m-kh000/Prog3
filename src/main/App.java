@@ -49,7 +49,7 @@ public class App {
         // //  f.getProductLine("test").addTask(new Task(c, 10, "Joseph", LocalDate.now(), LocalDate.of(2029, 5, 1), "todo", 10));
 
         Factory f = new Factory();
-        ProductLine pl = new ProductLine("test", "working");
+        ProductLine pl = new ProductLine("test", "working", 5);
         pl.addTask(new Task(c, 10, "Joseph", l, l, "good", 5));
         f.add(pl);
         
