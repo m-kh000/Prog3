@@ -38,7 +38,7 @@ public class ProductLine implements Runnable {
     public void run() {
         while (!inline.isEmpty()) {
             if (inprogress.isEmpty()) {
-                inprogress.add(inline.remove(0));
+                inprogress.add(inline.removeFirst());
             }
 
             while (true/* canMakeAnotherProduct && still didn't make all the required quantity */) {
