@@ -190,8 +190,8 @@ public class Validator {
         } catch (DateTimeParseException e) {
             if (e.getMessage().contains("Invalid date")) {
                 throw new InvalidDateFormatException("Invalid date.");
-            } else if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                throw new InvalidDateFormatException("Must be exactly YYYY-MM-DD");
+            } else if (!date.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                throw new InvalidDateFormatException("Must be exactly DD-MM-YYYY");
             } else {
                 throw new InvalidDateFormatException("Invalid date format: " + e.getMessage());
             }
