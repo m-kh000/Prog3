@@ -1,8 +1,13 @@
 package core;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+
 import jsonParser.annotations.JsonIgnore;
+import utils.FileUtils;
 import utils.ThreadManager;
 
 public class ProductLine implements Runnable {
@@ -37,22 +42,29 @@ public class ProductLine implements Runnable {
     @Override
     public void run() {
         while (!inline.isEmpty()) {
-            if (inprogress.isEmpty()) {
-                inprogress.add(inline.removeFirst());
+            inprogress.add(inline.removeFirst());
+
+            Task runningTask = getFirstAvailableInprogressTask();
+
+            if (runningTask == null) {
+                continue;
             }
 
-            while (true/* canMakeAnotherProduct && still didn't make all the required quantity */) {
-                /* consume the needed quantity from the items in the factory */
+            while (canProceedWith(runningTask) && !isTaskFinished(runningTask)) {
+                Factory.makeProduct(runningTask.getProduct());
+                runningTask.increaseReady();
+
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
-                    // TODO: log the exception to Exceptions.txt file
+                    FileUtils.log(e);
                 }
             }
 
-            // if (!inline.isEmpty()) {
-            //     inprogress.add(inline.removeFirst());
-            // }
+            if (runningTask.getCompletionPercentage() == 100.00) {
+                completed.add(runningTask);
+                inprogress.remove(runningTask);
+            } 
         }
         ThreadManager.assign();
     }
@@ -80,7 +92,18 @@ public class ProductLine implements Runnable {
     // }
 
     public void cancelTask(Task task) {
-    
+        int index = inline.indexOf(task);
+        if (index == -1) {
+            index = inprogress.indexOf(task);
+        } else {
+            canceled.add(inline.remove(index));
+        }
+
+        if (index == -1) {
+            throw new NoSuchElementException("No such task or the task is already completed or canceled."); 
+        } else {
+            canceled.add(inprogress.remove(index));
+        }
     }
 
     //GETTERS
@@ -160,5 +183,34 @@ public class ProductLine implements Runnable {
 
     Collection<Task> get0PCInprogress() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private boolean isTaskFinished(Task t) {
+        return t.getReady() == t.getRequiredQuantity();
+    }
+    private boolean canProceedWith(Task t) {
+        boolean test = true;
+
+        HashMap<Item, Integer> requiredItems = t.getProduct().getRequiredItems();
+        for (Map.Entry<Item, Integer> e : requiredItems.entrySet()) {
+            Item i = e.getKey();
+            int v = e.getValue();
+
+            if (v < i.getQuantityAvailable()) {
+                test = false;
+                break;
+            }
+        }
+
+        return test;
+    }
+    private Task getFirstAvailableInprogressTask() {
+        for (Task t : inprogress) {
+            if (canProceedWith(t)) {
+                return t;
+            }
+        }
+
+        return null;
     }
 }
