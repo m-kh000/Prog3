@@ -1,42 +1,43 @@
 package core;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class Factory {
-    private HashSet<ProductLine> allLines;
-    private Warehouse warehouse;
+    private static HashSet<ProductLine> allLines;
+    private static Warehouse warehouse;
 
     //all task methods use test case instead of actual tasks
-    Task testcase = new Task(new Product("plname"), 1,"cus",LocalDate.now(),LocalDate.now(),"status",0.5);
+    static Task testcase = new Task(new Product("plname"), 1,"cus",LocalDate.now(),LocalDate.now(),"status",0.5);
 
 
     public Factory() {
-        this.allLines = new HashSet<>();
-        this.warehouse = new Warehouse();
+        Factory.allLines = new HashSet<>();
+        Factory.warehouse = new Warehouse();
     }
 
     public Factory(HashSet<ProductLine> allLines,Warehouse warehouse) {
-        this.allLines = allLines;
-        this.warehouse = warehouse;
+        Factory.allLines = allLines;
+        Factory.warehouse = warehouse;
     }
 
-    synchronized public void add(Product p) {
+    static synchronized public void add(Product p) {
         warehouse.addProduct(p);
     }
 
-    synchronized public void add(Item i) {
+    static synchronized public void add(Item i) {
         i.setName(i.getName().trim());
         warehouse.addItem(i);
     }
     
-    synchronized public void add(ProductLine pl) {
+    static synchronized public void add(ProductLine pl) {
         allLines.add(pl);
     }
 
 
-    public void addTask(String nameText, String quantityText, String customerText, LocalDate startDate,LocalDate deliveryDate) {
+    public static void addTask(String nameText, String quantityText, String customerText, LocalDate startDate,LocalDate deliveryDate) {
         // TODO Auto-generated method stub
         //or add(task)
     }
@@ -44,19 +45,19 @@ public class Factory {
     
     // PREVIEWS : 
 
-    synchronized public ProductLine[] previewLines() {
+    public static synchronized ProductLine[] previewLines() {
         return allLines.toArray(new ProductLine[allLines.size()]);
     }
 
-    synchronized public Item[] previewItems() {
+    public static synchronized Item[] previewItems() {
         return warehouse.getItems().toArray(new Item[warehouse.getItems().size()]);
     }
 
-    synchronized public Product[] previewProducts() {
+    public static synchronized Product[] previewProducts() {
         return warehouse.getProducts().toArray(new Product[warehouse.getProducts().size()]);
     }
 
-    synchronized public Task[] previewTasks() {
+    public static synchronized Task[] previewTasks() {
         List<Task> tasks = new ArrayList<>();
         for (ProductLine pl : allLines) {
             tasks.addAll(pl.getCompleted());
@@ -72,15 +73,15 @@ public class Factory {
 
     // GETTERS : 
 
-    public HashSet<ProductLine> getAllLines() {
+    public static HashSet<ProductLine> getAllLines() {
         return allLines;
     }
     
-    public Warehouse getWarehouse() {
+    public static  Warehouse getWarehouse() {
         return warehouse;
     }
 
-    public ProductLine getProductLine(String name) {
+    public static ProductLine getProductLine(String name) {
         for (ProductLine pl : allLines) {
             if (pl.getName().equals(name)) {
                 return pl;
@@ -92,7 +93,7 @@ public class Factory {
 
     // SETTERS :
 
-    public void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) {
+    public static void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) {
         if(!warehouse.getItems().contains(i)) return;
         i.setName(name);
         i.setCategory(category);
@@ -101,13 +102,13 @@ public class Factory {
         i.setMinQuantity(minQuantity);
     }
 
-    synchronized public void deleteItem(String name) {
+    public static synchronized void deleteItem(String name) {
         warehouse.removeItem(name);
     }
 
     // FILTERS :
 
-    public List<Item> filterItemsByName(String filter) {
+    public static List<Item> filterItemsByName(String filter) {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
@@ -119,7 +120,7 @@ public class Factory {
         return filteredList;
     }
     
-    public List<Item> filterItemsByCategory(String filter) {
+    public static List<Item> filterItemsByCategory(String filter) {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
@@ -131,7 +132,7 @@ public class Factory {
         return filteredList;
     }
 
-    public List<Item> filterItemsByAvailable() {
+    public static List<Item> filterItemsByAvailable() {
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
             if (i.isAvailable()) {
@@ -141,7 +142,7 @@ public class Factory {
         return filteredList;
     }
 
-    public List<Item> filterItemsByOut() {
+    public static List<Item> filterItemsByOut() {
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
             if (i.isOut()) {
@@ -151,7 +152,7 @@ public class Factory {
         return filteredList;
     }
 
-    public List<Item> filterItemsByUnderMin() {
+    public static List<Item> filterItemsByUnderMin() {
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
             if (i.isUnderMin()) {
@@ -161,7 +162,7 @@ public class Factory {
         return filteredList;
     }
     
-    public List<Task> filterTasksByInprogress() {
+    public static List<Task> filterTasksByInprogress() {
         List<Task> filteredList = new ArrayList<>();
         for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getInprogress());
@@ -170,7 +171,7 @@ public class Factory {
         return filteredList;
     }
 
-    public List<Task> filterTasksByCompleted() {
+    public static List<Task> filterTasksByCompleted() {
         List<Task> filteredList = new ArrayList<>();
         for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getCompleted());
@@ -178,7 +179,7 @@ public class Factory {
         return filteredList;
     }
 
-    public List<Product> topOrderBetween(LocalDate start, LocalDate end) {
+    public static List<Product> topOrderBetween(LocalDate start, LocalDate end) {
         List<Product> list = new ArrayList<>();
         for (Product p : warehouse.getProducts()) {
             if (p.wasOrderedBetween(start, end)) {
@@ -188,7 +189,7 @@ public class Factory {
         return list;
     }
 
-    public String[] getItemsNames() {
+    public static String[] getItemsNames() {
         List<String> names = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
             names.add(i.getName());
@@ -197,7 +198,7 @@ public class Factory {
     }
     //TODO filterTasksby
 
-    public String[] get0PCTasksNames() {
+    public static String[] get0PCTasksNames() {
         List<String> names = new ArrayList<>();
         for (ProductLine pl : allLines) {
             for (Task t : pl.get0PCInprogress()) {
@@ -211,7 +212,11 @@ public class Factory {
         //return names.toArray(new String[names.size()]);//TODO when you do all pls and tasks
     }
 
-    public void cancelTask(String selectedItem) {
+    public static void cancelTask(String selectedItem) {
         // TODO Auto-generated method stub
+    }
+
+    public static void makeProduct(Product p) {
+        warehouse.makeProduct(p);
     }
 }

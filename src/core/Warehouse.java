@@ -2,7 +2,9 @@ package core;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import exceptions.StorageInitializationException;
 import utils.FileUtils;
@@ -90,5 +92,12 @@ public class Warehouse {
         Item temp = this.getItem(itemName);
 
         return ((temp == null) ? false : (temp.getQuantityAvailable() > 0) ? true : false);
+    }
+
+    public void makeProduct(Product p) {
+        getProduct(p.getName()).make();
+        for (Map.Entry<Item, Integer> e : p.getRequiredItems().entrySet()) {
+            items.get(items.indexOf(e.getKey())).take(e.getValue());
+        }
     }
 }
