@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 
 public class Factory {
     private HashSet<ProductLine> allLines;
@@ -213,5 +214,9 @@ public class Factory {
 
     public void cancelTask(String selectedItem) {
         // TODO Auto-generated method stub
+    }
+
+    public ComboBoxModel<String> getProductNames() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

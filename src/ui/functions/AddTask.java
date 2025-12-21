@@ -13,17 +13,21 @@ public class AddTask extends FunctionPanel {
         
         add(createTopPanel("Add Task", centerPanel, frame, factory, "supervisor"));
         
-        // add(new LabelBox("Product Name:", false));
-        // add(new LabelBox("Required Quantity:", false));
-        // add(new LabelBox("Customer Name:", false));
-        // add(new LabelBox("Start Date:", false));
-        // add(new LabelBox("Delivery Date:", false));
-        LabelBox name = new LabelBox("Product Name:");
-        LabelBox quantity = new LabelBox("Required Quantity:");
-        LabelBox customer = new LabelBox("Customer Name:");
-        LabelBox start = new LabelBox("Start Date:",false,true);
-        LabelBox delivery = new LabelBox("Delivery Date:",false,true);
-        add(name);
+        JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
+        JLabel selectLabel = new JLabel("Select Product:");
+        selectLabel.setFont(Manager.defaultFont(false, false));
+        JComboBox<String> product = new JComboBox<String>(factory.getProductNames());
+        product.setFont(Manager.defaultFont(false, false));
+        product.setSelectedItem(null);
+        selectPanel.add(selectLabel);
+        selectPanel.add(product);
+        add(selectPanel);
+        
+        LabelBox quantity = new LabelBox("Required Quantity:", false);
+        LabelBox customer = new LabelBox("Customer Name:", false);
+        LabelBox start = new LabelBox("Start Date:", false);
+        LabelBox delivery = new LabelBox("Delivery Date:", false);
+        
         add(quantity);
         add(customer);
         add(start);
@@ -35,24 +39,24 @@ public class AddTask extends FunctionPanel {
 
         submitBtn.addActionListener(e -> {
             try {
-            if (name.isEmpty() || quantity.isEmpty() || customer.isEmpty() || start.isEmpty() || delivery.isEmpty()) {
-                throw new EmptyFieldException();
-            }
-            String nameText = name.getText();
-            String quantityText = quantity.getText();
-            String customerText = customer.getText();
-            String startText = start.getText();
-            String deliveryText = delivery.getText();
-            LocalDate startDate = utils.Validator.validateDate(startText);
-            LocalDate deliveryDate = utils.Validator.validateDate(deliveryText);
-            factory.addTask(nameText, quantityText, customerText, startDate, deliveryDate);
-            name.setPlacehoder();
-            quantity.setPlacehoder();
-            customer.setPlacehoder();
-            customer.setPlacehoder();
-            start.setPlacehoder();
-            delivery.setPlacehoder();
-            JOptionPane.showMessageDialog(frame, "Task added successfully");
+                if (product.getSelectedItem() == null || quantity.getText().isEmpty() || customer.getText().isEmpty() || start.getText().isEmpty() || delivery.getText().isEmpty()) {
+                    throw new EmptyFieldException();
+                }
+                
+                String productName = (String) product.getSelectedItem();
+                String quantityText = quantity.getText();
+                String customerText = customer.getText();
+                String startText = start.getText();
+                String deliveryText = delivery.getText();
+                
+                // Clear fields
+                product.setSelectedItem(null);
+                quantity.reset();
+                customer.reset();
+                start.reset();
+                delivery.reset();
+                
+                JOptionPane.showMessageDialog(frame, "Task added successfully");
             } catch (EmptyFieldException ex) {
                 JOptionPane.showMessageDialog(frame, "Please fill all the fields");
             } catch (Exception ex) {

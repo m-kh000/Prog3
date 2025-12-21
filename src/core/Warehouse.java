@@ -1,10 +1,9 @@
 package core;
 
+import exceptions.StorageInitializationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import exceptions.StorageInitializationException;
 import utils.FileUtils;
 
 public class Warehouse {
@@ -90,5 +89,9 @@ public class Warehouse {
         Item temp = this.getItem(itemName);
 
         return ((temp == null) ? false : (temp.getQuantityAvailable() > 0) ? true : false);
+    }
+    public Object getProductsNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getProductsNames'");
     }
 }

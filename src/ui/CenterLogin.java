@@ -56,20 +56,22 @@ public class CenterLogin extends JPanel {
                 String passord = passwordbox.getText();
                 String response = utils.Validator.validateEmail(email, passord);
                 Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
-                    centerPanel.removeAll();
 
                     switch (r.getState().toLowerCase()) {
                     case "manager":
+                        centerPanel.removeAll();
                         Factory factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
                         makeSaveOnClose(frame, factory);
                         centerPanel.add(new CenterManager(centerPanel, frame ,factory));
                         break;
                     case "supervisor":
+                        centerPanel.removeAll();
                         Factory factory2 = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
                         makeSaveOnClose(frame, factory2);
                         centerPanel.add(new CenterSupervisor(centerPanel, frame ,factory2));
                         break;
                     case "signup":
+                        centerPanel.removeAll();
                         centerPanel.add(new CenterSignup(centerPanel, frame ,email, passord));
                         break;
                 }
