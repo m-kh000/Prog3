@@ -24,7 +24,7 @@ public class LabelBox extends JPanel {
         setLayout(new GridLayout(1, 2, 0, 0));
         
         JLabel label = new JLabel(labelText);
-        label.setFont(new Font("Arial", Font.PLAIN, 20));
+        label.setFont(Manager.defaultFont(true, false));
         add(label);
         
         if (isPassword) {
@@ -34,7 +34,7 @@ public class LabelBox extends JPanel {
             textField = new JTextField();
         }
         textField.setPreferredSize(new Dimension(10, 10));
-        textField.setFont(new Font("Arial", Font.PLAIN, 20));
+        textField.setFont(Manager.defaultFont(true, false));
         textField.setBorder(null);
         textField.setBackground(UIManager.getColor("Panel.background"));
         reset();

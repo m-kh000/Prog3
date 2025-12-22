@@ -1,24 +1,17 @@
 package ui.functions;
+import javax.swing.*;
+import java.awt.*;
 
-import core.Factory;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import ui.Manager;
+import ui.components.ProductLinePanel;
 import ui.components.ProductPanel;
+import core.Factory;
 
-public class FilterProducts extends FunctionPanel {
-    private JPanel ProductsPanel;
+public class FilterProductLines extends FunctionPanel {
+    private JPanel ProductLinesPanel;
     private JComboBox<String> filterField;
 
-    public FilterProducts(JPanel centerPanel, JFrame frame, Factory factory) {
+    public FilterProductLines(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
 
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
@@ -45,7 +38,7 @@ public class FilterProducts extends FunctionPanel {
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = (String) filterField.getSelectedItem();
-            updateProductsPanel(factory, filterType, filterValue);
+            updateProductLinesPanel(factory, filterType, filterValue);
         });
 
         filterPanel.add(filterLabel);
@@ -54,38 +47,33 @@ public class FilterProducts extends FunctionPanel {
         filterPanel.add(filterBtn);
 
         JPanel topContainer = new JPanel(new BorderLayout());
-        topContainer.add(createTopPanel("Filter Products", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        topContainer.add(createTopPanel("Filter ProductLines", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
         topContainer.add(filterPanel, BorderLayout.SOUTH);
         add(topContainer, BorderLayout.NORTH);
 
-        ProductsPanel = createProductsPanel();
-        add(new JScrollPane(ProductsPanel), BorderLayout.CENTER);
+        ProductLinesPanel = createProductLinesPanel();
+        add(new JScrollPane(ProductLinesPanel), BorderLayout.CENTER);
     }
 
-    private void updateProductsPanel(Factory factory, String filterType, String filterValue) {
-        ProductsPanel.removeAll();
+    private void updateProductLinesPanel(Factory factory, String filterType, String filterValue) {
+        ProductLinesPanel.removeAll();
 
-        List<core.Product> Products = null;
-        if (filterType.equals("One ProductLine")) {
-            Products = factory.getWarehouse().filterProductsByProductLine(filterValue);
-        } else {
-            Products = factory.getWarehouse().getTopSaleProducts();
-        }
-
-        if (Products != null) {
-            for (core.Product Product : Products) {
-                ProductsPanel.add(new ProductPanel(Product));
+        java.util.List<core.ProductLine> ProductLines = null;
+        if (filterType.equals("")){}
+        if (ProductLines != null) {
+            for (core.ProductLine ProductLine : ProductLines) {
+                ProductLinesPanel.add(new ProductLinePanel(ProductLine));
             }
         }
         else {
-            ProductsPanel.add(new JLabel("No products found."));
+            ProductLinesPanel.add(new JLabel("No ProductLines found."));
         }
 
-        ProductsPanel.revalidate();
-        ProductsPanel.repaint();
+        ProductLinesPanel.revalidate();
+        ProductLinesPanel.repaint();
     }
 
-    private JPanel createProductsPanel() {
+    private JPanel createProductLinesPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         return panel;

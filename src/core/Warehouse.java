@@ -1,12 +1,10 @@
 package core;
 
+import exceptions.StorageInitializationException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import exceptions.StorageInitializationException;
 import utils.FileUtils;
 
 public class Warehouse {
@@ -99,5 +97,17 @@ public class Warehouse {
         for (Map.Entry<Item, Integer> e : p.getRequiredItems().entrySet()) {
             items.get(items.indexOf(e.getKey())).take(e.getValue());
         }
+    }
+    public Object getProductsNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getProductsNames'");
+    }
+    public List<Product> getTopSaleProducts() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTopSaleProducts'");
+    }
+    public List<Product> filterProductsByProductLine(String filterValue) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'filterProductsByProductLine'");
     }
 }

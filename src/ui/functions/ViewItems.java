@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import ui.components.ItemPanel;
 import core.Factory;
+import javax.swing.JLabel;
 
 public class ViewItems extends FunctionPanel {
     public ViewItems(JPanel centerPanel, JFrame frame, Factory factory) {
@@ -16,6 +17,9 @@ public class ViewItems extends FunctionPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (core.Item item : factory.previewItems()) {
             panel.add(new ItemPanel(item));
+        }
+        if (factory.previewItems().length == 0) {
+            panel.add(new JLabel("No items found."));
         }
         return panel;
     }
