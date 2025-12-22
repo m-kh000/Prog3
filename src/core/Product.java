@@ -11,6 +11,7 @@ public class Product {
     private int quantityAvailable;
     private HashMap<Item, Integer> requiredItems;
     private HashSet<LocalDate> orderedIn;
+    private int purchaseFrequency;
 
     public Product() {}
     
@@ -40,6 +41,10 @@ public class Product {
             }
         }
         return false;
+    }
+
+    void increasePurchases(){
+        purchaseFrequency++;
     }
 
     // PREVIEWS : 
@@ -82,6 +87,10 @@ public class Product {
 
     public int getQuantityAvailable() {
         return quantityAvailable;
+    }
+
+    public int getPurchaseFrequency() {
+        return purchaseFrequency;
     }
 
     // SETTERS : 

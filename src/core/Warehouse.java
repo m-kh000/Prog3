@@ -3,6 +3,7 @@ package core;
 import exceptions.StorageInitializationException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import utils.FileUtils;
@@ -98,16 +99,34 @@ public class Warehouse {
             items.get(items.indexOf(e.getKey())).take(e.getValue());
         }
     }
-    public Object getProductsNames() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProductsNames'");
+    public String[] getProductsNames() {
+        List<String> names = new ArrayList<>();
+        for(Product p : products){
+            names.add(p.getName());
+        }
+        return names.toArray(new String[names.size()]);
     }
-    public List<Product> getTopSaleProducts() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTopSaleProducts'");
+    public Product[] getTopSaleProducts() {
+        List<Product> filteredList = new ArrayList<>();
+        List<Product> freq = new ArrayList<>();
+        for(Product p : products){
+            freq.add(p);
+        }
+        Collections.sort(freq, (p1, p2) -> {return p2.getPurchaseFrequency() - p1.getPurchaseFrequency();});
+        for(Product p : freq){
+            if(filteredList.size() == 10) break;
+            filteredList.add(p);
+        }
+        return filteredList.toArray(new Product[filteredList.size()]);
     }
-    public List<Product> filterProductsByProductLine(String filterValue) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'filterProductsByProductLine'");
+    public Product[] filterProductsByProductLine(String filter) {
+        List<Product> filteredList = new ArrayList<>();
+        filter = filter.trim().toLowerCase();
+        for(Product p : products){
+            if(p.getName().equals(filter)){
+                filteredList.add(p);
+            }
+        }
+        return filteredList.toArray(new Product[filteredList.size()]);
     }
 }
