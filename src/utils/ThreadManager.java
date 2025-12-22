@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -31,8 +32,13 @@ public class ThreadManager {
     public static void assign() {
         for (Thread t : threadPool) {
             if (!t.isAlive()) {
-                t = new Thread(waiting.remove());
-                t.start();
+                try {
+                    t = new Thread(waiting.remove());
+                    t.start();
+                } catch (NoSuchElementException e) {
+                    System.out.println("The waiting queue is empty.");
+                    FileUtils.log(e);
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.components.ProductPanel;
+import javax.swing.JLabel;
 
 public class ViewProducts extends FunctionPanel {
     public ViewProducts(JPanel centerPanel, JFrame frame, Factory factory) {
@@ -16,6 +17,9 @@ public class ViewProducts extends FunctionPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (core.Product product : factory.previewProducts()) {
             panel.add(new ProductPanel(product));
+        }
+        if (factory.previewProducts().length == 0) {
+            panel.add(new JLabel("No products found."));
         }
         return panel;
     }
