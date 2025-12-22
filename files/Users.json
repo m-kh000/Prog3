@@ -23,5 +23,10 @@
         "email": "joseph@gmail.com",
         "password": "12345678",
         "isManager": true
+    },
+    {
+        "email": "fdsa@gmail.com",
+        "password": "12345678",
+        "isManager": false
     }
 ]
