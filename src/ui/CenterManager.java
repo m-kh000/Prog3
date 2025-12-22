@@ -6,7 +6,7 @@ import ui.functions.*;
 
 public class CenterManager extends JPanel {
     public CenterManager(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(4, 1, 0, 20));
+        setLayout(new GridLayout(8, 1, 0, 20));
         JLabel title = new JLabel("Manager");
         title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);

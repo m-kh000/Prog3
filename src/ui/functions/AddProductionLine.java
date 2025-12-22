@@ -1,35 +1,66 @@
 package ui.functions;
 
-import javax.swing.*;
-import java.awt.*;
-import ui.LabelBox;
 import core.Factory;
+import core.ProductLine;
+import java.awt.*;
+import javax.swing.*;
+import ui.LabelBox;
+import ui.Manager;
 
 public class AddProductionLine extends FunctionPanel {
 
     public AddProductionLine(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(5, 1, 20, 20));
+        // Main grid: 8 rows, 1 column
+        setLayout(new GridLayout(8, 1, 10, 10));
 
-        add(BackBtn(centerPanel, frame, factory, "manager"));
+        // Row 1: Top panel
+        add(createTopPanel("Add Product Line:", centerPanel, frame, factory, "manager"));
 
-        JLabel title = new JLabel("Add Production Line");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
-        title.setHorizontalAlignment(JLabel.CENTER);
-        add(title);
+        // Row 2: Type name
+        LabelBox name = new LabelBox("Name:");
+        add(name);
 
-        add(new LabelBox("Name:", false));
+        // Row 3: Select status
+        JPanel statuspanel = new JPanel(new GridLayout(1, 2));
+        JLabel statuslabel = new JLabel("Status:");
+        statuslabel.setFont(Manager.defaultFont(true, false));
+        JComboBox<String> status = new JComboBox<>(new String[] { "Active","Maintenance","Stopped" });
+        statuspanel.add(statuslabel);
+        statuspanel.add(status);
+        add(statuspanel);
 
-        JPanel statusPanel = new JPanel(new GridLayout(1, 2, 0, 0));
-        JLabel statusLabel = new JLabel("Status:");
-        statusLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        JComboBox<String> statusCombo = new JComboBox<>(new String[]{"Active", "Stopped", "Maintenance"});
-        statusCombo.setFont(new Font("Arial", Font.PLAIN, 20));
-        statusPanel.add(statusLabel);
-        statusPanel.add(statusCombo);
-        add(statusPanel);
+        // Row 4: Type priority
+        LabelBox priority = new LabelBox("Priority:");
+        add(priority);
 
+        // Rows 5-7: Empty panels
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+
+        // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
         add(submitBtn);
+
+        submitBtn.addActionListener(e -> {
+            if (name.isEmpty() || priority.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                return;
+            }
+            String nameText = name.getText();
+            String statusText = (String)status.getSelectedItem();
+            String priorityText = priority.getText();
+            try {
+                factory.add(new ProductLine(nameText, statusText, Integer.parseInt(priorityText)));
+                name.reset();
+                status.setSelectedIndex(0);
+                priority.reset();
+                Manager.isEdited = true;
+                JOptionPane.showMessageDialog(null, "Product line added successfully");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        });
     }
 }

@@ -244,4 +244,15 @@ public class Factory {
         FileUtils.saveProducts(this);
         FileUtils.saveProductLines(this);
     }
+
+    public void addTaskToProductLine(String pLtext, String productName, int int1, String customerText, String startText,
+            String deliveryText) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addTaskToProductLine'");
+    }
+
+    public void modifyStatus(String selectedLineName, String selectedStatus) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'modifyStatus'");
+    }
 }
