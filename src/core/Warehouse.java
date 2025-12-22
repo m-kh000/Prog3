@@ -106,7 +106,7 @@ public class Warehouse {
         }
         return names.toArray(new String[names.size()]);
     }
-    public Product[] getTopSaleProducts() {
+    public List<Product> getTopSaleProducts() {
         List<Product> filteredList = new ArrayList<>();
         List<Product> freq = new ArrayList<>();
         for(Product p : products){
@@ -117,9 +117,9 @@ public class Warehouse {
             if(filteredList.size() == 10) break;
             filteredList.add(p);
         }
-        return filteredList.toArray(new Product[filteredList.size()]);
+        return filteredList;
     }
-    public Product[] filterProductsByProductLine(String filter) {
+    public List<Product> filterProductsByProductLine(String filter) {
         List<Product> filteredList = new ArrayList<>();
         filter = filter.trim().toLowerCase();
         for(Product p : products){
@@ -127,6 +127,6 @@ public class Warehouse {
                 filteredList.add(p);
             }
         }
-        return filteredList.toArray(new Product[filteredList.size()]);
+        return filteredList;
     }
 }
