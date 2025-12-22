@@ -1,8 +1,10 @@
 package core;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import utils.FileUtils;
 
 public class Factory {
     private static HashSet<ProductLine> allLines;
@@ -233,4 +235,13 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
+    public List<ProductLine> filterProductLinesByProduct(String filterValue) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void saveToTXT() throws IOException {
+        FileUtils.saveItems(this);
+        FileUtils.saveProducts(this);
+        FileUtils.saveProductLines(this);
+    }
 }

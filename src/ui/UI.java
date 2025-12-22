@@ -8,6 +8,7 @@ public class UI {
     public UI() {
         int bigp = 450, smallp = 80;
         
+        boolean beenEdited = false;
         JFrame frame = new JFrame("Login");
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setResizable(false);
