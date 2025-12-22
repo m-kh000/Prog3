@@ -233,4 +233,8 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
+    public List<ProductLine> filterProductLinesByProduct(String filterValue) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

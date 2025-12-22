@@ -32,7 +32,7 @@ public class FilterItems extends FunctionPanel {
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = filterField.getText();
-            updateItemsPanel(factory, filterType, filterValue);
+            updatePanel(factory, filterType, filterValue);
         });
         
         filterPanel.add(filterLabel);
@@ -45,23 +45,27 @@ public class FilterItems extends FunctionPanel {
         topContainer.add(filterPanel, BorderLayout.SOUTH);
         add(topContainer, BorderLayout.NORTH);
         
-        itemsPanel = createItemsPanel(factory.previewItems());
+        itemsPanel = createItemsPanel();
+        // Load initial items
+        for(core.Item item : Factory.previewItems()) {
+            itemsPanel.add(new ItemPanel(item));
+        }
         add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
     }
     
-    private void updateItemsPanel(Factory factory, String filterType, String filterValue) {
+    private void updatePanel(Factory factory, String filterType, String filterValue) {
         itemsPanel.removeAll();
         
         List<core.Item> items = null;
         switch (filterType) {
-            case "Name" -> items = factory.filterItemsByName(filterValue);
-            case "Category" -> items = factory.filterItemsByCategory(filterValue);
-            case "Available" -> items = factory.filterItemsByAvailable();
-            case "Under min" -> items = factory.filterItemsByUnderMin();
-            case "Out" -> items = factory.filterItemsByOut();
+            case "Name" -> items = Factory.filterItemsByName(filterValue);
+            case "Category" -> items = Factory.filterItemsByCategory(filterValue);
+            case "Available" -> items = Factory.filterItemsByAvailable();
+            case "Under min" -> items = Factory.filterItemsByUnderMin();
+            case "Out" -> items = Factory.filterItemsByOut();
         }
         
-        if(items != null) {
+        if(items != null && !items.isEmpty()) {
             for(core.Item item : items) {
                 itemsPanel.add(new ItemPanel(item));
             }
@@ -70,17 +74,9 @@ public class FilterItems extends FunctionPanel {
         itemsPanel.revalidate();
         itemsPanel.repaint();
     }
-        
     
-    private JPanel createItemsPanel(core.Item[] items) {
+    private JPanel createItemsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        for (core.Item item : items) {
-            panel.add(new ItemPanel(item));
-        }
-        if (items.length == 0) {
-            panel.add(new JLabel("No items found."));
-        }
         return panel;
-    }
-}
+    }}

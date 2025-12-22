@@ -43,7 +43,7 @@ public class CenterSupervisor extends JPanel {
         add(row3);
 
         JButton filterProductionLinesBtn = createStyledButton("Filter Production Lines", buttonColor);
-        filterProductionLinesBtn.addActionListener(e -> UI.switchContent(new FilterProductionLines(centerPanel, frame, factory)));
+        filterProductionLinesBtn.addActionListener(e -> UI.switchContent(new FilterProductLines(centerPanel, frame, factory)));
         add(filterProductionLinesBtn);
 
         JButton mostRequestedBtn = createStyledButton("Most Requested", buttonColor);
