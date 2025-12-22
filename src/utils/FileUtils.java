@@ -240,11 +240,10 @@ public class FileUtils {
      * if it does not exist.
      * </p>
      * 
-     * @param factory the factory that holds the items list
      */
-    public static void saveItems(Factory factory) throws IOException {
+    public static void saveItems() throws IOException {
         synchronized (FILE_LOCK) {
-            List<Item> items = new ArrayList<>(factory.getWarehouse().getItems());
+            List<Item> items = new ArrayList<>(Factory.getWarehouse().getItems());
             
             try {
                 createFile(ITEMS_FILE);
@@ -267,12 +266,11 @@ public class FileUtils {
      * if it does not exist.
      * </p>
      * 
-     * @param factory the factory that holds the products list
      * @throws IOException
      */
-    public static void saveProducts(Factory factory) throws IOException {
+    public static void saveProducts() throws IOException {
         synchronized (FILE_LOCK) {
-            List<Product> products = new ArrayList<>(factory.getWarehouse().getProducts());
+            List<Product> products = new ArrayList<>(Factory.getWarehouse().getProducts());
 
             try {
                 createFile(PRODUCTS_FILE);
@@ -286,12 +284,12 @@ public class FileUtils {
     /**
      * Saves Productlines in ./files/[PL's name]: a .json file for the basic data of the productline,
      * and a .josn file for each tasks list.
-     * @param factory the factory that holds the productlines set
+     * 
      * @throws IOException
      */
-    public static void saveProductLines(Factory factory) throws IOException {
+    public static void saveProductLines() throws IOException {
         synchronized (FILE_LOCK) {
-            HashSet<ProductLine> productLines = new HashSet<>(factory.getAllLines());
+            HashSet<ProductLine> productLines = new HashSet<>(Factory.getAllLines());
 
             FILES.mkdirs();
 

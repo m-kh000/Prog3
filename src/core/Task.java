@@ -12,11 +12,10 @@ public class Task {
     private LocalDate startDate;
     private LocalDate deliveryDate;
     private String status;
-    private double completionPercentage;
 
     public Task() {}
     
-    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status, double completionPercentage) {
+    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) {
         this.id = nextId++;
         this.product = product;
         product.increasePurchases();
@@ -26,7 +25,6 @@ public class Task {
         this.startDate = startDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
-        this.completionPercentage = completionPercentage;
     }
 
     // public boolean doTask() {
@@ -44,7 +42,7 @@ public class Task {
     // GETTERS : 
 
     public double getCompletionPercentage() {
-        return completionPercentage;
+        return ((ready * 100) / requiredQuantity);
     }
     
     public String getCustomerName() {
@@ -84,14 +82,10 @@ public class Task {
     }
 
     public String getName() {
-        return product.getName()+" "+requiredQuantity+" due to "+deliveryDate;
+        return product.getName() + " " + requiredQuantity + " due to " + deliveryDate;
     }
 
     // SETTERS : 
-
-    public void setCompletionPercentage(double completionPercentage) {
-        this.completionPercentage = completionPercentage;
-    }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;

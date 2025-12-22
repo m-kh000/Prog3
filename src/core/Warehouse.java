@@ -63,11 +63,12 @@ public class Warehouse {
         return null;
     }
     public List<Item> getItems() {
-        return items;
+        return this.items;
     }
     public List<Product> getProducts() {
-        return products;
+        return this.products;
     }
+    
     /**
      * @param productName the name of the product
      * @return the wanted product if found or else null
