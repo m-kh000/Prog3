@@ -11,7 +11,7 @@ public class Factory {
     private static Warehouse warehouse;
 
     //all task methods use test case instead of actual tasks
-    static Task testcase = new Task(new Product("plname"), 1,"cus",LocalDate.now(),LocalDate.now(),"status",0.5);
+    static Task testcase = new Task(new Product("plname"), 1,"cus",LocalDate.now(),LocalDate.now(),"status");
 
 
     public Factory() {
@@ -20,20 +20,20 @@ public class Factory {
     }
 
     public Factory(HashSet<ProductLine> allLines,Warehouse warehouse) {
-        Factory.allLines = allLines;
+        Factory.allLines = new HashSet<>(allLines);
         Factory.warehouse = warehouse;
     }
 
-    static synchronized public void add(Product p) {
+    public static synchronized void add(Product p) {
         warehouse.addProduct(p);
     }
 
-    static synchronized public void add(Item i) {
+    public static synchronized void add(Item i) {
         i.setName(i.getName().trim());
         warehouse.addItem(i);
     }
     
-    static synchronized public void add(ProductLine pl) {
+    public static synchronized void add(ProductLine pl) {
         allLines.add(pl);
     }
 
@@ -235,14 +235,33 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public List<ProductLine> filterProductLinesByProduct(String filterValue) {
+    public static List<ProductLine> filterProductLinesByProduct(String filterValue) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void saveToTXT() throws IOException {
-        FileUtils.saveItems(this);
-        FileUtils.saveProducts(this);
-        FileUtils.saveProductLines(this);
+    /**
+     * Deliver a specific completed task by removing it from the completed list in its 
+     * 
+     * @param t the task to deliver
+     * @return {@code true} if the task was found and removed or {@code false} otherwise
+     */
+    public static boolean deliverTask(Task t) {
+        //TODO: complete the implementation of this method
+
+        // for (ProductLine pl : allLines) {
+        //     if (pl.getCompleted().contains(t)) {
+        //         pl.getCompleted().remove(t);
+        //         return true;
+        //     }
+        // }
+
+        return false;
+    }
+
+    public static void saveToTXT() throws IOException {
+        FileUtils.saveItems();
+        FileUtils.saveProducts(); 
+        FileUtils.saveProductLines();
     }
 
     public void addTaskToProductLine(String pLtext, String productName, int int1, String customerText, String startText,
