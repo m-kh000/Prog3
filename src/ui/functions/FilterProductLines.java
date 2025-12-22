@@ -15,34 +15,21 @@ public class FilterProductLines extends FunctionPanel {
         setLayout(new BorderLayout());
 
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
-        JLabel filterLabel = new JLabel("Filter by:");
+        JLabel filterLabel = new JLabel("Filter by: ");
+        JLabel filterLabel2 = new JLabel("a specific product");
         filterLabel.setFont(Manager.defaultFont(false, false));
-        JComboBox<String> filterCombo = new JComboBox<>(new String[]{"One ProductLine", "Top Sales"});
-        filterCombo.setFont(Manager.defaultFont(false, false));
-        filterField = new JComboBox<>(factory.getProductLineNames());
+        filterField = new JComboBox<>(factory.getProductNames());
         filterField.setFont(Manager.defaultFont(false, false));
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 
-        filterCombo.addActionListener(e -> {
-            String filterType = (String) filterCombo.getSelectedItem();
-
-            filterField.removeAllItems();
-            if (filterType.equals("One ProductLine")) {
-                filterField.setEnabled(true);
-            } else {
-                filterField.setEnabled(false);
-            }
-        });
-
         filterBtn.addActionListener(e -> {
-            String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = (String) filterField.getSelectedItem();
-            updateProductLinesPanel(factory, filterType, filterValue);
+            updateProductLinesPanel(factory, filterValue);
         });
 
         filterPanel.add(filterLabel);
-        filterPanel.add(filterCombo);
+        filterPanel.add(filterLabel2);
         filterPanel.add(filterField);
         filterPanel.add(filterBtn);
 
@@ -55,12 +42,11 @@ public class FilterProductLines extends FunctionPanel {
         add(new JScrollPane(ProductLinesPanel), BorderLayout.CENTER);
     }
 
-    private void updateProductLinesPanel(Factory factory, String filterType, String filterValue) {
+    private void updateProductLinesPanel(Factory factory, String filterValue) {
         ProductLinesPanel.removeAll();
 
-        java.util.List<core.ProductLine> ProductLines = null;
-        if (filterType.equals("")){}
-        if (ProductLines != null) {
+        java.util.List<core.ProductLine> ProductLines = factory.filterProductLinesByProduct(filterValue);
+        if (ProductLines != null && !ProductLines.isEmpty()) {
             for (core.ProductLine ProductLine : ProductLines) {
                 ProductLinesPanel.add(new ProductLinePanel(ProductLine));
             }

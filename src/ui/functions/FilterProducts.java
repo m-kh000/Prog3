@@ -72,7 +72,7 @@ public class FilterProducts extends FunctionPanel {
             Products = factory.getWarehouse().getTopSaleProducts();
         }
 
-        if (Products != null) {
+        if (Products != null && !Products.isEmpty()) {
             for (core.Product Product : Products) {
                 ProductsPanel.add(new ProductPanel(Product));
             }

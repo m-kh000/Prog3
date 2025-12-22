@@ -61,12 +61,14 @@ public class CenterLogin extends JPanel {
                     case "manager":
                         centerPanel.removeAll();
                         Factory factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                        Manager.isEdited = false;
                         makeSaveOnClose(frame, factory);
                         centerPanel.add(new CenterManager(centerPanel, frame ,factory));
                         break;
                     case "supervisor":
                         centerPanel.removeAll();
                         Factory factory2 = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                        Manager.isEdited = false;
                         makeSaveOnClose(frame, factory2);
                         centerPanel.add(new CenterSupervisor(centerPanel, frame ,factory2));
                         break;
@@ -91,14 +93,16 @@ public class CenterLogin extends JPanel {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 try{
-                int response = JOptionPane.showConfirmDialog(frame, "Do you want to save before exiting?", "Confirm Exit",
-                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.YES_OPTION) {
-                    FileUtils.saveItems(factory);
-                    FileUtils.saveProductLines(factory);
-                    FileUtils.saveProducts(factory);
-                    System.exit(0);
-                } else if (response == JOptionPane.NO_OPTION) {
+                if (Manager.isEdited) {
+                    int response = JOptionPane.showConfirmDialog(frame, "Do you want to save before exiting?", "Confirm Exit",
+                            JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (response == JOptionPane.YES_OPTION) {
+                        factory.saveToTXT();
+                        System.exit(0);
+                    } else if (response == JOptionPane.NO_OPTION) {
+                        System.exit(0);
+                    }
+                } else {
                     System.exit(0);
                 }
             }catch(Exception e){
