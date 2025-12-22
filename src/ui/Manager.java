@@ -8,6 +8,7 @@ public class Manager {
     private static final int NORMAL_SIZE = 16;
     private static final int BIG_SIZE = 30;
     private static final Color BG_COLOR = new Color(240, 240, 240);
+    public static boolean isEdited = false;
     
     public static Font defaultFont(boolean isBold, boolean isBig) {
         int style = isBold ? Font.BOLD : Font.PLAIN;

@@ -7,7 +7,7 @@ import ui.functions.*;
 public class CenterSupervisor extends JPanel {
 
     public CenterSupervisor(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(7, 1, 0, 20));
+        setLayout(new GridLayout(6, 1, 0, 30));
         Color buttonColor = Color.decode("#5294ff");
 
         JLabel title = new JLabel("Supervisor");
@@ -46,11 +46,15 @@ public class CenterSupervisor extends JPanel {
         filterProductionLinesBtn.addActionListener(e -> UI.switchContent(new FilterProductLines(centerPanel, frame, factory)));
         add(filterProductionLinesBtn);
 
-        JButton mostRequestedBtn = createStyledButton("Most Requested", buttonColor);
-        mostRequestedBtn.addActionListener(e -> UI.switchContent(new MostRequested(centerPanel, frame, factory)));
         JButton saveStatusBtn = createStyledButton("Save Status to TXT", buttonColor);
-        saveStatusBtn.addActionListener(e -> UI.switchContent(new SaveStatusToTXT(centerPanel, frame, factory)));
-        add(mostRequestedBtn);
+        saveStatusBtn.addActionListener(e -> {
+            try {
+                factory.saveToTXT();
+                JOptionPane.showMessageDialog(frame, "Data saved successfully to TXT files.");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, "Error saving data: " + ex.getMessage());
+            }
+        });
         add(saveStatusBtn);
     }
 
