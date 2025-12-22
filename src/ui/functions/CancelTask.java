@@ -6,48 +6,49 @@ import ui.Manager;
 
 public class CancelTask extends FunctionPanel {
     public CancelTask(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new BorderLayout());
-        add(createTopPanel("Cancel Tasks", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        // Main grid: 8 rows, 1 column
+        setLayout(new GridLayout(8, 1, 20, 20));
         
-        JPanel boxes = new JPanel(new GridLayout(7, 1, 20, 20));
-
-        JPanel emp = new JPanel();
-        JPanel emp2 = new JPanel();
-        JPanel emp3 = new JPanel();
-        JPanel emp4 = new JPanel();
-        boxes.add(emp);
+        // Row 1: Top panel
+        add(createTopPanel("Cancel Tasks", centerPanel, frame, factory, "supervisor"));
         
+        // Row 2: Select task
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
-            JLabel selectLabel = new JLabel("Select Task:");
-            selectLabel.setFont(Manager.defaultFont(false, false));
-            JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
-            taskCombo.setFont(Manager.defaultFont(false, false));
-            taskCombo.setSelectedItem(null);
-            selectPanel.add(selectLabel);
-            selectPanel.add(taskCombo);
-            boxes.add(selectPanel);
+        JLabel selectLabel = new JLabel("Select Task:");
+        selectLabel.setFont(Manager.defaultFont(false, false));
+        JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
+        taskCombo.setFont(Manager.defaultFont(false, false));
+        taskCombo.setSelectedItem(null);
+        selectPanel.add(selectLabel);
+        selectPanel.add(taskCombo);
+        add(selectPanel);
 
-        boxes.add(emp2);
-        boxes.add(emp3);
-        boxes.add(emp4);
+        // Rows 3-7: Empty panels
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        
+        // Row 8: Cancel button
         JButton cancelBtn = new JButton("Cancel Task");
         cancelBtn.setFont(Manager.defaultFont(true, true));
         cancelBtn.setBackground(Color.RED);
         cancelBtn.setForeground(Color.WHITE);        
         cancelBtn.setFocusPainted(false);
         cancelBtn.setOpaque(true);
-        
-        boxes.add(cancelBtn);
+        add(cancelBtn);
 
         cancelBtn.addActionListener(e -> {
+            // Cancel selected task and update combo box
             factory.cancelTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
             for(String task : factory.get0PCTasksNames()) {
                 taskCombo.addItem(task);
             }
             taskCombo.setSelectedItem(null);
+            Manager.isEdited = true;
             JOptionPane.showMessageDialog(null, "Task cancelled successfully");
         });
-        add(boxes);
     }
 }

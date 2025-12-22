@@ -1,7 +1,7 @@
 package ui;
 
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Manager {
     private static final String FONT_NAME = "Arial";
