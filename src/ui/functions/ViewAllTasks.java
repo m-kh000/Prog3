@@ -4,6 +4,7 @@ import core.Task;
 import java.awt.*;
 import javax.swing.*;
 import ui.components.TaskPanel;
+import javax.swing.JLabel;
 
 public class ViewAllTasks extends FunctionPanel {
     public ViewAllTasks(JPanel centerPanel, JFrame frame, Factory factory) {
@@ -18,6 +19,9 @@ public class ViewAllTasks extends FunctionPanel {
         for (Task task : factory.previewTasks()) {
             panel.add(new TaskPanel(task));
         } 
+        if (factory.previewTasks().length == 0) {
+            panel.add(new JLabel("No tasks found."));
+        }
         return panel;
     }
 }

@@ -1,10 +1,8 @@
 package core;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import javax.swing.ComboBoxModel;
 
 public class Factory {
     private static HashSet<ProductLine> allLines;
@@ -197,8 +195,6 @@ public class Factory {
         }
         return names.toArray(new String[names.size()]);
     }
-    //TODO filterTasksby
-
     public static String[] get0PCTasksNames() {
         List<String> names = new ArrayList<>();
         for (ProductLine pl : allLines) {
@@ -221,7 +217,20 @@ public class Factory {
         warehouse.makeProduct(p);
     }
 
-    public ComboBoxModel<String> getProductNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public static String[] getProductNames() {
+        List<String> names = new ArrayList<>();
+        for (Product p : warehouse.getProducts()) {
+            names.add(p.getName());
+        }
+        return names.toArray(new String[names.size()]);
     }
+    
+    public static String[] getProductLineNames() {
+        List<String> names = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            names.add(pl.getName());
+        }
+        return names.toArray(new String[names.size()]);
+    }
+
 }

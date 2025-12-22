@@ -78,6 +78,9 @@ public class FilterItems extends FunctionPanel {
         for (core.Item item : items) {
             panel.add(new ItemPanel(item));
         }
+        if (items.length == 0) {
+            panel.add(new JLabel("No items found."));
+        }
         return panel;
     }
 }

@@ -102,4 +102,12 @@ public class Warehouse {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getProductsNames'");
     }
+    public List<Product> getTopSaleProducts() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTopSaleProducts'");
+    }
+    public List<Product> filterProductsByProductLine(String filterValue) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'filterProductsByProductLine'");
+    }
 }

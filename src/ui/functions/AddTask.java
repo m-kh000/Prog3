@@ -2,22 +2,21 @@ package ui.functions;
 import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
-import java.time.LocalDate;
 import javax.swing.*;
 import ui.LabelBox;
 import ui.Manager;
 
 public class AddTask extends FunctionPanel {
     public AddTask(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(7, 1, 10, 10));
+        setLayout(new GridLayout(7, 1, 10, 20));
         
         add(createTopPanel("Add Task", centerPanel, frame, factory, "supervisor"));
         
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Product:");
-        selectLabel.setFont(Manager.defaultFont(false, false));
+        selectLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> product = new JComboBox<String>(factory.getProductNames());
-        product.setFont(Manager.defaultFont(false, false));
+        product.setFont(Manager.defaultFont(true, false));
         product.setSelectedItem(null);
         selectPanel.add(selectLabel);
         selectPanel.add(product);
