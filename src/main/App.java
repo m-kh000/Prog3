@@ -53,7 +53,7 @@ public class App {
         pl.addTask(new Task(c, 10, "Joseph", l, l, "good"));
         Factory.add(pl);
         
-        FileUtils.saveProductLines(f);
+        FileUtils.saveProductLines();
 
         HashSet<ProductLine> pls = FileUtils.readProductLines();
 

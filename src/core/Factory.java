@@ -274,4 +274,31 @@ public class Factory {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'modifyStatus'");
     }
+
+    public String[] getCompletedTasksNames() {
+        List<String> names = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            for (Task t : pl.getCompleted()) {
+                names.add(t.getName());
+            }
+        }
+        return names.toArray(new String[names.size()]);
+    }
+
+    public void deliverTask(String selectedItem) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deliverTask'");
+    }
+
+    public String[] getItemNames() {
+        List<String> names = new ArrayList<>();
+        for (Item i : warehouse.getItems()) {
+            names.add(i.getName());
+        }
+        return names.toArray(new String[names.size()]);
+    }
+
+    public Item findItemByName(String toString) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
