@@ -6,7 +6,7 @@ public class UI {
     private static JPanel centerPanel;
     
     public UI() {
-        int bigp = 450, smallp = 80;
+        int bigp = 400, smallp = 80;
         
         boolean beenEdited = false;
         JFrame frame = new JFrame("Login");
