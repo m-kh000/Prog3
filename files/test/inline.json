@@ -2,7 +2,7 @@
     {
         "id": 2,
         "product": {
-            "id": 1,
+            "id": 2,
             "name": "Chair",
             "quantityAvailable": 0,
             "requiredItems": [

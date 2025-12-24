@@ -1,19 +1,20 @@
 package ui;
+import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+import ui.functions.AddProduct;
 
-public class UI {
+public class UI extends JFrame {
     private static JPanel centerPanel;
     
     public UI() {
         int bigp = 400, smallp = 80;
         
         boolean beenEdited = false;
-        JFrame frame = new JFrame("Login");
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        frame.setResizable(false);
-        frame.setLayout(new BorderLayout());
-        frame.setLocationRelativeTo(null);
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setResizable(false);
+        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
         
         JPanel paddings1 = new JPanel();
         JPanel paddings2 = new JPanel();
@@ -23,15 +24,16 @@ public class UI {
         paddings2.setPreferredSize(new Dimension(smallp, smallp));
         paddings3.setPreferredSize(new Dimension(bigp, bigp));
         paddings4.setPreferredSize(new Dimension(bigp, bigp));
-        frame.add(paddings1, BorderLayout.NORTH);
-        frame.add(paddings2, BorderLayout.SOUTH);
-        frame.add(paddings3, BorderLayout.EAST);
-        frame.add(paddings4, BorderLayout.WEST);
+        add(paddings1, BorderLayout.NORTH);
+        add(paddings2, BorderLayout.SOUTH);
+        add(paddings3, BorderLayout.EAST);
+        add(paddings4, BorderLayout.WEST);
 
         centerPanel = new JPanel(new BorderLayout());
-        centerPanel.add(new CenterLogin(centerPanel, frame));
-        frame.add(centerPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
+        // centerPanel.add(new CenterLogin(centerPanel, frame));
+        centerPanel.add(new AddProduct(centerPanel, this, new Factory()));
+        add(centerPanel, BorderLayout.CENTER);
+        setVisible(true);
     }
     
     public static void switchContent(JPanel newPanel) {
