@@ -12,6 +12,7 @@ import ui.LabelBox;
 import ui.Manager;
 
 public class AddProduct extends FunctionPanel {
+    private JPanel itemRequirementsPanel; // Store reference for refreshing
 
     public AddProduct(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
@@ -20,14 +21,11 @@ public class AddProduct extends FunctionPanel {
         add(createTopPanel("Add a Product", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
 
         // Product name input panel
-        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         LabelBox productNameBox = new LabelBox("Product Name:");
-        productNameBox.setPreferredSize(new Dimension(300,300));
-        namePanel.add(productNameBox);
-        add(namePanel, BorderLayout.CENTER);
+        add(productNameBox, BorderLayout.CENTER);
 
         // Scrollable panel for item requirements
-        JPanel itemRequirementsPanel = new JPanel();
+        itemRequirementsPanel = new JPanel();
         itemRequirementsPanel.setLayout(new BoxLayout(itemRequirementsPanel, BoxLayout.Y_AXIS));
         itemRequirementsPanel.setBorder(BorderFactory.createTitledBorder("Item Requirements"));
         itemRequirementsPanel.add(new ItemRequirementRow(factory, true));
@@ -37,8 +35,8 @@ public class AddProduct extends FunctionPanel {
         add(scrollPane, BorderLayout.SOUTH);
 
         // Add product button
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        JButton addProductButton = new JButton("Add Product");
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        CustomBtn addProductButton = new CustomBtn("Add Product");
         addProductButton.setFont(Manager.defaultFont(true, false));
         addProductButton.addActionListener(e -> {
             String productName = productNameBox.getText().trim();
@@ -87,18 +85,47 @@ public class AddProduct extends FunctionPanel {
         add(buttonPanel, BorderLayout.EAST);
     }
 
-    // Inner class for item requirement rows
+    // Get available items excluding already selected ones
+    private String[] getAvailableItems(Factory factory) {
+        String[] allItems = factory.getItemNames();
+        java.util.List<String> availableItems = new java.util.ArrayList<>();
+        java.util.Set<String> selectedItems = new java.util.HashSet<>();
+        
+        // Collect already selected items
+        for (Component component : itemRequirementsPanel.getComponents()) {
+            if (component instanceof ItemRequirementRow) {
+                ItemRequirementRow row = (ItemRequirementRow) component;
+                if (row.itemDropdown.getSelectedItem() != null) {
+                    selectedItems.add(row.itemDropdown.getSelectedItem().toString());
+                }
+            }
+        }
+        
+        // Add only non-selected items
+        for (String item : allItems) {
+            if (!selectedItems.contains(item)) {
+                availableItems.add(item);
+            }
+        }
+        
+        return availableItems.toArray(new String[0]);
+    }
+
     private class ItemRequirementRow extends JPanel {
+
         JComboBox<String> itemDropdown;
         LabelBox quantityInput;
-        
+        boolean isLast;
+        JPanel coupleOfButtons = new JPanel(new GridLayout(1,2));
+        CustomBtn addRowButton = new CustomBtn("+");
+        CustomBtn removeRowButton = new CustomBtn("-");
+
         public ItemRequirementRow(Factory factory, boolean isLastRow) {
             setLayout(new BorderLayout());
-            setPreferredSize(new Dimension(450, 40));
             setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
             
             // Item selection dropdown
-            itemDropdown = new JComboBox<>(factory.getItemNames());
+            itemDropdown = new JComboBox<>(getAvailableItems(factory));
             itemDropdown.setFont(Manager.defaultFont(false, false));
             itemDropdown.setPreferredSize(new Dimension(100, 50));
             add(itemDropdown, BorderLayout.WEST);
@@ -107,29 +134,52 @@ public class AddProduct extends FunctionPanel {
             quantityInput = new LabelBox("Quantity:");
             add(quantityInput, BorderLayout.CENTER);
             
-            // Add button for last row, empty panel for others
+            this.isLast = isLastRow;
+            addRowButton.setPreferredSize(new Dimension(100,50));
+            removeRowButton.setPreferredSize(new Dimension(100,50));
+            // Add/Remove buttons
             if (isLastRow) {
-                JButton addRowButton = new JButton("+");
-                addRowButton.setFont(Manager.defaultFont(true, false));
-                addRowButton.setFont(Manager.defaultFont(true, false));
-                addRowButton.setForeground(Color.decode("#5294ff"));
-                addRowButton.setBackground(UIManager.getColor("Panel.background"));
-                addRowButton.setFocusPainted(false);
-                addRowButton.setBorderPainted(false);
-                addRowButton.setOpaque(false);
-                addRowButton.setPreferredSize(new Dimension(100,50));
+                removeRowButton.addActionListener(e -> {
+                    // Remove this row and refresh
+                    if(isLast && itemRequirementsPanel.getComponentCount() > 1){
+                        ItemRequirementRow newLastRow = (ItemRequirementRow)(itemRequirementsPanel.getComponent(itemRequirementsPanel.getComponentCount() - 2));
+                        newLastRow.isLast = true;
+                        newLastRow.addRowButton.setEnabled(true);
+                    }else if(itemRequirementsPanel.getComponentCount() == 1){
+                        JOptionPane.showMessageDialog(null, "At least one item requirement is required.");
+                        return;
+                    }
+                    itemRequirementsPanel.remove(ItemRequirementRow.this);
+                    itemRequirementsPanel.revalidate();
+                    itemRequirementsPanel.repaint();
+                });
                 addRowButton.addActionListener(e -> {
-                    // Add new row and disable this button
+                    // Add new row and refresh
                     ItemRequirementRow newRow = new ItemRequirementRow(factory, true);
-                    ItemRequirementRow.this.getParent().add(newRow);
-                    ItemRequirementRow.this.getParent().revalidate();
-                    ItemRequirementRow.this.getParent().repaint();
+                    itemRequirementsPanel.add(newRow);
+                    itemRequirementsPanel.revalidate();
+                    itemRequirementsPanel.repaint();
                     addRowButton.setEnabled(false);
                 });
-                add(addRowButton, BorderLayout.EAST);
+                coupleOfButtons.add(addRowButton);
+                coupleOfButtons.add(removeRowButton);
+                add(coupleOfButtons, BorderLayout.EAST);
             } else {
                 add(new JPanel(), BorderLayout.EAST);
             }
         }
     }
+
+    private class CustomBtn extends JButton {
+        public CustomBtn(String text) {
+            super(text);
+            setFont(Manager.defaultFont(true, true));
+            setForeground(Color.decode("#5294ff"));
+            setFocusPainted(false);
+            setBorderPainted(false);
+            setContentAreaFilled(false);
+            setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }
+
 }

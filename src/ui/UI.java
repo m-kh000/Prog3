@@ -30,8 +30,7 @@ public class UI extends JFrame {
         add(paddings4, BorderLayout.WEST);
 
         centerPanel = new JPanel(new BorderLayout());
-        // centerPanel.add(new CenterLogin(centerPanel, frame));
-        centerPanel.add(new AddProduct(centerPanel, this, new Factory()));
+        centerPanel.add(new CenterLogin(centerPanel, this));
         add(centerPanel, BorderLayout.CENTER);
         setVisible(true);
     }
