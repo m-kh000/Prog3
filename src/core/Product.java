@@ -1,4 +1,5 @@
 package core;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,7 +26,7 @@ public class Product {
         this.id = nextId++;
         this.name = name;
         this.orderedIn = orderedIn;
-        this.requiredItems = requiredItems;
+        this.requiredItems = new HashMap<>(requiredItems);
     }
 
     public void addItem(Item i, int quantity) {
@@ -35,7 +36,7 @@ public class Product {
     public void order(LocalDate date) {}
 
     public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
-        for(LocalDate l:getOrderedIn()){
+        for(LocalDate l : getOrderedIn()){
             if(Dates.isBetween(l, start, end)){
                 return true;
             }
@@ -68,7 +69,7 @@ public class Product {
     }
 
     public HashMap<Item, Integer> getRequiredItems() {
-        return new HashMap<>(requiredItems);
+        return this.requiredItems;
     }
 
     private Item getItem(String name) {

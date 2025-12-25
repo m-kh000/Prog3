@@ -4,19 +4,19 @@ import java.awt.*;
 import javax.swing.*;
 import ui.Manager;
 
-public class CancelTask extends FunctionPanel {
-    public CancelTask(JPanel centerPanel, JFrame frame, Factory factory) {
+public class DeliverTask extends FunctionPanel {
+    public DeliverTask(JPanel centerPanel, JFrame frame, Factory factory) {
         // Main grid: 8 rows, 1 column
         setLayout(new GridLayout(8, 1, 20, 20));
         
         // Row 1: Top panel
-        add(createTopPanel("Cancel Tasks", centerPanel, frame, factory, "supervisor"));
+        add(createTopPanel("Deliver Tasks", centerPanel, frame, factory, "supervisor"));
         
         // Row 2: Select task
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
-        JLabel selectLabel = new JLabel("Select Task:");
+        JLabel selectLabel = new JLabel("Select a completed Task to deliver:");
         selectLabel.setFont(Manager.defaultFont(false, false));
-        JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
+        JComboBox<String> taskCombo = new JComboBox<>(factory.getCompletedTasksNames());
         taskCombo.setFont(Manager.defaultFont(false, false));
         taskCombo.setSelectedItem(null);
         selectPanel.add(selectLabel);
@@ -31,9 +31,9 @@ public class CancelTask extends FunctionPanel {
         add(new JPanel());
         
         // Row 8: Cancel button
-        JButton cancelBtn = new JButton("Cancel Task");
+        JButton cancelBtn = new JButton("Deliver Task");
         cancelBtn.setFont(Manager.defaultFont(true, true));
-        cancelBtn.setBackground(Color.RED);
+        cancelBtn.setBackground(Color.GREEN);
         cancelBtn.setForeground(Color.WHITE);        
         cancelBtn.setFocusPainted(false);
         cancelBtn.setOpaque(true);
@@ -41,14 +41,14 @@ public class CancelTask extends FunctionPanel {
 
         cancelBtn.addActionListener(e -> {
             // Cancel selected task and update combo box
-            factory.cancelTask((String)taskCombo.getSelectedItem());
+            factory.deliverTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
-            for(String task : factory.get0PCTasksNames()) {
+            for(String task : factory.getCompletedTasksNames()) {
                 taskCombo.addItem(task);
             }
             taskCombo.setSelectedItem(null);
             Manager.isEdited = true;
-            JOptionPane.showMessageDialog(null, "Task cancelled successfully");
+            JOptionPane.showMessageDialog(null, "Task delivered successfully");
         });
     }
 }

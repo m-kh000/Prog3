@@ -7,47 +7,49 @@ import ui.Manager;
 public class DeleteItem extends FunctionPanel {
 
     public DeleteItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
-        setLayout(new BorderLayout());
-        add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        // Main grid: 8 rows, 1 column
+        setLayout(new GridLayout(8, 1, 20, 20));
         
-        JPanel boxes = new JPanel(new GridLayout(7, 1, 20, 20));
-
-        JPanel emp = new JPanel();
-        JPanel emp2 = new JPanel();
-        JPanel emp3 = new JPanel();
-        JPanel emp4 = new JPanel();
-        boxes.add(emp);
+        // Row 1: Top panel
+        add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"));
         
-        JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
-            JLabel selectLabel = new JLabel("Select Item:");
-            selectLabel.setFont(Manager.defaultFont(false, false));
-            JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
-            itemCombo.setFont(Manager.defaultFont(false, false));
-            itemCombo.setSelectedItem(null);
-            selectPanel.add(selectLabel);
-            selectPanel.add(itemCombo);
-            boxes.add(selectPanel);
+        // Row 2: Select item
+        JPanel selectPanel = new JPanel(new GridLayout(2, 1, 0, 0));
+        JLabel selectLabel = new JLabel("Select Item:");
+        selectLabel.setFont(Manager.defaultFont(false, false));
+        JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
+        itemCombo.setFont(Manager.defaultFont(false, false));
+        itemCombo.setSelectedItem(null);
+        selectPanel.add(selectLabel);
+        selectPanel.add(itemCombo);
+        add(selectPanel);
 
-        boxes.add(emp2);
-        boxes.add(emp3);
-        boxes.add(emp4);
+        // Rows 3-7: Empty panels
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        
+        // Row 8: Delete button
         JButton deleteBtn = new JButton("Delete");
         deleteBtn.setFont(Manager.defaultFont(true, true));
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setForeground(Color.WHITE);
         deleteBtn.setFocusPainted(false);
         deleteBtn.setOpaque(true);
-        boxes.add(deleteBtn);
+        add(deleteBtn);
 
         deleteBtn.addActionListener(e -> {
+            // Delete selected item and update combo box
             factory.deleteItem((String)itemCombo.getSelectedItem());
             itemCombo.removeAllItems();
             for(String item : factory.getItemsNames()) {
                 itemCombo.addItem(item);
             }
             itemCombo.setSelectedItem(null);
+            Manager.isEdited = true;
             JOptionPane.showMessageDialog(null, "Item deleted successfully");
         });
-        add(boxes);
     }
 }

@@ -4,25 +4,41 @@ import core.Item;
 import java.awt.*;
 import javax.swing.*;
 import ui.LabelBox;
+import ui.Manager;
 
 public class AddItem extends FunctionPanel {
 
     public AddItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
+        // Main grid: 8 rows, 1 column
         setLayout(new GridLayout(8, 1, 10, 10));
 
+        // Row 1: Top panel
         add(createTopPanel("Add Item", centerPanel, frame, factory, "supervisor"));
 
+        // Row 2: Type name
         LabelBox name = new LabelBox("Name:");
-        LabelBox category = new LabelBox("Category:");
-        LabelBox price = new LabelBox("Price:");
-        LabelBox quantity = new LabelBox("Quantity:");
-        LabelBox minquantity = new LabelBox("min quantity:");
         add(name);
+        
+        // Row 3: Type category
+        LabelBox category = new LabelBox("Category:");
         add(category);
+        
+        // Row 4: Type price
+        LabelBox price = new LabelBox("Price:");
         add(price);
+        
+        // Row 5: Type quantity
+        LabelBox quantity = new LabelBox("Quantity:");
         add(quantity);
+        
+        // Row 6: Type min quantity
+        LabelBox minquantity = new LabelBox("min quantity:");
         add(minquantity);
 
+        // Row 7: Empty panel
+        add(new JPanel());
+
+        // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
         add(submitBtn);
@@ -43,7 +59,8 @@ public class AddItem extends FunctionPanel {
                 category.reset();
                 price.reset();
                 quantity.reset();
-                minquantity.reset();
+                minquantity.reset();                
+                Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Item added successfully");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());

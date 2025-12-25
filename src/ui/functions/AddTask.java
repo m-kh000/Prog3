@@ -8,10 +8,13 @@ import ui.Manager;
 
 public class AddTask extends FunctionPanel {
     public AddTask(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(7, 1, 10, 20));
+        // Main grid: 8 rows, 1 column
+        setLayout(new GridLayout(8, 1, 10, 20));
         
+        // Row 1: Top panel
         add(createTopPanel("Add Task", centerPanel, frame, factory, "supervisor"));
         
+        // Row 2: Select product
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Product:");
         selectLabel.setFont(Manager.defaultFont(true, false));
@@ -22,16 +25,34 @@ public class AddTask extends FunctionPanel {
         selectPanel.add(product);
         add(selectPanel);
         
-        LabelBox quantity = new LabelBox("Required Quantity:", false);
-        LabelBox customer = new LabelBox("Customer Name:", false);
-        LabelBox start = new LabelBox("Start Date:", false);
-        LabelBox delivery = new LabelBox("Delivery Date:", false);
+        // Row 3: Select product line
+        JPanel selectPLPanel = new JPanel(new GridLayout(1, 2, 0, 0));
+        JLabel selectPLLabel = new JLabel("Select Product Line:");
+        selectPLLabel.setFont(Manager.defaultFont(true, false));
+        JComboBox<String> PL = new JComboBox<String>(factory.getProductLineNames());
+        PL.setFont(Manager.defaultFont(true, false));
+        PL.setSelectedItem(null);
+        selectPLPanel.add(selectPLLabel);
+        selectPLPanel.add(PL);
+        add(selectPLPanel);
         
+        // Row 4: Type quantity
+        LabelBox quantity = new LabelBox("Required Quantity:", false);
         add(quantity);
+        
+        // Row 5: Type customer
+        LabelBox customer = new LabelBox("Customer Name:", false);
         add(customer);
+        
+        // Row 6: Type start date
+        LabelBox start = new LabelBox("Start Date:", false);
         add(start);
+        
+        // Row 7: Type delivery date
+        LabelBox delivery = new LabelBox("Delivery Date:", false);
         add(delivery);
 
+        // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(Manager.defaultFont(true, false));
         add(submitBtn);
@@ -43,6 +64,7 @@ public class AddTask extends FunctionPanel {
                 }
                 
                 String productName = (String) product.getSelectedItem();
+                String PLtext = (String) PL.getSelectedItem();
                 String quantityText = quantity.getText();
                 String customerText = customer.getText();
                 String startText = start.getText();
@@ -50,12 +72,16 @@ public class AddTask extends FunctionPanel {
                 
                 // Clear fields
                 product.setSelectedItem(null);
+                PL.setSelectedItem(null);
                 quantity.reset();
                 customer.reset();
                 start.reset();
                 delivery.reset();
-                
+
+                factory.addTaskToProductLine(PLtext, productName, Integer.parseInt(quantityText), customerText, startText, deliveryText);
+                Manager.isEdited = true;
                 JOptionPane.showMessageDialog(frame, "Task added successfully");
+                
             } catch (EmptyFieldException ex) {
                 JOptionPane.showMessageDialog(frame, "Please fill all the fields");
             } catch (Exception ex) {

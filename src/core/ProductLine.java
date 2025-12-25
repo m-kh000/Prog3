@@ -151,16 +151,16 @@ public class ProductLine implements Runnable {
         return name;
     }
 
-    public ArrayList<Task> getCompleted() {
-        return new ArrayList<>(completed);
+    public List<Task> getCompleted() {
+        return this.completed;
     }
 
-    public ArrayList<Task> getInprogress() {
-        return new ArrayList<>(inprogress);
+    public List<Task> getInprogress() {
+        return this.inprogress;
     }
 
-    public ArrayList<Task> getCanceled() {
-        return new ArrayList<>(canceled);
+    public List<Task> getCanceled() {
+        return this.canceled;
     }
 
     public void addTask(Task task) {
@@ -201,7 +201,7 @@ public class ProductLine implements Runnable {
             Item i = e.getKey();
             int v = e.getValue();
 
-            if (v < i.getQuantityAvailable()) {
+            if (v > i.getQuantityAvailable()) {
                 test = false;
                 break;
             }

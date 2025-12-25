@@ -7,7 +7,7 @@ import ui.functions.*;
 public class CenterSupervisor extends JPanel {
 
     public CenterSupervisor(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(6, 1, 0, 30));
+        setLayout(new GridLayout(7, 1, 0, 20));
         Color buttonColor = Color.decode("#5294ff");
 
         JLabel title = new JLabel("Supervisor");
@@ -35,7 +35,7 @@ public class CenterSupervisor extends JPanel {
 
         JPanel row3 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton productsBtn = createStyledButton("Products", buttonColor);
-        productsBtn.addActionListener(e -> UI.switchContent(new ViewProducts(centerPanel, frame, factory)));
+        productsBtn.addActionListener(e -> UI.switchContent(new Products(centerPanel, frame, factory)));
         JButton filterProductsBtn = createStyledButton("Filter Products", buttonColor);
         filterProductsBtn.addActionListener(e -> UI.switchContent(new FilterProducts(centerPanel, frame, factory)));
         row3.add(productsBtn);
@@ -56,6 +56,11 @@ public class CenterSupervisor extends JPanel {
             }
         });
         add(saveStatusBtn);
+
+        //deliver a task button
+        JButton deliverTaskBtn = createStyledButton("Deliver a Task", buttonColor);
+        // deliverTaskBtn.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
+        add(deliverTaskBtn);
     }
 
 

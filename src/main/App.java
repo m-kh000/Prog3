@@ -50,10 +50,10 @@ public class App {
 
         Factory f = new Factory();
         ProductLine pl = new ProductLine("test", "working", 5);
-        pl.addTask(new Task(c, 10, "Joseph", l, l, "good", 5));
-        f.add(pl);
+        pl.addTask(new Task(c, 10, "Joseph", l, l, "good"));
+        Factory.add(pl);
         
-        FileUtils.saveProductLines(f);
+        FileUtils.saveProductLines();
 
         HashSet<ProductLine> pls = FileUtils.readProductLines();
 
