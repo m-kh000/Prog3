@@ -142,6 +142,7 @@ public class ProductLine implements Runnable {
     public String getNote() {
         return this.note;
     }
+
     public int getId() {
         return id;
     }
@@ -188,6 +189,10 @@ public class ProductLine implements Runnable {
         this.status = status;
     }
 
+    public void removeCompletedTask(int id) {
+        this.completed.remove(getCompletedTask(id));
+    }
+
     Collection<Task> get0PCInprogress() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -220,6 +225,14 @@ public class ProductLine implements Runnable {
 
         return null;
     }
+    private Task getCompletedTask(int taskId) {
+        for (Task t : completed) {
+            if (t.getId() == taskId) {
+                return t;
+            }
+        }
+
+        return null;
 
     public double getCompletionRate() {
 //TODO return as 0.123253

@@ -20,7 +20,7 @@ public class ViewTasks extends FunctionPanel {
         for (core.Task task : factory.previewTasks()) {
             panel.add(new ui.components.TaskPanel(task));
         }
-        if (factory.previewTasks().length == 0) {
+        if (Factory.previewTasks().length == 0) {
             panel.add(new JLabel("No tasks found."));
         }
         return panel;
