@@ -301,4 +301,9 @@ public class Factory {
     public Item findItemByName(String toString) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public Product findProductByName(String productName) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findProductByName'");
+    }
 }

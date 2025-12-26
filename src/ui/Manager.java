@@ -16,6 +16,10 @@ public class Manager {
         return new Font(FONT_NAME, style, size);
     }
     
+    public static Font hintFont() {
+        return new Font(FONT_NAME, Font.PLAIN, 10);
+    }
+    
     public static Color defaultBGColor() {
         return BG_COLOR;
     }

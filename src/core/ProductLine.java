@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
 import jsonParser.annotations.JsonIgnore;
 import utils.FileUtils;
 import utils.ThreadManager;
@@ -217,5 +216,10 @@ public class ProductLine implements Runnable {
         }
 
         return null;
+    }
+
+    public double getCompletionRate() {
+//TODO return as 0.123253
+        return 0.123253;
     }
 }
