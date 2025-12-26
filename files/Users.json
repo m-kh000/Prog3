@@ -28,5 +28,10 @@
         "email": "fdsa@gmail.com",
         "password": "12345678",
         "isManager": false
+    },
+    {
+        "email": "koke@gmail.com",
+        "password": "iwantcookies",
+        "isManager": false
     }
 ]
