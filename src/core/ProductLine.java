@@ -185,6 +185,9 @@ public class ProductLine implements Runnable {
     public void setPriority(int priority) {
         this.priority = priority;
     }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     Collection<Task> get0PCInprogress() {
         throw new UnsupportedOperationException("Not supported yet.");
