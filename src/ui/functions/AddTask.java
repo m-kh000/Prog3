@@ -4,6 +4,7 @@ import core.Task;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
+import javax.xml.validation.Validator;
 import ui.LabelBox;
 import ui.Manager;
 
@@ -79,7 +80,7 @@ public class AddTask extends FunctionPanel {
                 start.reset();
                 delivery.reset();
 
-                factory.add(new Task(factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, startText, deliveryText),PLtext);
+                factory.add(new Task(factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(frame, "Task added successfully");
                 
