@@ -17,7 +17,7 @@ public class ViewTasks extends FunctionPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(new ui.components.TaskPanel(new Task(new Product("Chair"), 5, "John Doe", LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 20), "In Progress")));
-        for (core.Task task : Factory.previewTasks()) {
+        for (core.Task task : factory.previewTasks()) {
             panel.add(new ui.components.TaskPanel(task));
         }
         if (Factory.previewTasks().length == 0) {

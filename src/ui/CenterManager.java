@@ -22,6 +22,9 @@ public class CenterManager extends JPanel {
         JButton viewPerformance = createStyledButton("View Performance", buttonColor);
         viewPerformance.addActionListener(e -> UI.switchContent(new ViewPerformance(centerPanel, frame, factory)));
 
+        JButton deliverTask = createStyledButton("Deliver Task", buttonColor);
+        deliverTask.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
+
         add(addLine);
         add(modifyStatus);
         add(viewPerformance);

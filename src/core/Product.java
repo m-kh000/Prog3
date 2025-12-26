@@ -103,4 +103,8 @@ public class Product {
     public void make() {
         this.quantityAvailable++;
     }
+
+    public Object reqItemCount() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

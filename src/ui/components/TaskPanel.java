@@ -1,6 +1,7 @@
 package ui.components;
 import java.awt.*;
 import javax.swing.*;
+import ui.Manager;
 
 public class TaskPanel extends JPanel {
     public TaskPanel(core.Task task) {
@@ -8,23 +9,61 @@ public class TaskPanel extends JPanel {
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
-        JLabel idLabel = new JLabel("ID: " + task.getId());
-        add(idLabel);
-        
+        // ID and icon combined
         ImageIcon icon = new ImageIcon("task.png");
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        JLabel iconLabel = new JLabel(new ImageIcon(img));
-        add(iconLabel);
+        JPanel idIconPanel = new JPanel();
+        idIconPanel.setLayout(new BoxLayout(idIconPanel, BoxLayout.X_AXIS));
+        JLabel idValue = new JLabel(String.valueOf(task.getId()) + "  ");
+        idValue.setForeground(Color.DARK_GRAY);
+        idValue.setFont(Manager.defaultFont(false, false));
+        idIconPanel.add(idValue);
+        idIconPanel.add(new JLabel(new ImageIcon(img)));
+        add(idIconPanel);
         
-        JLabel productLabel = new JLabel(task.getProduct().getName());
-        add(productLabel);
+        // Product name
+        JLabel nameLabel = new JLabel(task.getProduct().getName());
+        nameLabel.setFont(Manager.defaultFont(false, false));
+        add(nameLabel);
         
-        JLabel quantityLabel = new JLabel("Req: " + task.getRequiredQuantity());
-        add(quantityLabel);
+        // Required quantity with hint
+        JLabel quantityValue = new JLabel(String.valueOf(task.getRequiredQuantity()));
+        quantityValue.setForeground(Color.BLUE);
+        quantityValue.setFont(Manager.defaultFont(false, false));
+        JPanel quantityPanel = new JPanel();
+        quantityPanel.setLayout(new BoxLayout(quantityPanel, BoxLayout.X_AXIS));
+        JLabel quantityHint = new JLabel("Required");
+        quantityHint.setForeground(Color.GRAY);
+        quantityHint.setFont(Manager.hintFont());
+        quantityPanel.add(quantityValue);
+        quantityPanel.add(quantityHint);
+        add(quantityPanel);
         
+        // Ready quantity with hint
+        JLabel readyValue = new JLabel(String.valueOf(task.getReady()));
+        readyValue.setForeground(Color.ORANGE);
+        readyValue.setFont(Manager.defaultFont(false, false));
+        JPanel readyPanel = new JPanel();
+        readyPanel.setLayout(new BoxLayout(readyPanel, BoxLayout.X_AXIS));
+        JLabel readyHint = new JLabel("Ready");
+        readyHint.setForeground(Color.GRAY);
+        readyHint.setFont(Manager.hintFont());
+        readyPanel.add(readyValue);
+        readyPanel.add(readyHint);
+        add(readyPanel);
+        
+        // Status with hint
         boolean isCompleted = task.getReady() >= task.getRequiredQuantity();
-        JLabel readyLabel = new JLabel(isCompleted ? "Ready" : "Not Ready");
-        readyLabel.setForeground(isCompleted ? Color.GREEN : Color.RED);
-        add(readyLabel);
+        JLabel statusValue = new JLabel(isCompleted ? "Complete" : "Pending");
+        statusValue.setForeground(isCompleted ? Color.GREEN : Color.RED);
+        statusValue.setFont(Manager.defaultFont(false, false));
+        JPanel statusPanel = new JPanel();
+        statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
+        JLabel statusHint = new JLabel("Status");
+        statusHint.setForeground(Color.GRAY);
+        statusHint.setFont(Manager.hintFont());
+        statusPanel.add(statusValue);
+        statusPanel.add(statusHint);
+        add(statusPanel);
     }
 }

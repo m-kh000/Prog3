@@ -38,9 +38,14 @@ public class Factory {
     }
 
 
-    public static void addTask(String nameText, String quantityText, String customerText, LocalDate startDate,LocalDate deliveryDate) {
-        // TODO Auto-generated method stub
-        //or add(task)
+    public static void add(Task task,String plName) {
+        plName = plName.trim().toLowerCase();
+        for(ProductLine pl:allLines){
+            if(pl.getName().equals(plName)){
+                pl.addTask(task);
+                break;
+            }
+        }
     }
     
     
@@ -211,8 +216,19 @@ public class Factory {
         //return names.toArray(new String[names.size()]);//TODO when you do all pls and tasks
     }
 
-    public static void cancelTask(String selectedItem) {
-        // TODO Auto-generated method stub
+    public static void cancelTask(String taskToBeCanceled) {
+        for(ProductLine pl : allLines){
+            for(Task task : pl.getInlineTasks()){
+                if(task.getName().equals(taskToBeCanceled)){
+                    pl.cancelTask(task);
+                }
+            }
+            for(Task task : pl.get0PCInprogress()){
+                if(task.getName().equals(taskToBeCanceled)){
+                    pl.cancelTask(task);
+                }
+            }
+        }
     }
 
     public static void makeProduct(Product p) {
@@ -260,15 +276,51 @@ public class Factory {
         FileUtils.saveProductLines();
     }
 
-    public void addTaskToProductLine(String pLtext, String productName, int int1, String customerText, String startText,
-            String deliveryText) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addTaskToProductLine'");
+    public void modifyStatus(String selectedLineName, String selectedStatus) {
+        selectedStatus = selectedStatus.trim().toLowerCase();
+        for(ProductLine pl : allLines){
+            if(pl.getName().trim().toLowerCase().equals(selectedLineName)){
+                pl.setStatus(selectedStatus);
+            }
+        }
     }
 
-    public void modifyStatus(String selectedLineName, String selectedStatus) {
+    public String[] getCompletedTasksNames() {
+        List<String> names = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            for (Task t : pl.getCompleted()) {
+                names.add(t.getName());
+            }
+        }
+        return names.toArray(new String[names.size()]);
+    }
+
+    public void deliverTask(String selectedItem) {
+        selectedItem = selectedItem.trim().toLowerCase();
+        for(ProductLine pl : allLines){
+            for(Task t : pl.getCompleted()){
+                if(t.getName().equals(selectedItem)){
+                    pl.getCompleted().remove(t);
+                }
+            }
+        }
+    }
+
+    public String[] getItemNames() {
+        List<String> names = new ArrayList<>();
+        for (Item i : warehouse.getItems()) {
+            names.add(i.getName());
+        }
+        return names.toArray(new String[names.size()]);
+    }
+
+    public Item findItemByName(String toString) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Product findProductByName(String productName) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modifyStatus'");
+        throw new UnsupportedOperationException("Unimplemented method 'findProductByName'");
     }
 
     public static class UserInfo extends User{
