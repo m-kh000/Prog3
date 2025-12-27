@@ -5,4 +5,7 @@ public class EmptyFieldException extends Exception{
         super("please fill out all fields");
     }
     
+    public EmptyFieldException(String message) {
+        super(message);
+    }
 }

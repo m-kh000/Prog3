@@ -17,7 +17,7 @@ public class App {
            HashSet<LocalDate> hs = new HashSet<>();
            LocalDate l = LocalDate.of(2006, 4, 11);
            hs.add(l);
-        // // f.add(new Product("bread", hm, hs));
+        // // f.add(new Product("bread", h+m, hs));
 
         // // FileUtils.saveProducts(f);
         
@@ -28,7 +28,7 @@ public class App {
 
         // // w.addItem(new Item("Screws", "Hardware", 0.5, 100, 20));
         // // w.addItem(new Item("Bolts", "Hardware", 0.75, 50, 30));
-          Product c = new Product("Chair", hm, hs);
+        Product c = new Product("Chair", hm, hs);
         // // w.addProduct(c);
         // // w.addProduct(table);
 
@@ -53,7 +53,7 @@ public class App {
         pl.addTask(new Task(c, 10, "Joseph", l, l, "good"));
         Factory.add(pl);
         
-        FileUtils.saveProductLines(f);
+        FileUtils.saveProductLines();
 
         HashSet<ProductLine> pls = FileUtils.readProductLines();
 

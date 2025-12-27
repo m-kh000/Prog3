@@ -2,31 +2,49 @@
     {
         "email": "m@gmail.com",
         "password": "12345678",
-        "isManager": false
+        "isManager": false,
+        "lastSeen": null
     },
     {
         "email": "a@gmail.com",
         "password": "123456789",
-        "isManager": true
+        "isManager": true,
+        "lastSeen": null
     },
     {
         "email": "s@gmail.com",
         "password": "12345678",
-        "isManager": false
+        "isManager": false,
+        "lastSeen": null
     },
     {
         "email": "j@gmail.com",
         "password": "12345678910",
-        "isManager": false
+        "isManager": false,
+        "lastSeen": null
     },
     {
         "email": "joseph@gmail.com",
         "password": "12345678",
-        "isManager": true
+        "isManager": true,
+        "lastSeen": null
     },
     {
         "email": "fdsa@gmail.com",
         "password": "12345678",
-        "isManager": false
+        "isManager": false,
+        "lastSeen": null
+    },
+    {
+        "email": "jos@gmail.com",
+        "password": "12345678",
+        "isManager": true,
+        "lastSeen": null
+    },
+    {
+        "email": "john@gmail.com",
+        "password": "00000000",
+        "isManager": true,
+        "lastSeen": "2025-12-25"
     }
 ]

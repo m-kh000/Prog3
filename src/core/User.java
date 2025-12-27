@@ -1,9 +1,12 @@
 package core;
 
+import java.time.LocalDate;
+
 public class User {
     private String email;
     private String password;
     private boolean isManager;
+    private LocalDate lastSeen;
 
     public User() {}
     
@@ -11,6 +14,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.isManager = isManager;
+        this.lastSeen = LocalDate.now();
     }
 
     public String getEmail() {
@@ -19,12 +23,13 @@ public class User {
     public String getPassword() {
         return this.password;
     }
-    public String getFileFormat() {
-        return this.getEmail() + ", "
-                + this.getPassword() + ", "
-                + (this.isManager() ? "true\n" : "false");
+    public String getLastSeen() {
+        return this.lastSeen.toString();
     }
 
+    public void resetLastSeen() {
+        this.lastSeen = LocalDate.now();
+    } 
     public boolean isManager() {
         return this.isManager;
     }

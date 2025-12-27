@@ -143,6 +143,7 @@ public class ProductLine implements Runnable {
     public String getNote() {
         return this.note;
     }
+
     public int getId() {
         return id;
     }
@@ -186,6 +187,10 @@ public class ProductLine implements Runnable {
         this.priority = priority;
     }
 
+    public void removeCompletedTask(int id) {
+        this.completed.remove(getCompletedTask(id));
+    }
+
     Collection<Task> get0PCInprogress() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -212,6 +217,15 @@ public class ProductLine implements Runnable {
     private Task getFirstAvailableInprogressTask() {
         for (Task t : inprogress) {
             if (canProceedWith(t)) {
+                return t;
+            }
+        }
+
+        return null;
+    }
+    private Task getCompletedTask(int taskId) {
+        for (Task t : completed) {
+            if (t.getId() == taskId) {
                 return t;
             }
         }

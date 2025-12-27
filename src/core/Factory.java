@@ -240,22 +240,18 @@ public class Factory {
     }
 
     /**
-     * Deliver a specific completed task by removing it from the completed list in its 
+     * Deliver a specific completed task by removing it from the completed list in its
+     * productline.
      * 
      * @param t the task to deliver
      * @return {@code true} if the task was found and removed or {@code false} otherwise
      */
-    public static boolean deliverTask(Task t) {
-        //TODO: complete the implementation of this method
+    public static void deliverTask(ProductLine pl, int taskId) {
+        pl.removeCompletedTask(taskId);
+    }
 
-        // for (ProductLine pl : allLines) {
-        //     if (pl.getCompleted().contains(t)) {
-        //         pl.getCompleted().remove(t);
-        //         return true;
-        //     }
-        // }
+    public static void getUsersInfo() {
 
-        return false;
     }
 
     public static void saveToTXT() throws IOException {
@@ -273,5 +269,27 @@ public class Factory {
     public void modifyStatus(String selectedLineName, String selectedStatus) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'modifyStatus'");
+    }
+
+    public static class UserInfo extends User{
+        private String email;
+        private String role;
+        private String lastSeen;
+
+        public UserInfo(String email, String role, String lastSeen) {
+            this.email = super.getEmail();
+            this.role = super.isManager() ? "manager" : "supervisor";
+            this.lastSeen = super.getLastSeen();
+        }
+
+        public String getEmailInfo() {
+            return this.email;
+        }
+        public String getRoleInfo() {
+            return this.role;
+        }
+        public String getLastSeenInfo() {
+            return this.lastSeen;
+        }
     }
 }

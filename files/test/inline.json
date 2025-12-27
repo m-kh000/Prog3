@@ -7,14 +7,32 @@
             "quantityAvailable": 0,
             "requiredItems": [
                 {
-                    "key": {
-                        "id": 1,
-                        "name": "flour",
-                        "category": "test",
-                        "price": 500.0,
-                        "quantityAvailable": 1000,
-                        "minQuantity": 100
-                    },
+                    "key": [
+                        {
+                            "key": "quantityAvailable",
+                            "value": 1000
+                        },
+                        {
+                            "key": "minQuantity",
+                            "value": 100
+                        },
+                        {
+                            "key": "price",
+                            "value": 500.0
+                        },
+                        {
+                            "key": "name",
+                            "value": "flour"
+                        },
+                        {
+                            "key": "id",
+                            "value": 1
+                        },
+                        {
+                            "key": "category",
+                            "value": "test"
+                        }
+                    ],
                     "value": 10
                 }
             ],
@@ -28,7 +46,6 @@
         "customerName": "Joseph",
         "startDate": "2006-04-11",
         "deliveryDate": "2006-04-11",
-        "status": "good",
-        "completionPercentage": 5.0
+        "status": "good"
     }
 ]
