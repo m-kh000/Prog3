@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import core.User.UserInfo;
 import utils.FileUtils;
 
 public class Factory {
@@ -260,14 +262,17 @@ public class Factory {
      * productline.
      * 
      * @param t the task to deliver
-     * @return {@code true} if the task was found and removed or {@code false} otherwise
      */
     public static void deliverTask(ProductLine pl, int taskId) {
         pl.removeCompletedTask(taskId);
     }
 
-    public static void getUsersInfo() {
-
+    /**
+     * Not implemented right now, left until we decide about the Email system.
+     * @return
+     */
+    public static UserInfo[] getUsersInfo() {
+        return null;
     }
 
     public static void saveToTXT() throws IOException {
@@ -321,27 +326,5 @@ public class Factory {
     public Product findProductByName(String productName) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findProductByName'");
-    }
-
-    public static class UserInfo extends User{
-        private String email;
-        private String role;
-        private String lastSeen;
-
-        public UserInfo(String email, String role, String lastSeen) {
-            this.email = super.getEmail();
-            this.role = super.isManager() ? "manager" : "supervisor";
-            this.lastSeen = super.getLastSeen();
-        }
-
-        public String getEmailInfo() {
-            return this.email;
-        }
-        public String getRoleInfo() {
-            return this.role;
-        }
-        public String getLastSeenInfo() {
-            return this.lastSeen;
-        }
     }
 }

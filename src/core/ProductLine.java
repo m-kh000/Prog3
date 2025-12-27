@@ -233,7 +233,7 @@ public class ProductLine implements Runnable {
         }
 
         return null;
-
+    }
     public double getCompletionRate() {
 //TODO return as 0.123253
         return 0.123253;

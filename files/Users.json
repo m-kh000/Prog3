@@ -46,11 +46,11 @@
         "password": "00000000",
         "isManager": true,
         "lastSeen": "2025-12-25"
-        "isManager": false
     },
     {
         "email": "koke@gmail.com",
         "password": "iwantcookies",
-        "isManager": false
+        "isManager": false,
+        "lastSeen": null
     }
 ]
