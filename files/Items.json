@@ -14,5 +14,13 @@
         "price": 10.0,
         "quantityAvailable": 100,
         "minQuantity": 50
+    },
+    {
+        "id": 2,
+        "name": "screws",
+        "category": "items",
+        "price": 1.0,
+        "quantityAvailable": 1000,
+        "minQuantity": 100
     }
 ]
