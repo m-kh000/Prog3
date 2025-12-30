@@ -1,3 +1,43 @@
 [
-    
+    {
+        "id": 2,
+        "product": {
+            "id": 4,
+            "name": "wooden cake",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "CAKE ^_~",
+                        "category": "caky",
+                        "price": 31115.0,
+                        "quantityAvailable": 0,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 1
+        },
+        "requiredQuantity": 1000,
+        "ready": 0,
+        "customerName": "Mira",
+        "startDate": "2025-05-02",
+        "deliveryDate": "2026-05-02",
+        "status": "inline"
+    }
 ]

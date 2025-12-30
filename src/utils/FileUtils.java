@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -168,19 +167,19 @@ public class FileUtils {
                                 pl = JsonParser.fromJson(readData(f), ProductLine.class);
                                 break;
                             case "inline.json":
-                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class);
                                 inline = Arrays.asList(inlineArr);
                                 break;
                             case "inprogress.json":
-                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class);
                                 inprogress = Arrays.asList(inprogressArr);
                                 break;
                             case "completed.json":
-                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class);
                                 completed = Arrays.asList(completedArr);
                                 break;
                             case "canceled.json":
-                                Task[] canceledArr = JsonParser.fromJson(readData(f), Task[].class, LocalDate.class);
+                                Task[] canceledArr = JsonParser.fromJson(readData(f), Task[].class);
                                 canceled = Arrays.asList(canceledArr);
                                 break;
                         }
