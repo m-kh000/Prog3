@@ -1,22 +1,18 @@
 package core;
 
+import core.User.UserInfo;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import core.User.UserInfo;
 import utils.FileUtils;
 
 public class Factory {
 
     private static HashSet<ProductLine> allLines;
     private static Warehouse warehouse;
-
-    //all task methods use test case instead of actual tasks
-    static Task testcase = new Task(new Product("plname"), 1, "cus", LocalDate.now(), LocalDate.now(), "status");
 
     public Factory() {
         Factory.allLines = new HashSet<>();
@@ -71,8 +67,7 @@ public class Factory {
             tasks.addAll(pl.getInprogress());
             tasks.addAll(pl.getCanceled());
         }
-        return new Task[]{testcase};
-        //return tasks.toArray(new Task[tasks.size()]);//TODO when you do all pls and tasks
+        return tasks.toArray(new Task[tasks.size()]);
     }
 
     // GETTERS : 

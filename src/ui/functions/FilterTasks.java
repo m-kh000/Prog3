@@ -17,10 +17,12 @@ public class FilterTasks extends FunctionPanel {
 
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
         JLabel filterLabel = new JLabel("Filter by:");
-        filterLabel.setFont(Manager.defaultFont(false, false));
+        filterLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> filterCombo = new JComboBox<>(new String[]{"ProductLine", "Product", "InProgress", "Completed"});
+        filterCombo.setSelectedItem(null);;
         filterCombo.setFont(Manager.defaultFont(false, false));
         filterField = new JComboBox<>();
+        filterField.setEnabled(false);
         filterField.setFont(Manager.defaultFont(false, false));
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
@@ -35,13 +37,19 @@ public class FilterTasks extends FunctionPanel {
                     filterField.addItem(name);
                 }
                 filterField.setEnabled(true);
+                filterField.revalidate();
+                filterField.repaint();
+                
             } else if (filterType.equals("Product")) {
                 String[] productNames = factory.getProductNames();
                 for (String name : productNames) {
                     filterField.addItem(name);
                 }
                 filterField.setEnabled(true);
+                filterField.revalidate();
+                filterField.repaint();
             } else {
+                filterField.setSelectedItem(null);
                 filterField.setEnabled(false);
             }
         });

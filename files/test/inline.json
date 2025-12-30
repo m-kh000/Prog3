@@ -8,66 +8,30 @@
             "requiredItems": [
                 {
                     "key": [
-                        [
-                            {
-                                "key": "value",
-                                "value": 1000
-                            },
-                            {
-                                "key": "key",
-                                "value": "quantityAvailable"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 100
-                            },
-                            {
-                                "key": "key",
-                                "value": "minQuantity"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 500.0
-                            },
-                            {
-                                "key": "key",
-                                "value": "price"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "flour"
-                            },
-                            {
-                                "key": "key",
-                                "value": "name"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 1
-                            },
-                            {
-                                "key": "key",
-                                "value": "id"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "test"
-                            },
-                            {
-                                "key": "key",
-                                "value": "category"
-                            }
-                        ]
+                        {
+                            "key": "quantityAvailable",
+                            "value": 1000
+                        },
+                        {
+                            "key": "minQuantity",
+                            "value": 100
+                        },
+                        {
+                            "key": "price",
+                            "value": 500.0
+                        },
+                        {
+                            "key": "name",
+                            "value": "flour"
+                        },
+                        {
+                            "key": "id",
+                            "value": 1
+                        },
+                        {
+                            "key": "category",
+                            "value": "test"
+                        }
                     ],
                     "value": 10
                 }

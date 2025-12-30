@@ -48,6 +48,7 @@ public class CenterLogin extends JPanel {
         loginButton.setBackground(bg);
         loginButton.setContentAreaFilled(false);
         boxes.add(loginButton);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         add(boxes, BorderLayout.CENTER);
 
