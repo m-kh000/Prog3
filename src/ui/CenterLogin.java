@@ -48,6 +48,7 @@ public class CenterLogin extends JPanel {
         loginButton.setBackground(bg);
         loginButton.setContentAreaFilled(false);
         boxes.add(loginButton);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         add(boxes, BorderLayout.CENTER);
 
@@ -60,7 +61,6 @@ public class CenterLogin extends JPanel {
             Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
             Factory factory = null;
             boolean successful = false;
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             switch (r.getState().toLowerCase()) {
                 case "manager":
