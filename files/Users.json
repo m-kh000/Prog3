@@ -52,5 +52,11 @@
         "password": "iwantcookies",
         "isManager": false,
         "lastSeen": null
+    },
+    {
+        "email": "zouzou@gmail.com",
+        "password": "22542254",
+        "isManager": false,
+        "lastSeen": "2025-12-30"
     }
 ]

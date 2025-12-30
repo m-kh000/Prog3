@@ -23,7 +23,7 @@ public class FileUtils {
 
     private static final Object FILE_LOCK = new Object();
 
-    private static final File FILES = new File("./files/");
+    private static final File FILES = new File("./files");
     private static final File USERS_FILE = new File("./files/Users.json");
     private static final File ITEMS_FILE = new File("./files/Items.json");
     private static final File PRODUCTS_FILE = new File("./files/Products.json");
@@ -156,7 +156,7 @@ public class FileUtils {
 
                 String[] productLinesPaths = JsonParser.fromJson(readData(PRODUCTLINESPATHS_FILE),
                         String[].class);
-
+                
                 HashSet<ProductLine> productLines = new HashSet<>();
 
                 for (int i = 0; i < productLinesPaths.length; i++) {
@@ -182,19 +182,19 @@ public class FileUtils {
                                 pl = JsonParser.fromJson(readData(f), ProductLine.class);
                                 break;
                             case "inline.json":
-                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class);
+                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
                                 inline = Arrays.asList(inlineArr);
                                 break;
                             case "inprogress.json":
-                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class);
+                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
                                 inprogress = Arrays.asList(inprogressArr);
                                 break;
                             case "completed.json":
-                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class);
+                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
                                 completed = Arrays.asList(completedArr);
                                 break;
                             case "canceled.json":
-                                Task[] canceledArr = JsonParser.fromJson(readData(f), Task[].class);
+                                Task[] canceledArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
                                 canceled = Arrays.asList(canceledArr);
                                 break;
                         }
