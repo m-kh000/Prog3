@@ -60,6 +60,7 @@ public class CenterLogin extends JPanel {
             Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
             Factory factory = null;
             boolean successful = false;
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             switch (r.getState().toLowerCase()) {
                 case "manager":
