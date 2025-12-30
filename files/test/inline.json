@@ -47,5 +47,82 @@
         "startDate": "2006-04-11",
         "deliveryDate": "2006-04-11",
         "status": "good"
+    },
+    {
+        "id": 2,
+        "product": {
+            "id": 3,
+            "name": "milky screws",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": [
+                        {
+                            "key": "quantityAvailable",
+                            "value": 100
+                        },
+                        {
+                            "key": "minQuantity",
+                            "value": 20
+                        },
+                        {
+                            "key": "price",
+                            "value": 1000.0
+                        },
+                        {
+                            "key": "name",
+                            "value": "milk"
+                        },
+                        {
+                            "key": "id",
+                            "value": 2
+                        },
+                        {
+                            "key": "category",
+                            "value": "dairy"
+                        }
+                    ],
+                    "value": 1
+                },
+                {
+                    "key": [
+                        {
+                            "key": "quantityAvailable",
+                            "value": 1000
+                        },
+                        {
+                            "key": "minQuantity",
+                            "value": 100
+                        },
+                        {
+                            "key": "price",
+                            "value": 1.0
+                        },
+                        {
+                            "key": "name",
+                            "value": "screw"
+                        },
+                        {
+                            "key": "id",
+                            "value": 2
+                        },
+                        {
+                            "key": "category",
+                            "value": "items"
+                        }
+                    ],
+                    "value": 3
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 4
+        },
+        "requiredQuantity": 100,
+        "ready": 0,
+        "customerName": "Joseph",
+        "startDate": "2025-02-11",
+        "deliveryDate": "2026-02-11",
+        "status": "inline"
     }
 ]

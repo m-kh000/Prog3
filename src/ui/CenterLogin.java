@@ -106,8 +106,9 @@ public class CenterLogin extends JPanel {
                     }
             
             
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            FileUtils.log(ex);
         }
         });
         passwordbox.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
@@ -137,6 +138,7 @@ public class CenterLogin extends JPanel {
                 } 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);                
+                FileUtils.log(e);
             }
             System.exit(0);
             

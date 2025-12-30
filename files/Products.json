@@ -25,6 +25,17 @@
                     "minQuantity": 100
                 },
                 "value": 3
+            },
+            {
+                "key": {
+                    "id": 2,
+                    "name": "screw",
+                    "category": "items",
+                    "price": 1.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 100
+                },
+                "value": 3
             }
         ],
         "orderedIn": [
@@ -38,17 +49,6 @@
         "requiredItems": [
             {
                 "key": {
-                    "id": 3,
-                    "name": "wood",
-                    "category": "dk",
-                    "price": 1000.0,
-                    "quantityAvailable": 1,
-                    "minQuantity": 20
-                },
-                "value": 1
-            },
-            {
-                "key": {
                     "id": 2,
                     "name": "CAKE ^_~",
                     "category": "caky",
@@ -57,10 +57,22 @@
                     "minQuantity": 20
                 },
                 "value": 1
+            },
+            {
+                "key": {
+                    "id": 3,
+                    "name": "wood",
+                    "category": "dk",
+                    "price": 1000.0,
+                    "quantityAvailable": 1,
+                    "minQuantity": 20
+                },
+                "value": 1
             }
         ],
         "orderedIn": [
         ],
+        "purchaseFrequency": 1
         "purchaseFrequency": 1
     }
 ]
