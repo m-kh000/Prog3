@@ -42,6 +42,15 @@ public class AddProductionLine extends FunctionPanel {
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
         add(submitBtn);
+        
+        // Add Enter key functionality
+        priority.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    submitBtn.doClick();
+                }
+            }
+        });
 
         submitBtn.addActionListener(e -> {
             if (name.isEmpty() || priority.isEmpty()) {

@@ -11,16 +11,40 @@
         "id": 2,
         "name": "wool",
         "category": "fabric",
-        "price": 10.0,
+        "price": 700.0,
         "quantityAvailable": 100,
         "minQuantity": 50
     },
     {
         "id": 2,
-        "name": "screws",
+        "name": "screw",
         "category": "items",
         "price": 1.0,
         "quantityAvailable": 1000,
         "minQuantity": 100
+    },
+    {
+        "id": 2,
+        "name": "milk",
+        "category": "dairy",
+        "price": 1000.0,
+        "quantityAvailable": 100,
+        "minQuantity": 20
+    },
+    {
+        "id": 2,
+        "name": "CAKE :)",
+        "category": "caky",
+        "price": 3000.0,
+        "quantityAvailable": 0,
+        "minQuantity": 10
+    },
+    {
+        "id": 2,
+        "name": "CAKE ^_~",
+        "category": "caky",
+        "price": 31115.0,
+        "quantityAvailable": 0,
+        "minQuantity": 20
     }
 ]

@@ -42,6 +42,10 @@ public class LabelBox extends JPanel {
         add(textField);
     }
 
+    public JTextField getTextField() {
+        return textField;
+    }
+
     public String getText() {
         return textField instanceof JPasswordField ? 
             new String(((JPasswordField) textField).getPassword()) : textField.getText();

@@ -1,27 +1,29 @@
 package core;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import core.User.UserInfo;
 import utils.FileUtils;
 
 public class Factory {
+
     private static HashSet<ProductLine> allLines;
     private static Warehouse warehouse;
 
     //all task methods use test case instead of actual tasks
-    static Task testcase = new Task(new Product("plname"), 1,"cus",LocalDate.now(),LocalDate.now(),"status");
-
+    static Task testcase = new Task(new Product("plname"), 1, "cus", LocalDate.now(), LocalDate.now(), "status");
 
     public Factory() {
         Factory.allLines = new HashSet<>();
         Factory.warehouse = new Warehouse();
     }
 
-    public Factory(HashSet<ProductLine> allLines,Warehouse warehouse) {
+    public Factory(HashSet<ProductLine> allLines, Warehouse warehouse) {
         Factory.allLines = new HashSet<>(allLines);
         Factory.warehouse = warehouse;
     }
@@ -34,25 +36,22 @@ public class Factory {
         i.setName(i.getName().trim());
         warehouse.addItem(i);
     }
-    
+
     public static synchronized void add(ProductLine pl) {
         allLines.add(pl);
     }
 
-
-    public static void add(Task task,String plName) {
+    public static void add(Task task, String plName) {
         plName = plName.trim().toLowerCase();
-        for(ProductLine pl:allLines){
-            if(pl.getName().equals(plName)){
+        for (ProductLine pl : allLines) {
+            if (pl.getName().equals(plName)) {
                 pl.addTask(task);
                 break;
             }
         }
     }
-    
-    
-    // PREVIEWS : 
 
+    // PREVIEWS : 
     public static synchronized ProductLine[] previewLines() {
         return allLines.toArray(new ProductLine[allLines.size()]);
     }
@@ -76,16 +75,12 @@ public class Factory {
         //return tasks.toArray(new Task[tasks.size()]);//TODO when you do all pls and tasks
     }
 
-    
-    /* Removed previewProducts and previewTasks methods */
-
     // GETTERS : 
-
     public static HashSet<ProductLine> getAllLines() {
         return allLines;
     }
-    
-    public static  Warehouse getWarehouse() {
+
+    public static Warehouse getWarehouse() {
         return warehouse;
     }
 
@@ -100,9 +95,10 @@ public class Factory {
     }
 
     // SETTERS :
-
     public static void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) {
-        if(!warehouse.getItems().contains(i)) return;
+        if (!warehouse.getItems().contains(i)) {
+            return;
+        }
         i.setName(name);
         i.setCategory(category);
         i.setPrice(price);
@@ -115,7 +111,6 @@ public class Factory {
     }
 
     // FILTERS :
-
     public static List<Item> filterItemsByName(String filter) {
         filter = filter.trim();
         filter = filter.toLowerCase();
@@ -127,13 +122,13 @@ public class Factory {
         }
         return filteredList;
     }
-    
+
     public static List<Item> filterItemsByCategory(String filter) {
         filter = filter.trim();
         filter = filter.toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
-            if (i.getName().toLowerCase().contains(filter)) {
+            if (i.getCategory().toLowerCase().contains(filter)) {
                 filteredList.add(i);
             }
         }
@@ -169,7 +164,7 @@ public class Factory {
         }
         return filteredList;
     }
-    
+
     public static List<Task> filterTasksByInprogress() {
         List<Task> filteredList = new ArrayList<>();
         for (ProductLine pl : allLines) {
@@ -204,29 +199,21 @@ public class Factory {
         }
         return names.toArray(new String[names.size()]);
     }
+
     public static String[] get0PCTasksNames() {
         List<String> names = new ArrayList<>();
         for (ProductLine pl : allLines) {
-            for (Task t : pl.get0PCInprogress()) {
-                names.add(t.getName());
-            }
-            for (Task t : pl.getCanceled()) {
+            for (Task t : pl.get0PCTasks()) {
                 names.add(t.getName());
             }
         }
-        return new String[]{testcase.getName()};        
-        //return names.toArray(new String[names.size()]);//TODO when you do all pls and tasks
+        return names.toArray(new String[names.size()]);
     }
 
     public static void cancelTask(String taskToBeCanceled) {
-        for(ProductLine pl : allLines){
-            for(Task task : pl.getInlineTasks()){
-                if(task.getName().equals(taskToBeCanceled)){
-                    pl.cancelTask(task);
-                }
-            }
-            for(Task task : pl.get0PCInprogress()){
-                if(task.getName().equals(taskToBeCanceled)){
+        for (ProductLine pl : allLines) {
+            for (Task task : pl.get0PCTasks()) {
+                if (task.getName().equals(taskToBeCanceled)) {
                     pl.cancelTask(task);
                 }
             }
@@ -244,7 +231,7 @@ public class Factory {
         }
         return names.toArray(new String[names.size()]);
     }
-    
+
     public static String[] getProductLineNames() {
         List<String> names = new ArrayList<>();
         for (ProductLine pl : allLines) {
@@ -254,13 +241,18 @@ public class Factory {
     }
 
     public static List<ProductLine> filterProductLinesByProduct(String filterValue) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<ProductLine> filteredList = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            if(pl.hasProduct(filterValue))
+                filteredList.add(pl);
+        }
+        return filteredList;
     }
 
     /**
-     * Deliver a specific completed task by removing it from the completed list in its
-     * productline.
-     * 
+     * Deliver a specific completed task by removing it from the completed list
+     * in its productline.
+     *
      * @param t the task to deliver
      */
     public static void deliverTask(ProductLine pl, int taskId) {
@@ -269,6 +261,7 @@ public class Factory {
 
     /**
      * Not implemented right now, left until we decide about the Email system.
+     *
      * @return
      */
     public static UserInfo[] getUsersInfo() {
@@ -277,14 +270,14 @@ public class Factory {
 
     public static void saveToTXT() throws IOException {
         FileUtils.saveItems();
-        FileUtils.saveProducts(); 
+        FileUtils.saveProducts();
         FileUtils.saveProductLines();
     }
 
     public void modifyStatus(String selectedLineName, String selectedStatus) {
         selectedStatus = selectedStatus.trim().toLowerCase();
-        for(ProductLine pl : allLines){
-            if(pl.getName().trim().toLowerCase().equals(selectedLineName)){
+        for (ProductLine pl : allLines) {
+            if (pl.getName().trim().toLowerCase().equals(selectedLineName)) {
                 pl.setStatus(selectedStatus);
             }
         }
@@ -302,9 +295,9 @@ public class Factory {
 
     public void deliverTask(String selectedItem) {
         selectedItem = selectedItem.trim().toLowerCase();
-        for(ProductLine pl : allLines){
-            for(Task t : pl.getCompleted()){
-                if(t.getName().equals(selectedItem)){
+        for (ProductLine pl : allLines) {
+            for (Task t : pl.getCompleted()) {
+                if (t.getName().equals(selectedItem)) {
                     pl.getCompleted().remove(t);
                 }
             }
@@ -319,12 +312,19 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public Item findItemByName(String toString) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Item findItemByName(String itemName)  throws NoSuchElementException{
+        for(Item i : warehouse.getItems()){
+            if(i.getName().equals(itemName))
+                return i;
+        }
+        throw new NoSuchElementException();
     }
 
-    public Product findProductByName(String productName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findProductByName'");
+    public Product findProductByName(String productName) throws NoSuchElementException{
+        for(Product p : warehouse.getProducts()){
+            if(p.getName().equals(productName))
+                return p;
+        }
+        throw new NoSuchElementException();
     }
 }

@@ -61,7 +61,7 @@ public class App {
           System.out.println(p.getName());
           System.out.println(p.getId());
           System.out.println(p.getLineStatus());
-          System.out.println(p.getInlineTasks().get(0));
+          // System.out.println(p.getInlineTasks().get(0));
           System.out.println(p.getInprogress());
           System.out.println(p.getCompletedTasks());
           System.out.println(p.getCanceledTasks());

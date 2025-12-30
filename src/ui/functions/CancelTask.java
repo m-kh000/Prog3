@@ -17,7 +17,7 @@ public class CancelTask extends FunctionPanel {
         JLabel selectLabel = new JLabel("Select Task:");
         selectLabel.setFont(Manager.defaultFont(false, false));
         JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
-        taskCombo.setFont(Manager.defaultFont(false, false));
+        taskCombo.setFont(Manager.defaultFont(true, false));
         taskCombo.setSelectedItem(null);
         selectPanel.add(selectLabel);
         selectPanel.add(taskCombo);
@@ -38,6 +38,14 @@ public class CancelTask extends FunctionPanel {
         cancelBtn.setFocusPainted(false);
         cancelBtn.setOpaque(true);
         add(cancelBtn);
+        
+        // Add Enter key functionality
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "cancel");
+        getActionMap().put("cancel", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                cancelBtn.doClick();
+            }
+        });
 
         cancelBtn.addActionListener(e -> {
             // Cancel selected task and update combo box

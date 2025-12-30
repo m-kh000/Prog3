@@ -1,16 +1,14 @@
 package ui;
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-import ui.functions.AddProduct;
+
+import core.Factory;
 
 public class UI extends JFrame {
     private static JPanel centerPanel;
     
     public UI() {
         int bigp = 400, smallp = 80;
-        
-        boolean beenEdited = false;
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setResizable(false);
         setLayout(new BorderLayout());
@@ -41,5 +39,13 @@ public class UI extends JFrame {
         centerPanel.revalidate();
         centerPanel.repaint();
     }
+
+    
 }
 
+//TODO 
+//ids
+//add product
+//json localdate
+//hashset in product
+//deliver a task exception

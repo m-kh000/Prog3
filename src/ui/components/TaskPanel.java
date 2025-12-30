@@ -29,7 +29,7 @@ public class TaskPanel extends JPanel {
         // Required quantity with hint
         JLabel quantityValue = new JLabel(String.valueOf(task.getRequiredQuantity()));
         quantityValue.setForeground(Color.BLUE);
-        quantityValue.setFont(Manager.defaultFont(false, false));
+        quantityValue.setFont(Manager.defaultFont(false, true, ""));
         JPanel quantityPanel = new JPanel();
         quantityPanel.setLayout(new BoxLayout(quantityPanel, BoxLayout.X_AXIS));
         JLabel quantityHint = new JLabel("Required");
@@ -42,7 +42,7 @@ public class TaskPanel extends JPanel {
         // Ready quantity with hint
         JLabel readyValue = new JLabel(String.valueOf(task.getReady()));
         readyValue.setForeground(Color.ORANGE);
-        readyValue.setFont(Manager.defaultFont(false, false));
+        readyValue.setFont(Manager.defaultFont(false, true,""));
         JPanel readyPanel = new JPanel();
         readyPanel.setLayout(new BoxLayout(readyPanel, BoxLayout.X_AXIS));
         JLabel readyHint = new JLabel("Ready");

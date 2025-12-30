@@ -47,17 +47,26 @@ public class AddTask extends FunctionPanel {
         add(customer);
         
         // Row 6: Type start date
-        LabelBox start = new LabelBox("Start Date:", false);
+        LabelBox start = new LabelBox("Start Date:", false, true);
         add(start);
         
         // Row 7: Type delivery date
-        LabelBox delivery = new LabelBox("Delivery Date:", false);
+        LabelBox delivery = new LabelBox("Delivery Date:", false, true);
         add(delivery);
 
         // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(Manager.defaultFont(true, false));
         add(submitBtn);
+        
+        // Add Enter key functionality
+        delivery.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    submitBtn.doClick();
+                }
+            }
+        });
 
         submitBtn.addActionListener(e -> {
             try {
@@ -72,6 +81,9 @@ public class AddTask extends FunctionPanel {
                 String startText = start.getText();
                 String deliveryText = delivery.getText();
                 
+                factory.add(new Task(factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
+                Manager.isEdited = true;
+
                 // Clear fields
                 product.setSelectedItem(null);
                 PL.setSelectedItem(null);
@@ -80,12 +92,8 @@ public class AddTask extends FunctionPanel {
                 start.reset();
                 delivery.reset();
 
-                factory.add(new Task(factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
-                Manager.isEdited = true;
                 JOptionPane.showMessageDialog(frame, "Task added successfully");
                 
-            } catch (EmptyFieldException ex) {
-                JOptionPane.showMessageDialog(frame, "Please fill all the fields");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
             }
