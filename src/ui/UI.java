@@ -45,6 +45,7 @@ public class UI extends JFrame {
 
 //TODO 
 //ids
+//bye item
 //add product
 //json localdate
 //hashset in product
