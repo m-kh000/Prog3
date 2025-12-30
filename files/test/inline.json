@@ -1,236 +1,95 @@
 [
     {
-        "id": 2,
-        "product": {
-            "id": 1,
-            "name": "Chair",
-            "quantityAvailable": 0,
-            "requiredItems": [
-                {
-                    "key": [
-                        [
-                            {
-                                "key": "value",
-                                "value": 1000
-                            },
-                            {
-                                "key": "key",
-                                "value": "quantityAvailable"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 100
-                            },
-                            {
-                                "key": "key",
-                                "value": "minQuantity"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 500.0
-                            },
-                            {
-                                "key": "key",
-                                "value": "price"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "flour"
-                            },
-                            {
-                                "key": "key",
-                                "value": "name"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 1
-                            },
-                            {
-                                "key": "key",
-                                "value": "id"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "test"
-                            },
-                            {
-                                "key": "key",
-                                "value": "category"
-                            }
-                        ]
-                    ],
-                    "value": 10
-                }
-            ],
-            "orderedIn": [
-                "2006-04-11"
-            ],
-            "purchaseFrequency": 1
-        },
-        "requiredQuantity": 10,
-        "ready": 0,
-        "customerName": "Joseph",
-        "startDate": "2006-04-11",
-        "deliveryDate": "2006-04-11",
-        "status": "good"
-    },
-    {
-        "id": 2,
+        "id": 1,
         "product": {
             "id": 3,
             "name": "milky screws",
             "quantityAvailable": 0,
             "requiredItems": [
                 {
-                    "key": [
-                        [
-                            {
-                                "key": "value",
-                                "value": 1000
-                            },
-                            {
-                                "key": "key",
-                                "value": "quantityAvailable"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 100
-                            },
-                            {
-                                "key": "key",
-                                "value": "minQuantity"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 1.0
-                            },
-                            {
-                                "key": "key",
-                                "value": "price"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "screw"
-                            },
-                            {
-                                "key": "key",
-                                "value": "name"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 2
-                            },
-                            {
-                                "key": "key",
-                                "value": "id"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "items"
-                            },
-                            {
-                                "key": "key",
-                                "value": "category"
-                            }
-                        ]
-                    ],
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
                     "value": 3
                 },
                 {
-                    "key": [
-                        [
-                            {
-                                "key": "value",
-                                "value": 100
-                            },
-                            {
-                                "key": "key",
-                                "value": "quantityAvailable"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 20
-                            },
-                            {
-                                "key": "key",
-                                "value": "minQuantity"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 1000.0
-                            },
-                            {
-                                "key": "key",
-                                "value": "price"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "milk"
-                            },
-                            {
-                                "key": "key",
-                                "value": "name"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": 2
-                            },
-                            {
-                                "key": "key",
-                                "value": "id"
-                            }
-                        ],
-                        [
-                            {
-                                "key": "value",
-                                "value": "dairy"
-                            },
-                            {
-                                "key": "key",
-                                "value": "category"
-                            }
-                        ]
-                    ],
+                    "key": {
+                        "id": 2,
+                        "name": "milk",
+                        "category": "dairy",
+                        "price": 1000.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 5
+        },
+        "requiredQuantity": 1000,
+        "ready": 0,
+        "customerName": "Joseph",
+        "startDate": "2025-11-11",
+        "deliveryDate": "2026-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 4,
+            "name": "wooden cake",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "CAKE ^_~",
+                        "category": "caky",
+                        "price": 31115.0,
+                        "quantityAvailable": 0,
+                        "minQuantity": 20
+                    },
                     "value": 1
                 }
             ],
             "orderedIn": [
             ],
-            "purchaseFrequency": 4
+            "purchaseFrequency": 6
         },
-        "requiredQuantity": 100,
+        "requiredQuantity": 200,
         "ready": 0,
-        "customerName": "Joseph",
-        "startDate": "2025-02-11",
-        "deliveryDate": "2026-02-11",
+        "customerName": "Mira",
+        "startDate": "2025-12-22",
+        "deliveryDate": "2026-12-22",
         "status": "inline"
     }
 ]

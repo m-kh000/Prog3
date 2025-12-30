@@ -130,7 +130,7 @@ public class CenterLogin extends JPanel {
                     int response = JOptionPane.showConfirmDialog(frame, "Do you want to save before exiting?", "Confirm Exit",
                         JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (response == JOptionPane.YES_OPTION) {
-                        factory.saveToTXT();
+                        Factory.saveToTXT();
                         System.exit(0);
                     } else if (response == JOptionPane.CANCEL_OPTION) {
                         return;
