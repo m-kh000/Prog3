@@ -49,3 +49,8 @@ public class UI extends JFrame {
 // hashset in product
 // deliver a task exception
 // employ and assign new ProductLines automatically
+// chose icon
+//logger
+//negative
+//view tasks
+//no edits to save
