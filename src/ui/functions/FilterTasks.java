@@ -37,13 +37,19 @@ public class FilterTasks extends FunctionPanel {
                     filterField.addItem(name);
                 }
                 filterField.setEnabled(true);
+                filterField.revalidate();
+                filterField.repaint();
+                
             } else if (filterType.equals("Product")) {
                 String[] productNames = factory.getProductNames();
                 for (String name : productNames) {
                     filterField.addItem(name);
                 }
                 filterField.setEnabled(true);
+                filterField.revalidate();
+                filterField.repaint();
             } else {
+                filterField.setSelectedItem(null);
                 filterField.setEnabled(false);
             }
         });
