@@ -10,7 +10,7 @@ public class ProductPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
         // ID and icon combined
-        ImageIcon icon = new ImageIcon("product.png");
+        ImageIcon icon = new ImageIcon("icons/product.png");
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         JPanel idIconPanel = new JPanel();
         idIconPanel.setLayout(new BoxLayout(idIconPanel, BoxLayout.X_AXIS));

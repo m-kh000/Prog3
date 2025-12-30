@@ -78,15 +78,17 @@ public class FilterTasks extends FunctionPanel {
         tasksPanel.removeAll();
 
         List<core.Task> tasks = null;
-        if (filterType.equals("ProductLine") || filterType.equals("Product")) {
-            //tasks = factory.filterTasksByProduct(filterValue);
-        } else if (filterType.equals("InProgress")) {
+        if (filterType.equals("Product")) {
+            tasks = factory.filterTasksByProduct(filterValue);
+        } else if (filterType.equals("ProductLine")) {
+            tasks = factory.filterTasksByProductLine(filterValue);
+        }else if (filterType.equals("InProgress")) {
             tasks = Factory.filterTasksByInprogress();
         } else if (filterType.equals("Completed")) {
             tasks = Factory.filterTasksByCompleted();
         }
 
-        if (tasks != null) {
+        if (tasks != null || !tasks.isEmpty()) {
             for (core.Task task : tasks) {
                 tasksPanel.add(new TaskPanel(task));
             }

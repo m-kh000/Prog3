@@ -7,6 +7,28 @@
             {
                 "key": {
                     "id": 2,
+                    "name": "screw",
+                    "category": "items",
+                    "price": 1.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 100
+                },
+                "value": 3
+            },
+            {
+                "key": {
+                    "id": 2,
+                    "name": "screw",
+                    "category": "items",
+                    "price": 1.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 100
+                },
+                "value": 3
+            },
+            {
+                "key": {
+                    "id": 2,
                     "name": "milk",
                     "category": "dairy",
                     "price": 1000.0,
@@ -14,33 +36,11 @@
                     "minQuantity": 20
                 },
                 "value": 1
-            },
-            {
-                "key": {
-                    "id": 2,
-                    "name": "screw",
-                    "category": "items",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 100
-                },
-                "value": 3
-            },
-            {
-                "key": {
-                    "id": 2,
-                    "name": "screw",
-                    "category": "items",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 100
-                },
-                "value": 3
             }
         ],
         "orderedIn": [
         ],
-        "purchaseFrequency": 2
+        "purchaseFrequency": 3
     },
     {
         "id": 4,

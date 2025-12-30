@@ -9,7 +9,7 @@ public class ProductLinePanel extends JPanel {
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
-        ImageIcon icon = new ImageIcon("pl.png");
+        ImageIcon icon = new ImageIcon("icons/pl.png");
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         JPanel iconPanel = new JPanel();
         iconPanel.setLayout(new BoxLayout(iconPanel, BoxLayout.X_AXIS));

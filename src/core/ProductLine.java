@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,9 +108,11 @@ public class ProductLine implements Runnable {
     public List<Task> getInprogressTasks() {
         return this.inprogress;
     }
-/**
- * both inprogress and inline tasks are returned
- **/
+
+    /**
+     * both inprogress and inline tasks are returned
+ *
+     */
     public List<Task> get0PCTasks() {
         List<Task> tasks = new ArrayList<>();
         for (Task t : inprogress) {
@@ -125,7 +126,7 @@ public class ProductLine implements Runnable {
         return tasks;
     }
 
-    public List<Task> getInlineTasks() {
+    public List<Task> getInline() {
         return this.inline;
     }
 

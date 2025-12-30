@@ -9,7 +9,7 @@ public abstract class FunctionPanel extends JPanel {
 
     protected JButton BackBtn(JPanel centerPanel, JFrame frame, Factory factory, String role) {
         JButton backBtn = new JButton();
-        ImageIcon backIcon = new ImageIcon("back.png");
+        ImageIcon backIcon = new ImageIcon("icons/back.png");
         Image img = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         backBtn.setIcon(new ImageIcon(img));
         backBtn.setFont(Manager.defaultFont(true, false));

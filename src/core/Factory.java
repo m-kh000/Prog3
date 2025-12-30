@@ -63,9 +63,9 @@ public class Factory {
     public static synchronized Task[] previewTasks() {
         List<Task> tasks = new ArrayList<>();
         for (ProductLine pl : allLines) {
+            tasks.addAll(pl.getInline());
             tasks.addAll(pl.getCompleted());
             tasks.addAll(pl.getInprogress());
-            tasks.addAll(pl.getCanceled());
         }
         return tasks.toArray(new Task[tasks.size()]);
     }
@@ -164,7 +164,7 @@ public class Factory {
         List<Task> filteredList = new ArrayList<>();
         for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getInprogress());
-            filteredList.addAll(pl.getInlineTasks());
+            filteredList.addAll(pl.getInline());
         }
         return filteredList;
     }
@@ -238,8 +238,9 @@ public class Factory {
     public static List<ProductLine> filterProductLinesByProduct(String filterValue) {
         List<ProductLine> filteredList = new ArrayList<>();
         for (ProductLine pl : allLines) {
-            if(pl.hasProduct(filterValue))
+            if (pl.hasProduct(filterValue)) {
                 filteredList.add(pl);
+            }
         }
         return filteredList;
     }
@@ -307,18 +308,50 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public Item findItemByName(String itemName)  throws NoSuchElementException{
-        for(Item i : warehouse.getItems()){
-            if(i.getName().equals(itemName))
+    public Item findItemByName(String itemName) throws NoSuchElementException {
+        for (Item i : warehouse.getItems()) {
+            if (i.getName().equals(itemName)) {
                 return i;
+            }
         }
         throw new NoSuchElementException();
     }
 
-    public Product findProductByName(String productName) throws NoSuchElementException{
-        for(Product p : warehouse.getProducts()){
-            if(p.getName().equals(productName))
+    public Product findProductByName(String productName) throws NoSuchElementException {
+        for (Product p : warehouse.getProducts()) {
+            if (p.getName().equals(productName)) {
                 return p;
+            }
+        }
+        throw new NoSuchElementException();
+    }
+
+    public List<Task> filterTasksByProduct(String filterValue) {
+        filterValue = filterValue.trim().toLowerCase();
+        List<Task> filteredList = new ArrayList<>();
+        for(Task t : previewTasks()) {
+            if(t.getProduct().getName().equals(filterValue)) {
+                filteredList.add(t);
+            }
+        }
+        return filteredList;
+    }
+
+    public List<Task> filterTasksByProductLine(String filterValue) {
+        filterValue = filterValue.trim().toLowerCase();
+        List<Task> filteredList = new ArrayList<>();
+        ProductLine pl = findPLByName(filterValue);
+        filteredList.addAll(pl.getInline());
+        filteredList.addAll(pl.getInprogress());
+        filteredList.addAll(pl.getCompleted());
+        return filteredList;
+    }
+
+    private ProductLine findPLByName(String filterValue) {
+        for(ProductLine pl : allLines) {
+            if(pl.getName().equals(filterValue)) {
+                return pl;
+            }
         }
         throw new NoSuchElementException();
     }
