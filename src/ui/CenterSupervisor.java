@@ -48,18 +48,23 @@ public class CenterSupervisor extends JPanel {
 
         JButton saveStatusBtn = createStyledButton("Save Status to TXT", buttonColor);
         saveStatusBtn.addActionListener(e -> {
+            if(!Manager.isEdited)
             try {
                 factory.saveToTXT();
+                Manager.isEdited = false;
                 JOptionPane.showMessageDialog(frame, "Data saved successfully to TXT files.");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, "Error saving data: " + ex.getMessage());
+            }
+            else{
+                JOptionPane.showMessageDialog(frame, "No edits to save.");
             }
         });
         add(saveStatusBtn);
 
         //deliver a task button
         JButton deliverTaskBtn = createStyledButton("Deliver a Task", buttonColor);
-        // deliverTaskBtn.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
+        deliverTaskBtn.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
         add(deliverTaskBtn);
     }
 

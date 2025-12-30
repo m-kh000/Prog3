@@ -18,7 +18,7 @@ public class ModifyItem extends FunctionPanel {
         add(createTopPanel("Modify Items", centerPanel, frame, factory, "supervisor"));
         
         // Row 2: Select item
-        JPanel selectPanel = new JPanel(new GridLayout(2, 1, 0, 0));
+        JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Item:");
         selectLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         String[] allitems = factory.getItemsNames();
@@ -53,6 +53,16 @@ public class ModifyItem extends FunctionPanel {
         JButton updateBtn = new JButton("Update");
         updateBtn.setFont(new Font("Arial", Font.BOLD, 20));
         add(updateBtn);
+        
+        // Add Enter key functionality
+        minquan.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    updateBtn.doClick();
+                }
+            }
+        });
+        
         // Auto-populate fields when item is selected
         itemCombo.addActionListener(e -> {
             String selectedName = (String)itemCombo.getSelectedItem();

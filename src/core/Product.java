@@ -104,7 +104,7 @@ public class Product {
         this.quantityAvailable++;
     }
 
-    public Object reqItemCount() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int reqItemCount() {
+        return requiredItems.size();
     }
 }

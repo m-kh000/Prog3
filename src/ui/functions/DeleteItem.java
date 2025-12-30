@@ -14,7 +14,7 @@ public class DeleteItem extends FunctionPanel {
         add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"));
         
         // Row 2: Select item
-        JPanel selectPanel = new JPanel(new GridLayout(2, 1, 0, 0));
+        JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Item:");
         selectLabel.setFont(Manager.defaultFont(false, false));
         JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
@@ -39,6 +39,14 @@ public class DeleteItem extends FunctionPanel {
         deleteBtn.setFocusPainted(false);
         deleteBtn.setOpaque(true);
         add(deleteBtn);
+        
+        // Add Enter key functionality
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "delete");
+        getActionMap().put("delete", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                deleteBtn.doClick();
+            }
+        });
 
         deleteBtn.addActionListener(e -> {
             // Delete selected item and update combo box

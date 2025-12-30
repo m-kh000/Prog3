@@ -40,4 +40,15 @@ public abstract class FunctionPanel extends JPanel {
         }
     }
 
+    protected  JButton createStyledButton(String text, Color bgColor) {
+        JButton button = new JButton(text);
+        button.setFont(Manager.defaultFont(true, false));
+        button.setForeground(Color.WHITE);
+        button.setBackground(bgColor);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+        return button;
+    }
+
 }

@@ -1,8 +1,6 @@
 package ui.functions;
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-import ui.Manager;
 import ui.UI;
 
 public class Products extends FunctionPanel {
@@ -12,26 +10,16 @@ public class Products extends FunctionPanel {
         
         add(createTopPanel("Products", centerPanel, frame, factory, "supervisor"));
         
+        //Row 1 view
         JButton viewProductsBtn = createStyledButton("View All Products", buttonColor);
         viewProductsBtn.addActionListener(e -> UI.switchContent(new ViewProducts(centerPanel, frame, factory)));
         add(viewProductsBtn);
         
-        JButton filterProductsBtn = createStyledButton("Add Product", buttonColor);
-        filterProductsBtn.addActionListener(e -> UI.switchContent(new AddProduct(centerPanel, frame, factory)));
-        add(filterProductsBtn);
+        //Row 2 view
+        JButton addProductBtn = createStyledButton("Add Product", buttonColor);
+        addProductBtn.addActionListener(e -> UI.switchContent(new AddProduct(centerPanel, frame, factory)));
+        add(addProductBtn);
         
-        add(new JPanel()); // Empty panel
-        add(new JPanel()); // Empty panel
     }
     
-    private JButton createStyledButton(String text, Color bgColor) {
-        JButton button = new JButton(text);
-        button.setFont(Manager.defaultFont(true, false));
-        button.setForeground(Color.WHITE);
-        button.setBackground(bgColor);
-        button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setOpaque(true);
-        return button;
-    }
 }

@@ -38,14 +38,22 @@ public class AddProduct extends FunctionPanel {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         CustomBtn addProductButton = new CustomBtn("Add Product");
         addProductButton.setFont(Manager.defaultFont(true, false));
+        
+        // Add Enter key functionality
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "addProduct");
+        getActionMap().put("addProduct", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                addProductButton.doClick();
+            }
+        });
+        
         addProductButton.addActionListener(e -> {
             String productName = productNameBox.getText().trim();
-            if (productName.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Product name cannot be empty.");
-                return;
-            }
             
             try {
+                if (productName.isEmpty()) {
+                    throw new EmptyFieldException();
+                }
                 // Collect item requirements from all rows
                 HashMap<Item, Integer> itemRequirements = new HashMap<>();
                 for (Component component : itemRequirementsPanel.getComponents()) {
@@ -63,9 +71,8 @@ public class AddProduct extends FunctionPanel {
                 }
                 
                 // Create and add the product
-                factory.add(new core.Product(productName, itemRequirements, (HashSet<LocalDate>) null));
+                factory.add(new core.Product(productName, itemRequirements, new HashSet<LocalDate>()));
                 Manager.isEdited = true;
-                JOptionPane.showMessageDialog(frame, "Product added successfully.");
                 
                 // Clear form
                 productNameBox.reset();
@@ -73,6 +80,8 @@ public class AddProduct extends FunctionPanel {
                 itemRequirementsPanel.add(new ItemRequirementRow(factory, true));
                 itemRequirementsPanel.revalidate();
                 itemRequirementsPanel.repaint();
+
+                JOptionPane.showMessageDialog(frame, "Product added successfully.");
                 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Please enter number quantities.");

@@ -14,32 +14,25 @@ public class Items extends FunctionPanel {
 
         add(createTopPanel("Items", centerPanel, frame, factory, "supervisor"));
 
-
-        JButton addItemBtn = createStyledButton("Add Item", buttonColor);
-        addItemBtn.addActionListener(e -> UI.switchContent(new AddItem(centerPanel, frame, factory)));
-        add(addItemBtn);
-
+        //Row 1 view
         JButton viewItemsBtn = createStyledButton("View Items", buttonColor);
         viewItemsBtn.addActionListener(e -> UI.switchContent(new ViewItems(centerPanel, frame, factory)));
         add(viewItemsBtn);
 
+        //Row 2 view
+        JButton addItemBtn = createStyledButton("Add Item", buttonColor);
+        addItemBtn.addActionListener(e -> UI.switchContent(new AddItem(centerPanel, frame, factory)));
+        add(addItemBtn);
+
+        //Row 3 modify
         JButton modifyItemBtn = createStyledButton("Modify Item", buttonColor);
         modifyItemBtn.addActionListener(e -> UI.switchContent(new ModifyItem(centerPanel, frame, factory)));
         add(modifyItemBtn);
 
+        //Row 4 delete
         JButton deleteItemBtn = createStyledButton("Delete Item", buttonColor);
         deleteItemBtn.addActionListener(e -> UI.switchContent(new DeleteItem(centerPanel, frame, factory)));
         add(deleteItemBtn);
     }
 
-    private JButton createStyledButton(String text, Color bgColor) {
-        JButton button = new JButton(text);
-        button.setFont(Manager.defaultFont(true, false));
-        button.setForeground(Color.WHITE);
-        button.setBackground(bgColor);
-        button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setOpaque(true);
-        return button;
-    }
 }

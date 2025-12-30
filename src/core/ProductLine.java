@@ -1,4 +1,5 @@
 package core;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import utils.FileUtils;
 import utils.ThreadManager;
 
 public class ProductLine implements Runnable {
+
     private static int nextId = 1;
     private int id;
     private int priority;
@@ -25,7 +27,8 @@ public class ProductLine implements Runnable {
     @JsonIgnore
     private List<Task> canceled;
 
-    public ProductLine() {}
+    public ProductLine() {
+    }
 
     public ProductLine(String name, String status, int priority) {
         this.id = nextId++;
@@ -63,82 +66,73 @@ public class ProductLine implements Runnable {
             if (runningTask.getCompletionPercentage() == 100.00) {
                 completed.add(runningTask);
                 inprogress.remove(runningTask);
-            } 
+            }
         }
         ThreadManager.assign();
     }
 
-
-    public Task[] previewCompletedTasks() {
-        return completed.toArray(new Task[completed.size()]);
-    }
-    public Task[] previewInprogressTasks() {
-        return inprogress.toArray(new Task[inprogress.size()]);
-    }
-    public Task[] preview0PCInprogressTasks() {
-        List<Task> inprogress0PC = new ArrayList<>();
-        for(Task t : inprogress){
-            if(t.getCompletionPercentage() == 0.0){
-                inprogress0PC.add(t);
-            }
-        }
-        return inprogress0PC.toArray(new Task[inprogress0PC.size()]);
-    }
-    public Task[] previewInlineTasks() {
-        return inline.toArray(new Task[inline.size()]);
-    }
-    public Task[] previewCanceledTasks() {
-        return canceled.toArray(new Task[canceled.size()]);
-    }
-
-    // public boolean madeProduct() {
-   
-    // }
-
     public void cancelTask(Task task) {
-        int index = inline.indexOf(task);
-        if (index == -1) {
-            index = inprogress.indexOf(task);
-        } else {
-            canceled.add(inline.remove(index));
-        }
-
-        if (index == -1) {
-            throw new NoSuchElementException("No such task or the task is already completed or canceled."); 
-        } else {
+        int index = inprogress.indexOf(task);
+        if (index != -1) {
             canceled.add(inprogress.remove(index));
+        } else {
+            index = inline.indexOf(task);
+            if (index != -1) {
+                canceled.add(inline.remove(index));
+            } else {
+                throw new NoSuchElementException("Task not found in the product line.");
+            }
         }
     }
 
     //GETTERS
-
     public int getLineId() {
         return this.id;
     }
+
     public int getPriority() {
         return this.priority;
     }
+
     public String getLineName() {
         return this.name;
     }
+
     public String getLineStatus() {
         return this.status;
     }
+
     public List<Task> getCompletedTasks() {
         return this.completed;
     }
+
     public List<Task> getInprogressTasks() {
         return this.inprogress;
     }
-    public List<Task> get0PCInprogressTasks() {
-        return this.inprogress;
+/**
+ * both inprogress and inline tasks are returned
+ **/
+    public List<Task> get0PCTasks() {
+        List<Task> tasks = new ArrayList<>();
+        for (Task t : inprogress) {
+            if (t.getCompletionPercentage() == 0) {
+                tasks.add(t);
+            }
+        }
+        for (Task t : inline) {
+            tasks.add(t);
+        }
+        return tasks;
     }
+
     public List<Task> getInlineTasks() {
         return this.inline;
     }
+
     public List<Task> getCanceledTasks() {
         return this.canceled;
     }
+
     public String getNote() {
         return this.note;
     }
@@ -168,23 +162,29 @@ public class ProductLine implements Runnable {
     }
 
     public void setInline(List<Task> tasks) {
-        this.inline = tasks;
-    } 
-    public void setInprogress(List<Task> tasks) {
-        this.inprogress = tasks;
-    } 
-    public void setCompleted(List<Task> tasks) {
-        this.completed = tasks;
-    } 
-    public void setCanceled(List<Task> tasks) {
-        this.canceled = tasks;
+        this.inline = new ArrayList<>(tasks);
     }
+
+    public void setInprogress(List<Task> tasks) {
+        this.inprogress = new ArrayList<>(tasks);
+    }
+
+    public void setCompleted(List<Task> tasks) {
+        this.completed = new ArrayList<>(tasks);
+    }
+
+    public void setCanceled(List<Task> tasks) {
+        this.canceled = new ArrayList<>(tasks);
+    }
+
     public void setNote(String note) {
         this.note = note;
     }
+
     public void setPriority(int priority) {
         this.priority = priority;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -193,13 +193,10 @@ public class ProductLine implements Runnable {
         this.completed.remove(getCompletedTask(id));
     }
 
-    Collection<Task> get0PCInprogress() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     private boolean isTaskFinished(Task t) {
         return t.getReady() == t.getRequiredQuantity();
     }
+
     private boolean canProceedWith(Task t) {
         boolean test = true;
 
@@ -216,6 +213,7 @@ public class ProductLine implements Runnable {
 
         return test;
     }
+
     private Task getFirstAvailableInprogressTask() {
         for (Task t : inprogress) {
             if (canProceedWith(t)) {
@@ -225,6 +223,7 @@ public class ProductLine implements Runnable {
 
         return null;
     }
+
     private Task getCompletedTask(int taskId) {
         for (Task t : completed) {
             if (t.getId() == taskId) {
@@ -234,8 +233,28 @@ public class ProductLine implements Runnable {
 
         return null;
     }
+
     public double getCompletionRate() {
 //TODO return as 0.123253
         return 0.123253;
+    }
+
+    public boolean hasProduct(String filterValue) {
+        for (Task t : inline) {
+            if (t.getProduct().getName().equals(filterValue)) {
+                return true;
+            }
+        }
+        for (Task t : inprogress) {
+            if (t.getProduct().getName().equals(filterValue)) {
+                return true;
+            }
+        }
+        for (Task t : completed) {
+            if (t.getProduct().getName().equals(filterValue)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
