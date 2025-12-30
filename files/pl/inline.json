@@ -7,25 +7,61 @@
             "quantityAvailable": 0,
             "requiredItems": [
                 {
-                    "key": {
-                        "id": 3,
-                        "name": "wood",
-                        "category": "dk",
-                        "price": 1000.0,
-                        "quantityAvailable": 1,
-                        "minQuantity": 20
-                    },
+                    "key": [
+                        {
+                            "key": "quantityAvailable",
+                            "value": 0
+                        },
+                        {
+                            "key": "minQuantity",
+                            "value": 20
+                        },
+                        {
+                            "key": "price",
+                            "value": 31115.0
+                        },
+                        {
+                            "key": "name",
+                            "value": "CAKE ^_~"
+                        },
+                        {
+                            "key": "id",
+                            "value": 2
+                        },
+                        {
+                            "key": "category",
+                            "value": "caky"
+                        }
+                    ],
                     "value": 1
                 },
                 {
-                    "key": {
-                        "id": 2,
-                        "name": "CAKE ^_~",
-                        "category": "caky",
-                        "price": 31115.0,
-                        "quantityAvailable": 0,
-                        "minQuantity": 20
-                    },
+                    "key": [
+                        {
+                            "key": "quantityAvailable",
+                            "value": 1
+                        },
+                        {
+                            "key": "minQuantity",
+                            "value": 20
+                        },
+                        {
+                            "key": "price",
+                            "value": 1000.0
+                        },
+                        {
+                            "key": "name",
+                            "value": "wood"
+                        },
+                        {
+                            "key": "id",
+                            "value": 3
+                        },
+                        {
+                            "key": "category",
+                            "value": "dk"
+                        }
+                    ],
                     "value": 1
                 }
             ],
@@ -38,6 +74,58 @@
         "customerName": "mk",
         "startDate": "1111-11-11",
         "deliveryDate": "1111-12-12",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 3,
+            "name": "milky screws",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "milk",
+                        "category": "dairy",
+                        "price": 1000.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 3
+        },
+        "requiredQuantity": 5,
+        "ready": 0,
+        "customerName": "MMKK",
+        "startDate": "2222-02-22",
+        "deliveryDate": "2222-03-22",
         "status": "inline"
     }
 ]

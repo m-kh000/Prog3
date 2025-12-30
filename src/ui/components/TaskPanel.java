@@ -10,7 +10,7 @@ public class TaskPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
         // ID and icon combined
-        ImageIcon icon = new ImageIcon("task.png");
+        ImageIcon icon = new ImageIcon("icons/task.png");
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         JPanel idIconPanel = new JPanel();
         idIconPanel.setLayout(new BoxLayout(idIconPanel, BoxLayout.X_AXIS));

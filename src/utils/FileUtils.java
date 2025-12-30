@@ -20,6 +20,7 @@ import core.User;
 import jsonParser.*;
 
 public class FileUtils {
+
     private static final Object FILE_LOCK = new Object();
 
     private static final File FILES = new File("./files/");
@@ -29,20 +30,21 @@ public class FileUtils {
     private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
     private static final File EXCEPTIONS_FILE = new File("./files/Exceptions.txt");
 
-
     /**
      * This method reads users from the Users.json file.
-     * 
+     *
      * <p>
-     * reads the data from ./files/Users.json using a {@code BufferedReader} that wraps a {@code FileReader}
-     * in a class level synchronization to make the reading process thread safe.
+     * reads the data from ./files/Users.json using a {@code BufferedReader}
+     * that wraps a {@code FileReader} in a class level synchronization to make
+     * the reading process thread safe.
      * </p>
      * <p>
-     * if the Users.json file does not exist, the method will return an empty {@code List<User>}.
+     * if the Users.json file does not exist, the method will return an empty
+     * {@code List<User>}.
      * </p>
-     * 
-     * @return a {@code new ArrayList<User>} with the users if the file is found and is not empty, 
-     *      or else returns an empty {@code ArrayList<User>}
+     *
+     * @return a {@code new ArrayList<User>} with the users if the file is found
+     * and is not empty, or else returns an empty {@code ArrayList<User>}
      * @throws IOException
      */
     public static List<User> readUsers() throws IOException {
@@ -58,17 +60,19 @@ public class FileUtils {
 
     /**
      * This method reads items from the Items.json file.
-     * 
+     *
      * <p>
-     * reads the data from ./files/Items.json using a {@code BufferedReader} that wraps a {@code FileReader}
-     * in a class level synchronization to make the reading process thread safe.
+     * reads the data from ./files/Items.json using a {@code BufferedReader}
+     * that wraps a {@code FileReader} in a class level synchronization to make
+     * the reading process thread safe.
      * </p>
      * <p>
-     * if the Items.json file does not exist, the method will return an empty {@code List<Item>}.
+     * if the Items.json file does not exist, the method will return an empty
+     * {@code List<Item>}.
      * </p>
-     * 
-     * @return a {@code new ArrayList<Item>} with the items if the file is found and is not empty, 
-     *      or else returns an empty {@code ArrayList<Item>}
+     *
+     * @return a {@code new ArrayList<Item>} with the items if the file is found
+     * and is not empty, or else returns an empty {@code ArrayList<Item>}
      * @throws IOException
      */
     public static List<Item> readItems() throws IOException {
@@ -76,7 +80,7 @@ public class FileUtils {
             if (!ITEMS_FILE.exists()) {
                 return new ArrayList<>();
             }
-            
+
             Item[] items = JsonParser.fromJson(readData(ITEMS_FILE), Item[].class);
             return new ArrayList<>(Arrays.asList(items));
         }
@@ -84,17 +88,20 @@ public class FileUtils {
 
     /**
      * This method reads products from the Products.json file.
-     * 
+     *
      * <p>
-     * reads the data from ./files/Products.json using a {@code BufferedReader} that wraps a {@code FileReader}
-     * in a class level synchronization to make the reading process thread safe.
+     * reads the data from ./files/Products.json using a {@code BufferedReader}
+     * that wraps a {@code FileReader} in a class level synchronization to make
+     * the reading process thread safe.
      * </p>
      * <p>
-     * if the Products.json file does not exist, the method will return an empty {@code List<Product>}.
+     * if the Products.json file does not exist, the method will return an empty
+     * {@code List<Product>}.
      * </p>
-     * 
-     * @return a {@code new ArrayList<Product>} with the products if the file is found and is not empty, 
-     *      or else returns an empty {@code ArrayList<Product>}
+     *
+     * @return a {@code new ArrayList<Product>} with the products if the file is
+     * found and is not empty, or else returns an empty
+     * {@code ArrayList<Product>}
      * @throws IOException
      */
     public static List<Product> readProducts() throws IOException {
@@ -102,7 +109,7 @@ public class FileUtils {
             if (!PRODUCTS_FILE.exists()) {
                 return new ArrayList<>();
             }
-            
+
             Product[] products = JsonParser.fromJson(readData(PRODUCTS_FILE), Product[].class, Item.class, Integer.class, null);
             return new ArrayList<>(Arrays.asList(products));
         }
@@ -110,27 +117,35 @@ public class FileUtils {
 
     /**
      * This method reads productlines from the Items.json file.
-     * 
+     *
      * <p>
      * Reads the data from ./files as following:
-     * <li> - reads the paths for each productline folder from ProductlinesPaths.json </li>
-     * <li> - goes to each productline folder and reads the data from its files as following: </li>
-     * <li>     - reads the main data of the productline from Productline.json </li>
-     * <li>     - reads the content of the inline {@code List<Task>} from inline.json </li>
-     * <li>     - reads the content of the inprogress {@code List<Task>} from inprogress.json </li>
-     * <li>     - reads the content of the completed {@code List<Task>} from completed.json </li>
-     * <li>     - reads the content of the canceled {@code List<Task>} from canceled.json </li>
+     * <li> - reads the paths for each productline folder from
+     * ProductlinesPaths.json </li>
+     * <li> - goes to each productline folder and reads the data from its files
+     * as following: </li>
+     * <li> - reads the main data of the productline from Productline.json </li>
+     * <li> - reads the content of the inline {@code List<Task>} from
+     * inline.json </li>
+     * <li> - reads the content of the inprogress {@code List<Task>} from
+     * inprogress.json </li>
+     * <li> - reads the content of the completed {@code List<Task>} from
+     * completed.json </li>
+     * <li> - reads the content of the canceled {@code List<Task>} from
+     * canceled.json </li>
      *
-     *  It uses a {@code BufferedReader} that wraps a {@code FileReader} in 
-     *  a class level synchronization to make the reading process thread safe.
+     * It uses a {@code BufferedReader} that wraps a {@code FileReader} in a
+     * class level synchronization to make the reading process thread safe.
      * </p>
-     * 
+     *
      * <p>
-     * if the ProductlinesPaths.json file does not exist, the method will return an empty {@code HashSet<ProductLine>}.
+     * if the ProductlinesPaths.json file does not exist, the method will return
+     * an empty {@code HashSet<ProductLine>}.
      * </p>
-     * 
-     * @return a {@code new HashSet<ProductLine>} with the productlines if the files are found and are not empty, 
-     *      or else returns an empty {@code HashSet<ProductLine>}
+     *
+     * @return a {@code new HashSet<ProductLine>} with the productlines if the
+     * files are found and are not empty, or else returns an empty
+     * {@code HashSet<ProductLine>}
      */
     public static HashSet<ProductLine> readProductLines() {
         synchronized (FILE_LOCK) {
@@ -140,16 +155,16 @@ public class FileUtils {
                 }
 
                 String[] productLinesPaths = JsonParser.fromJson(readData(PRODUCTLINESPATHS_FILE),
-                                                         String[].class);
+                        String[].class);
 
                 HashSet<ProductLine> productLines = new HashSet<>();
-                
+
                 for (int i = 0; i < productLinesPaths.length; i++) {
                     File file = new File(productLinesPaths[i]);
                     if (!file.exists() || !file.isDirectory()) {
                         throw new IOException("Path does not exist or is not a directory: " + file.getAbsolutePath());
                     }
-                    
+
                     File[] plFiles = file.listFiles();
                     if (plFiles == null || plFiles.length <= 0) {
                         throw new IOException("Couldn\'t find directory or directory is empty: " + file.getAbsolutePath());
@@ -201,23 +216,24 @@ public class FileUtils {
 
     /**
      * This method saves all users in the users list in the provided factory.
-     * 
+     *
      * <p>
-     * Writes the data to ./files/Users.json using a {@code BufferedWriter} that wraps a {@code FileWriter}
-     * in a class level synchronization to make the writing process thread safe.
+     * Writes the data to ./files/Users.json using a {@code BufferedWriter} that
+     * wraps a {@code FileWriter} in a class level synchronization to make the
+     * writing process thread safe.
      * </p>
      * <p>
-     * This method automatically creates the Users.json file with its parent directories 
-     * if it does not exist.
+     * This method automatically creates the Users.json file with its parent
+     * directories if it does not exist.
      * </p>
-     * 
+     *
      * @param factory the factory that holds the users list
      */
     public static void saveUsers(User newUser) throws IOException {
         synchronized (FILE_LOCK) {
             List<User> users = readUsers();
             users.add(newUser);
-            
+
             try {
                 createFile(USERS_FILE);
                 writeData(USERS_FILE, JsonParser.toJson(users), false);
@@ -229,21 +245,22 @@ public class FileUtils {
 
     /**
      * This method saves all items in the items list in the provided factory.
-     * 
+     *
      * <p>
-     * Writes the data to ./files/Items.json using a {@code BufferedWriter} that wraps a {@code FileWriter}
-     * in a class level synchronization to make the writing process thread safe.
+     * Writes the data to ./files/Items.json using a {@code BufferedWriter} that
+     * wraps a {@code FileWriter} in a class level synchronization to make the
+     * writing process thread safe.
      * </p>
      * <p>
-     * This method automatically creates the Items.json file with its parent directories
-     * if it does not exist.
+     * This method automatically creates the Items.json file with its parent
+     * directories if it does not exist.
      * </p>
-     * 
+     *
      */
     public static void saveItems() throws IOException {
         synchronized (FILE_LOCK) {
             List<Item> items = new ArrayList<>(Factory.getWarehouse().getItems());
-            
+
             try {
                 createFile(ITEMS_FILE);
                 writeData(ITEMS_FILE, JsonParser.toJson(items), false);
@@ -254,17 +271,19 @@ public class FileUtils {
     }
 
     /**
-     * This method saves all products in the products hashmap in the provided factory.
-     * 
+     * This method saves all products in the products hashmap in the provided
+     * factory.
+     *
      * <p>
-     * Writes the data to ./files/Products.json using a {@code BufferedWriter} that wraps a {@code FileWriter}
-     * in a class level synchronization to make the writing process thread safe.
+     * Writes the data to ./files/Products.json using a {@code BufferedWriter}
+     * that wraps a {@code FileWriter} in a class level synchronization to make
+     * the writing process thread safe.
      * </p>
      * <p>
-     * This method automatically creates the Products.json file with its parent directories
-     * if it does not exist.
+     * This method automatically creates the Products.json file with its parent
+     * directories if it does not exist.
      * </p>
-     * 
+     *
      * @throws IOException
      */
     public static void saveProducts() throws IOException {
@@ -281,9 +300,9 @@ public class FileUtils {
     }
 
     /**
-     * Saves Productlines in ./files/[PL's name]: a .json file for the basic data of the productline,
-     * and a .josn file for each tasks list.
-     * 
+     * Saves Productlines in ./files/[PL's name]: a .json file for the basic
+     * data of the productline, and a .josn file for each tasks list.
+     *
      * @throws IOException
      */
     public static void saveProductLines() throws IOException {
@@ -309,15 +328,15 @@ public class FileUtils {
                     if (!productLinesPaths.contains(plPath)) {
                         productLinesPaths.add(plPath);
                     }
-    
+
                     File file = new File(plPath, "Productline.json");
                     createFile(file);
                     writeData(file, JsonParser.toJson(pl), false);
-    
+
                     file = new File(plPath, "inline.json");
                     createFile(file);
-                    writeData(file, JsonParser.toJson(pl.getInlineTasks()), false);
-    
+                    writeData(file, JsonParser.toJson(pl.getInline()), false);
+
                     file = new File(plPath, "inprogress.json");
                     createFile(file);
                     writeData(file, JsonParser.toJson(pl.getInprogressTasks()), false);
@@ -339,17 +358,19 @@ public class FileUtils {
     }
 
     /**
-     * Logs an {@code Exception} along with its message in ./files/Exceptions.txt
+     * Logs an {@code Exception} along with its message in
+     * ./files/Exceptions.txt
+     *
      * @param exception the exception to log
      */
     public static void log(Exception exception) {
         synchronized (FILE_LOCK) {
             try {
                 createFile(EXCEPTIONS_FILE);
-                String logString = exception.getClass().getSimpleName() 
-                                 + " occurred, Exception\'s message: "
-                                 + exception.getMessage()
-                                 + "\n";
+                String logString = exception.getClass().getSimpleName()
+                        + " occurred, Exception\'s message: "
+                        + exception.getMessage()
+                        + "\n";
 
                 writeData(EXCEPTIONS_FILE, logString, true);
             } catch (Exception e) {
@@ -358,14 +379,16 @@ public class FileUtils {
         }
     }
 
-
     /**
      * Creates the specified file along with its necessary directories.
+     *
      * @param file
      * @throws IOException
      */
-    private static void createFile(File file) throws IOException{
-        if (file == null) return;
+    private static void createFile(File file) throws IOException {
+        if (file == null) {
+            return;
+        }
 
         file.getParentFile().mkdirs();
 
@@ -377,11 +400,13 @@ public class FileUtils {
     /**
      * Writes the sent data to the specified file.
      * <p>
-     *  NOTE: this method does not checks for the existance of the file you must do it manually.
-     * </p> 
+     * NOTE: this method does not checks for the existance of the file you must
+     * do it manually.
+     * </p>
+     *
      * @param file the file to write the data on
-     * @param data  the data to write
-     * @param append if {@code true}, the data will be appended to the file 
+     * @param data the data to write
+     * @param append if {@code true}, the data will be appended to the file
      * @throws IOException
      */
     private static void writeData(File file, String data, boolean append) throws IOException {
@@ -393,8 +418,10 @@ public class FileUtils {
     /**
      * Reads data from the specified file.
      * <p>
-     *  NOTE: this method does not checks for the existance of the file you must do it manually.
-     * </p> 
+     * NOTE: this method does not checks for the existance of the file you must
+     * do it manually.
+     * </p>
+     *
      * @param file the file to read from
      * @return a {@code String} containing the data
      * @throws IOException

@@ -4,13 +4,13 @@ import core.Task;
 import java.awt.*;
 import javax.swing.*;
 import ui.components.TaskPanel;
-import javax.swing.JLabel;
 
 public class ViewAllTasks extends FunctionPanel {
     public ViewAllTasks(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
         add(createTopPanel("View All Tasks", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
         add(new JScrollPane(createTasksPanel(factory)), BorderLayout.CENTER);
+        
     }
     
     private JPanel createTasksPanel(Factory factory) {

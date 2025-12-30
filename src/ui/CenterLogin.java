@@ -42,7 +42,7 @@ public class CenterLogin extends JPanel {
         boxes.add(emailbox);
         boxes.add(passwordbox);
         JButton loginButton = new JButton();
-        loginButton.setIcon(new ImageIcon("l.png"));
+        loginButton.setIcon(new ImageIcon("icons/l.png"));
         loginButton.setFocusable(false);
         loginButton.setBorder(null);
         loginButton.setBackground(bg);
@@ -86,19 +86,19 @@ public class CenterLogin extends JPanel {
                     centerPanel.revalidate();
                     centerPanel.repaint();
                     if(successful) {
-                        ImageIcon icon = new ImageIcon("smile.png");
+                        ImageIcon icon = new ImageIcon("icons/smile.png");
                         Image img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("smile2.png");
+                        icon = new ImageIcon("icons/smile2.png");
                         img = icon.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("smile3.png");
+                        icon = new ImageIcon("icons/smile3.png");
                         img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("smile4.png");
+                        icon = new ImageIcon("icons/smile4.png");
                         img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("smile5.png");
+                        icon = new ImageIcon("icons/smile5.png");
                         img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
                     } else {

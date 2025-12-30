@@ -8,61 +8,133 @@
             "requiredItems": [
                 {
                     "key": [
-                        {
-                            "key": "quantityAvailable",
-                            "value": 100
-                        },
-                        {
-                            "key": "minQuantity",
-                            "value": 20
-                        },
-                        {
-                            "key": "price",
-                            "value": 1000.0
-                        },
-                        {
-                            "key": "name",
-                            "value": "milk"
-                        },
-                        {
-                            "key": "id",
-                            "value": 2
-                        },
-                        {
-                            "key": "category",
-                            "value": "dairy"
-                        }
+                        [
+                            {
+                                "key": "value",
+                                "value": 1000
+                            },
+                            {
+                                "key": "key",
+                                "value": "quantityAvailable"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": 100
+                            },
+                            {
+                                "key": "key",
+                                "value": "minQuantity"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": 1.0
+                            },
+                            {
+                                "key": "key",
+                                "value": "price"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": "screw"
+                            },
+                            {
+                                "key": "key",
+                                "value": "name"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": 2
+                            },
+                            {
+                                "key": "key",
+                                "value": "id"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": "items"
+                            },
+                            {
+                                "key": "key",
+                                "value": "category"
+                            }
+                        ]
                     ],
-                    "value": 1
+                    "value": 3
                 },
                 {
                     "key": [
-                        {
-                            "key": "quantityAvailable",
-                            "value": 1000
-                        },
-                        {
-                            "key": "minQuantity",
-                            "value": 100
-                        },
-                        {
-                            "key": "price",
-                            "value": 1.0
-                        },
-                        {
-                            "key": "name",
-                            "value": "screw"
-                        },
-                        {
-                            "key": "id",
-                            "value": 2
-                        },
-                        {
-                            "key": "category",
-                            "value": "items"
-                        }
+                        [
+                            {
+                                "key": "value",
+                                "value": 100
+                            },
+                            {
+                                "key": "key",
+                                "value": "quantityAvailable"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": 20
+                            },
+                            {
+                                "key": "key",
+                                "value": "minQuantity"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": 1000.0
+                            },
+                            {
+                                "key": "key",
+                                "value": "price"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": "milk"
+                            },
+                            {
+                                "key": "key",
+                                "value": "name"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": 2
+                            },
+                            {
+                                "key": "key",
+                                "value": "id"
+                            }
+                        ],
+                        [
+                            {
+                                "key": "value",
+                                "value": "dairy"
+                            },
+                            {
+                                "key": "key",
+                                "value": "category"
+                            }
+                        ]
                     ],
-                    "value": 3
+                    "value": 1
                 }
             ],
             "orderedIn": [

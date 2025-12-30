@@ -64,7 +64,7 @@ public class CenterSignup extends JPanel {
         boxes.add(passwordbox);
         
         JButton signupButton = new JButton();
-        signupButton.setIcon(new ImageIcon("s.png"));
+        signupButton.setIcon(new ImageIcon("icons/s.png"));
         signupButton.setFocusable(false);
         signupButton.setBorder(null);
         signupButton.setBackground(bg);
