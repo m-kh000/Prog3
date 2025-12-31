@@ -3,6 +3,8 @@ package core;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import exceptions.InvalidValuesException;
 import utils.Dates;
 
 public class Product {
@@ -29,7 +31,10 @@ public class Product {
         this.requiredItems = new HashMap<>(requiredItems);
     }
 
-    public void addItem(Item i, int quantity) {
+    public void addItem(Item i, int quantity) throws InvalidValuesException {
+        if(quantity <= 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         requiredItems.put(i, quantity);
     }
 
