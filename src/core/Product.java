@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import utils.Dates;
+import utils.IDInitializer;
 
 public class Product {
     private static int nextId = 1;
@@ -13,6 +14,10 @@ public class Product {
     private HashMap<Item, Integer> requiredItems;
     private HashSet<LocalDate> orderedIn;
     private int purchaseFrequency;
+
+    static {
+        nextId = IDInitializer.getProductsGlobalID();
+    }
 
     public Product() {}
     

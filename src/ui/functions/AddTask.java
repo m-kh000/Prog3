@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.xml.validation.Validator;
 import ui.LabelBox;
 import ui.Manager;
+import utils.FileUtils;
 
 public class AddTask extends FunctionPanel {
     public AddTask(JPanel centerPanel, JFrame frame, Factory factory) {
@@ -41,7 +42,7 @@ public class AddTask extends FunctionPanel {
         JPanel selectPLPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectPLLabel = new JLabel("Select Product Line:");
         selectPLLabel.setFont(Manager.defaultFont(true, false));
-        JComboBox<String> PL = new JComboBox<String>(factory.getProductLineNames());
+        JComboBox<String> PL = new JComboBox<String>(Factory.getProductLineNames());
         PL.setFont(Manager.defaultFont(true, false));
         PL.setSelectedItem(null);
         selectPLPanel.add(selectPLLabel);
@@ -93,7 +94,7 @@ public class AddTask extends FunctionPanel {
                 String startText = start.getText();
                 String deliveryText = delivery.getText();
                 
-                factory.add(new Task(factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
+                Factory.add(new Task(Factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
                 Manager.isEdited = true;
 
                 // Clear fields
@@ -108,6 +109,7 @@ public class AddTask extends FunctionPanel {
                 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
+                FileUtils.log(ex);
             }
         });
     }

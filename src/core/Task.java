@@ -2,6 +2,8 @@ package core;
 
 import java.time.LocalDate;
 
+import utils.IDInitializer;
+
 public class Task {
     private static int nextId = 1;
     private int id;
@@ -12,6 +14,10 @@ public class Task {
     private LocalDate startDate;
     private LocalDate deliveryDate;
     private String status;
+
+    static {
+        nextId = IDInitializer.getTasksGlobalID();
+    }
 
     public Task() {}
     

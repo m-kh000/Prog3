@@ -317,7 +317,7 @@ public class Factory {
         throw new NoSuchElementException();
     }
 
-    public Product findProductByName(String productName) throws NoSuchElementException {
+    public static Product findProductByName(String productName) throws NoSuchElementException {
         for (Product p : warehouse.getProducts()) {
             if (p.getName().equals(productName)) {
                 return p;

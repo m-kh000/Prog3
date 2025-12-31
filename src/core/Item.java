@@ -1,4 +1,7 @@
 package core;
+
+import utils.IDInitializer;
+
 public class Item {
     private static int nextId = 1;
     private int id;
@@ -7,6 +10,10 @@ public class Item {
     private double price;
     private int quantityAvailable;
     private int minQuantity;
+
+    static {
+        nextId = IDInitializer.getItemsGlobalID();
+    }
 
     public Item() {}
     
