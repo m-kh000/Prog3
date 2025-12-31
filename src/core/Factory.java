@@ -111,7 +111,7 @@ public class Factory {
         filter = filter.trim().toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
-            if (i.getName().trim().toLowerCase().equals(filter)) {
+            if (i.getName().trim().toLowerCase().contains(filter)) {
                 filteredList.add(i);
             }
         }
@@ -122,7 +122,7 @@ public class Factory {
         filter = filter.trim().toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
-            if (i.getCategory().trim().toLowerCase().equals(filter)) {
+            if (i.getCategory().trim().toLowerCase().contains(filter)) {
                 filteredList.add(i);
             }
         }
@@ -190,7 +190,7 @@ public class Factory {
         filterValue = filterValue.trim().toLowerCase();
         List<Task> filteredList = new ArrayList<>();
         for(Task t : previewTasks()) {
-            if(t.getProduct().getName().trim().toLowerCase().equals(filterValue)) {
+            if(t.getProduct().getName().trim().toLowerCase().contains(filterValue)) {
                 filteredList.add(t);
             }
         }

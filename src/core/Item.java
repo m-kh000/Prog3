@@ -116,7 +116,7 @@ public class Item {
         this.quantityAvailable = quantityAvailable;
     }
 
-    public void restock(int addQuantity) {
+    public void restock(int addQuantity) throws InvalidValuesException {
         if (addQuantity<=0) {
             throw new InvalidValuesException();
         }

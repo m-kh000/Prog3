@@ -235,8 +235,15 @@ public class ProductLine implements Runnable {
         throw new NoSuchElementException();
     }
 
+    public List<Task> getBothInPInL() {
+        List <Task> filteredList = new ArrayList<>();
+        filteredList.addAll(inprogress);
+        filteredList.addAll(inline);
+        return filteredList;
+    }
+
     public double getCompletionRate() {
-//TODO return as 0.123253
+        //TODO return as 0.123253
         return 0.123253;
     }
 

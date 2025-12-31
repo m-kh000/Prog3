@@ -44,7 +44,7 @@ public class ProductLinePanel extends JPanel {
         add(completedPanel);
         
         // In progress tasks
-        JLabel inprogressValue = new JLabel(String.valueOf(line.getInprogress().size()));
+        JLabel inprogressValue = new JLabel(String.valueOf(line.getBothInPInL().size()));
         inprogressValue.setForeground(Color.BLUE);
         inprogressValue.setFont(Manager.defaultFont(false, false));
         JPanel inprogressPanel = new JPanel();
