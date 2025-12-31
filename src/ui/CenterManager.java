@@ -6,11 +6,21 @@ import ui.functions.*;
 
 public class CenterManager extends JPanel {
     public CenterManager(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(8, 1, 0, 20));
+        setLayout(new BorderLayout());
+        
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 0, 20));
         JLabel title = new JLabel("Manager");
         title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
-        add(title);
+        mainPanel.add(title);
         Color buttonColor = Color.decode("#5294ff");
 
         JButton addLine = createStyledButton("Add Production Line", buttonColor);
@@ -25,9 +35,11 @@ public class CenterManager extends JPanel {
         JButton deliverTask = createStyledButton("Deliver Task", buttonColor);
         deliverTask.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
 
-        add(addLine);
-        add(modifyStatus);
-        add(viewPerformance);
+        mainPanel.add(addLine);
+        mainPanel.add(modifyStatus);
+        mainPanel.add(viewPerformance);
+        
+        add(mainPanel, BorderLayout.CENTER);
     }
 
     private JButton createStyledButton(String text, Color bgColor) {

@@ -16,6 +16,16 @@ public class CenterSignup extends JPanel {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
         
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        
         JPanel title = new JPanel(new BorderLayout());
         JButton loginButton = new JButton("Login");
         loginButton.setFont(Manager.defaultFont(false, true));
@@ -30,7 +40,7 @@ public class CenterSignup extends JPanel {
         titleLabel.setFont(Manager.defaultFont(true, true));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         title.add(titleLabel, BorderLayout.CENTER);
-        add(title, BorderLayout.NORTH);
+        mainPanel.add(title, BorderLayout.NORTH);
         
         JPanel boxes = new JPanel(new GridLayout(4, 1, 30, 0));
         //role
@@ -71,7 +81,8 @@ public class CenterSignup extends JPanel {
         signupButton.setContentAreaFilled(false);
         boxes.add(signupButton);
         
-        add(boxes, BorderLayout.CENTER);
+        mainPanel.add(boxes, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
 
         //actions
         signupButton.addActionListener(e -> {

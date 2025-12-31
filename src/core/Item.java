@@ -101,4 +101,11 @@ public class Item {
     public void setQuantityAvailable(int quantityAvailable) {
         this.quantityAvailable = quantityAvailable;
     }
+
+    public void restock(int addQuantity) {
+        if (addQuantity<=0) {
+            throw new InvalidValuesException();
+        }
+        quantityAvailable += addQuantity;
+    }
 }
