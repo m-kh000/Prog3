@@ -42,7 +42,7 @@ public class Factory {
     public static void add(Task task, String plName) {
         plName = plName.trim().toLowerCase();
         for (ProductLine pl : allLines) {
-            if (pl.getName().equals(plName)) {
+            if (pl.getName().trim().toLowerCase().equals(plName)) {
                 pl.addTask(task);
                 break;
             }

@@ -371,7 +371,6 @@ public class FileUtils {
             } catch (IllegalAccessException e) {
                 log(e);
             }
-
         }
     }
 
