@@ -33,7 +33,9 @@ public class Product {
         requiredItems.put(i, quantity);
     }
 
-    public void order(LocalDate date) {}
+    public void order(LocalDate date) {
+        orderedIn.add(date);
+    }
 
     public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
         for(LocalDate l : getOrderedIn()){

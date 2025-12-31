@@ -111,7 +111,8 @@ public class Warehouse {
         List<Product> filteredList = new ArrayList<>();
         List<Product> freq = new ArrayList<>();
         for(Product p : products){
-            freq.add(p);
+            if(p.getPurchaseFrequency() > 0)
+                freq.add(p);
         }
         Collections.sort(freq, (p1, p2) -> {return p2.getPurchaseFrequency() - p1.getPurchaseFrequency();});
         for(Product p : freq){

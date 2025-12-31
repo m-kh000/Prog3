@@ -190,7 +190,7 @@ public class ProductLine implements Runnable {
         this.status = status;
     }
 
-    public void removeCompletedTask(int id) {
+    public void removeCompletedTask(int id) throws NoSuchElementException {
         this.completed.remove(getCompletedTask(id));
     }
 
@@ -225,14 +225,14 @@ public class ProductLine implements Runnable {
         return null;
     }
 
-    private Task getCompletedTask(int taskId) {
+    private Task getCompletedTask(int taskId) throws NoSuchElementException {
         for (Task t : completed) {
             if (t.getId() == taskId) {
                 return t;
             }
         }
 
-        return null;
+        throw new NoSuchElementException();
     }
 
     public double getCompletionRate() {

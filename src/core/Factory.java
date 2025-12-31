@@ -1,6 +1,8 @@
 package core;
 
 import core.User.UserInfo;
+import exceptions.InvalidValuesException;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,10 +91,9 @@ public class Factory {
         return null;
     }
 
-    // SETTERS :
-    public static void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) {
+    public static void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) throws InvalidValuesException, NoSuchElementException {
         if (!warehouse.getItems().contains(i)) {
-            return;
+            throw new NoSuchElementException();
         }
         i.setName(name);
         i.setCategory(category);
@@ -107,11 +108,10 @@ public class Factory {
 
     // FILTERS :
     public static List<Item> filterItemsByName(String filter) {
-        filter = filter.trim();
-        filter = filter.toLowerCase();
+        filter = filter.trim().toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
-            if (i.getName().toLowerCase().contains(filter)) {
+            if (i.getName().trim().toLowerCase().equals(filter)) {
                 filteredList.add(i);
             }
         }
@@ -119,11 +119,10 @@ public class Factory {
     }
 
     public static List<Item> filterItemsByCategory(String filter) {
-        filter = filter.trim();
-        filter = filter.toLowerCase();
+        filter = filter.trim().toLowerCase();
         List<Item> filteredList = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
-            if (i.getCategory().toLowerCase().contains(filter)) {
+            if (i.getCategory().trim().toLowerCase().equals(filter)) {
                 filteredList.add(i);
             }
         }
@@ -174,6 +173,37 @@ public class Factory {
         for (ProductLine pl : allLines) {
             filteredList.addAll(pl.getCompleted());
         }
+        return filteredList;
+    }
+
+    public static List<ProductLine> filterProductLinesByProduct(String filterValue) {
+        List<ProductLine> filteredList = new ArrayList<>();
+        for (ProductLine pl : allLines) {
+            if (pl.hasProduct(filterValue)) {
+                filteredList.add(pl);
+            }
+        }
+        return filteredList;
+    }
+
+    public static List<Task> filterTasksByProduct(String filterValue) {
+        filterValue = filterValue.trim().toLowerCase();
+        List<Task> filteredList = new ArrayList<>();
+        for(Task t : previewTasks()) {
+            if(t.getProduct().getName().trim().toLowerCase().equals(filterValue)) {
+                filteredList.add(t);
+            }
+        }
+        return filteredList;
+    }
+
+    public static List<Task> filterTasksByProductLine(String filterValue) {
+        filterValue = filterValue.trim().toLowerCase();
+        List<Task> filteredList = new ArrayList<>();
+        ProductLine pl = findPLByName(filterValue);
+        filteredList.addAll(pl.getInline());
+        filteredList.addAll(pl.getInprogress());
+        filteredList.addAll(pl.getCompleted());
         return filteredList;
     }
 
@@ -235,23 +265,13 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public static List<ProductLine> filterProductLinesByProduct(String filterValue) {
-        List<ProductLine> filteredList = new ArrayList<>();
-        for (ProductLine pl : allLines) {
-            if (pl.hasProduct(filterValue)) {
-                filteredList.add(pl);
-            }
-        }
-        return filteredList;
-    }
-
     /**
      * Deliver a specific completed task by removing it from the completed list
      * in its productline.
      *
      * @param t the task to deliver
      */
-    public static void deliverTask(ProductLine pl, int taskId) {
+    public static void deliverTask(ProductLine pl, int taskId) throws NoSuchElementException {
         pl.removeCompletedTask(taskId);
     }
 
@@ -270,7 +290,7 @@ public class Factory {
         FileUtils.saveProductLines();
     }
 
-    public void modifyStatus(String selectedLineName, String selectedStatus) {
+    public static void modifyStatus(String selectedLineName, String selectedStatus) {
         selectedStatus = selectedStatus.trim().toLowerCase();
         for (ProductLine pl : allLines) {
             if (pl.getName().trim().toLowerCase().equals(selectedLineName)) {
@@ -279,7 +299,7 @@ public class Factory {
         }
     }
 
-    public String[] getCompletedTasksNames() {
+    public static String[] getCompletedTasksNames() {
         List<String> names = new ArrayList<>();
         for (ProductLine pl : allLines) {
             for (Task t : pl.getCompleted()) {
@@ -289,18 +309,18 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public void deliverTask(String selectedItem) {
+    public static void deliverTask(String selectedItem) {
         selectedItem = selectedItem.trim().toLowerCase();
         for (ProductLine pl : allLines) {
             for (Task t : pl.getCompleted()) {
-                if (t.getName().equals(selectedItem)) {
+                if (t.getName().trim().toLowerCase().equals(selectedItem)) {
                     pl.getCompleted().remove(t);
                 }
             }
         }
     }
 
-    public String[] getItemNames() {
+    public static String[] getItemNames() {
         List<String> names = new ArrayList<>();
         for (Item i : warehouse.getItems()) {
             names.add(i.getName());
@@ -308,48 +328,32 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public Item findItemByName(String itemName) throws NoSuchElementException {
+    public static Item findItemByName(String itemName) throws NoSuchElementException {
+        itemName = itemName.trim().toLowerCase();
         for (Item i : warehouse.getItems()) {
-            if (i.getName().equals(itemName)) {
+            if (i.getName().trim().toLowerCase().equals(itemName)) {
                 return i;
             }
         }
+
         throw new NoSuchElementException();
     }
 
-    public Product findProductByName(String productName) throws NoSuchElementException {
+    public static Product findProductByName(String productName) throws NoSuchElementException {
+        productName = productName.trim().toLowerCase();
         for (Product p : warehouse.getProducts()) {
-            if (p.getName().equals(productName)) {
+            if (p.getName().trim().toLowerCase().equals(productName)) {
                 return p;
             }
         }
+
         throw new NoSuchElementException();
     }
 
-    public List<Task> filterTasksByProduct(String filterValue) {
+    private static ProductLine findPLByName(String filterValue) {
         filterValue = filterValue.trim().toLowerCase();
-        List<Task> filteredList = new ArrayList<>();
-        for(Task t : previewTasks()) {
-            if(t.getProduct().getName().equals(filterValue)) {
-                filteredList.add(t);
-            }
-        }
-        return filteredList;
-    }
-
-    public List<Task> filterTasksByProductLine(String filterValue) {
-        filterValue = filterValue.trim().toLowerCase();
-        List<Task> filteredList = new ArrayList<>();
-        ProductLine pl = findPLByName(filterValue);
-        filteredList.addAll(pl.getInline());
-        filteredList.addAll(pl.getInprogress());
-        filteredList.addAll(pl.getCompleted());
-        return filteredList;
-    }
-
-    private ProductLine findPLByName(String filterValue) {
         for(ProductLine pl : allLines) {
-            if(pl.getName().equals(filterValue)) {
+            if(pl.getName().trim().toLowerCase().equals(filterValue)) {
                 return pl;
             }
         }

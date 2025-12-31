@@ -18,11 +18,12 @@ public class Task {
     public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) {
         this.id = nextId++;
         this.product = product;
-        product.increasePurchases();
+        this.product.increasePurchases();
         this.requiredQuantity = requiredQuantity;
         this.ready = 0;
         this.customerName = customerName;
         this.startDate = startDate;
+        this.product.order(startDate);
         this.deliveryDate = deliveryDate;
         this.status = status;
     }
