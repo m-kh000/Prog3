@@ -1,2 +1,76 @@
 [
+    {
+        "id": 1,
+        "product": {
+            "id": 1,
+            "name": "Hoodie",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "cotton",
+                        "category": "fabrics",
+                        "price": 2.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 500
+                    },
+                    "value": 10
+                }
+            ],
+            "orderedIn": [
+                "2025-12-31"
+            ],
+            "purchaseFrequency": 1
+        },
+        "requiredQuantity": 100,
+        "ready": 0,
+        "customerName": "Joseph",
+        "startDate": "2025-12-31",
+        "deliveryDate": "2026-01-30",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 4,
+            "name": "wooden cake",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "CAKE ^_~",
+                        "category": "caky",
+                        "price": 31115.0,
+                        "quantityAvailable": 0,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                }
+            ],
+            "orderedIn": [
+                "2025-11-11",
+                "1111-11-11"
+            ],
+            "purchaseFrequency": 10
+        },
+        "requiredQuantity": 10,
+        "ready": 0,
+        "customerName": "Zein",
+        "startDate": "2025-11-11",
+        "deliveryDate": "2026-11-11",
+        "status": "inline"
+    }
 ]

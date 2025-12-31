@@ -122,7 +122,7 @@ public class Item {
     }
 
     public void restock(int addQuantity) throws InvalidValuesException {
-        if (addQuantity<=0) {
+        if (addQuantity <= 0) {
             throw new InvalidValuesException();
         }
         quantityAvailable += addQuantity;
