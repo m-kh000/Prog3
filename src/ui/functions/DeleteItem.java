@@ -2,6 +2,8 @@ package ui.functions;
 
 import java.awt.*;
 import javax.swing.*;
+
+import exceptions.EmptyFieldException;
 import ui.Manager;
 
 public class DeleteItem extends FunctionPanel {
@@ -48,16 +50,25 @@ public class DeleteItem extends FunctionPanel {
             }
         });
 
-        deleteBtn.addActionListener(e -> {
+        deleteBtn.addActionListener (e -> {
             // Delete selected item and update combo box
-            factory.deleteItem((String)itemCombo.getSelectedItem());
-            itemCombo.removeAllItems();
-            for(String item : factory.getItemsNames()) {
-                itemCombo.addItem(item);
+            try {
+                if(itemCombo.getSelectedItem()!= null){
+                factory.deleteItem((String)itemCombo.getSelectedItem());
+                itemCombo.removeAllItems();
+                for(String item : factory.getItemsNames()) {
+                    itemCombo.addItem(item);
+                }
+                itemCombo.setSelectedItem(null);
+                Manager.isEdited = true;
+                JOptionPane.showMessageDialog(null, "Item deleted successfully");
             }
-            itemCombo.setSelectedItem(null);
-            Manager.isEdited = true;
-            JOptionPane.showMessageDialog(null, "Item deleted successfully");
+            else
+                throw new EmptyFieldException();
+            }
+            catch (Exception ee) {
+                JOptionPane.showMessageDialog(null, ee.getMessage());
+            }
         });
     }
 }

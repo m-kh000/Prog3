@@ -20,6 +20,182 @@
                 {
                     "key": {
                         "id": 2,
+                        "name": "milk",
+                        "category": "dairy",
+                        "price": 1000.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 5
+        },
+        "requiredQuantity": 1000,
+        "ready": 0,
+        "customerName": "Joseph",
+        "startDate": "2025-11-11",
+        "deliveryDate": "2026-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 4,
+            "name": "wooden cake",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "CAKE ^_~",
+                        "category": "caky",
+                        "price": 31115.0,
+                        "quantityAvailable": 0,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 6
+        },
+        "requiredQuantity": 200,
+        "ready": 0,
+        "customerName": "Mira",
+        "startDate": "2025-12-22",
+        "deliveryDate": "2026-12-22",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 1,
+            "name": "Bed",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "wool",
+                        "category": "fabric",
+                        "price": 700.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 50
+                    },
+                    "value": 6
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 6
+                }
+            ],
+            "orderedIn": [
+            ],
+            "purchaseFrequency": 2
+        },
+        "requiredQuantity": 13,
+        "ready": 0,
+        "customerName": "zeeeee",
+        "startDate": "2026-01-01",
+        "deliveryDate": "2026-02-10",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 1,
+            "name": "Bed",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 6
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "wool",
+                        "category": "fabric",
+                        "price": 700.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 50
+                    },
+                    "value": 6
+                }
+            ],
+            "orderedIn": [
+                "2026-09-09"
+            ],
+            "purchaseFrequency": 3
+        },
+        "requiredQuantity": 90,
+        "ready": 0,
+        "customerName": "zeeeee",
+        "startDate": "2026-09-09",
+        "deliveryDate": "2026-10-10",
+        "status": "inline"
+    },
+    {
+        "id": 2,
+        "product": {
+            "id": 3,
+            "name": "milky screws",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                },
+                {
+                    "key": {
+                        "id": 2,
                         "name": "screw",
                         "category": "items",
                         "price": 1.0,
@@ -41,14 +217,68 @@
                 }
             ],
             "orderedIn": [
+                "1111-11-11"
             ],
-            "purchaseFrequency": 5
+            "purchaseFrequency": 8
         },
-        "requiredQuantity": 1000,
+        "requiredQuantity": 1,
         "ready": 0,
-        "customerName": "Joseph",
-        "startDate": "2025-11-11",
-        "deliveryDate": "2026-11-11",
+        "customerName": "1",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 3,
+        "product": {
+            "id": 3,
+            "name": "milky screws",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "milk",
+                        "category": "dairy",
+                        "price": 1000.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 20
+                    },
+                    "value": 1
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
+                }
+            ],
+            "orderedIn": [
+                "1111-11-11"
+            ],
+            "purchaseFrequency": 8
+        },
+        "requiredQuantity": 13,
+        "ready": 0,
+        "customerName": "1",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
         "status": "inline"
     },
     {
@@ -82,14 +312,59 @@
                 }
             ],
             "orderedIn": [
+                "1111-11-11"
             ],
-            "purchaseFrequency": 6
+            "purchaseFrequency": 9
         },
-        "requiredQuantity": 200,
+        "requiredQuantity": 1,
         "ready": 0,
-        "customerName": "Mira",
-        "startDate": "2025-12-22",
-        "deliveryDate": "2026-12-22",
+        "customerName": "1",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 1,
+        "product": {
+            "id": 1,
+            "name": "Bed",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "wool",
+                        "category": "fabric",
+                        "price": 700.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 50
+                    },
+                    "value": 6
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
+                        "minQuantity": 20
+                    },
+                    "value": 6
+                }
+            ],
+            "orderedIn": [
+                "2026-09-09",
+                "1111-11-11",
+                "2024-10-10"
+            ],
+            "purchaseFrequency": 5
+        },
+        "requiredQuantity": -12,
+        "ready": 0,
+        "customerName": "1",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
         "status": "inline"
     }
 ]

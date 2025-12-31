@@ -1,4 +1,7 @@
 package core;
+
+import exceptions.InvalidValuesException;
+
 public class Item {
     private static int nextId = 1;
     private int id;
@@ -10,7 +13,10 @@ public class Item {
 
     public Item() {}
     
-    public Item(String name, String category, double price, int quantityAvailable, int minQuantity) {
+    public Item(String name, String category, double price, int quantityAvailable, int minQuantity) throws InvalidValuesException {
+        if(price <= 0.0 || quantityAvailable < 0 || minQuantity <= 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.id = nextId++;
         this.name = name;
         this.category = category;
@@ -30,12 +36,11 @@ public class Item {
         return quantity <= quantityAvailable;
     }
 
-    public void add(int quantity) {
+    public void add(int quantity) throws InvalidValuesException {
+        if(quantity <= 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         quantityAvailable += quantity;
-    }
-    
-    public void resetCategoryPriceMinQuantity(int newQuantity) { 
-        minQuantity = newQuantity;
     }
 
     public boolean isAvailable() { 
@@ -86,7 +91,10 @@ public class Item {
         this.category = category;
     }
 
-    public void setMinQuantity(int minQuantity) {
+    public void setMinQuantity(int minQuantity) throws InvalidValuesException {
+        if (minQuantity <= 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.minQuantity = minQuantity;
     }
 
@@ -94,15 +102,21 @@ public class Item {
         this.name = name;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double price) throws InvalidValuesException {
+        if (price <= 0.0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.price = price;
     }
 
-    public void setQuantityAvailable(int quantityAvailable) {
+    public void setQuantityAvailable(int quantityAvailable) throws InvalidValuesException {
+        if (quantityAvailable < 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.quantityAvailable = quantityAvailable;
     }
 
-    public void restock(int addQuantity) {
+    public void restock(int addQuantity) throws InvalidValuesException {
         if (addQuantity<=0) {
             throw new InvalidValuesException();
         }

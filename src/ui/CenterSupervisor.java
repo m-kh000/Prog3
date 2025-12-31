@@ -58,7 +58,7 @@ public class CenterSupervisor extends JPanel {
 
         JButton saveStatusBtn = createStyledButton("Save Status to TXT", buttonColor);
         saveStatusBtn.addActionListener(e -> {
-            if(!Manager.isEdited)
+            if(Manager.isEdited)
             try {
                 factory.saveToTXT();
                 Manager.isEdited = false;
