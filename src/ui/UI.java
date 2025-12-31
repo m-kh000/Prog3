@@ -2,8 +2,6 @@ package ui;
 import java.awt.*;
 import javax.swing.*;
 
-import core.Factory;
-
 public class UI extends JFrame {
     private static JPanel centerPanel;
     
@@ -43,9 +41,10 @@ public class UI extends JFrame {
     
 }
 
-//TODO 
-//ids
-//add product
-//json localdate
-//hashset in product
-//deliver a task exception
+// TODO 
+// ids
+// add product
+// json localdate, Done
+// hashset in product
+// deliver a task exception
+// employ and assign new ProductLines automatically
