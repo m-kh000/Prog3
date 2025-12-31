@@ -115,4 +115,11 @@ public class Item {
         }
         this.quantityAvailable = quantityAvailable;
     }
+
+    public void restock(int addQuantity) {
+        if (addQuantity<=0) {
+            throw new InvalidValuesException();
+        }
+        quantityAvailable += addQuantity;
+    }
 }

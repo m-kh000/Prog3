@@ -10,11 +10,21 @@ import ui.Manager;
 
 public class AddTask extends FunctionPanel {
     public AddTask(JPanel centerPanel, JFrame frame, Factory factory) {
+        setLayout(new BorderLayout());
+        
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
         // Main grid: 8 rows, 1 column
-        setLayout(new GridLayout(8, 1, 10, 20));
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 10, 20));
         
         // Row 1: Top panel
-        add(createTopPanel("Add Task", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Add Task", centerPanel, frame, factory, "supervisor"));
         
         // Row 2: Select product
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
@@ -25,7 +35,7 @@ public class AddTask extends FunctionPanel {
         product.setSelectedItem(null);
         selectPanel.add(selectLabel);
         selectPanel.add(product);
-        add(selectPanel);
+        mainPanel.add(selectPanel);
         
         // Row 3: Select product line
         JPanel selectPLPanel = new JPanel(new GridLayout(1, 2, 0, 0));
@@ -36,28 +46,30 @@ public class AddTask extends FunctionPanel {
         PL.setSelectedItem(null);
         selectPLPanel.add(selectPLLabel);
         selectPLPanel.add(PL);
-        add(selectPLPanel);
+        mainPanel.add(selectPLPanel);
         
         // Row 4: Type quantity
         LabelBox quantity = new LabelBox("Required Quantity:", false);
-        add(quantity);
+        mainPanel.add(quantity);
         
         // Row 5: Type customer
         LabelBox customer = new LabelBox("Customer Name:", false);
-        add(customer);
+        mainPanel.add(customer);
         
         // Row 6: Type start date
         LabelBox start = new LabelBox("Start Date:", false, true);
-        add(start);
+        mainPanel.add(start);
         
         // Row 7: Type delivery date
         LabelBox delivery = new LabelBox("Delivery Date:", false, true);
-        add(delivery);
+        mainPanel.add(delivery);
 
         // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(Manager.defaultFont(true, false));
-        add(submitBtn);
+        mainPanel.add(submitBtn);
+        
+        add(mainPanel, BorderLayout.CENTER);
         
         // Add Enter key functionality
         delivery.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {

@@ -16,6 +16,16 @@ public class CenterLogin extends JPanel {
     public CenterLogin(JPanel centerPanel, JFrame frame, String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
+        
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
+        JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel boxes = new JPanel(new GridLayout(3, 1, 30, 0));
 
         JPanel title = new JPanel(new BorderLayout());
@@ -32,7 +42,7 @@ public class CenterLogin extends JPanel {
         titleLable.setFont(Manager.defaultFont(true, true));
         titleLable.setHorizontalAlignment(JLabel.CENTER);
         title.add(titleLable, BorderLayout.CENTER);
-        add(title,BorderLayout.NORTH);
+        mainPanel.add(title,BorderLayout.NORTH);
 
         LabelBox emailbox = new LabelBox("Email:");
         LabelBox passwordbox = new LabelBox("Password:", true);
@@ -50,7 +60,8 @@ public class CenterLogin extends JPanel {
         boxes.add(loginButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        add(boxes, BorderLayout.CENTER);
+        mainPanel.add(boxes, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
 
         //triggered be pressing btn or ENTER
         loginButton.addActionListener(e -> {
@@ -86,20 +97,8 @@ public class CenterLogin extends JPanel {
                     centerPanel.revalidate();
                     centerPanel.repaint();
                     if(successful) {
-                        ImageIcon icon = new ImageIcon("icons/smile.png");
+                        ImageIcon icon = new ImageIcon("icons/smile5.png");
                         Image img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile2.png");
-                        img = icon.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile3.png");
-                        img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile4.png");
-                        img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile5.png");
-                        img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
                     } else {
                         JOptionPane.showMessageDialog(null, r.getMessage(), "Message", JOptionPane.INFORMATION_MESSAGE);
