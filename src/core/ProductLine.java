@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import exceptions.InvalidValuesException;
 import jsonParser.annotations.JsonIgnore;
 import utils.FileUtils;
+import utils.IDInitializer;
 import utils.ThreadManager;
 
 public class ProductLine implements Runnable {
@@ -27,6 +28,10 @@ public class ProductLine implements Runnable {
     private List<Task> inline;
     @JsonIgnore
     private List<Task> canceled;
+
+    static {
+        nextId = IDInitializer.getProductlinesGlobalID();
+    }
 
     public ProductLine() {
     }
@@ -92,6 +97,9 @@ public class ProductLine implements Runnable {
     //GETTERS
     public int getLineId() {
         return this.id;
+    }
+    public static int getNextId() {
+        return nextId;
     }
 
     public int getPriority() {

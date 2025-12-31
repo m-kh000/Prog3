@@ -29,6 +29,7 @@ public class FileUtils {
     private static final File PRODUCTS_FILE = new File("./files/Products.json");
     private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
     private static final File EXCEPTIONS_FILE = new File("./files/Exceptions.txt");
+    private static final File IDS_FILE = new File("./files/IDs.json");
 
     /**
      * This method reads users from the Users.json file.
@@ -215,6 +216,23 @@ public class FileUtils {
     }
 
     /**
+     * Reads IDs from IDS.json file.
+     * 
+     * @return an array of integers containing the global ids for each class
+     * @throws IOException
+     */
+    public static int[] readIDs() throws IOException {
+        synchronized (FILE_LOCK) {
+            if (!IDS_FILE.exists()) {
+                return new int[] {1, 1, 1, 1};
+            }
+
+            int[] ids = JsonParser.fromJson(readData(IDS_FILE), int[].class);
+            return ids;
+        }
+    }
+
+    /**
      * This method saves all users in the users list in the provided factory.
      *
      * <p>
@@ -354,6 +372,29 @@ public class FileUtils {
                 log(e);
             }
 
+        }
+    }
+
+    /**
+     * Saves the next ID for each class in IDs.json file.
+     *<p>
+     *  Saves in an array of integers where [0] is the Item's id, [1] is the Product's id
+     *  [2] is the Task's id and [3] is the PoductLine's id. 
+     *</p>
+     */
+    public static void saveIDs() throws IOException {
+        synchronized (FILE_LOCK) {
+            int[] ids = new int[4];
+            ids[0] = Item.getNextId();
+            ids[1] = Product.getNextId();
+            ids[2] = Task.getNextId();
+            ids[3] = ProductLine.getNextId();
+            try {
+                createFile(IDS_FILE);
+                writeData(IDS_FILE, JsonParser.toJson(ids), false);
+            } catch (IllegalAccessException e) {
+                log(e);
+            }
         }
     }
 

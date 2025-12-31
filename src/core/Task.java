@@ -2,6 +2,7 @@ package core;
 
 import java.time.LocalDate;
 
+import utils.IDInitializer;
 import exceptions.InvalidValuesException;
 
 public class Task {
@@ -14,6 +15,10 @@ public class Task {
     private LocalDate startDate;
     private LocalDate deliveryDate;
     private String status;
+
+    static {
+        nextId = IDInitializer.getTasksGlobalID();
+    }
 
     public Task() {}
     

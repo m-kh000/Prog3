@@ -1,5 +1,6 @@
 package core;
 
+import utils.IDInitializer;
 import exceptions.InvalidValuesException;
 
 public class Item {
@@ -10,6 +11,10 @@ public class Item {
     private double price;
     private int quantityAvailable;
     private int minQuantity;
+
+    static {
+        nextId = IDInitializer.getItemsGlobalID();
+    }
 
     public Item() {}
     

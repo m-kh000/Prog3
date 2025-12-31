@@ -214,6 +214,17 @@
                         "minQuantity": 20
                     },
                     "value": 1
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "screw",
+                        "category": "items",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 100
+                    },
+                    "value": 3
                 }
             ],
             "orderedIn": [
