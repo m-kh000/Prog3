@@ -97,20 +97,8 @@ public class CenterLogin extends JPanel {
                     centerPanel.revalidate();
                     centerPanel.repaint();
                     if(successful) {
-                        ImageIcon icon = new ImageIcon("icons/smile.png");
+                        ImageIcon icon = new ImageIcon("icons/smile5.png");
                         Image img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile2.png");
-                        img = icon.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile3.png");
-                        img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile4.png");
-                        img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                        icon = new ImageIcon("icons/smile5.png");
-                        img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                         JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
                     } else {
                         JOptionPane.showMessageDialog(null, r.getMessage(), "Message", JOptionPane.INFORMATION_MESSAGE);
