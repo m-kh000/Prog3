@@ -8,23 +8,23 @@
             "requiredItems": [
                 {
                     "key": {
-                        "id": 2,
-                        "name": "wool",
-                        "category": "fabric",
-                        "price": 700.0,
-                        "quantityAvailable": 100,
-                        "minQuantity": 50
-                    },
-                    "value": 6
-                },
-                {
-                    "key": {
                         "id": 3,
                         "name": "wood",
                         "category": "dk",
                         "price": 1000.0,
                         "quantityAvailable": 1,
                         "minQuantity": 20
+                    },
+                    "value": 6
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "wool",
+                        "category": "fabric",
+                        "price": 700.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 50
                     },
                     "value": 6
                 }

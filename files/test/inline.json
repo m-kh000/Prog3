@@ -60,22 +60,22 @@
             "requiredItems": [
                 {
                     "key": {
-                        "id": 2,
-                        "name": "CAKE ^_~",
-                        "category": "caky",
-                        "price": 31115.0,
-                        "quantityAvailable": 0,
+                        "id": 3,
+                        "name": "wood",
+                        "category": "dk",
+                        "price": 1000.0,
+                        "quantityAvailable": 1,
                         "minQuantity": 20
                     },
                     "value": 1
                 },
                 {
                     "key": {
-                        "id": 3,
-                        "name": "wood",
-                        "category": "dk",
-                        "price": 1000.0,
-                        "quantityAvailable": 1,
+                        "id": 2,
+                        "name": "CAKE ^_~",
+                        "category": "caky",
+                        "price": 31115.0,
+                        "quantityAvailable": 0,
                         "minQuantity": 20
                     },
                     "value": 1
@@ -101,23 +101,23 @@
             "requiredItems": [
                 {
                     "key": {
-                        "id": 2,
-                        "name": "wool",
-                        "category": "fabric",
-                        "price": 700.0,
-                        "quantityAvailable": 100,
-                        "minQuantity": 50
-                    },
-                    "value": 6
-                },
-                {
-                    "key": {
                         "id": 3,
                         "name": "wood",
                         "category": "dk",
                         "price": 1000.0,
                         "quantityAvailable": 1,
                         "minQuantity": 20
+                    },
+                    "value": 6
+                },
+                {
+                    "key": {
+                        "id": 2,
+                        "name": "wool",
+                        "category": "fabric",
+                        "price": 700.0,
+                        "quantityAvailable": 100,
+                        "minQuantity": 50
                     },
                     "value": 6
                 }
