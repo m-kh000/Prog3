@@ -7,13 +7,23 @@ import ui.functions.*;
 public class CenterSupervisor extends JPanel {
 
     public CenterSupervisor(JPanel centerPanel, JFrame frame, Factory factory) {
-        setLayout(new GridLayout(7, 1, 0, 20));
+        setLayout(new BorderLayout());
+        
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
+        JPanel mainPanel = new JPanel(new GridLayout(7, 1, 0, 20));
         Color buttonColor = Color.decode("#5294ff");
 
         JLabel title = new JLabel("Supervisor");
         title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
-        add(title);
+        mainPanel.add(title);
 
         JPanel row1 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton itemsBtn = createStyledButton("Items", buttonColor);
@@ -22,7 +32,7 @@ public class CenterSupervisor extends JPanel {
         filterItemsBtn.addActionListener(e -> UI.switchContent(new FilterItems(centerPanel, frame, factory)));
         row1.add(itemsBtn);
         row1.add(filterItemsBtn);
-        add(row1);
+        mainPanel.add(row1);
 
         JPanel row2 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton tasksBtn = createStyledButton("Tasks", buttonColor);
@@ -31,7 +41,7 @@ public class CenterSupervisor extends JPanel {
         filterTasksBtn.addActionListener(e -> UI.switchContent(new FilterTasks(centerPanel, frame, factory)));
         row2.add(tasksBtn);
         row2.add(filterTasksBtn);
-        add(row2);
+        mainPanel.add(row2);
 
         JPanel row3 = new JPanel(new GridLayout(1, 2, 10, 0));
         JButton productsBtn = createStyledButton("Products", buttonColor);
@@ -40,11 +50,11 @@ public class CenterSupervisor extends JPanel {
         filterProductsBtn.addActionListener(e -> UI.switchContent(new FilterProducts(centerPanel, frame, factory)));
         row3.add(productsBtn);
         row3.add(filterProductsBtn);
-        add(row3);
+        mainPanel.add(row3);
 
         JButton filterProductionLinesBtn = createStyledButton("Filter Production Lines", buttonColor);
         filterProductionLinesBtn.addActionListener(e -> UI.switchContent(new FilterProductLines(centerPanel, frame, factory)));
-        add(filterProductionLinesBtn);
+        mainPanel.add(filterProductionLinesBtn);
 
         JButton saveStatusBtn = createStyledButton("Save Status to TXT", buttonColor);
         saveStatusBtn.addActionListener(e -> {
@@ -60,12 +70,14 @@ public class CenterSupervisor extends JPanel {
                 JOptionPane.showMessageDialog(frame, "No edits to save.");
             }
         });
-        add(saveStatusBtn);
+        mainPanel.add(saveStatusBtn);
 
         //deliver a task button
         JButton deliverTaskBtn = createStyledButton("Deliver a Task", buttonColor);
         deliverTaskBtn.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
-        add(deliverTaskBtn);
+        mainPanel.add(deliverTaskBtn);
+        
+        add(mainPanel, BorderLayout.CENTER);
     }
 
 

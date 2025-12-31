@@ -6,7 +6,7 @@ public class UI extends JFrame {
     private static JPanel centerPanel;
     
     public UI() {
-        int bigp = 400, smallp = 80;
+        int bigp = 300, smallp = 80;
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setResizable(false);
         setLayout(new BorderLayout());
@@ -43,9 +43,8 @@ public class UI extends JFrame {
 
 // TODO 
 // ids
-//bye item
+// buy item
 // add product
-// json localdate, Done
 // hashset in product
 // deliver a task exception
 // employ and assign new ProductLines automatically

@@ -16,6 +16,16 @@ public class CenterLogin extends JPanel {
     public CenterLogin(JPanel centerPanel, JFrame frame, String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
+        
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
+        JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel boxes = new JPanel(new GridLayout(3, 1, 30, 0));
 
         JPanel title = new JPanel(new BorderLayout());
@@ -32,7 +42,7 @@ public class CenterLogin extends JPanel {
         titleLable.setFont(Manager.defaultFont(true, true));
         titleLable.setHorizontalAlignment(JLabel.CENTER);
         title.add(titleLable, BorderLayout.CENTER);
-        add(title,BorderLayout.NORTH);
+        mainPanel.add(title,BorderLayout.NORTH);
 
         LabelBox emailbox = new LabelBox("Email:");
         LabelBox passwordbox = new LabelBox("Password:", true);
@@ -50,7 +60,8 @@ public class CenterLogin extends JPanel {
         boxes.add(loginButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        add(boxes, BorderLayout.CENTER);
+        mainPanel.add(boxes, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
 
         //triggered be pressing btn or ENTER
         loginButton.addActionListener(e -> {

@@ -17,12 +17,22 @@ public class AddProduct extends FunctionPanel {
     public AddProduct(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
         
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
+        
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        
         // Top panel with navigation
-        add(createTopPanel("Add a Product", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        mainPanel.add(createTopPanel("Add a Product", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
 
         // Product name input panel
         LabelBox productNameBox = new LabelBox("Product Name:");
-        add(productNameBox, BorderLayout.CENTER);
+        mainPanel.add(productNameBox, BorderLayout.CENTER);
 
         // Scrollable panel for item requirements
         itemRequirementsPanel = new JPanel();
@@ -32,7 +42,7 @@ public class AddProduct extends FunctionPanel {
 
         JScrollPane scrollPane = new JScrollPane(itemRequirementsPanel);
         scrollPane.setPreferredSize(new Dimension(600, 450));
-        add(scrollPane, BorderLayout.SOUTH);
+        mainPanel.add(scrollPane, BorderLayout.SOUTH);
 
         // Add product button
         JPanel buttonPanel = new JPanel(new GridBagLayout());
@@ -91,7 +101,9 @@ public class AddProduct extends FunctionPanel {
         });
         
         buttonPanel.add(addProductButton);
-        add(buttonPanel, BorderLayout.EAST);
+        mainPanel.add(buttonPanel, BorderLayout.EAST);
+        
+        add(mainPanel, BorderLayout.CENTER);
     }
 
     // Get available items excluding already selected ones
