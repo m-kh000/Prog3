@@ -43,8 +43,14 @@ public class UI extends JFrame {
 
 // TODO 
 // ids
+//bye item
 // add product
 // json localdate, Done
 // hashset in product
 // deliver a task exception
 // employ and assign new ProductLines automatically
+// chose icon
+//logger
+//negative
+//view tasks
+//no edits to save
