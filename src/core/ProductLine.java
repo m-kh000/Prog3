@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import exceptions.InvalidValuesException;
 import jsonParser.annotations.JsonIgnore;
 import utils.FileUtils;
 import utils.IDInitializer;
@@ -34,7 +36,10 @@ public class ProductLine implements Runnable {
     public ProductLine() {
     }
 
-    public ProductLine(String name, String status, int priority) {
+    public ProductLine(String name, String status, int priority) throws InvalidValuesException {
+        if(priority < 1 || priority > 10) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.id = nextId++;
         this.priority = priority;
         this.name = name;
@@ -190,7 +195,10 @@ public class ProductLine implements Runnable {
         this.note = note;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(int priority) throws InvalidValuesException {
+        if(priority < 1 || priority > 10) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.priority = priority;
     }
 
@@ -198,7 +206,7 @@ public class ProductLine implements Runnable {
         this.status = status;
     }
 
-    public void removeCompletedTask(int id) {
+    public void removeCompletedTask(int id) throws NoSuchElementException {
         this.completed.remove(getCompletedTask(id));
     }
 
@@ -233,19 +241,32 @@ public class ProductLine implements Runnable {
         return null;
     }
 
-    private Task getCompletedTask(int taskId) {
+    private Task getCompletedTask(int taskId) throws NoSuchElementException {
         for (Task t : completed) {
             if (t.getId() == taskId) {
                 return t;
             }
         }
 
-        return null;
+        throw new NoSuchElementException();
+    }
+
+    public List<Task> getBothInPInL() {
+        List <Task> filteredList = new ArrayList<>();
+        filteredList.addAll(inprogress);
+        filteredList.addAll(inline);
+        return filteredList;
     }
 
     public double getCompletionRate() {
-//TODO return as 0.123253
-        return 0.123253;
+        double num = inprogress.size() + inline.size();
+        double sum = 0;
+        for(Task t : inprogress) {
+            sum += t.getCompletionPercentage();
+        }
+        double rate = num / sum;
+        rate /= 100.0;
+        return rate;
     }
 
     public boolean hasProduct(String filterValue) {

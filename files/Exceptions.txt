@@ -1,2 +1,3 @@
 JsonParsingException occurred, Exception's message: Failed to parse JSON: Expected ',' or '}' after key-value pair
 EmptyFieldException occurred, Exception's message: please fill out all fields
+InvalidEmailException occurred, Exception's message: Invalid Email Format.

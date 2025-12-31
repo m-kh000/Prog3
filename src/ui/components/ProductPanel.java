@@ -5,7 +5,7 @@ import ui.Manager;
 
 public class ProductPanel extends JPanel {
     public ProductPanel(core.Product product) {
-        setLayout(new GridLayout(1, 3, 10, 0));
+        setLayout(new GridLayout(1, 4, 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         
@@ -26,6 +26,7 @@ public class ProductPanel extends JPanel {
         nameLabel.setFont(Manager.defaultFont(false, false));
         add(nameLabel);
         
+        add(new JLabel("" + product.getPurchaseFrequency()));
         // Items count with hint
         JLabel itemsValue = new JLabel(String.valueOf(product.reqItemCount()));
         itemsValue.setForeground(Color.BLUE);

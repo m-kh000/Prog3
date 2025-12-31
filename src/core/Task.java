@@ -3,6 +3,7 @@ package core;
 import java.time.LocalDate;
 
 import utils.IDInitializer;
+import exceptions.InvalidValuesException;
 
 public class Task {
     private static int nextId = 1;
@@ -21,14 +22,18 @@ public class Task {
 
     public Task() {}
     
-    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) {
+    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) throws InvalidValuesException {
+        if(requiredQuantity <= 0 || startDate.isAfter(deliveryDate)) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.id = nextId++;
         this.product = product;
-        product.increasePurchases();
+        this.product.increasePurchases();
         this.requiredQuantity = requiredQuantity;
         this.ready = 0;
         this.customerName = customerName;
         this.startDate = startDate;
+        this.product.order(startDate);
         this.deliveryDate = deliveryDate;
         this.status = status;
     }
@@ -97,7 +102,10 @@ public class Task {
         this.customerName = customerName;
     }
 
-    public void setDeliveryDate(LocalDate deliveryDate) {
+    public void setDeliveryDate(LocalDate deliveryDate) throws InvalidValuesException {
+        if(startDate.isAfter(deliveryDate)) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.deliveryDate = deliveryDate;
     }
 
@@ -113,11 +121,17 @@ public class Task {
         this.product = product;
     }
 
-    public void setRequiredQuantity(int requiredQuantity) {
+    public void setRequiredQuantity(int requiredQuantity) throws InvalidValuesException {
+        if(requiredQuantity <= 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.requiredQuantity = requiredQuantity;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) throws InvalidValuesException {
+        if(startDate.isAfter(deliveryDate)) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         this.startDate = startDate;
     }
 

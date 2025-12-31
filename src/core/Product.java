@@ -3,6 +3,8 @@ package core;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import exceptions.InvalidValuesException;
 import utils.Dates;
 import utils.IDInitializer;
 
@@ -34,11 +36,16 @@ public class Product {
         this.requiredItems = new HashMap<>(requiredItems);
     }
 
-    public void addItem(Item i, int quantity) {
+    public void addItem(Item i, int quantity) throws InvalidValuesException {
+        if(quantity <= 0) {
+            throw new InvalidValuesException("Invalid values!");
+        }
         requiredItems.put(i, quantity);
     }
 
-    public void order(LocalDate date) {}
+    public void order(LocalDate date) {
+        orderedIn.add(date);
+    }
 
     public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
         for(LocalDate l : getOrderedIn()){

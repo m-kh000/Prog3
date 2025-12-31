@@ -58,5 +58,11 @@
         "password": "22542254",
         "isManager": false,
         "lastSeen": "2025-12-30"
+    },
+    {
+        "email": "sisi@gmail.com",
+        "password": "1234567890",
+        "isManager": false,
+        "lastSeen": "2025-12-31"
     }
 ]

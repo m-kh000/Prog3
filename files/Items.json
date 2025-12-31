@@ -4,7 +4,7 @@
         "name": "wood",
         "category": "dk",
         "price": 1000.0,
-        "quantityAvailable": 1,
+        "quantityAvailable": 21,
         "minQuantity": 20
     },
     {
@@ -12,7 +12,7 @@
         "name": "wool",
         "category": "fabric",
         "price": 700.0,
-        "quantityAvailable": 100,
+        "quantityAvailable": 120,
         "minQuantity": 50
     },
     {
@@ -36,15 +36,15 @@
         "name": "CAKE :)",
         "category": "caky",
         "price": 3000.0,
-        "quantityAvailable": 0,
-        "minQuantity": 10
+        "quantityAvailable": 31,
+        "minQuantity": 30
     },
     {
-        "id": 2,
-        "name": "CAKE ^_~",
-        "category": "caky",
-        "price": 31115.0,
-        "quantityAvailable": 0,
+        "id": 1,
+        "name": "item",
+        "category": "dk",
+        "price": 10.0,
+        "quantityAvailable": 30,
         "minQuantity": 20
     }
 ]
