@@ -24,11 +24,11 @@
         "minQuantity": 50
     },
     {
-        "id": 4,
-        "name": "Screws",
-        "category": "Material",
-        "price": 2.0,
-        "quantityAvailable": 2000,
-        "minQuantity": 500
+        "id": 1,
+        "name": "milk",
+        "category": "dairy",
+        "price": 1.0,
+        "quantityAvailable": 120,
+        "minQuantity": 100
     }
 ]

@@ -15,7 +15,7 @@ public class CancelTask extends FunctionPanel {
         // Row 2: Select task
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Task:");
-        selectLabel.setFont(Manager.defaultFont(false, false));
+        selectLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
         taskCombo.setFont(Manager.defaultFont(true, false));
         taskCombo.setSelectedItem(null);
@@ -59,4 +59,5 @@ public class CancelTask extends FunctionPanel {
             JOptionPane.showMessageDialog(null, "Task cancelled successfully");
         });
     }
+
 }

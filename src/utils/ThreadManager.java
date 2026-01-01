@@ -1,10 +1,9 @@
 package utils;
 
+import core.ProductLine;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.PriorityBlockingQueue;
-
-import core.ProductLine;
 
 public class ThreadManager {
     private static Thread[] threadPool = new Thread[6];
@@ -31,6 +30,7 @@ public class ThreadManager {
      */
     public static void assign() {
         for (Thread t : threadPool) {
+            if(t != null)
             if (!t.isAlive()) {
                 try {
                     t = new Thread(waiting.remove());

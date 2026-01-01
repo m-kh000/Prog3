@@ -290,6 +290,13 @@ public class Factory {
         FileUtils.saveProductLines();
     }
 
+    public static void employAndAssignProductLines() {
+        for (ProductLine pl : allLines) {
+            utils.ThreadManager.employ(pl);
+        }
+        utils.ThreadManager.assign();
+    }
+
     public static void modifyStatus(String selectedLineName, String selectedStatus) {
         selectedStatus = selectedStatus.trim().toLowerCase();
         for (ProductLine pl : allLines) {

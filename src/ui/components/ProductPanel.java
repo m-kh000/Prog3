@@ -26,11 +26,23 @@ public class ProductPanel extends JPanel {
         nameLabel.setFont(Manager.defaultFont(false, false));
         add(nameLabel);
         
-        add(new JLabel("" + product.getPurchaseFrequency()));
+        //number of perchaces with hint
+        JLabel purchaseFrequency = new JLabel(String.valueOf(product.getPurchaseFrequency()));
+        purchaseFrequency.setForeground(Color.BLUE);
+        purchaseFrequency.setFont(Manager.defaultFont(false, true,""));
+        JPanel purchasepPanel = new JPanel();
+        purchasepPanel.setLayout(new BoxLayout(purchasepPanel, BoxLayout.X_AXIS));
+        JLabel purchaseHint = new JLabel("Purchase Frequency");
+        purchaseHint.setForeground(Color.GRAY);
+        purchaseHint.setFont(Manager.hintFont());
+        purchasepPanel.add(purchaseFrequency);
+        purchasepPanel.add(purchaseHint);
+        add(purchasepPanel);
+
         // Items count with hint
         JLabel itemsValue = new JLabel(String.valueOf(product.reqItemCount()));
         itemsValue.setForeground(Color.BLUE);
-        itemsValue.setFont(Manager.defaultFont(false, false));
+        itemsValue.setFont(Manager.defaultFont(false, true,""));
         JPanel itemsPanel = new JPanel();
         itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
         JLabel itemsHint = new JLabel("Items");

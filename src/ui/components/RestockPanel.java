@@ -56,7 +56,7 @@ public class RestockPanel extends JPanel {
         add(minPanel);
         
         // Add quantity input
-        quantityField = new JTextField("0");
+        quantityField = new JTextField("");
         quantityField.setFont(Manager.defaultFont(false, false));
         add(quantityField);
         
@@ -71,7 +71,7 @@ public class RestockPanel extends JPanel {
                 Manager.isEdited = true;
                 quantityValue.setText(String.valueOf(item.getQuantityAvailable()));
                 quantityValue.setForeground(item.isUnderMin() ? Color.RED : Color.GREEN);
-                quantityField.setText("0");
+                quantityField.setText("");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }

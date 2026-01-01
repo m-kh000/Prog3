@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 import ui.LabelBox;
 import ui.Manager;
+import utils.FileUtils;
 
 public class AddProductionLine extends FunctionPanel {
 
@@ -69,6 +70,7 @@ public class AddProductionLine extends FunctionPanel {
                 JOptionPane.showMessageDialog(null, "Product line added successfully");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                FileUtils.log(ex);
             }
         });
     }

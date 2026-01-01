@@ -4,6 +4,7 @@ import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
 import ui.Manager;
+import utils.FileUtils;
 
 public class ModifyStatusOfAProductionLine extends FunctionPanel {
 
@@ -61,6 +62,7 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
                 JOptionPane.showMessageDialog(null, "Status modified successfully");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                FileUtils.log(ex);
             }
         });
     }
