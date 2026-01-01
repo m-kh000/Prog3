@@ -1,5 +1,0 @@
-JsonParsingException occurred, Exception's message: Failed to parse JSON: Expected ',' or '}' after key-value pair
-EmptyFieldException occurred, Exception's message: please fill out all fields
-InvalidEmailException occurred, Exception's message: Invalid Email Format.
-JsonParsingException occurred, Exception's message: Failed to parse JSON: Expected ',' or ']' in array
-InvalidDateFormatException occurred, Exception's message: Must be exactly DD-MM-YYYY
