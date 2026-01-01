@@ -1,22 +1,11 @@
 [
     {
-        "id": 1,
+        "id": 2,
         "product": {
             "id": 2,
             "name": "Bed",
             "quantityAvailable": 0,
             "requiredItems": [
-                {
-                    "key": {
-                        "id": 4,
-                        "name": "Screws",
-                        "category": "Material",
-                        "price": 2.0,
-                        "quantityAvailable": 2000,
-                        "minQuantity": 500
-                    },
-                    "value": 40
-                },
                 {
                     "key": {
                         "id": 1,
@@ -30,26 +19,37 @@
                 },
                 {
                     "key": {
-                        "id": 3,
+                        "id": 4,
                         "name": "Wood",
                         "category": "Material",
-                        "price": 5.0,
-                        "quantityAvailable": 100,
+                        "price": 10.0,
+                        "quantityAvailable": 500,
                         "minQuantity": 50
                     },
                     "value": 20
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "Screws",
+                        "category": "Material",
+                        "price": 1.0,
+                        "quantityAvailable": 2000,
+                        "minQuantity": 500
+                    },
+                    "value": 35
                 }
             ],
             "orderedIn": [
-                "2025-12-31"
+                "2026-01-01"
             ],
-            "purchaseFrequency": 2
+            "purchaseFrequency": 1
         },
-        "requiredQuantity": 15,
+        "requiredQuantity": 10,
         "ready": 0,
-        "customerName": "Joseph",
-        "startDate": "2025-12-31",
-        "deliveryDate": "2026-01-30",
+        "customerName": "Mira",
+        "startDate": "2026-01-01",
+        "deliveryDate": "2026-02-28",
         "status": "inline"
     }
 ]

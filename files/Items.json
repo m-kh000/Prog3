@@ -11,24 +11,24 @@
         "id": 2,
         "name": "Wool",
         "category": "Fabrics",
-        "price": 1.0,
+        "price": 2.0,
         "quantityAvailable": 500,
         "minQuantity": 100
     },
     {
         "id": 3,
-        "name": "Wood",
+        "name": "Screws",
         "category": "Material",
-        "price": 5.0,
-        "quantityAvailable": 100,
-        "minQuantity": 50
+        "price": 1.0,
+        "quantityAvailable": 2000,
+        "minQuantity": 500
     },
     {
-        "id": 1,
-        "name": "milk",
-        "category": "dairy",
-        "price": 1.0,
-        "quantityAvailable": 120,
-        "minQuantity": 100
+        "id": 4,
+        "name": "Wood",
+        "category": "Material",
+        "price": 10.0,
+        "quantityAvailable": 500,
+        "minQuantity": 50
     }
 ]

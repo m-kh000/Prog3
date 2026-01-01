@@ -17,12 +17,9 @@
             }
         ],
         "orderedIn": [
-            "2025-11-11",
-            "2025-12-22",
-            "1111-11-11",
-            "2025-12-31"
+            "2026-01-01"
         ],
-        "purchaseFrequency": 9
+        "purchaseFrequency": 1
     },
     {
         "id": 2,
@@ -43,6 +40,8 @@
             {
                 "key": {
                     "id": 4,
+<<<<<<< HEAD
+=======
                     "name": "Screws",
                     "category": "Material",
                     "price": 2.0,
@@ -54,16 +53,33 @@
             {
                 "key": {
                     "id": 3,
+>>>>>>> main
                     "name": "Wood",
                     "category": "Material",
-                    "price": 5.0,
-                    "quantityAvailable": 100,
+                    "price": 10.0,
+                    "quantityAvailable": 500,
                     "minQuantity": 50
                 },
                 "value": 20
+            },
+            {
+                "key": {
+                    "id": 3,
+                    "name": "Screws",
+                    "category": "Material",
+                    "price": 1.0,
+                    "quantityAvailable": 2000,
+                    "minQuantity": 500
+                },
+                "value": 35
             }
         ],
         "orderedIn": [
+<<<<<<< HEAD
+            "2026-01-01"
+        ],
+        "purchaseFrequency": 1
+=======
             "2025-12-31"
         ],
         "purchaseFrequency": 3
@@ -99,5 +115,6 @@
         "orderedIn": [
         ],
         "purchaseFrequency": 0
+>>>>>>> main
     }
 ]
