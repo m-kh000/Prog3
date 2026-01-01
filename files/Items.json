@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Cotton",
+        "category": "Fabrics",
+        "price": 1.0,
+        "quantityAvailable": 1000,
+        "minQuantity": 200
+    },
+    {
+        "id": 2,
+        "name": "Wool",
+        "category": "Fabrics",
+        "price": 1.0,
+        "quantityAvailable": 500,
+        "minQuantity": 100
+    },
+    {
+        "id": 3,
+        "name": "Wood",
+        "category": "Material",
+        "price": 5.0,
+        "quantityAvailable": 100,
+        "minQuantity": 50
+    },
+    {
+        "id": 4,
+        "name": "Screws",
+        "category": "Material",
+        "price": 2.0,
+        "quantityAvailable": 2000,
+        "minQuantity": 500
+    }
+]

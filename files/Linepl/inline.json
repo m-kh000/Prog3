@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "product": {
+            "id": 1,
+            "name": "Hoodie",
+            "quantityAvailable": 0,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 1,
+                        "name": "Cotton",
+                        "category": "Fabrics",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 200
+                    },
+                    "value": 10
+                }
+            ],
+            "orderedIn": [
+                "2025-11-11",
+                "2025-12-22",
+                "2025-12-31"
+            ],
+            "purchaseFrequency": 8
+        },
+        "requiredQuantity": 20,
+        "ready": 0,
+        "customerName": "Zein",
+        "startDate": "2025-12-22",
+        "deliveryDate": "2026-12-22",
+        "status": "inline"
+    }
+]
