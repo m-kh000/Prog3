@@ -59,6 +59,14 @@ public class FilterTasks extends FunctionPanel {
             String filterValue = (String) filterField.getSelectedItem();
             updateTasksPanel(factory, filterType, filterValue);
         });
+        //enter key
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    filterBtn.doClick();
+                }
+            }
+        });
 
         filterPanel.add(filterLabel);
         filterPanel.add(filterCombo);
@@ -91,6 +99,7 @@ public class FilterTasks extends FunctionPanel {
         if (tasks != null || !tasks.isEmpty()) {
             for (core.Task task : tasks) {
                 tasksPanel.add(new TaskPanel(task));
+                tasksPanel.add(Box.createVerticalStrut(5));
             }
         }
         else {

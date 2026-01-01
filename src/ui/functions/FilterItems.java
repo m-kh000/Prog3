@@ -1,9 +1,9 @@
 package ui.functions;
-import javax.swing.*;
-import java.awt.*;
-import ui.components.ItemPanel;
 import core.Factory;
+import java.awt.*;
 import java.util.List;
+import javax.swing.*;
+import ui.components.ItemPanel;
 
 public class FilterItems extends FunctionPanel {
     private JPanel itemsPanel;
@@ -33,6 +33,14 @@ public class FilterItems extends FunctionPanel {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = filterField.getText();
             updatePanel(factory, filterType, filterValue);
+        });
+        //enter key
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    filterBtn.doClick();
+                }
+            }
         });
         
         filterPanel.add(filterLabel);
@@ -68,6 +76,7 @@ public class FilterItems extends FunctionPanel {
         if(items != null && !items.isEmpty()) {
             for(core.Item item : items) {
                 itemsPanel.add(new ItemPanel(item));
+                itemsPanel.add(Box.createVerticalStrut(5));
             }
         }
         

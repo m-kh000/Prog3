@@ -4,6 +4,7 @@ import core.Factory;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.List;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -47,6 +48,14 @@ public class FilterProducts extends FunctionPanel {
             String filterValue = (String) filterField.getSelectedItem();
             updateProductsPanel(factory, filterType, filterValue);
         });
+        //enter key
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    filterBtn.doClick();
+                }
+            }
+        });
 
         filterPanel.add(filterLabel);
         filterPanel.add(filterCombo);
@@ -75,6 +84,7 @@ public class FilterProducts extends FunctionPanel {
         if (Products != null && !Products.isEmpty()) {
             for (core.Product Product : Products) {
                 ProductsPanel.add(new ProductPanel(Product));
+                ProductsPanel.add(Box.createVerticalStrut(5));
             }
         }
         else {

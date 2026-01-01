@@ -77,6 +77,7 @@ public class CenterLogin extends JPanel {
                 case "manager":
                     centerPanel.removeAll();
                     factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                    Factory.employAndAssignProductLines();
                     makeSaveOnClose(frame, factory);
                     centerPanel.add(new CenterManager(centerPanel, frame ,factory));
                     successful = true;
@@ -84,6 +85,7 @@ public class CenterLogin extends JPanel {
                 case "supervisor":
                     centerPanel.removeAll();
                     factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                    Factory.employAndAssignProductLines();
                     makeSaveOnClose(frame, factory);
                     centerPanel.add(new CenterSupervisor(centerPanel, frame ,factory));
                     successful = true;

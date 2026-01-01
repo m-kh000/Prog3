@@ -1,9 +1,8 @@
 package core;
 
-import java.time.LocalDate;
-
-import utils.IDInitializer;
 import exceptions.InvalidValuesException;
+import java.time.LocalDate;
+import utils.IDInitializer;
 
 public class Task {
     private static int nextId = 1;
@@ -93,7 +92,7 @@ public class Task {
     }
 
     public String getName() {
-        return product.getName() + " " + requiredQuantity + " due to " + deliveryDate;
+        return requiredQuantity + " " + product.getName() + "(s) due to " + deliveryDate;
     }
 
     // SETTERS : 

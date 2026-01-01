@@ -18,6 +18,7 @@ public class ViewAllTasks extends FunctionPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (Task task : factory.previewTasks()) {
             panel.add(new TaskPanel(task));
+            panel.add(Box.createVerticalStrut(5));
         } 
         if (factory.previewTasks().length == 0) {
             panel.add(new JLabel("No tasks found."));

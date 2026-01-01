@@ -17,6 +17,7 @@ public class ViewItems extends FunctionPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (core.Item item : factory.previewItems()) {
             panel.add(new ItemPanel(item));
+            panel.add(Box.createVerticalStrut(5));
         }
         if (factory.previewItems().length == 0) {
             panel.add(new JLabel("No items found."));

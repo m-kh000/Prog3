@@ -3,6 +3,7 @@ import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.functions.*;
+import utils.FileUtils;
 
 public class CenterSupervisor extends JPanel {
 
@@ -65,6 +66,7 @@ public class CenterSupervisor extends JPanel {
                 JOptionPane.showMessageDialog(frame, "Data saved successfully to TXT files.");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, "Error saving data: " + ex.getMessage());
+                FileUtils.log(ex);
             }
             else{
                 JOptionPane.showMessageDialog(frame, "No edits to save.");
