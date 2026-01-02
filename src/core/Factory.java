@@ -288,6 +288,7 @@ public class Factory {
         FileUtils.saveItems();
         FileUtils.saveProducts();
         FileUtils.saveProductLines();
+        FileUtils.saveIDs();
     }
 
     public static void modifyStatus(String selectedLineName, String selectedStatus) {
