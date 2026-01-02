@@ -40,20 +40,6 @@
             {
                 "key": {
                     "id": 4,
-<<<<<<< HEAD
-=======
-                    "name": "Screws",
-                    "category": "Material",
-                    "price": 2.0,
-                    "quantityAvailable": 2000,
-                    "minQuantity": 500
-                },
-                "value": 40
-            },
-            {
-                "key": {
-                    "id": 3,
->>>>>>> main
                     "name": "Wood",
                     "category": "Material",
                     "price": 10.0,
@@ -75,46 +61,8 @@
             }
         ],
         "orderedIn": [
-<<<<<<< HEAD
             "2026-01-01"
         ],
         "purchaseFrequency": 1
-=======
-            "2025-12-31"
-        ],
-        "purchaseFrequency": 3
-    },
-    {
-        "id": 1,
-        "name": "crop top",
-        "quantityAvailable": 0,
-        "requiredItems": [
-            {
-                "key": {
-                    "id": 2,
-                    "name": "Wool",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 500,
-                    "minQuantity": 100
-                },
-                "value": 1
-            },
-            {
-                "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 200
-                },
-                "value": 2
-            }
-        ],
-        "orderedIn": [
-        ],
-        "purchaseFrequency": 0
->>>>>>> main
     }
 ]

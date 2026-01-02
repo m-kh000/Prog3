@@ -5,3 +5,4 @@ EmptyFieldException occurred, Exception's message: please fill out all fields
 InvalidValuesException occurred, Exception's message: Invalid values!
 NullPointerException occurred, Exception's message: Cannot invoke "java.lang.Thread.isAlive()" because "t" is null
 NullPointerException occurred, Exception's message: Cannot invoke "java.lang.Thread.isAlive()" because "t" is null
+JsonParsingException occurred, Exception's message: Failed to parse JSON: Unexpected Json character at index 1010: '<' (ASCII: 60). Expected: '"'
