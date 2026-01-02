@@ -1,8 +1,10 @@
 package ui.functions;
 import core.Factory;
+import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
 import ui.Manager;
+import utils.FileUtils;
 
 public class DeliverTask extends FunctionPanel {
     public DeliverTask(JPanel centerPanel, JFrame frame, Factory factory) {
@@ -15,7 +17,7 @@ public class DeliverTask extends FunctionPanel {
         // Row 2: Select task
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select a completed Task to deliver:");
-        selectLabel.setFont(Manager.defaultFont(false, false));
+        selectLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> taskCombo = new JComboBox<>(factory.getCompletedTasksNames());
         taskCombo.setFont(Manager.defaultFont(false, false));
         taskCombo.setSelectedItem(null);
@@ -40,6 +42,10 @@ public class DeliverTask extends FunctionPanel {
         add(cancelBtn);
 
         cancelBtn.addActionListener(e -> {
+            try{
+            if (taskCombo.getSelectedItem() == null) {
+                throw new EmptyFieldException();
+            }
             // Cancel selected task and update combo box
             factory.deliverTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
@@ -49,6 +55,10 @@ public class DeliverTask extends FunctionPanel {
             taskCombo.setSelectedItem(null);
             Manager.isEdited = true;
             JOptionPane.showMessageDialog(null, "Task delivered successfully");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            FileUtils.log(ex);
+        }
         });
     }
 }

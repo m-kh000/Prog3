@@ -1,7 +1,7 @@
 package core;
 
-import utils.IDInitializer;
 import exceptions.InvalidValuesException;
+import utils.IDInitializer;
 
 public class Item {
     private static int nextId = 1;
@@ -20,7 +20,7 @@ public class Item {
     
     public Item(String name, String category, double price, int quantityAvailable, int minQuantity) throws InvalidValuesException {
         if(price <= 0.0 || quantityAvailable < 0 || minQuantity <= 0) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException();
         }
         this.id = nextId++;
         this.name = name;
@@ -43,7 +43,7 @@ public class Item {
 
     public void add(int quantity) throws InvalidValuesException {
         if(quantity <= 0) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException();
         }
         quantityAvailable += quantity;
     }
@@ -98,7 +98,7 @@ public class Item {
 
     public void setMinQuantity(int minQuantity) throws InvalidValuesException {
         if (minQuantity <= 0) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException();
         }
         this.minQuantity = minQuantity;
     }
@@ -109,14 +109,14 @@ public class Item {
 
     public void setPrice(double price) throws InvalidValuesException {
         if (price <= 0.0) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException();
         }
         this.price = price;
     }
 
     public void setQuantityAvailable(int quantityAvailable) throws InvalidValuesException {
         if (quantityAvailable < 0) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException();
         }
         this.quantityAvailable = quantityAvailable;
     }
@@ -126,5 +126,6 @@ public class Item {
             throw new InvalidValuesException();
         }
         quantityAvailable += addQuantity;
+        Factory.employAndAssignProductLines();
     }
 }

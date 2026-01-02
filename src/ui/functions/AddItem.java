@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import ui.LabelBox;
 import ui.Manager;
+import utils.FileUtils;
 
 public class AddItem extends FunctionPanel {
 
@@ -85,6 +86,7 @@ public class AddItem extends FunctionPanel {
                 JOptionPane.showMessageDialog(null, "Item added successfully");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                FileUtils.log(ex);
             }
         });
     }

@@ -5,6 +5,7 @@ import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
 import jsonParser.JsonParser;
+import utils.FileUtils;
 import utils.Validator;
 
 public class CenterSignup extends JPanel {
@@ -84,7 +85,7 @@ public class CenterSignup extends JPanel {
         mainPanel.add(boxes, BorderLayout.CENTER);
         add(mainPanel, BorderLayout.CENTER);
 
-        //actions
+        //executed by click or enter
         signupButton.addActionListener(e -> {
             String email = emailbox.getText();
             String password = passwordbox.getText();
@@ -109,8 +110,16 @@ public class CenterSignup extends JPanel {
                 utils.FileUtils.saveUsers(newUser);
                 UI.switchContent(new CenterLogin(centerPanel, frame));
                 JOptionPane.showMessageDialog(null, "Signup successful");
-            } catch (Exception e1) {
-                JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                FileUtils.log(ex);
+            }
+        });
+        passwordbox.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    signupButton.doClick();
+                }
             }
         });
     }

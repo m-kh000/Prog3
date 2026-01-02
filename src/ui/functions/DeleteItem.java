@@ -1,10 +1,10 @@
 package ui.functions;
 
+import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
-
-import exceptions.EmptyFieldException;
 import ui.Manager;
+import utils.FileUtils;
 
 public class DeleteItem extends FunctionPanel {
 
@@ -20,7 +20,7 @@ public class DeleteItem extends FunctionPanel {
         JLabel selectLabel = new JLabel("Select Item:");
         selectLabel.setFont(Manager.defaultFont(false, false));
         JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
-        itemCombo.setFont(Manager.defaultFont(false, false));
+        itemCombo.setFont(Manager.defaultFont(true, false));
         itemCombo.setSelectedItem(null);
         selectPanel.add(selectLabel);
         selectPanel.add(itemCombo);
@@ -66,8 +66,17 @@ public class DeleteItem extends FunctionPanel {
             else
                 throw new EmptyFieldException();
             }
-            catch (Exception ee) {
-                JOptionPane.showMessageDialog(null, ee.getMessage());
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+                FileUtils.log(ex);
+            }
+        });
+        //enter key
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    deleteBtn.doClick();
+                }
             }
         });
     }

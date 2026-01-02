@@ -17,6 +17,7 @@ public class ViewProducts extends FunctionPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (core.Product product : factory.previewProducts()) {
             panel.add(new ProductPanel(product));
+            panel.add(Box.createVerticalStrut(5));
         }
         if (factory.previewProducts().length == 0) {
             panel.add(new JLabel("No products found."));

@@ -43,9 +43,5 @@ public class UI extends JFrame {
 
 // TODO 
 // ids
-// add product
-// hashset in product
-// deliver a task exception
-// employ and assign new ProductLines automatically
 //logger
-//top sales
+//product lines combobox and filter by pls exception

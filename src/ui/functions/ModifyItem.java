@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.*;
 import ui.LabelBox;
 import ui.Manager;
+import utils.FileUtils;
 
 public class ModifyItem extends FunctionPanel {
 
@@ -30,7 +31,7 @@ public class ModifyItem extends FunctionPanel {
         // Row 2: Select item
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Item:");
-        selectLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        selectLabel.setFont(Manager.defaultFont(true, false));
         String[] allitems = factory.getItemsNames();
         JComboBox<String> itemCombo = new JComboBox<>(allitems);
         itemCombo.setSelectedItem(null);
@@ -134,8 +135,10 @@ public class ModifyItem extends FunctionPanel {
                 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter valid numbers for price and quantities");
+                FileUtils.log(ex);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error updating item: " + ex.getMessage());
+                FileUtils.log(ex);
             }
         });
     }
