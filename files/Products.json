@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 0,
+        "quantityAvailable": 1,
         "requiredItems": [
             {
                 "key": {
@@ -24,19 +24,8 @@
     {
         "id": 2,
         "name": "Bed",
-        "quantityAvailable": 0,
+        "quantityAvailable": 1,
         "requiredItems": [
-            {
-                "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 200
-                },
-                "value": 10
-            },
             {
                 "key": {
                     "id": 4,
@@ -58,6 +47,17 @@
                     "minQuantity": 500
                 },
                 "value": 35
+            },
+            {
+                "key": {
+                    "id": 1,
+                    "name": "Cotton",
+                    "category": "Fabrics",
+                    "price": 1.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 200
+                },
+                "value": 10
             }
         ],
         "orderedIn": [
