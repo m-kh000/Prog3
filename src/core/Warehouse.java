@@ -97,7 +97,12 @@ public class Warehouse {
     public void makeProduct(Product p) {
         getProduct(p.getName()).make();
         for (Map.Entry<Item, Integer> e : p.getRequiredItems().entrySet()) {
-            items.get(items.indexOf(e.getKey())).take(e.getValue());
+            int index = items.indexOf(e.getKey());
+            if (index == -1) {
+                continue;
+            }
+
+            items.get(index).take(e.getValue());
         }
     }
     public String[] getProductsNames() {

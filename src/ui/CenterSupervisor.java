@@ -68,7 +68,7 @@ public class CenterSupervisor extends JPanel {
         saveStatusBtn.addActionListener(e -> {
             if(Manager.isEdited)
             try {
-                factory.saveToTXT();
+                Factory.saveToTXT();
                 Manager.isEdited = false;
                 JOptionPane.showMessageDialog(frame, "Data saved successfully to TXT files.");
             } catch (Exception ex) {
