@@ -10,6 +10,11 @@ public class ThreadManager {
     private static Queue<ProductLine> waiting = new PriorityBlockingQueue<>(1,
                              (pl1, pl2) -> {return pl2.getPriority() - pl1.getPriority();});
 
+    static {
+        for (int i = 0; i < threadPool.length; i++)
+            threadPool[i] = new Thread();
+    }
+
     /**
      * Adds a product line to the waiting queue.
      * 
@@ -30,7 +35,6 @@ public class ThreadManager {
      */
     public static void assign() {
         for (Thread t : threadPool) {
-            if(t != null)
             if (!t.isAlive()) {
                 try {
                     t = new Thread(waiting.remove());
