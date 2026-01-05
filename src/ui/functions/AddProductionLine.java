@@ -8,43 +8,26 @@ import ui.LabelBox;
 import ui.Manager;
 import utils.FileUtils;
 
+// AddProductionLine panel for creating new production lines
 public class AddProductionLine extends FunctionPanel {
 
     public AddProductionLine(JPanel centerPanel, JFrame frame, Factory factory) {
-        // Main grid: 8 rows, 1 column
         setLayout(new GridLayout(8, 1, 10, 10));
 
-        // Row 1: Top panel
-        add(createTopPanel("Add Product Line:", centerPanel, frame, factory, "manager"));
-
-        // Row 2: Type name
+        // Components
         LabelBox name = new LabelBox("Name:");
-        add(name);
-
-        // Row 3: Select status
-        JPanel statuspanel = new JPanel(new GridLayout(1, 2));
-        JLabel statuslabel = new JLabel("Status:");
-        statuslabel.setFont(Manager.defaultFont(true, false));
+        
+        JPanel statusPanel = new JPanel(new GridLayout(1, 2));
+        JLabel statusLabel = new JLabel("Status:");
+        statusLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> status = new JComboBox<>(new String[] { "Active","Maintenance","Stopped" });
-        statuspanel.add(statuslabel);
-        statuspanel.add(status);
-        add(statuspanel);
-
-        // Row 4: Type priority
+        
         LabelBox priority = new LabelBox("Priority:");
-        add(priority);
-
-        // Rows 5-7: Empty panels
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-
-        // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
-        add(submitBtn);
         
-        // Add Enter key functionality
+        // Listeners
+        // Enter key functionality
         priority.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent e) {
                 if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -53,6 +36,7 @@ public class AddProductionLine extends FunctionPanel {
             }
         });
 
+        // Submit button listener
         submitBtn.addActionListener(e -> {
             if (name.isEmpty() || priority.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill in all fields");
@@ -73,5 +57,19 @@ public class AddProductionLine extends FunctionPanel {
                 FileUtils.log(ex);
             }
         });
+        
+        // Layout setup
+        add(createTopPanel("Add Product Line:", centerPanel, frame, factory, "manager"));
+        add(name);
+        
+        statusPanel.add(statusLabel);
+        statusPanel.add(status);
+        add(statusPanel);
+        
+        add(priority);
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        add(submitBtn);
     }
 }

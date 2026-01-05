@@ -33,6 +33,7 @@ public class Product {
         this.id = nextId++;
         this.name = name;
         this.orderedIn = orderedIn;
+        //TODO make sure that all items are unique
         this.requiredItems = new HashMap<>(requiredItems);
     }
 

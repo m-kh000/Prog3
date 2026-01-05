@@ -18,37 +18,40 @@ public class Items extends FunctionPanel {
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
         
+        // Components creation
         JPanel mainPanel = new JPanel(new GridLayout(6, 1, 20, 20));
         Color buttonColor = Color.decode("#5294ff");
 
-        mainPanel.add(createTopPanel("Items", centerPanel, frame, factory, "supervisor"));
-
-        //Row 1 view
         JButton viewItemsBtn = createStyledButton("View Items", buttonColor);
-        viewItemsBtn.addActionListener(e -> UI.switchContent(new ViewItems(centerPanel, frame, factory)));
-        mainPanel.add(viewItemsBtn);
-
-        //Row 2 restock
         JButton restockBtn = createStyledButton("Restock Items", buttonColor);
-        restockBtn.addActionListener(e -> UI.switchContent(new Restock(centerPanel, frame, factory)));
-        mainPanel.add(restockBtn);
-
-        //Row 2 view
         JButton addItemBtn = createStyledButton("Add Item", buttonColor);
-        addItemBtn.addActionListener(e -> UI.switchContent(new AddItem(centerPanel, frame, factory)));
-        mainPanel.add(addItemBtn);
-
-        //Row 3 modify
         JButton modifyItemBtn = createStyledButton("Modify Item", buttonColor);
-        modifyItemBtn.addActionListener(e -> UI.switchContent(new ModifyItem(centerPanel, frame, factory)));
-        mainPanel.add(modifyItemBtn);
-
-        //Row 4 delete
         JButton deleteItemBtn = createStyledButton("Delete Item", buttonColor);
+
+        // Listeners
+        // View items button click
+        viewItemsBtn.addActionListener(e -> UI.switchContent(new ViewItems(centerPanel, frame, factory)));
+        
+        // Restock button click
+        restockBtn.addActionListener(e -> UI.switchContent(new Restock(centerPanel, frame, factory)));
+        
+        // Add item button click
+        addItemBtn.addActionListener(e -> UI.switchContent(new AddItem(centerPanel, frame, factory)));
+        
+        // Modify item button click
+        modifyItemBtn.addActionListener(e -> UI.switchContent(new ModifyItem(centerPanel, frame, factory)));
+        
+        // Delete item button click
         deleteItemBtn.addActionListener(e -> UI.switchContent(new DeleteItem(centerPanel, frame, factory)));
+
+        // Layout setup
+        mainPanel.add(createTopPanel("Items", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(viewItemsBtn);
+        mainPanel.add(restockBtn);
+        mainPanel.add(addItemBtn);
+        mainPanel.add(modifyItemBtn);
         mainPanel.add(deleteItemBtn);
         
         add(mainPanel, BorderLayout.CENTER);
     }
-
 }

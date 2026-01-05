@@ -6,55 +6,58 @@ import javax.swing.*;
 import ui.Manager;
 import utils.FileUtils;
 
+// ModifyStatusOfAProductionLine panel for updating production line status
 public class ModifyStatusOfAProductionLine extends FunctionPanel {
 
     public ModifyStatusOfAProductionLine(JPanel centerPanel, JFrame frame, core.Factory factory) {
-        // Main grid: 8 rows, 1 column
         setLayout(new GridLayout(8, 1, 10, 10));
         
-        // Row 1: Top panel
-        add(createTopPanel("Modify Status of a Production Line:", centerPanel, frame, factory, "manager"));
-        
-        // Row 2: Select production line
-        JPanel linepanel = new JPanel(new GridLayout(1, 2));
+        // Components
+        JPanel linePanel = new JPanel(new GridLayout(1, 2));
         JLabel lineLabel = new JLabel("Select Production Line:");
         JComboBox<String> lineComboBox = new JComboBox<>(factory.getProductLineNames());
-        linepanel.add(lineLabel);
-        linepanel.add(lineComboBox);
-        add(linepanel);
-
-        // Row 3: Select new status
-        JPanel statuspanel = new JPanel(new GridLayout(1, 2));
-        JLabel statuslabel = new JLabel("New Status:");
+        
+        JPanel statusPanel = new JPanel(new GridLayout(1, 2));
+        JLabel statusLabel = new JLabel("New Status:");
         JComboBox<String> statusComboBox = new JComboBox<>(new String[] { "Active","Maintenance","Stopped" });
-        statuspanel.add(statuslabel);
-        statuspanel.add(statusComboBox);
-        add(statuspanel);
-
-        // Rows 4-7: Empty panels
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-
-        // Row 8: Submit button
+        
+        JLabel hint = new JLabel();
+        hint.setFont(Manager.defaultFont(false, false));
+        hint.setForeground(Color.LIGHT_GRAY);
+        
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
-        add(submitBtn);
 
+        // Listeners
+        // Line selection listener - update hint
+        lineComboBox.addActionListener(e -> {
+            String selectedLineName = (String)lineComboBox.getSelectedItem();
+            if (selectedLineName != null) {
+                hint.setText("Current Status: " + factory.getProductLine(selectedLineName).getLineStatus());
+                revalidate();
+                repaint();
+            }
+        });
+
+        // Enter key binding
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "filter");
+        getActionMap().put("filter", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                submitBtn.doClick();
+            }
+        });
+
+        // Submit button listener
         submitBtn.addActionListener(e -> {
             try {
-                // Validate selections
                 if (lineComboBox.getSelectedItem() == null || statusComboBox.getSelectedItem() == null) {
                     throw new EmptyFieldException();
                 }
                 
-                // Get selected values and modify status
                 String selectedLineName = (String)lineComboBox.getSelectedItem();
                 String selectedStatus = (String)statusComboBox.getSelectedItem();
                 factory.modifyStatus(selectedLineName, selectedStatus);
                 
-                // Reset selections
                 lineComboBox.setSelectedIndex(0);
                 statusComboBox.setSelectedIndex(0);
                 
@@ -65,5 +68,22 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
                 FileUtils.log(ex);
             }
         });
+        
+        // Layout setup
+        add(createTopPanel("Modify Status of a Production Line:", centerPanel, frame, factory, "manager"));
+        
+        linePanel.add(lineLabel);
+        linePanel.add(lineComboBox);
+        add(linePanel);
+        
+        statusPanel.add(statusLabel);
+        statusPanel.add(statusComboBox);
+        add(statusPanel);
+        
+        add(hint);
+        add(new JPanel());
+        add(new JPanel());
+        add(new JPanel());
+        add(submitBtn);
     }
 }

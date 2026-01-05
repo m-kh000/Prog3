@@ -4,14 +4,7 @@ import core.Factory;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.List;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import ui.Manager;
 import ui.components.ProductPanel;
 
@@ -22,6 +15,7 @@ public class FilterProducts extends FunctionPanel {
     public FilterProducts(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
 
+        // Components creation
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
         JLabel filterLabel = new JLabel("Filter by:");
         filterLabel.setFont(Manager.defaultFont(false, false));
@@ -32,31 +26,38 @@ public class FilterProducts extends FunctionPanel {
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 
+        // Listeners
+        // Filter combo selection changes
         filterCombo.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
-
             filterField.removeAllItems();
             if (filterType.equals("One ProductLine")) {
                 filterField.setEnabled(true);
+                filterCombo.removeAll();
+                for (String productLineName : factory.getProductLineNames()) {
+                    filterField.addItem(productLineName);
+                }
             } else {
                 filterField.setEnabled(false);
             }
         });
 
+        // Enter key binding
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "filter");
+        getActionMap().put("filter", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                filterBtn.doClick();
+            }
+        });
+
+        // Filter button click
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = (String) filterField.getSelectedItem();
             updateProductsPanel(factory, filterType, filterValue);
         });
-        //enter key
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    filterBtn.doClick();
-                }
-            }
-        });
 
+        // Layout setup
         filterPanel.add(filterLabel);
         filterPanel.add(filterCombo);
         filterPanel.add(filterField);
@@ -68,9 +69,16 @@ public class FilterProducts extends FunctionPanel {
         add(topContainer, BorderLayout.NORTH);
 
         ProductsPanel = createProductsPanel();
+        // Load all products initially
+        for (core.Product product : factory.previewProducts()) {
+            ProductsPanel.add(new ProductPanel(product));
+            ProductsPanel.add(Box.createVerticalStrut(5));
+        }
+        
         add(new JScrollPane(ProductsPanel), BorderLayout.CENTER);
     }
 
+    // Update products panel with filtered results
     private void updateProductsPanel(Factory factory, String filterType, String filterValue) {
         ProductsPanel.removeAll();
 
@@ -95,6 +103,7 @@ public class FilterProducts extends FunctionPanel {
         ProductsPanel.repaint();
     }
 
+    // Create products panel with vertical layout
     private JPanel createProductsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

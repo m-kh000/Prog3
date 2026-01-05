@@ -12,6 +12,7 @@ public class FilterProductLines extends FunctionPanel {
     public FilterProductLines(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
 
+        // Components creation
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
         JLabel filterLabel = new JLabel("Filter by: ");
         JLabel filterLabel2 = new JLabel("a specific product");
@@ -21,19 +22,22 @@ public class FilterProductLines extends FunctionPanel {
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 
+        // Listeners
+        // Filter button click
         filterBtn.addActionListener(e -> {
             String filterValue = (String) filterField.getSelectedItem();
             updateProductLinesPanel(factory, filterValue);
         });
-        //enter key
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    filterBtn.doClick();
-                }
+        
+        // Enter key binding
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "filter");
+        getActionMap().put("filter", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                filterBtn.doClick();
             }
         });
 
+        // Layout setup
         filterPanel.add(filterLabel);
         filterPanel.add(filterLabel2);
         filterPanel.add(filterField);
@@ -45,9 +49,16 @@ public class FilterProductLines extends FunctionPanel {
         add(topContainer, BorderLayout.NORTH);
 
         ProductLinesPanel = createProductLinesPanel();
+        // Load all product lines initially
+        for (core.ProductLine productLine : factory.previewLines()) {
+            ProductLinesPanel.add(new ProductLinePanel(productLine));
+            ProductLinesPanel.add(Box.createVerticalStrut(5));
+        }
+        
         add(new JScrollPane(ProductLinesPanel), BorderLayout.CENTER);
     }
 
+    // Update product lines panel with filtered results
     private void updateProductLinesPanel(Factory factory, String filterValue) {
         ProductLinesPanel.removeAll();
 
@@ -66,6 +77,7 @@ public class FilterProductLines extends FunctionPanel {
         ProductLinesPanel.repaint();
     }
 
+    // Create product lines panel with vertical layout
     private JPanel createProductLinesPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

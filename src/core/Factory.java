@@ -25,7 +25,7 @@ public class Factory {
         Factory.allLines = new HashSet<>(allLines);
         Factory.warehouse = warehouse;
     }
-
+//TODO make sure names are unique here or in warehouse and throw exception
     public static synchronized void add(Product p) {
         warehouse.addProduct(p);
     }

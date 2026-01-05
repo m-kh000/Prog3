@@ -124,11 +124,7 @@ public class Warehouse {
     public List<Product> filterProductsByProductLine(String filter) {
         List<Product> filteredList = new ArrayList<>();
         filter = filter.trim().toLowerCase();
-        for(Product p : products){
-            if(p.getName().equals(filter)){
-                filteredList.add(p);
-            }
-        }
+        //TODO no idea how you organized the pls but make this work :)
         return filteredList;
     }
 }

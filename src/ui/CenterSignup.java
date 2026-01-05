@@ -13,6 +13,7 @@ public class CenterSignup extends JPanel {
     public CenterSignup(JPanel centerPanel, JFrame frame) {
         this(centerPanel, frame,"","");
     }
+    
     public CenterSignup(JPanel centerPanel, JFrame frame,String autoEmail, String autoPassword) {
         Color bg = frame.getBackground();
         setLayout(new BorderLayout());
@@ -25,6 +26,7 @@ public class CenterSignup extends JPanel {
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
         
+        // Components creation
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         JPanel title = new JPanel(new BorderLayout());
@@ -35,16 +37,14 @@ public class CenterSignup extends JPanel {
         loginButton.setBackground(bg);
         loginButton.setFocusable(false);
         loginButton.setContentAreaFilled(false);
-        loginButton.addActionListener(e -> UI.switchContent(new CenterLogin(centerPanel, frame)));
-        title.add(loginButton, BorderLayout.WEST);
+        
         JLabel titleLabel = new JLabel("Sign Up");
         titleLabel.setFont(Manager.defaultFont(true, true));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        title.add(titleLabel, BorderLayout.CENTER);
-        mainPanel.add(title, BorderLayout.NORTH);
         
         JPanel boxes = new JPanel(new GridLayout(4, 1, 30, 0));
-        //role
+        
+        // Role selection
         JRadioButton manager = new JRadioButton("Manager");
         JRadioButton supervisor = new JRadioButton("Supervisor");
         ButtonGroup m_sGroup = new ButtonGroup();
@@ -56,6 +56,7 @@ public class CenterSignup extends JPanel {
         supervisor.setFocusable(false);
         m_sGroup.add(manager);
         m_sGroup.add(supervisor);
+        
         JPanel m_spanel = new JPanel(new GridLayout(2, 1, 0, -20));
         m_spanel.add(manager);
         m_spanel.add(supervisor);
@@ -64,28 +65,24 @@ public class CenterSignup extends JPanel {
         roleLable.setFont(Manager.defaultFont(false, true));
         role.add(roleLable);
         role.add(m_spanel);
-        boxes.add(role);
         
         LabelBox emailbox = new LabelBox("Email:");
         LabelBox passwordbox = new LabelBox("Password:",true);
         if(!autoEmail.equals(""))emailbox.setText(autoEmail);
         passwordbox.setText(autoPassword);
 
-        boxes.add(emailbox);
-        boxes.add(passwordbox);
-        
         JButton signupButton = new JButton();
         signupButton.setIcon(new ImageIcon("icons/s.png"));
         signupButton.setFocusable(false);
         signupButton.setBorder(null);
         signupButton.setBackground(bg);
         signupButton.setContentAreaFilled(false);
-        boxes.add(signupButton);
-        
-        mainPanel.add(boxes, BorderLayout.CENTER);
-        add(mainPanel, BorderLayout.CENTER);
 
-        //executed by click or enter
+        // Listeners
+        // Login button click
+        loginButton.addActionListener(e -> UI.switchContent(new CenterLogin(centerPanel, frame)));
+        
+        // Signup button click
         signupButton.addActionListener(e -> {
             String email = emailbox.getText();
             String password = passwordbox.getText();
@@ -115,12 +112,18 @@ public class CenterSignup extends JPanel {
                 FileUtils.log(ex);
             }
         });
-        passwordbox.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    signupButton.doClick();
-                }
-            }
-        });
+
+        // Layout setup
+        title.add(loginButton, BorderLayout.WEST);
+        title.add(titleLabel, BorderLayout.CENTER);
+        mainPanel.add(title, BorderLayout.NORTH);
+        
+        boxes.add(role);
+        boxes.add(emailbox);
+        boxes.add(passwordbox);
+        boxes.add(signupButton);
+        
+        mainPanel.add(boxes, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
     }
 }

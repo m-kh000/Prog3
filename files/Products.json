@@ -17,26 +17,16 @@
             }
         ],
         "orderedIn": [
+            "2025-12-22",
             "2026-01-01"
         ],
-        "purchaseFrequency": 1
+        "purchaseFrequency": 2
     },
     {
         "id": 2,
         "name": "Bed",
         "quantityAvailable": 1,
         "requiredItems": [
-            {
-                "key": {
-                    "id": 4,
-                    "name": "Wood",
-                    "category": "Material",
-                    "price": 10.0,
-                    "quantityAvailable": 500,
-                    "minQuantity": 50
-                },
-                "value": 20
-            },
             {
                 "key": {
                     "id": 3,
@@ -58,11 +48,76 @@
                     "minQuantity": 200
                 },
                 "value": 10
+            },
+            {
+                "key": {
+                    "id": 4,
+                    "name": "Wood",
+                    "category": "Material",
+                    "price": 10.0,
+                    "quantityAvailable": 500,
+                    "minQuantity": 50
+                },
+                "value": 20
             }
         ],
         "orderedIn": [
+            "2011-11-11",
             "2026-01-01"
         ],
-        "purchaseFrequency": 1
+        "purchaseFrequency": 2
+    },
+    {
+        "id": 3,
+        "name": "chair",
+        "quantityAvailable": 0,
+        "requiredItems": [
+            {
+                "key": {
+                    "id": 4,
+                    "name": "Wood",
+                    "category": "Material",
+                    "price": 10.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 50
+                },
+                "value": 20
+            },
+            {
+                "key": {
+                    "id": 3,
+                    "name": "Screws",
+                    "category": "Material",
+                    "price": 1.0,
+                    "quantityAvailable": 2050,
+                    "minQuantity": 500
+                },
+                "value": 100
+            }
+        ],
+        "orderedIn": [
+        ],
+        "purchaseFrequency": 0
+    },
+    {
+        "id": 4,
+        "name": "pillow case",
+        "quantityAvailable": 0,
+        "requiredItems": [
+            {
+                "key": {
+                    "id": 2,
+                    "name": "Wool",
+                    "category": "Fabrics",
+                    "price": 2.0,
+                    "quantityAvailable": 502,
+                    "minQuantity": 100
+                },
+                "value": 2
+            }
+        ],
+        "orderedIn": [
+        ],
+        "purchaseFrequency": 0
     }
 ]

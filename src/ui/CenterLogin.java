@@ -25,9 +25,10 @@ public class CenterLogin extends JPanel {
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
         
+        // Components creation
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel boxes = new JPanel(new GridLayout(3, 1, 30, 0));
-
+        
         JPanel title = new JPanel(new BorderLayout());
         JButton signupButton = new JButton("Sign Up");
         signupButton.setFont(Manager.defaultFont(false, true,""));
@@ -36,34 +37,38 @@ public class CenterLogin extends JPanel {
         signupButton.setBackground(bg);
         signupButton.setFocusable(false);
         signupButton.setContentAreaFilled(false);
-        signupButton.addActionListener(e -> UI.switchContent(new CenterSignup(centerPanel, frame )));
-        title.add(signupButton, BorderLayout.WEST);
+        
         JLabel titleLable = new JLabel("Login");
         titleLable.setFont(Manager.defaultFont(true, true));
         titleLable.setHorizontalAlignment(JLabel.CENTER);
-        title.add(titleLable, BorderLayout.CENTER);
-        mainPanel.add(title,BorderLayout.NORTH);
-
+        
         LabelBox emailbox = new LabelBox("Email:");
         LabelBox passwordbox = new LabelBox("Password:", true);
         if(!autoEmail.equals(""))emailbox.setText(autoEmail);
         passwordbox.setText(autoPassword);
 
-        boxes.add(emailbox);
-        boxes.add(passwordbox);
         JButton loginButton = new JButton();
         loginButton.setIcon(new ImageIcon("icons/l.png"));
         loginButton.setFocusable(false);
         loginButton.setBorder(null);
         loginButton.setBackground(bg);
         loginButton.setContentAreaFilled(false);
-        boxes.add(loginButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mainPanel.add(boxes, BorderLayout.CENTER);
-        add(mainPanel, BorderLayout.CENTER);
-
-        //triggered be pressing btn or ENTER
+        // Listeners
+        // Signup button click
+        signupButton.addActionListener(e -> UI.switchContent(new CenterSignup(centerPanel, frame )));
+        
+        // Enter key on password field
+        passwordbox.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    loginButton.doClick();
+                }
+            }
+        });
+        
+        // Login button click
         loginButton.addActionListener(e -> {
         try {
             String email = emailbox.getText();
@@ -112,15 +117,21 @@ public class CenterLogin extends JPanel {
             FileUtils.log(ex);
         }
         });
-        passwordbox.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    loginButton.doClick();
-                }
-            }
-        });
-        
+
+        // Layout setup
+        title.add(signupButton, BorderLayout.WEST);
+        title.add(titleLable, BorderLayout.CENTER);
+        mainPanel.add(title,BorderLayout.NORTH);
+
+        boxes.add(emailbox);
+        boxes.add(passwordbox);
+        boxes.add(loginButton);
+
+        mainPanel.add(boxes, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
     }
+    
+    // Setup save on close functionality
     public void makeSaveOnClose (JFrame frame, Factory factory) {
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -146,7 +157,3 @@ public class CenterLogin extends JPanel {
     }});
     }
 }
-/*
-git pull origin main
-git push -u origin MKs-branch
-*/

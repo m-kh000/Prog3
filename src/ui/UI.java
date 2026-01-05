@@ -40,8 +40,3 @@ public class UI extends JFrame {
 
     
 }
-
-// TODO 
-// ids
-//logger
-//product lines combobox and filter by pls exception

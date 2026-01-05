@@ -16,32 +16,42 @@ public class CenterManager extends JPanel {
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
         
+        // Components creation
         JPanel mainPanel = new JPanel(new GridLayout(8, 1, 0, 20));
         JLabel title = new JLabel("Manager");
         title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
-        mainPanel.add(title);
         Color buttonColor = Color.decode("#5294ff");
 
         JButton addLine = createStyledButton("Add Production Line", buttonColor);
-        addLine.addActionListener(e -> UI.switchContent(new AddProductionLine(centerPanel, frame, factory)));
-
         JButton modifyStatus = createStyledButton("Modify Status of a Production Line", buttonColor);
-        modifyStatus.addActionListener(e -> UI.switchContent(new ModifyStatusOfAProductionLine(centerPanel, frame, factory)));
-
         JButton viewPerformance = createStyledButton("View Performance", buttonColor);
-        viewPerformance.addActionListener(e -> UI.switchContent(new ViewPerformance(centerPanel, frame, factory)));
-
         JButton deliverTask = createStyledButton("Deliver Task", buttonColor);
+
+        // Listeners
+        // Add production line button click
+        addLine.addActionListener(e -> UI.switchContent(new AddProductionLine(centerPanel, frame, factory)));
+        
+        // Modify status button click
+        modifyStatus.addActionListener(e -> UI.switchContent(new ModifyStatusOfAProductionLine(centerPanel, frame, factory)));
+        
+        // View performance button click
+        viewPerformance.addActionListener(e -> UI.switchContent(new ViewPerformance(centerPanel, frame, factory)));
+        
+        // Deliver task button click
         deliverTask.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
 
+        // Layout setup
+        mainPanel.add(title);
         mainPanel.add(addLine);
         mainPanel.add(modifyStatus);
         mainPanel.add(viewPerformance);
+        mainPanel.add(deliverTask);
         
         add(mainPanel, BorderLayout.CENTER);
     }
 
+    // Create styled button with specified color
     private JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
         button.setFont(Manager.defaultFont(true, false));
