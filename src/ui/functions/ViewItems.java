@@ -3,25 +3,28 @@ import javax.swing.*;
 import java.awt.*;
 import ui.components.ItemPanel;
 import core.Factory;
-import javax.swing.JLabel;
 
+// ViewItems panel for displaying all items in the warehouse
 public class ViewItems extends FunctionPanel {
+    
     public ViewItems(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
-        add(createTopPanel("View All Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
-        add(new JScrollPane(createItemsPanel(factory)), BorderLayout.CENTER);
-    }
-    
-    private JPanel createItemsPanel(Factory factory) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        
+        // Components
+        JPanel itemsPanel = new JPanel();
+        itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
         for (core.Item item : factory.previewItems()) {
-            panel.add(new ItemPanel(item));
-            panel.add(Box.createVerticalStrut(5));
+            itemsPanel.add(new ItemPanel(item));
+            itemsPanel.add(Box.createVerticalStrut(5));
         }
         if (factory.previewItems().length == 0) {
-            panel.add(new JLabel("No items found."));
+            itemsPanel.add(new JLabel("No items found."));
         }
-        return panel;
+        
+        JScrollPane scrollPane = new JScrollPane(itemsPanel);
+        
+        // Layout setup
+        add(createTopPanel("View All Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
     }
 }

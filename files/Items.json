@@ -4,7 +4,7 @@
         "name": "Cotton",
         "category": "Fabrics",
         "price": 1.0,
-        "quantityAvailable": 1100,
+        "quantityAvailable": 1201,
         "minQuantity": 200
     },
     {
@@ -12,7 +12,7 @@
         "name": "Wool",
         "category": "Fabrics",
         "price": 2.0,
-        "quantityAvailable": 500,
+        "quantityAvailable": 502,
         "minQuantity": 100
     },
     {
@@ -20,7 +20,7 @@
         "name": "Screws",
         "category": "Material",
         "price": 1.0,
-        "quantityAvailable": 2000,
+        "quantityAvailable": 2050,
         "minQuantity": 500
     },
     {
@@ -28,7 +28,15 @@
         "name": "Wood",
         "category": "Material",
         "price": 10.0,
-        "quantityAvailable": 500,
+        "quantityAvailable": 1000,
         "minQuantity": 50
+    },
+    {
+        "id": 6,
+        "name": "POTATOO",
+        "category": "vegetable",
+        "price": 5.0,
+        "quantityAvailable": 3,
+        "minQuantity": 5
     }
 ]

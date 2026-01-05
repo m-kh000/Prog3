@@ -15,11 +15,12 @@ public class FilterTasks extends FunctionPanel {
     public FilterTasks(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
 
+        // Components creation
         JPanel filterPanel = new JPanel(new GridLayout(1, 4));
         JLabel filterLabel = new JLabel("Filter by:");
         filterLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> filterCombo = new JComboBox<>(new String[]{"ProductLine", "Product", "InProgress", "Completed"});
-        filterCombo.setSelectedItem(null);;
+        filterCombo.setSelectedItem(null);
         filterCombo.setFont(Manager.defaultFont(false, false));
         filterField = new JComboBox<>();
         filterField.setEnabled(false);
@@ -27,6 +28,8 @@ public class FilterTasks extends FunctionPanel {
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 
+        // Listeners
+        // Filter combo selection changes
         filterCombo.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
 
@@ -54,20 +57,22 @@ public class FilterTasks extends FunctionPanel {
             }
         });
 
+        // Filter button click
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = (String) filterField.getSelectedItem();
             updateTasksPanel(factory, filterType, filterValue);
         });
-        //enter key
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    filterBtn.doClick();
-                }
+        
+        // Enter key binding
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "filter");
+        getActionMap().put("filter", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                filterBtn.doClick();
             }
         });
 
+        // Layout setup
         filterPanel.add(filterLabel);
         filterPanel.add(filterCombo);
         filterPanel.add(filterField);
@@ -79,9 +84,15 @@ public class FilterTasks extends FunctionPanel {
         add(topContainer, BorderLayout.NORTH);
 
         tasksPanel = createTasksPanel();
+        // Load all tasks initially
+        for (core.Task task : factory.previewTasks()) {
+            tasksPanel.add(new TaskPanel(task));
+            tasksPanel.add(Box.createVerticalStrut(5));
+        }
         add(new JScrollPane(tasksPanel), BorderLayout.CENTER);
     }
 
+    // Update tasks panel with filtered results
     private void updateTasksPanel(Factory factory, String filterType, String filterValue) {
         tasksPanel.removeAll();
 
@@ -110,6 +121,7 @@ public class FilterTasks extends FunctionPanel {
         tasksPanel.repaint();
     }
 
+    // Create tasks panel with vertical layout
     private JPanel createTasksPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

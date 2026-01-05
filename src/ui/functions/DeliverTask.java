@@ -8,45 +8,40 @@ import utils.FileUtils;
 
 public class DeliverTask extends FunctionPanel {
     public DeliverTask(JPanel centerPanel, JFrame frame, Factory factory) {
-        // Main grid: 8 rows, 1 column
+        
         setLayout(new GridLayout(8, 1, 20, 20));
         
-        // Row 1: Top panel
-        add(createTopPanel("Deliver Tasks", centerPanel, frame, factory, "supervisor"));
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
         
-        // Row 2: Select task
+        // Components creation
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 20, 20));
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select a completed Task to deliver:");
         selectLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> taskCombo = new JComboBox<>(factory.getCompletedTasksNames());
         taskCombo.setFont(Manager.defaultFont(false, false));
         taskCombo.setSelectedItem(null);
-        selectPanel.add(selectLabel);
-        selectPanel.add(taskCombo);
-        add(selectPanel);
-
-        // Rows 3-7: Empty panels
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
         
-        // Row 8: Cancel button
-        JButton cancelBtn = new JButton("Deliver Task");
-        cancelBtn.setFont(Manager.defaultFont(true, true));
-        cancelBtn.setBackground(Color.GREEN);
-        cancelBtn.setForeground(Color.WHITE);        
-        cancelBtn.setFocusPainted(false);
-        cancelBtn.setOpaque(true);
-        add(cancelBtn);
+        JButton deliverBtn = new JButton("Deliver Task");
+        deliverBtn.setFont(Manager.defaultFont(true, true));
+        deliverBtn.setBackground(Color.GREEN);
+        deliverBtn.setForeground(Color.WHITE);        
+        deliverBtn.setFocusPainted(false);
+        deliverBtn.setOpaque(true);
 
-        cancelBtn.addActionListener(e -> {
+        // Listeners
+        // Deliver button click
+        deliverBtn.addActionListener(e -> {
             try{
             if (taskCombo.getSelectedItem() == null) {
                 throw new EmptyFieldException();
             }
-            // Cancel selected task and update combo box
             factory.deliverTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
             for(String task : factory.getCompletedTasksNames()) {
@@ -60,5 +55,20 @@ public class DeliverTask extends FunctionPanel {
             FileUtils.log(ex);
         }
         });
+
+        // Layout setup
+        selectPanel.add(selectLabel);
+        selectPanel.add(taskCombo);
+        
+        mainPanel.add(createTopPanel("Deliver Tasks", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(selectPanel);
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(deliverBtn);
+        
+        add(mainPanel, BorderLayout.CENTER);
     }
 }

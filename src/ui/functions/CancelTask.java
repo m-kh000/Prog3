@@ -6,40 +6,35 @@ import ui.Manager;
 
 public class CancelTask extends FunctionPanel {
     public CancelTask(JPanel centerPanel, JFrame frame, Factory factory) {
-        // Main grid: 8 rows, 1 column
+        
         setLayout(new GridLayout(8, 1, 20, 20));
         
-        // Row 1: Top panel
-        add(createTopPanel("Cancel Tasks", centerPanel, frame, factory, "supervisor"));
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
         
-        // Row 2: Select task
+        // Components creation
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 20, 20));
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Task:");
         selectLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> taskCombo = new JComboBox<>(factory.get0PCTasksNames());
         taskCombo.setFont(Manager.defaultFont(true, false));
         taskCombo.setSelectedItem(null);
-        selectPanel.add(selectLabel);
-        selectPanel.add(taskCombo);
-        add(selectPanel);
-
-        // Rows 3-7: Empty panels
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
         
-        // Row 8: Cancel button
         JButton cancelBtn = new JButton("Cancel Task");
         cancelBtn.setFont(Manager.defaultFont(true, true));
         cancelBtn.setBackground(Color.RED);
         cancelBtn.setForeground(Color.WHITE);        
         cancelBtn.setFocusPainted(false);
         cancelBtn.setOpaque(true);
-        add(cancelBtn);
-        
-        // Add Enter key functionality
+
+        // Listeners
+        // Enter key binding
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "cancel");
         getActionMap().put("cancel", new AbstractAction() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -47,8 +42,8 @@ public class CancelTask extends FunctionPanel {
             }
         });
 
+        // Cancel button click
         cancelBtn.addActionListener(e -> {
-            // Cancel selected task and update combo box
             factory.cancelTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
             for(String task : factory.get0PCTasksNames()) {
@@ -58,6 +53,20 @@ public class CancelTask extends FunctionPanel {
             Manager.isEdited = true;
             JOptionPane.showMessageDialog(null, "Task cancelled successfully");
         });
-    }
 
+        // Layout setup
+        selectPanel.add(selectLabel);
+        selectPanel.add(taskCombo);
+        
+        mainPanel.add(createTopPanel("Cancel Tasks", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(selectPanel);
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(cancelBtn);
+        
+        add(mainPanel, BorderLayout.CENTER);
+    }
 }

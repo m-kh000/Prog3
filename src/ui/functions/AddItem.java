@@ -20,43 +20,18 @@ public class AddItem extends FunctionPanel {
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
         
-        // Main grid: 8 rows, 1 column
+        // Components creation
         JPanel mainPanel = new JPanel(new GridLayout(8, 1, 10, 10));
-
-        // Row 1: Top panel
-        mainPanel.add(createTopPanel("Add Item", centerPanel, frame, factory, "supervisor"));
-
-        // Row 2: Type name
         LabelBox name = new LabelBox("Name:");
-        mainPanel.add(name);
-        
-        // Row 3: Type category
         LabelBox category = new LabelBox("Category:");
-        mainPanel.add(category);
-        
-        // Row 4: Type price
         LabelBox price = new LabelBox("Price:");
-        mainPanel.add(price);
-        
-        // Row 5: Type quantity
         LabelBox quantity = new LabelBox("Quantity:");
-        mainPanel.add(quantity);
-        
-        // Row 6: Type min quantity
         LabelBox minquantity = new LabelBox("min quantity:");
-        mainPanel.add(minquantity);
-
-        // Row 7: Empty panel
-        mainPanel.add(new JPanel());
-
-        // Row 8: Submit button
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
-        mainPanel.add(submitBtn);
-        
-        add(mainPanel, BorderLayout.CENTER);
-        
-        // Add Enter key functionality
+
+        // Listeners
+        // Enter key functionality
         minquantity.getTextField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent e) {
                 if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -65,6 +40,7 @@ public class AddItem extends FunctionPanel {
             }
         });
 
+        // Submit button click
         submitBtn.addActionListener(e -> {
             if (name.isEmpty() || category.isEmpty() || price.isEmpty() || quantity.isEmpty() || minquantity.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill in all fields");
@@ -89,5 +65,17 @@ public class AddItem extends FunctionPanel {
                 FileUtils.log(ex);
             }
         });
+
+        // Layout setup
+        mainPanel.add(createTopPanel("Add Item", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(name);
+        mainPanel.add(category);
+        mainPanel.add(price);
+        mainPanel.add(quantity);
+        mainPanel.add(minquantity);
+        mainPanel.add(new JPanel());
+        mainPanel.add(submitBtn);
+        
+        add(mainPanel, BorderLayout.CENTER);
     }
 }

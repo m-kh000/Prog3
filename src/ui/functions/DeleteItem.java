@@ -9,40 +9,35 @@ import utils.FileUtils;
 public class DeleteItem extends FunctionPanel {
 
     public DeleteItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
-        // Main grid: 8 rows, 1 column
+        
         setLayout(new GridLayout(8, 1, 20, 20));
         
-        // Row 1: Top panel
-        add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"));
+        // Side panels
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(100, 0));
+        rightPanel.setPreferredSize(new Dimension(100, 0));
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
         
-        // Row 2: Select item
+        // Components creation
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 20, 20));
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Item:");
-        selectLabel.setFont(Manager.defaultFont(false, false));
+        selectLabel.setFont(Manager.defaultFont(true, false));
         JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
         itemCombo.setFont(Manager.defaultFont(true, false));
         itemCombo.setSelectedItem(null);
-        selectPanel.add(selectLabel);
-        selectPanel.add(itemCombo);
-        add(selectPanel);
-
-        // Rows 3-7: Empty panels
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
-        add(new JPanel());
         
-        // Row 8: Delete button
         JButton deleteBtn = new JButton("Delete");
         deleteBtn.setFont(Manager.defaultFont(true, true));
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setForeground(Color.WHITE);
         deleteBtn.setFocusPainted(false);
         deleteBtn.setOpaque(true);
-        add(deleteBtn);
-        
-        // Add Enter key functionality
+
+        // Listeners
+        // Enter key binding
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "delete");
         getActionMap().put("delete", new AbstractAction() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -50,8 +45,8 @@ public class DeleteItem extends FunctionPanel {
             }
         });
 
+        // Delete button click
         deleteBtn.addActionListener (e -> {
-            // Delete selected item and update combo box
             try {
                 if(itemCombo.getSelectedItem()!= null){
                 factory.deleteItem((String)itemCombo.getSelectedItem());
@@ -71,13 +66,20 @@ public class DeleteItem extends FunctionPanel {
                 FileUtils.log(ex);
             }
         });
-        //enter key
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    deleteBtn.doClick();
-                }
-            }
-        });
+
+        // Layout setup
+        selectPanel.add(selectLabel);
+        selectPanel.add(itemCombo);
+        
+        mainPanel.add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(selectPanel);
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(new JPanel());
+        mainPanel.add(deleteBtn);
+        
+        add(mainPanel, BorderLayout.CENTER);
     }
 }

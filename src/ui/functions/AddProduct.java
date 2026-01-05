@@ -1,8 +1,8 @@
 package ui.functions;
 import core.Factory;
 import core.Item;
+import utils.FileUtils;
 import exceptions.EmptyFieldException;
-
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -11,8 +11,9 @@ import javax.swing.*;
 import ui.LabelBox;
 import ui.Manager;
 
+// AddProduct panel for creating new products with item requirements
 public class AddProduct extends FunctionPanel {
-    private JPanel itemRequirementsPanel; // Store reference for refreshing
+    private JPanel itemRequirementsPanel;
 
     public AddProduct(JPanel centerPanel, JFrame frame, Factory factory) {
         setLayout(new BorderLayout());
@@ -25,16 +26,10 @@ public class AddProduct extends FunctionPanel {
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
         
+        // Components
         JPanel mainPanel = new JPanel(new BorderLayout());
-        
-        // Top panel with navigation
-        mainPanel.add(createTopPanel("Add a Product", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
-
-        // Product name input panel
         LabelBox productNameBox = new LabelBox("Product Name:");
-        mainPanel.add(productNameBox, BorderLayout.CENTER);
-
-        // Scrollable panel for item requirements
+        
         itemRequirementsPanel = new JPanel();
         itemRequirementsPanel.setLayout(new BoxLayout(itemRequirementsPanel, BoxLayout.Y_AXIS));
         itemRequirementsPanel.setBorder(BorderFactory.createTitledBorder("Item Requirements"));
@@ -42,14 +37,13 @@ public class AddProduct extends FunctionPanel {
 
         JScrollPane scrollPane = new JScrollPane(itemRequirementsPanel);
         scrollPane.setPreferredSize(new Dimension(600, 450));
-        mainPanel.add(scrollPane, BorderLayout.SOUTH);
 
-        // Add product button
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         CustomBtn addProductButton = new CustomBtn("Add Product");
         addProductButton.setFont(Manager.defaultFont(true, false));
         
-        // Add Enter key functionality
+        // Listeners
+        // Enter key functionality
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "addProduct");
         getActionMap().put("addProduct", new AbstractAction() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -57,6 +51,7 @@ public class AddProduct extends FunctionPanel {
             }
         });
         
+        // Add product button listener
         addProductButton.addActionListener(e -> {
             String productName = productNameBox.getText().trim();
             
@@ -64,7 +59,7 @@ public class AddProduct extends FunctionPanel {
                 if (productName.isEmpty()) {
                     throw new EmptyFieldException();
                 }
-                // Collect item requirements from all rows
+                
                 HashMap<Item, Integer> itemRequirements = new HashMap<>();
                 for (Component component : itemRequirementsPanel.getComponents()) {
                     if (component instanceof ItemRequirementRow) {
@@ -73,18 +68,15 @@ public class AddProduct extends FunctionPanel {
                             Item selectedItem = factory.findItemByName(row.itemDropdown.getSelectedItem().toString());
                             int quantity = Integer.parseInt(row.quantityInput.getText().trim());
                             itemRequirements.put(selectedItem, quantity);
-                        }
-                        else{
+                        } else {
                             throw new EmptyFieldException();
                         }
                     }
                 }
                 
-                // Create and add the product
                 factory.add(new core.Product(productName, itemRequirements, new HashSet<LocalDate>()));
                 Manager.isEdited = true;
                 
-                // Clear form
                 productNameBox.reset();
                 itemRequirementsPanel.removeAll();
                 itemRequirementsPanel.add(new ItemRequirementRow(factory, true));
@@ -93,12 +85,16 @@ public class AddProduct extends FunctionPanel {
 
                 JOptionPane.showMessageDialog(frame, "Product added successfully.");
                 
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Please enter number quantities.");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(frame, "Error adding product: " + ex.getMessage());
+                JOptionPane.showMessageDialog(frame, ex.getMessage());
+                FileUtils.log(ex);
             }
         });
+        
+        // Layout setup
+        mainPanel.add(createTopPanel("Add a Product", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        mainPanel.add(productNameBox, BorderLayout.CENTER);
+        mainPanel.add(scrollPane, BorderLayout.SOUTH);
         
         buttonPanel.add(addProductButton);
         mainPanel.add(buttonPanel, BorderLayout.EAST);
@@ -112,7 +108,6 @@ public class AddProduct extends FunctionPanel {
         java.util.List<String> availableItems = new java.util.ArrayList<>();
         java.util.Set<String> selectedItems = new java.util.HashSet<>();
         
-        // Collect already selected items
         for (Component component : itemRequirementsPanel.getComponents()) {
             if (component instanceof ItemRequirementRow) {
                 ItemRequirementRow row = (ItemRequirementRow) component;
@@ -122,7 +117,6 @@ public class AddProduct extends FunctionPanel {
             }
         }
         
-        // Add only non-selected items
         for (String item : allItems) {
             if (!selectedItems.contains(item)) {
                 availableItems.add(item);
@@ -133,7 +127,6 @@ public class AddProduct extends FunctionPanel {
     }
 
     private class ItemRequirementRow extends JPanel {
-
         JComboBox<String> itemDropdown;
         LabelBox quantityInput;
         boolean isLast;
@@ -145,23 +138,19 @@ public class AddProduct extends FunctionPanel {
             setLayout(new BorderLayout());
             setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
             
-            // Item selection dropdown
             itemDropdown = new JComboBox<>(getAvailableItems(factory));
             itemDropdown.setFont(Manager.defaultFont(false, false));
             itemDropdown.setPreferredSize(new Dimension(100, 50));
             add(itemDropdown, BorderLayout.WEST);
             
-            // Quantity input
             quantityInput = new LabelBox("Quantity:");
             add(quantityInput, BorderLayout.CENTER);
             
             this.isLast = isLastRow;
             addRowButton.setPreferredSize(new Dimension(100,50));
             removeRowButton.setPreferredSize(new Dimension(100,50));
-            // Add/Remove buttons
             if (isLastRow) {
                 removeRowButton.addActionListener(e -> {
-                    // Remove this row and refresh
                     if(isLast && itemRequirementsPanel.getComponentCount() > 1){
                         ItemRequirementRow newLastRow = (ItemRequirementRow)(itemRequirementsPanel.getComponent(itemRequirementsPanel.getComponentCount() - 2));
                         newLastRow.isLast = true;
@@ -175,7 +164,6 @@ public class AddProduct extends FunctionPanel {
                     itemRequirementsPanel.repaint();
                 });
                 addRowButton.addActionListener(e -> {
-                    // Add new row and refresh
                     ItemRequirementRow newRow = new ItemRequirementRow(factory, true);
                     itemRequirementsPanel.add(newRow);
                     itemRequirementsPanel.revalidate();
@@ -202,5 +190,4 @@ public class AddProduct extends FunctionPanel {
             setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
     }
-
 }
