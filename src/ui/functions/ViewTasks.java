@@ -24,7 +24,7 @@ public class ViewTasks extends FunctionPanel {
             tasksPanel.add(Box.createVerticalStrut(5));
             
             // Add actual tasks from factory
-            for (core.Task task : factory.previewTasks()) {
+            for (core.Task task : Factory.previewTasks()) {
                 tasksPanel.add(new ui.components.TaskPanel(task));
                 tasksPanel.add(Box.createVerticalStrut(5));
             }

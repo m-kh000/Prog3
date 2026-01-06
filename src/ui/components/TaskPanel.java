@@ -54,12 +54,13 @@ public class TaskPanel extends JPanel {
         
         // Status with hint
         boolean isCompleted = task.getReady() >= task.getRequiredQuantity();
-        JLabel statusValue = new JLabel(isCompleted ? "Complete" : "Pending");
+        boolean isCanceled = task.getStatus().equals("Canceled");
+        JLabel statusValue = new JLabel(isCanceled ? "Canceled" : isCompleted ? "Completed" : "Pending");
         statusValue.setForeground(isCompleted ? Color.GREEN : Color.RED);
         statusValue.setFont(Manager.defaultFont(false, false));
         JPanel statusPanel = new JPanel();
         statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
-        JLabel statusHint = new JLabel("Status");
+        JLabel statusHint = new JLabel(" Status");
         statusHint.setForeground(Color.GRAY);
         statusHint.setFont(Manager.hintFont());
         statusPanel.add(statusValue);

@@ -34,11 +34,10 @@ public class ThreadManager {
      * the method does nothing.
      */
     public static void assign() {
-        if (waiting.isEmpty()) {
-            return;
-        }
-
         for (Thread t : threadPool) {
+            if (waiting.isEmpty()) {
+                return;
+            }
             if (!t.isAlive()) {
                 try {
                     t = new Thread(waiting.remove());

@@ -23,7 +23,7 @@ public class Task {
     
     public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) throws InvalidValuesException {
         if(requiredQuantity <= 0 || startDate.isAfter(deliveryDate)) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException("Invalid values in class Task!");
         }
         this.id = nextId++;
         this.product = product;
