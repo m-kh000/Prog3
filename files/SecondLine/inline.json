@@ -1,2 +1,35 @@
 [
+    {
+        "id": 5,
+        "product": {
+            "id": 1,
+            "name": "Hoodie",
+            "quantityAvailable": 70,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 1,
+                        "name": "Cotton",
+                        "category": "Fabrics",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 200
+                    },
+                    "value": 10
+                }
+            ],
+            "orderedIn": [
+                "2025-12-22",
+                "1111-11-11",
+                "2026-01-01"
+            ],
+            "purchaseFrequency": 3
+        },
+        "requiredQuantity": 20,
+        "ready": 0,
+        "customerName": "1",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
+        "status": "inline"
+    }
 ]
