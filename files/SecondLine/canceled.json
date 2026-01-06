@@ -19,17 +19,6 @@
                 },
                 {
                     "key": {
-                        "id": 4,
-                        "name": "Wood",
-                        "category": "Material",
-                        "price": 10.0,
-                        "quantityAvailable": 500,
-                        "minQuantity": 50
-                    },
-                    "value": 20
-                },
-                {
-                    "key": {
                         "id": 1,
                         "name": "Cotton",
                         "category": "Fabrics",
@@ -38,6 +27,17 @@
                         "minQuantity": 200
                     },
                     "value": 10
+                },
+                {
+                    "key": {
+                        "id": 4,
+                        "name": "Wood",
+                        "category": "Material",
+                        "price": 10.0,
+                        "quantityAvailable": 500,
+                        "minQuantity": 50
+                    },
+                    "value": 20
                 }
             ],
             "orderedIn": [
@@ -50,6 +50,6 @@
         "customerName": "Mira",
         "startDate": "2026-01-01",
         "deliveryDate": "2026-02-28",
-        "status": "inline"
+        "status": "Canceled"
     }
 ]

@@ -68,6 +68,7 @@ public class Factory {
             tasks.addAll(pl.getInline());
             tasks.addAll(pl.getCompleted());
             tasks.addAll(pl.getInprogress());
+            tasks.addAll(pl.getCanceledTasks());
         }
         return tasks.toArray(new Task[tasks.size()]);
     }

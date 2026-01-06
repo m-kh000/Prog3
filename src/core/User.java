@@ -40,7 +40,7 @@ public class User {
 
     public void resetLastSeen() {
         this.lastSeen = LocalDate.now();
-    } 
+    }
     public boolean isManager() {
         return this.isManager;
     }

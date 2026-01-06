@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 
 import exceptions.InvalidValuesException;
 import jsonParser.annotations.JsonIgnore;
+import ui.Manager;
 import utils.FileUtils;
 import utils.IDInitializer;
 import utils.ThreadManager;
@@ -33,13 +34,13 @@ public class ProductLine implements Runnable {
         nextId = IDInitializer.getProductlinesGlobalID();
     }
 
-    public ProductLine() {
-    }
+    public ProductLine() {}
 
     public ProductLine(String name, String status, int priority) throws InvalidValuesException {
         if(priority < 1 || priority > 10) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException("Invalid values in class ProductLine!");
         }
+
         this.id = nextId++;
         this.priority = priority;
         this.name = name;
@@ -53,6 +54,8 @@ public class ProductLine implements Runnable {
     @Override
     public void run() {
         while (!inline.isEmpty()) {
+            Manager.isEdited = true;
+
             inprogress.add(inline.removeFirst());
 
             Task runningTask = getFirstAvailableInprogressTask();
@@ -89,9 +92,10 @@ public class ProductLine implements Runnable {
             if (index != -1) {
                 canceled.add(inline.remove(index));
             } else {
-                throw new NoSuchElementException("Task not found in the product line.");
+                throw new NoSuchElementException("Task not found in the specified product line.");
             }
         }
+        task.setStatus("Canceled");
     }
 
     //GETTERS

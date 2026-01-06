@@ -68,3 +68,36 @@ NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
+EmptyFieldException occurred, Exception's message: please fill out all fields
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: nullException's cause: null
+NoSuchElementException occurred, Exception's message: nullException's cause: null
+NoSuchElementException occurred, Exception's message: nullException's cause: null
+NoSuchElementException occurred, Exception's message: nullException's cause: null
