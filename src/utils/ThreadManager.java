@@ -34,6 +34,10 @@ public class ThreadManager {
      * the method does nothing.
      */
     public static void assign() {
+        if (waiting.isEmpty()) {
+            return;
+        }
+
         for (Thread t : threadPool) {
             if (!t.isAlive()) {
                 try {
