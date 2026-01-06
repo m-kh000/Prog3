@@ -13,6 +13,7 @@ public class FilterTasks extends FunctionPanel {
     private JComboBox<String> filterField;
 
     public FilterTasks(JPanel centerPanel, JFrame frame, Factory factory) {
+        Manager.autorefresh = true;
         setLayout(new BorderLayout());
 
         // Components creation

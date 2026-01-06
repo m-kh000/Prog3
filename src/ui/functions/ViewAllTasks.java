@@ -3,12 +3,14 @@ import core.Factory;
 import core.Task;
 import java.awt.*;
 import javax.swing.*;
+import ui.Manager;
 import ui.components.TaskPanel;
 
 // ViewAllTasks panel for displaying all tasks in the system
 public class ViewAllTasks extends FunctionPanel {
     
     public ViewAllTasks(JPanel centerPanel, JFrame frame, Factory factory) {
+        Manager.autorefresh = true;
         setLayout(new BorderLayout());
         
         // Components

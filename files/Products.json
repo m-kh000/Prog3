@@ -18,26 +18,16 @@
         ],
         "orderedIn": [
             "2025-12-22",
+            "1111-11-11",
             "2026-01-01"
         ],
-        "purchaseFrequency": 2
+        "purchaseFrequency": 3
     },
     {
         "id": 2,
         "name": "Bed",
         "quantityAvailable": 1,
         "requiredItems": [
-            {
-                "key": {
-                    "id": 3,
-                    "name": "Screws",
-                    "category": "Material",
-                    "price": 1.0,
-                    "quantityAvailable": 2000,
-                    "minQuantity": 500
-                },
-                "value": 35
-            },
             {
                 "key": {
                     "id": 4,
@@ -59,6 +49,17 @@
                     "minQuantity": 200
                 },
                 "value": 10
+            },
+            {
+                "key": {
+                    "id": 3,
+                    "name": "Screws",
+                    "category": "Material",
+                    "price": 1.0,
+                    "quantityAvailable": 2000,
+                    "minQuantity": 500
+                },
+                "value": 35
             }
         ],
         "orderedIn": [
@@ -96,8 +97,9 @@
             }
         ],
         "orderedIn": [
+            "1111-11-11"
         ],
-        "purchaseFrequency": 0
+        "purchaseFrequency": 1
     },
     {
         "id": 4,

@@ -4,7 +4,12 @@ import javax.swing.*;
 import ui.Manager;
 
 public class TaskPanel extends JPanel {
+    JLabel readyValue;
+    JLabel statusValue;
+    core.Task task;
+    Timer refreshTimer;
     public TaskPanel(core.Task task) {
+        this.task = task;
         setLayout(new GridLayout(1, 5, 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
@@ -40,7 +45,7 @@ public class TaskPanel extends JPanel {
         add(quantityPanel);
         
         // Ready quantity with hint
-        JLabel readyValue = new JLabel(String.valueOf(task.getReady()));
+        readyValue = new JLabel(String.valueOf(task.getReady()));
         readyValue.setForeground(Color.ORANGE);
         readyValue.setFont(Manager.defaultFont(false, true,""));
         JPanel readyPanel = new JPanel();
@@ -54,8 +59,7 @@ public class TaskPanel extends JPanel {
         
         // Status with hint
         boolean isCompleted = task.getReady() >= task.getRequiredQuantity();
-        boolean isCanceled = task.getStatus().equals("Canceled");
-        JLabel statusValue = new JLabel(isCanceled ? "Canceled" : isCompleted ? "Completed" : "Pending");
+        statusValue = new JLabel(isCompleted ? "Completed" : "Pending");
         statusValue.setForeground(isCompleted ? Color.GREEN : Color.RED);
         statusValue.setFont(Manager.defaultFont(false, false));
         JPanel statusPanel = new JPanel();
@@ -66,5 +70,26 @@ public class TaskPanel extends JPanel {
         statusPanel.add(statusValue);
         statusPanel.add(statusHint);
         add(statusPanel);
+        
+        // Auto-refresh timer (every 2 seconds)
+        refreshTimer = new Timer(2000, e -> refreshTasksPanel());
+        refreshTimer.start();
+        
+    }
+
+    private void refreshTasksPanel() {
+        if(!Manager.autorefresh) {
+            refreshTimer.stop();
+            return;
+        }
+
+        readyValue.setText(String.valueOf(task.getReady()));
+        boolean isCompleted = task.getReady() >= task.getRequiredQuantity();
+        statusValue.setText(isCompleted ? "Completed" : "Pending");
+        statusValue.setForeground(isCompleted ? Color.GREEN : Color.RED);
+        getParent().revalidate();
+        getParent().repaint();
+        System.out.println("refresh");
+
     }
 }

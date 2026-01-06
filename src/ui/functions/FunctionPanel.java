@@ -34,8 +34,10 @@ public abstract class FunctionPanel extends JPanel {
 
     protected void navigateBack(JPanel centerPanel, JFrame frame, Factory factory, String role) {
         if (role.equals("manager")) {
+            Manager.autorefresh = false;
             UI.switchContent(new CenterManager(centerPanel, frame, factory));
         } else {
+            Manager.autorefresh = false;
             UI.switchContent(new CenterSupervisor(centerPanel, frame, factory));
         }
     }
