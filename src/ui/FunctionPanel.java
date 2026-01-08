@@ -1,9 +1,8 @@
-package ui.functions;
+package ui;
 
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-import ui.*;
 
 public abstract class FunctionPanel extends JPanel {
 
@@ -33,13 +32,12 @@ public abstract class FunctionPanel extends JPanel {
     }
 
     protected void navigateBack(JPanel centerPanel, JFrame frame, String role) {
+        Manager.taskAutorefresh = false;
+        Manager.plAutorefresh = false;
+        Manager.itemAutorefresh = false;
         if (role.equals("manager")) {
-            Manager.taskAutorefresh = false;
-            Manager.plAutorefresh = false;
             UI.switchContent(new CenterManager(centerPanel, frame));
         } else {
-            Manager.taskAutorefresh = false;
-            Manager.plAutorefresh = false;
             UI.switchContent(new CenterSupervisor(centerPanel, frame));
         }
     }

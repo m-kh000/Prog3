@@ -13,6 +13,7 @@ public class Manager {
     public static boolean isEdited = false;
     public static boolean taskAutorefresh = false;
     public static boolean plAutorefresh = false;
+    public static boolean itemAutorefresh = false;
 
     public static Font defaultFont(boolean isBold, boolean isBig) {
         int style = isBold ? Font.BOLD : Font.PLAIN;

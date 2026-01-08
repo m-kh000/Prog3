@@ -75,8 +75,8 @@ public class TaskPanel extends JPanel {
         statusPanel.add(statusHint);
         add(statusPanel);
 
-        // Auto-refresh timer (every 2 seconds)
-        refreshTimer = new Timer(2000, e -> refreshTasksPanel());
+        // Auto-refresh timer (every 1.2 seconds)
+        refreshTimer = new Timer(1200, e -> refreshTasksPanel());
         refreshTimer.start();
 
     }
@@ -86,14 +86,15 @@ public class TaskPanel extends JPanel {
             refreshTimer.stop();
             return;
         }
-
         readyValue.setText(String.valueOf(task.getReady()));
         boolean isCompleted = task.getReady() >= task.getRequiredQuantity();
-        statusValue.setText(isCompleted ? "Completed" : "Pending");
         statusValue.setForeground(isCompleted ? Color.GREEN : Color.RED);
+        if(isCompleted){
+            statusValue.setText("Completed");
+            refreshTimer.stop();
+        }
         getParent().revalidate();
         getParent().repaint();
-        System.out.println("refresh");
 
     }
 }

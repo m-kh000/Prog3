@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 70,
+        "quantityAvailable": 190,
         "requiredItems": [
             {
                 "key": {
@@ -19,9 +19,10 @@
         "orderedIn": [
             "2025-12-22",
             "1111-11-11",
+            "2002-02-22",
             "2026-01-01"
         ],
-        "purchaseFrequency": 3
+        "purchaseFrequency": 4
     },
     {
         "id": 2,
@@ -41,17 +42,6 @@
             },
             {
                 "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 200
-                },
-                "value": 10
-            },
-            {
-                "key": {
                     "id": 3,
                     "name": "Screws",
                     "category": "Material",
@@ -60,6 +50,17 @@
                     "minQuantity": 500
                 },
                 "value": 35
+            },
+            {
+                "key": {
+                    "id": 1,
+                    "name": "Cotton",
+                    "category": "Fabrics",
+                    "price": 1.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 200
+                },
+                "value": 10
             }
         ],
         "orderedIn": [
@@ -71,19 +72,8 @@
     {
         "id": 3,
         "name": "chair",
-        "quantityAvailable": 0,
+        "quantityAvailable": 200,
         "requiredItems": [
-            {
-                "key": {
-                    "id": 3,
-                    "name": "Screws",
-                    "category": "Material",
-                    "price": 1.0,
-                    "quantityAvailable": 2050,
-                    "minQuantity": 500
-                },
-                "value": 100
-            },
             {
                 "key": {
                     "id": 4,
@@ -94,17 +84,29 @@
                     "minQuantity": 50
                 },
                 "value": 20
+            },
+            {
+                "key": {
+                    "id": 3,
+                    "name": "Screws",
+                    "category": "Material",
+                    "price": 1.0,
+                    "quantityAvailable": 2050,
+                    "minQuantity": 500
+                },
+                "value": 100
             }
         ],
         "orderedIn": [
+            "1111-11-11",
             "1111-11-11"
         ],
-        "purchaseFrequency": 1
+        "purchaseFrequency": 3
     },
     {
         "id": 4,
         "name": "pillow case",
-        "quantityAvailable": 0,
+        "quantityAvailable": 8,
         "requiredItems": [
             {
                 "key": {
@@ -119,7 +121,8 @@
             }
         ],
         "orderedIn": [
+            "2022-02-22"
         ],
-        "purchaseFrequency": 0
+        "purchaseFrequency": 1
     }
 ]

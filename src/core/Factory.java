@@ -47,6 +47,7 @@ public class Factory {
                 break;
             }
         }
+        employAndAssignProductLines();
     }
 
     // PREVIEWS : 

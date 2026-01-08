@@ -2,6 +2,8 @@ package ui.functions;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.components.ProductLinePanel;
 
 // ViewPerformance panel for displaying production line performance with real-time updates

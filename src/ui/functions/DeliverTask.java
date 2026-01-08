@@ -4,13 +4,14 @@ import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
 
+import ui.FunctionPanel;
 import ui.Manager;
 import utils.FileUtils;
 
 public class DeliverTask extends FunctionPanel {
     public DeliverTask(JPanel centerPanel, JFrame frame) {
         
-        setLayout(new GridLayout(8, 1, 20, 20));
+        setLayout(new BorderLayout());
         
         // Side panels
         JPanel leftPanel = new JPanel();

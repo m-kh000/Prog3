@@ -4,6 +4,8 @@ import core.Factory;
 import core.Task;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.components.TaskPanel;
 
 public class ViewAllTasks extends FunctionPanel {

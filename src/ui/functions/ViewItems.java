@@ -1,6 +1,8 @@
 package ui.functions;
 import javax.swing.*;
 import java.awt.*;
+
+import ui.FunctionPanel;
 import ui.components.ItemPanel;
 import core.Factory;
 

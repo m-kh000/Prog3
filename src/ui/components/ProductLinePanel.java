@@ -67,8 +67,8 @@ public class ProductLinePanel extends JPanel {
         inprogressPanel.add(inprogressHint);
         add(inprogressPanel);
 
-        // Auto-refresh timer (every 2 seconds)
-        refreshTimer = new Timer(2000, e -> refreshTasksPanel());
+        // Auto-refresh timer (every 1.2 seconds)
+        refreshTimer = new Timer(1200, e -> refreshTasksPanel());
         refreshTimer.start();
 
     }
@@ -84,6 +84,5 @@ public class ProductLinePanel extends JPanel {
     inprogressValue.setText(String.valueOf(line.getBothInPInL().size()));
         getParent().revalidate();
         getParent().repaint();
-        System.out.println("pl refresh");
     }
 }

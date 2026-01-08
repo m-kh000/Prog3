@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.Manager;
 import ui.components.ProductPanel;
 

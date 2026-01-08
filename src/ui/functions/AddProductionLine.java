@@ -4,6 +4,8 @@ import core.Factory;
 import core.ProductLine;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.LabelBox;
 import ui.Manager;
 import utils.FileUtils;

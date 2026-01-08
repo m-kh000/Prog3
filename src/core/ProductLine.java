@@ -53,7 +53,7 @@ public class ProductLine implements Runnable {
         while (!inline.isEmpty()) {
             Manager.isEdited = true;
 
-            inprogress.add(inline.removeFirst());
+            inprogress.add(inline.remove(0));
 
             Task runningTask = getFirstAvailableInprogressTask();
 

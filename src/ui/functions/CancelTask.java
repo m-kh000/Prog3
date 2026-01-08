@@ -2,12 +2,14 @@ package ui.functions;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.Manager;
 
 public class CancelTask extends FunctionPanel {
     public CancelTask(JPanel centerPanel, JFrame frame) {
         
-        setLayout(new GridLayout(8, 1, 20, 20));
+        setLayout(new BorderLayout());
         
         // Side panels
         JPanel leftPanel = new JPanel();
