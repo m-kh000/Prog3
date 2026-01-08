@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.LabelBox;
 import ui.Manager;
 

@@ -6,6 +6,8 @@ import exceptions.EmptyFieldException;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.LabelBox;
 import ui.Manager;
 import utils.FileUtils;

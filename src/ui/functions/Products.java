@@ -1,6 +1,8 @@
 package ui.functions;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.UI;
 
 public class Products extends FunctionPanel {

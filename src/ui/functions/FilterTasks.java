@@ -4,6 +4,8 @@ import core.Factory;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.Manager;
 import ui.components.TaskPanel;
 

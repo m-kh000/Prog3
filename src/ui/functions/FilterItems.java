@@ -3,6 +3,8 @@ import core.Factory;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.components.ItemPanel;
 
 public class FilterItems extends FunctionPanel {

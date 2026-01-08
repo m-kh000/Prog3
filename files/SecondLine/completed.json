@@ -30,5 +30,80 @@
         "startDate": "2025-12-22",
         "deliveryDate": "2026-01-01",
         "status": "inline"
+    },
+    {
+        "id": 5,
+        "product": {
+            "id": 1,
+            "name": "Hoodie",
+            "quantityAvailable": 70,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 1,
+                        "name": "Cotton",
+                        "category": "Fabrics",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 200
+                    },
+                    "value": 10
+                }
+            ],
+            "orderedIn": [
+                "2025-12-22",
+                "1111-11-11",
+                "2026-01-01"
+            ],
+            "purchaseFrequency": 3
+        },
+        "requiredQuantity": 20,
+        "ready": 20,
+        "customerName": "1",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 8,
+        "product": {
+            "id": 3,
+            "name": "chair",
+            "quantityAvailable": 100,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "Screws",
+                        "category": "Material",
+                        "price": 1.0,
+                        "quantityAvailable": 2050,
+                        "minQuantity": 500
+                    },
+                    "value": 100
+                },
+                {
+                    "key": {
+                        "id": 4,
+                        "name": "Wood",
+                        "category": "Material",
+                        "price": 10.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 50
+                    },
+                    "value": 20
+                }
+            ],
+            "orderedIn": [
+                "1111-11-11"
+            ],
+            "purchaseFrequency": 2
+        },
+        "requiredQuantity": 100,
+        "ready": 100,
+        "customerName": "mk",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
+        "status": "inline"
     }
 ]

@@ -1,13 +1,19 @@
 package ui.components;
+import core.Item;
 import java.awt.*;
 import javax.swing.*;
 import ui.Manager;
 
 public class ItemPanel extends JPanel {
+    Timer refreshTimer;
+    JLabel quantityValue;
+    Item item;
     public ItemPanel(core.Item item) {
+        this.item = item;
         setLayout(new GridLayout(1, 4, 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        Manager.itemAutorefresh = true;
         
         // ID and icon combined
         ImageIcon icon = new ImageIcon("icons/item.png");
@@ -27,7 +33,7 @@ public class ItemPanel extends JPanel {
         add(nameLabel);
         
         // Quantity with hint
-        JLabel quantityValue = new JLabel(String.valueOf(item.getQuantityAvailable()));
+        quantityValue = new JLabel(String.valueOf(item.getQuantityAvailable()));
         quantityValue.setForeground(item.isUnderMin() ? Color.RED : Color.GREEN);
         quantityValue.setFont(Manager.defaultFont(false, false));
         JPanel quantityPanel = new JPanel();
@@ -64,5 +70,21 @@ public class ItemPanel extends JPanel {
         categoryPanel.add(categoryValue);
         categoryPanel.add(categoryHint);
         add(categoryPanel);
+        // Auto-refresh timer (every 3 seconds)
+        refreshTimer = new Timer(3000, e -> refreshTasksPanel());
+        refreshTimer.start();
+
+    }
+
+    private void refreshTasksPanel() {
+        if (!Manager.itemAutorefresh) {
+            refreshTimer.stop();
+            return;
+        }
+        quantityValue.setText(String.valueOf(item.getQuantityAvailable()));
+        quantityValue.setForeground(item.isUnderMin() ? Color.RED : Color.GREEN);
+        getParent().revalidate();
+        getParent().repaint();
+
     }
 }

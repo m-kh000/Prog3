@@ -4,6 +4,8 @@ import core.Task;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.LabelBox;
 import ui.Manager;
 import utils.FileUtils;

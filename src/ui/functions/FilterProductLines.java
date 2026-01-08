@@ -2,6 +2,8 @@ package ui.functions;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.Manager;
 import ui.components.ProductLinePanel;
 

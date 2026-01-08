@@ -5,11 +5,15 @@ import ui.Manager;
 
 public class RestockPanel extends JPanel {
     private JTextField quantityField;
-    
+    private Timer refreshTimer;
+    private core.Item item;
+        JLabel quantityValue;
     public RestockPanel(core.Item item) {
+        this.item = item;
         setLayout(new GridLayout(1, 6, 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        Manager.itemAutorefresh = true;
         
         // ID and icon combined
         ImageIcon icon = new ImageIcon("icons/item.png");
@@ -29,7 +33,7 @@ public class RestockPanel extends JPanel {
         add(nameLabel);
 
         // Quantity with hint
-        JLabel quantityValue = new JLabel(String.valueOf(item.getQuantityAvailable()));
+        quantityValue = new JLabel(String.valueOf(item.getQuantityAvailable()));
         quantityValue.setForeground(item.isUnderMin() ? Color.RED : Color.GREEN);
         quantityValue.setFont(Manager.defaultFont(false, false));
         JPanel quantityPanel = new JPanel();
@@ -83,6 +87,22 @@ public class RestockPanel extends JPanel {
             }
         });
         add(submitBtn);
+
+        // Auto-refresh timer (every 3 seconds)
+        refreshTimer = new Timer(3000, e -> refreshTasksPanel());
+        refreshTimer.start();
+
+    }
+    private void refreshTasksPanel() {
+        if (!Manager.itemAutorefresh) {
+            refreshTimer.stop();
+            return;
+        }
+        quantityValue.setText(String.valueOf(item.getQuantityAvailable()));
+        quantityValue.setForeground(item.isUnderMin() ? Color.RED : Color.GREEN);
+        getParent().revalidate();
+        getParent().repaint();
+
     }
 
     private class CustomBtn extends JButton {

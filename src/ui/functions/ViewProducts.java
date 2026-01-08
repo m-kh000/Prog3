@@ -2,6 +2,8 @@ package ui.functions;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.components.ProductPanel;
 
 // ViewProducts panel for displaying all products in the warehouse

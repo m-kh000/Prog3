@@ -3,6 +3,8 @@ import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
+
+import ui.FunctionPanel;
 import ui.Manager;
 import utils.FileUtils;
 

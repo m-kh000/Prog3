@@ -2,6 +2,8 @@ package ui;
 import core.Factory;
 import core.Warehouse;
 import java.awt.*;
+import java.io.IOException;
+
 import javax.swing.*;
 import jsonParser.JsonParser;
 import utils.FileUtils;
@@ -77,40 +79,24 @@ public class CenterLogin extends JPanel {
             Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
             Factory Factory = null;
             boolean successful = false;
-
+            centerPanel.removeAll();
             switch (r.getState().toLowerCase()) {
                 case "manager":
-                    centerPanel.removeAll();
-                    Factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
-                    Factory.employAndAssignProductLines();
-                    makeSaveOnClose(frame);
                     centerPanel.add(new CenterManager(centerPanel, frame ));
-                    successful = true;
+                    successfulyIn(centerPanel,r,frame);
                     break;
                 case "supervisor":
-                    centerPanel.removeAll();
-                    Factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
-                    Factory.employAndAssignProductLines();
-                    makeSaveOnClose(frame);
                     centerPanel.add(new CenterSupervisor(centerPanel, frame ));
-                    successful = true;
+                    successfulyIn(centerPanel,r,frame);
                     break;
                 case "signup":
-                    centerPanel.removeAll();
                     centerPanel.add(new CenterSignup(centerPanel, frame ,email, passord));
+                    JOptionPane.showMessageDialog(null, r.getMessage(), "Message", JOptionPane.INFORMATION_MESSAGE);
+                    centerPanel.revalidate();
+                    centerPanel.repaint();
                     break;
             
             }
-                    centerPanel.revalidate();
-                    centerPanel.repaint();
-                    if(successful) {
-                        ImageIcon icon = new ImageIcon("icons/smile5.png");
-                        Image img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
-                    } else {
-                        JOptionPane.showMessageDialog(null, r.getMessage(), "Message", JOptionPane.INFORMATION_MESSAGE);
-                    }
-            
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -155,5 +141,21 @@ public class CenterLogin extends JPanel {
             System.exit(0);
             
     }});
+    }
+
+    //everything youll need once ur in
+    private void successfulyIn(JPanel centerPanel, Validator.Response r,JFrame frame) {
+        centerPanel.revalidate();
+        centerPanel.repaint();
+        ImageIcon icon = new ImageIcon("icons/smile5.png");
+        Image img = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+        JOptionPane.showMessageDialog(null, r.getMessage(), "HI!!", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img));
+        try {
+            Factory factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+            Factory.employAndAssignProductLines();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,"I/O Error" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        makeSaveOnClose(frame);
     }
 }
