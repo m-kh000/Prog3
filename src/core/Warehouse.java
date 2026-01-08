@@ -129,7 +129,20 @@ public class Warehouse {
     public List<Product> filterProductsByProductLine(String filter) {
         List<Product> filteredList = new ArrayList<>();
         filter = filter.trim().toLowerCase();
-        //TODO no idea how you organized the pls but make this work :)
+        for(ProductLine pl : Factory.getAllLines()) {
+            if(pl.getName().trim().toLowerCase().equals(filter)) {
+                for(Task t : pl.getCompletedTasks()) {
+                    filteredList.add(t.getProduct());
+                }
+                for(Task t : pl.getInprogress()) {
+                    filteredList.add(t.getProduct());
+                }
+                for(Task t : pl.getInline()) {
+                    filteredList.add(t.getProduct());
+                }
+                break;
+            }
+        }
         return filteredList;
     }
 }

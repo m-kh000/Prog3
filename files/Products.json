@@ -27,19 +27,8 @@
     {
         "id": 2,
         "name": "Bed",
-        "quantityAvailable": 1,
+        "quantityAvailable": 3,
         "requiredItems": [
-            {
-                "key": {
-                    "id": 4,
-                    "name": "Wood",
-                    "category": "Material",
-                    "price": 10.0,
-                    "quantityAvailable": 500,
-                    "minQuantity": 50
-                },
-                "value": 20
-            },
             {
                 "key": {
                     "id": 3,
@@ -61,30 +50,31 @@
                     "minQuantity": 200
                 },
                 "value": 10
-            }
-        ],
-        "orderedIn": [
-            "2011-11-11",
-            "2026-01-01"
-        ],
-        "purchaseFrequency": 2
-    },
-    {
-        "id": 3,
-        "name": "chair",
-        "quantityAvailable": 200,
-        "requiredItems": [
+            },
             {
                 "key": {
                     "id": 4,
                     "name": "Wood",
                     "category": "Material",
                     "price": 10.0,
-                    "quantityAvailable": 1000,
+                    "quantityAvailable": 500,
                     "minQuantity": 50
                 },
                 "value": 20
-            },
+            }
+        ],
+        "orderedIn": [
+            "2011-11-11",
+            "1111-11-11",
+            "2026-01-01"
+        ],
+        "purchaseFrequency": 3
+    },
+    {
+        "id": 3,
+        "name": "chair",
+        "quantityAvailable": 200,
+        "requiredItems": [
             {
                 "key": {
                     "id": 3,
@@ -95,10 +85,20 @@
                     "minQuantity": 500
                 },
                 "value": 100
+            },
+            {
+                "key": {
+                    "id": 4,
+                    "name": "Wood",
+                    "category": "Material",
+                    "price": 10.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 50
+                },
+                "value": 20
             }
         ],
         "orderedIn": [
-            "1111-11-11",
             "1111-11-11"
         ],
         "purchaseFrequency": 3
@@ -124,5 +124,26 @@
             "2022-02-22"
         ],
         "purchaseFrequency": 1
+    },
+    {
+        "id": 5,
+        "name": "Fries",
+        "quantityAvailable": 0,
+        "requiredItems": [
+            {
+                "key": {
+                    "id": 5,
+                    "name": "POTATOO",
+                    "category": "vegetable",
+                    "price": 5.0,
+                    "quantityAvailable": 3,
+                    "minQuantity": 5
+                },
+                "value": 100
+            }
+        ],
+        "orderedIn": [
+        ],
+        "purchaseFrequency": 0
     }
 ]
