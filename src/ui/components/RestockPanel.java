@@ -1,5 +1,4 @@
 package ui.components;
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.Manager;
@@ -7,7 +6,7 @@ import ui.Manager;
 public class RestockPanel extends JPanel {
     private JTextField quantityField;
     
-    public RestockPanel(core.Item item, Factory factory) {
+    public RestockPanel(core.Item item) {
         setLayout(new GridLayout(1, 6, 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));

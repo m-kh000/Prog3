@@ -12,7 +12,7 @@ public class FilterTasks extends FunctionPanel {
     private JPanel tasksPanel;
     private JComboBox<String> filterField;
 
-    public FilterTasks(JPanel centerPanel, JFrame frame, Factory factory) {
+    public FilterTasks(JPanel centerPanel, JFrame frame) {
         Manager.autorefresh = true;
         setLayout(new BorderLayout());
 
@@ -36,7 +36,7 @@ public class FilterTasks extends FunctionPanel {
 
             filterField.removeAllItems();
             if (filterType.equals("ProductLine")) {
-                String[] productLineNames = factory.getProductLineNames();
+                String[] productLineNames = Factory.getProductLineNames();
                 for (String name : productLineNames) {
                     filterField.addItem(name);
                 }
@@ -45,7 +45,7 @@ public class FilterTasks extends FunctionPanel {
                 filterField.repaint();
                 
             } else if (filterType.equals("Product")) {
-                String[] productNames = factory.getProductNames();
+                String[] productNames = Factory.getProductNames();
                 for (String name : productNames) {
                     filterField.addItem(name);
                 }
@@ -62,7 +62,7 @@ public class FilterTasks extends FunctionPanel {
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = (String) filterField.getSelectedItem();
-            updateTasksPanel(factory, filterType, filterValue);
+            updateTasksPanel(filterType, filterValue);
         });
         
         // Enter key binding
@@ -80,13 +80,13 @@ public class FilterTasks extends FunctionPanel {
         filterPanel.add(filterBtn);
 
         JPanel topContainer = new JPanel(new BorderLayout());
-        topContainer.add(createTopPanel("Filter Tasks", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        topContainer.add(createTopPanel("Filter Tasks", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         topContainer.add(filterPanel, BorderLayout.SOUTH);
         add(topContainer, BorderLayout.NORTH);
 
         tasksPanel = createTasksPanel();
         // Load all tasks initially
-        for (core.Task task : factory.previewTasks()) {
+        for (core.Task task : Factory.previewTasks()) {
             tasksPanel.add(new TaskPanel(task));
             tasksPanel.add(Box.createVerticalStrut(5));
         }
@@ -94,14 +94,14 @@ public class FilterTasks extends FunctionPanel {
     }
 
     // Update tasks panel with filtered results
-    private void updateTasksPanel(Factory factory, String filterType, String filterValue) {
+    private void updateTasksPanel(String filterType, String filterValue) {
         tasksPanel.removeAll();
 
         List<core.Task> tasks = null;
         if (filterType.equals("Product")) {
-            tasks = factory.filterTasksByProduct(filterValue);
+            tasks = Factory.filterTasksByProduct(filterValue);
         } else if (filterType.equals("ProductLine")) {
-            tasks = factory.filterTasksByProductLine(filterValue);
+            tasks = Factory.filterTasksByProductLine(filterValue);
         }else if (filterType.equals("InProgress")) {
             tasks = Factory.filterTasksByInprogress();
         } else if (filterType.equals("Completed")) {

@@ -1,6 +1,7 @@
 package ui.functions;
 
 import core.Item;
+import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import java.util.List;
@@ -12,7 +13,7 @@ import utils.FileUtils;
 // ModifyItem panel for editing existing item properties
 public class ModifyItem extends FunctionPanel {
 
-    public ModifyItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
+    public ModifyItem(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Side panels
@@ -29,7 +30,7 @@ public class ModifyItem extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Item:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        String[] allitems = factory.getItemsNames();
+        String[] allitems = Factory.getItemsNames();
         JComboBox<String> itemCombo = new JComboBox<>(allitems);
         itemCombo.setSelectedItem(null);
         itemCombo.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -48,7 +49,7 @@ public class ModifyItem extends FunctionPanel {
         itemCombo.addActionListener(e -> {
             String selectedName = (String)itemCombo.getSelectedItem();
             if (selectedName != null) {
-                List<Item> items = factory.filterItemsByName(selectedName);
+                List<Item> items = Factory.filterItemsByName(selectedName);
                 if (!items.isEmpty()) {
                     Item item = items.get(0);
                     name.setText(item.getName());
@@ -81,7 +82,7 @@ public class ModifyItem extends FunctionPanel {
                 }
                 
                 String selectedItemName = (String)itemCombo.getSelectedItem();
-                List<Item> items = factory.filterItemsByName(selectedItemName);
+                List<Item> items = Factory.filterItemsByName(selectedItemName);
                 if (!items.isEmpty()) {
                     Item item = items.get(0);
                     item.setName(name.getText());
@@ -92,7 +93,7 @@ public class ModifyItem extends FunctionPanel {
                 }
                 
                 itemCombo.removeAllItems();
-                String[] updatedItems = factory.getItemsNames();
+                String[] updatedItems = Factory.getItemsNames();
                 for(String itemName : updatedItems) {
                     itemCombo.addItem(itemName);
                 }
@@ -117,7 +118,7 @@ public class ModifyItem extends FunctionPanel {
         });
         
         // Layout setup
-        mainPanel.add(createTopPanel("Modify Items", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Modify Items", centerPanel, frame, "supervisor"));
         
         selectPanel.add(selectLabel);
         selectPanel.add(itemCombo);

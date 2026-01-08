@@ -7,24 +7,24 @@ import core.Factory;
 // ViewItems panel for displaying all items in the warehouse
 public class ViewItems extends FunctionPanel {
     
-    public ViewItems(JPanel centerPanel, JFrame frame, Factory factory) {
+    public ViewItems(JPanel centerPanel, JFrame frame ) {
         setLayout(new BorderLayout());
         
         // Components
         JPanel itemsPanel = new JPanel();
         itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
-        for (core.Item item : factory.previewItems()) {
+        for (core.Item item : Factory.previewItems()) {
             itemsPanel.add(new ItemPanel(item));
             itemsPanel.add(Box.createVerticalStrut(5));
         }
-        if (factory.previewItems().length == 0) {
+        if (Factory.previewItems().length == 0) {
             itemsPanel.add(new JLabel("No items found."));
         }
         
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
         
         // Layout setup
-        add(createTopPanel("View All Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        add(createTopPanel("View All Items", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
 }

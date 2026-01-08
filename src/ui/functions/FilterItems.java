@@ -8,7 +8,7 @@ import ui.components.ItemPanel;
 public class FilterItems extends FunctionPanel {
     private JPanel itemsPanel;
     
-    public FilterItems(JPanel centerPanel, JFrame frame, core.Factory factory) {
+    public FilterItems(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Components creation
@@ -37,7 +37,7 @@ public class FilterItems extends FunctionPanel {
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = filterField.getText();
-            updatePanel(factory, filterType, filterValue);
+            updatePanel(filterType, filterValue);
         });
         
         // Enter key binding
@@ -55,7 +55,7 @@ public class FilterItems extends FunctionPanel {
         filterPanel.add(filterBtn);
         
         JPanel topContainer = new JPanel(new BorderLayout());
-        topContainer.add(createTopPanel("Filter Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        topContainer.add(createTopPanel("Filter Items", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         topContainer.add(filterPanel, BorderLayout.SOUTH);
         add(topContainer, BorderLayout.NORTH);
         
@@ -69,7 +69,7 @@ public class FilterItems extends FunctionPanel {
     }
     
     // Update items panel with filtered results
-    private void updatePanel(Factory factory, String filterType, String filterValue) {
+    private void updatePanel(String filterType, String filterValue) {
         itemsPanel.removeAll();
         
         List<core.Item> items = null;

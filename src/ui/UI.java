@@ -41,7 +41,7 @@ public class UI extends JFrame {
     
 }
 //TODO
-//make factory static
+//make Factory static
 //add messages to exeptions
 //refresh pls
 //cancel and deliver task 

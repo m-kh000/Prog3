@@ -1,11 +1,10 @@
 package ui;
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.functions.*;
 
 public class CenterManager extends JPanel {
-    public CenterManager(JPanel centerPanel, JFrame frame, Factory factory) {
+    public CenterManager(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Side panels
@@ -30,16 +29,16 @@ public class CenterManager extends JPanel {
 
         // Listeners
         // Add production line button click
-        addLine.addActionListener(e -> UI.switchContent(new AddProductionLine(centerPanel, frame, factory)));
+        addLine.addActionListener(e -> UI.switchContent(new AddProductionLine(centerPanel, frame)));
         
         // Modify status button click
-        modifyStatus.addActionListener(e -> UI.switchContent(new ModifyStatusOfAProductionLine(centerPanel, frame, factory)));
+        modifyStatus.addActionListener(e -> UI.switchContent(new ModifyStatusOfAProductionLine(centerPanel, frame)));
         
         // View performance button click
-        viewPerformance.addActionListener(e -> UI.switchContent(new ViewPerformance(centerPanel, frame, factory)));
+        viewPerformance.addActionListener(e -> UI.switchContent(new ViewPerformance(centerPanel, frame)));
         
         // Deliver task button click
-        deliverTask.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
+        deliverTask.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame)));
 
         // Layout setup
         mainPanel.add(title);

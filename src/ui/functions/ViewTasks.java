@@ -11,7 +11,7 @@ import utils.FileUtils;
 // ViewTasks panel for displaying tasks with sample data
 public class ViewTasks extends FunctionPanel {
     
-    public ViewTasks(JPanel centerPanel, JFrame frame, core.Factory factory) {
+    public ViewTasks(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Components
@@ -23,7 +23,7 @@ public class ViewTasks extends FunctionPanel {
             tasksPanel.add(new ui.components.TaskPanel(new Task(new Product("Chair"), 5, "John Doe", LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 20), "In Progress")));
             tasksPanel.add(Box.createVerticalStrut(5));
             
-            // Add actual tasks from factory
+            // Add actual tasks from Factory
             for (core.Task task : Factory.previewTasks()) {
                 tasksPanel.add(new ui.components.TaskPanel(task));
                 tasksPanel.add(Box.createVerticalStrut(5));
@@ -39,7 +39,7 @@ public class ViewTasks extends FunctionPanel {
         JScrollPane scrollPane = new JScrollPane(tasksPanel);
         
         // Layout setup
-        add(createTopPanel("View All Tasks", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        add(createTopPanel("View All Tasks", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
 }

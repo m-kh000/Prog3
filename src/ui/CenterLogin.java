@@ -75,24 +75,24 @@ public class CenterLogin extends JPanel {
             String passord = passwordbox.getText();
             String response = utils.Validator.validateEmail(email, passord);
             Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
-            Factory factory = null;
+            Factory Factory = null;
             boolean successful = false;
 
             switch (r.getState().toLowerCase()) {
                 case "manager":
                     centerPanel.removeAll();
-                    factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                    Factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
                     Factory.employAndAssignProductLines();
-                    makeSaveOnClose(frame, factory);
-                    centerPanel.add(new CenterManager(centerPanel, frame ,factory));
+                    makeSaveOnClose(frame);
+                    centerPanel.add(new CenterManager(centerPanel, frame ));
                     successful = true;
                     break;
                 case "supervisor":
                     centerPanel.removeAll();
-                    factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
+                    Factory = new Factory(FileUtils.readProductLines(),new Warehouse(FileUtils.readItems(),FileUtils.readProducts()));
                     Factory.employAndAssignProductLines();
-                    makeSaveOnClose(frame, factory);
-                    centerPanel.add(new CenterSupervisor(centerPanel, frame ,factory));
+                    makeSaveOnClose(frame);
+                    centerPanel.add(new CenterSupervisor(centerPanel, frame ));
                     successful = true;
                     break;
                 case "signup":
@@ -132,7 +132,7 @@ public class CenterLogin extends JPanel {
     }
     
     // Setup save on close functionality
-    public void makeSaveOnClose (JFrame frame, Factory factory) {
+    public void makeSaveOnClose (JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override

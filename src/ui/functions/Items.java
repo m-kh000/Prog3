@@ -1,13 +1,11 @@
 package ui.functions;
-
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.UI;
 
 public class Items extends FunctionPanel {
 
-    public Items(JPanel centerPanel, JFrame frame, Factory factory) {
+    public Items(JPanel centerPanel, JFrame frame ) {
         setLayout(new BorderLayout());
         
         // Side panels
@@ -30,22 +28,22 @@ public class Items extends FunctionPanel {
 
         // Listeners
         // View items button click
-        viewItemsBtn.addActionListener(e -> UI.switchContent(new ViewItems(centerPanel, frame, factory)));
+        viewItemsBtn.addActionListener(e -> UI.switchContent(new ViewItems(centerPanel, frame)));
         
         // Restock button click
-        restockBtn.addActionListener(e -> UI.switchContent(new Restock(centerPanel, frame, factory)));
+        restockBtn.addActionListener(e -> UI.switchContent(new Restock(centerPanel, frame)));
         
         // Add item button click
-        addItemBtn.addActionListener(e -> UI.switchContent(new AddItem(centerPanel, frame, factory)));
+        addItemBtn.addActionListener(e -> UI.switchContent(new AddItem(centerPanel, frame)));
         
         // Modify item button click
-        modifyItemBtn.addActionListener(e -> UI.switchContent(new ModifyItem(centerPanel, frame, factory)));
+        modifyItemBtn.addActionListener(e -> UI.switchContent(new ModifyItem(centerPanel, frame)));
         
         // Delete item button click
-        deleteItemBtn.addActionListener(e -> UI.switchContent(new DeleteItem(centerPanel, frame, factory)));
+        deleteItemBtn.addActionListener(e -> UI.switchContent(new DeleteItem(centerPanel, frame)));
 
         // Layout setup
-        mainPanel.add(createTopPanel("Items", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Items", centerPanel, frame, "supervisor"));
         mainPanel.add(viewItemsBtn);
         mainPanel.add(restockBtn);
         mainPanel.add(addItemBtn);
