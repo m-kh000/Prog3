@@ -5,7 +5,7 @@ import javax.swing.*;
 import ui.Manager;
 
 public class CancelTask extends FunctionPanel {
-    public CancelTask(JPanel centerPanel, JFrame frame, Factory factory) {
+    public CancelTask(JPanel centerPanel, JFrame frame) {
         
         setLayout(new GridLayout(8, 1, 20, 20));
         
@@ -58,7 +58,7 @@ public class CancelTask extends FunctionPanel {
         selectPanel.add(selectLabel);
         selectPanel.add(taskCombo);
         
-        mainPanel.add(createTopPanel("Cancel Tasks", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Cancel Tasks", centerPanel, frame, "supervisor"));
         mainPanel.add(selectPanel);
         mainPanel.add(new JPanel());
         mainPanel.add(new JPanel());

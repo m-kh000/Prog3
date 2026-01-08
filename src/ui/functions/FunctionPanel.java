@@ -7,7 +7,7 @@ import ui.*;
 
 public abstract class FunctionPanel extends JPanel {
 
-    protected JButton BackBtn(JPanel centerPanel, JFrame frame, Factory factory, String role) {
+    protected JButton BackBtn(JPanel centerPanel, JFrame frame, String role) {
         JButton backBtn = new JButton();
         ImageIcon backIcon = new ImageIcon("icons/back.png");
         Image img = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -18,31 +18,33 @@ public abstract class FunctionPanel extends JPanel {
         backBtn.setFocusPainted(false);
         backBtn.setBorderPainted(false);
         backBtn.setOpaque(true);
-        backBtn.addActionListener(e -> navigateBack(centerPanel, frame, factory, role));
+        backBtn.addActionListener(e -> navigateBack(centerPanel, frame, role));
         return backBtn;
     }
 
-    protected JPanel createTopPanel(String titleText, JPanel centerPanel, JFrame frame, Factory factory, String role) {
+    protected JPanel createTopPanel(String titleText, JPanel centerPanel, JFrame frame, String role) {
         JPanel topPanel = new JPanel(new BorderLayout());
         JLabel title = new JLabel(titleText);
         title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
         topPanel.add(title, BorderLayout.CENTER);
-        topPanel.add(BackBtn(centerPanel, frame, factory, role), BorderLayout.WEST);
+        topPanel.add(BackBtn(centerPanel, frame, role), BorderLayout.WEST);
         return topPanel;
     }
 
-    protected void navigateBack(JPanel centerPanel, JFrame frame, Factory factory, String role) {
+    protected void navigateBack(JPanel centerPanel, JFrame frame, String role) {
         if (role.equals("manager")) {
-            Manager.autorefresh = false;
-            UI.switchContent(new CenterManager(centerPanel, frame, factory));
+            Manager.taskAutorefresh = false;
+            Manager.plAutorefresh = false;
+            UI.switchContent(new CenterManager(centerPanel, frame));
         } else {
-            Manager.autorefresh = false;
-            UI.switchContent(new CenterSupervisor(centerPanel, frame, factory));
+            Manager.taskAutorefresh = false;
+            Manager.plAutorefresh = false;
+            UI.switchContent(new CenterSupervisor(centerPanel, frame));
         }
     }
 
-    protected  JButton createStyledButton(String text, Color bgColor) {
+    protected JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
         button.setFont(Manager.defaultFont(true, false));
         button.setForeground(Color.WHITE);

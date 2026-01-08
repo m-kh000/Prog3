@@ -11,7 +11,7 @@ import utils.FileUtils;
 // AddTask panel for creating new production tasks
 public class AddTask extends FunctionPanel {
     
-    public AddTask(JPanel centerPanel, JFrame frame, Factory factory) {
+    public AddTask(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Side panels
@@ -28,7 +28,7 @@ public class AddTask extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Product:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        JComboBox<String> product = new JComboBox<String>(factory.getProductNames());
+        JComboBox<String> product = new JComboBox<String>(Factory.getProductNames());
         product.setFont(Manager.defaultFont(true, false));
         product.setSelectedItem(null);
         
@@ -83,14 +83,20 @@ public class AddTask extends FunctionPanel {
 
                 JOptionPane.showMessageDialog(frame, "Task added successfully");
                 
-            } catch (Exception ex) {
+            } catch (EmptyFieldException ex) {
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
+                FileUtils.log(ex);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Quantity must be a number");
+                FileUtils.log(ex);
+            }catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame,"Error while adding task: "+ ex.getMessage());
                 FileUtils.log(ex);
             }
         });
         
         // Layout setup
-        mainPanel.add(createTopPanel("Add Task", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Add Task", centerPanel, frame, "supervisor"));
         
         selectPanel.add(selectLabel);
         selectPanel.add(product);

@@ -8,7 +8,7 @@ import ui.Manager;
 import utils.FileUtils;
 
 public class DeliverTask extends FunctionPanel {
-    public DeliverTask(JPanel centerPanel, JFrame frame, Factory factory) {
+    public DeliverTask(JPanel centerPanel, JFrame frame) {
         
         setLayout(new GridLayout(8, 1, 20, 20));
         
@@ -61,7 +61,7 @@ public class DeliverTask extends FunctionPanel {
         selectPanel.add(selectLabel);
         selectPanel.add(taskCombo);
         
-        mainPanel.add(createTopPanel("Deliver Tasks", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Deliver Tasks", centerPanel, frame, "supervisor"));
         mainPanel.add(selectPanel);
         mainPanel.add(new JPanel());
         mainPanel.add(new JPanel());

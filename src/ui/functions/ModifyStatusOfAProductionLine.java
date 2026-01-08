@@ -1,5 +1,5 @@
 package ui.functions;
-
+import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
@@ -9,13 +9,13 @@ import utils.FileUtils;
 // ModifyStatusOfAProductionLine panel for updating production line status
 public class ModifyStatusOfAProductionLine extends FunctionPanel {
 
-    public ModifyStatusOfAProductionLine(JPanel centerPanel, JFrame frame, core.Factory factory) {
+    public ModifyStatusOfAProductionLine(JPanel centerPanel, JFrame frame) {
         setLayout(new GridLayout(8, 1, 10, 10));
         
         // Components
         JPanel linePanel = new JPanel(new GridLayout(1, 2));
         JLabel lineLabel = new JLabel("Select Production Line:");
-        JComboBox<String> lineComboBox = new JComboBox<>(factory.getProductLineNames());
+        JComboBox<String> lineComboBox = new JComboBox<>(Factory.getProductLineNames());
         
         JPanel statusPanel = new JPanel(new GridLayout(1, 2));
         JLabel statusLabel = new JLabel("New Status:");
@@ -33,7 +33,7 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
         lineComboBox.addActionListener(e -> {
             String selectedLineName = (String)lineComboBox.getSelectedItem();
             if (selectedLineName != null) {
-                hint.setText("Current Status: " + factory.getProductLine(selectedLineName).getLineStatus());
+                hint.setText("Current Status: " + Factory.getProductLine(selectedLineName).getLineStatus());
                 revalidate();
                 repaint();
             }
@@ -56,7 +56,7 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
                 
                 String selectedLineName = (String)lineComboBox.getSelectedItem();
                 String selectedStatus = (String)statusComboBox.getSelectedItem();
-                factory.modifyStatus(selectedLineName, selectedStatus);
+                Factory.modifyStatus(selectedLineName, selectedStatus);
                 
                 lineComboBox.setSelectedIndex(0);
                 statusComboBox.setSelectedIndex(0);
@@ -64,13 +64,13 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Status modified successfully");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null,"Error while modifying productlines: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });
         
         // Layout setup
-        add(createTopPanel("Modify Status of a Production Line:", centerPanel, frame, factory, "manager"));
+        add(createTopPanel("Modify Status of a Production Line:", centerPanel, frame, "manager"));
         
         linePanel.add(lineLabel);
         linePanel.add(lineComboBox);

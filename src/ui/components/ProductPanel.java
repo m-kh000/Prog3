@@ -4,6 +4,7 @@ import javax.swing.*;
 import ui.Manager;
 
 public class ProductPanel extends JPanel {
+        public JLabel purchaseFrequency;
     public ProductPanel(core.Product product) {
         setLayout(new GridLayout(1, 4, 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
@@ -27,7 +28,7 @@ public class ProductPanel extends JPanel {
         add(nameLabel);
         
         //number of perchaces with hint
-        JLabel purchaseFrequency = new JLabel(String.valueOf(product.getPurchaseFrequency()));
+        purchaseFrequency = new JLabel(String.valueOf(product.getPurchaseFrequency()));
         purchaseFrequency.setForeground(Color.BLUE);
         purchaseFrequency.setFont(Manager.defaultFont(false, true,""));
         JPanel purchasepPanel = new JPanel();
@@ -40,14 +41,18 @@ public class ProductPanel extends JPanel {
         add(purchasepPanel);
 
         // Items count with hint
+        ImageIcon itemIcon = new ImageIcon("icons/item.png");
+        Image itemImg = itemIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         JLabel itemsValue = new JLabel(String.valueOf(product.reqItemCount()));
-        itemsValue.setForeground(Color.BLUE);
+        itemsValue.setForeground(new Color(80, 170, 255));
         itemsValue.setFont(Manager.defaultFont(false, true,""));
         JPanel itemsPanel = new JPanel();
         itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.X_AXIS));
         JLabel itemsHint = new JLabel("Items");
         itemsHint.setForeground(Color.GRAY);
         itemsHint.setFont(Manager.hintFont());
+        itemsPanel.add(new JLabel(new ImageIcon(itemImg)));
+        itemsPanel.add(Box.createHorizontalStrut(10));
         itemsPanel.add(itemsValue);
         itemsPanel.add(itemsHint);
         add(itemsPanel);

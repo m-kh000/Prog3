@@ -1,5 +1,5 @@
 package ui.functions;
-
+import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
@@ -8,7 +8,7 @@ import utils.FileUtils;
 
 public class DeleteItem extends FunctionPanel {
 
-    public DeleteItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
+    public DeleteItem(JPanel centerPanel, JFrame frame) {
         
         setLayout(new GridLayout(8, 1, 20, 20));
         
@@ -25,7 +25,7 @@ public class DeleteItem extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Item:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        JComboBox<String> itemCombo = new JComboBox<>(factory.getItemsNames());
+        JComboBox<String> itemCombo = new JComboBox<>(Factory.getItemsNames());
         itemCombo.setFont(Manager.defaultFont(true, false));
         itemCombo.setSelectedItem(null);
         
@@ -49,9 +49,9 @@ public class DeleteItem extends FunctionPanel {
         deleteBtn.addActionListener (e -> {
             try {
                 if(itemCombo.getSelectedItem()!= null){
-                factory.deleteItem((String)itemCombo.getSelectedItem());
+                Factory.deleteItem((String)itemCombo.getSelectedItem());
                 itemCombo.removeAllItems();
-                for(String item : factory.getItemsNames()) {
+                for(String item : Factory.getItemsNames()) {
                     itemCombo.addItem(item);
                 }
                 itemCombo.setSelectedItem(null);
@@ -71,7 +71,7 @@ public class DeleteItem extends FunctionPanel {
         selectPanel.add(selectLabel);
         selectPanel.add(itemCombo);
         
-        mainPanel.add(createTopPanel("Delete Items", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Delete Items", centerPanel, frame, "supervisor"));
         mainPanel.add(selectPanel);
         mainPanel.add(new JPanel());
         mainPanel.add(new JPanel());

@@ -7,7 +7,7 @@ import utils.FileUtils;
 
 public class CenterSupervisor extends JPanel {
 
-    public CenterSupervisor(JPanel centerPanel, JFrame frame, Factory factory) {
+    public CenterSupervisor(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Side panels
@@ -44,25 +44,25 @@ public class CenterSupervisor extends JPanel {
 
         // Listeners
         // Items button click
-        itemsBtn.addActionListener(e -> UI.switchContent(new Items(centerPanel, frame, factory)));
+        itemsBtn.addActionListener(e -> UI.switchContent(new Items(centerPanel, frame)));
         
         // Filter items button click
-        filterItemsBtn.addActionListener(e -> UI.switchContent(new FilterItems(centerPanel, frame, factory)));
+        filterItemsBtn.addActionListener(e -> UI.switchContent(new FilterItems(centerPanel, frame)));
         
         // Tasks button click
-        tasksBtn.addActionListener(e -> UI.switchContent(new Tasks(centerPanel, frame, factory)));
+        tasksBtn.addActionListener(e -> UI.switchContent(new Tasks(centerPanel, frame)));
         
         // Filter tasks button click
-        filterTasksBtn.addActionListener(e -> UI.switchContent(new FilterTasks(centerPanel, frame, factory)));
+        filterTasksBtn.addActionListener(e -> UI.switchContent(new FilterTasks(centerPanel, frame)));
         
         // Products button click
-        productsBtn.addActionListener(e -> UI.switchContent(new Products(centerPanel, frame, factory)));
+        productsBtn.addActionListener(e -> UI.switchContent(new Products(centerPanel, frame)));
         
         // Filter products button click
-        filterProductsBtn.addActionListener(e -> UI.switchContent(new FilterProducts(centerPanel, frame, factory)));
+        filterProductsBtn.addActionListener(e -> UI.switchContent(new FilterProducts(centerPanel, frame)));
         
         // Filter production lines button click
-        filterProductionLinesBtn.addActionListener(e -> UI.switchContent(new FilterProductLines(centerPanel, frame, factory)));
+        filterProductionLinesBtn.addActionListener(e -> UI.switchContent(new FilterProductLines(centerPanel, frame)));
         
         // Save status button click
         saveStatusBtn.addActionListener(e -> {
@@ -81,7 +81,7 @@ public class CenterSupervisor extends JPanel {
         });
         
         // Deliver task button click
-        deliverTaskBtn.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame, factory)));
+        deliverTaskBtn.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame)));
 
         // Layout setup
         row1.add(itemsBtn);

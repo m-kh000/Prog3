@@ -10,16 +10,16 @@ import ui.components.RestockPanel;
 // Restock panel for managing item restocking operations
 public class Restock extends FunctionPanel {
     
-    public Restock(JPanel centerPanel, JFrame frame, Factory factory) {
+    public Restock(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Components
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
-        List<Item> items = factory.getWarehouse().getItems();
+        List<Item> items = Factory.getWarehouse().getItems();
         for (Item item : items) {
-            RestockPanel panel = new RestockPanel(item, factory);
+            RestockPanel panel = new RestockPanel(item);
             mainPanel.add(panel);
             mainPanel.add(Box.createVerticalStrut(5));
         }
@@ -28,7 +28,7 @@ public class Restock extends FunctionPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
         // Layout setup
-        add(createTopPanel("Restock Items", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        add(createTopPanel("Restock Items", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
 }

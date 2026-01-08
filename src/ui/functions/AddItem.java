@@ -1,15 +1,17 @@
 package ui.functions;
 
 import core.Item;
+import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.LabelBox;
 import ui.Manager;
 import utils.FileUtils;
 
+
 public class AddItem extends FunctionPanel {
 
-    public AddItem(JPanel centerPanel, JFrame frame, core.Factory factory) {
+    public AddItem(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Side panels
@@ -52,7 +54,7 @@ public class AddItem extends FunctionPanel {
             String quantityText = quantity.getText();
             String minquantityText = minquantity.getText();
             try {
-                factory.add(new Item(nameText, categoryText, Integer.parseInt(priceText), Integer.parseInt(quantityText), Integer.parseInt(minquantityText)));
+                Factory.add(new Item(nameText, categoryText, Integer.parseInt(priceText), Integer.parseInt(quantityText), Integer.parseInt(minquantityText)));
                 name.reset();
                 category.reset();
                 price.reset();
@@ -61,13 +63,13 @@ public class AddItem extends FunctionPanel {
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Item added successfully");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null,"Error while adding Item: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });
 
         // Layout setup
-        mainPanel.add(createTopPanel("Add Item", centerPanel, frame, factory, "supervisor"));
+        mainPanel.add(createTopPanel("Add Item", centerPanel, frame, "supervisor"));
         mainPanel.add(name);
         mainPanel.add(category);
         mainPanel.add(price);

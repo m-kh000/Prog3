@@ -11,7 +11,7 @@ import utils.FileUtils;
 // AddProductionLine panel for creating new production lines
 public class AddProductionLine extends FunctionPanel {
 
-    public AddProductionLine(JPanel centerPanel, JFrame frame, Factory factory) {
+    public AddProductionLine(JPanel centerPanel, JFrame frame ) {
         setLayout(new GridLayout(8, 1, 10, 10));
 
         // Components
@@ -46,20 +46,20 @@ public class AddProductionLine extends FunctionPanel {
             String statusText = (String)status.getSelectedItem();
             String priorityText = priority.getText();
             try {
-                factory.add(new ProductLine(nameText, statusText, Integer.parseInt(priorityText)));
+                Factory.add(new ProductLine(nameText, statusText, Integer.parseInt(priorityText)));
                 name.reset();
                 status.setSelectedIndex(0);
                 priority.reset();
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Product line added successfully");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null,"Error while adding productline: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });
         
         // Layout setup
-        add(createTopPanel("Add Product Line:", centerPanel, frame, factory, "manager"));
+        add(createTopPanel("Add Product Line:", centerPanel, frame, "manager"));
         add(name);
         
         statusPanel.add(statusLabel);

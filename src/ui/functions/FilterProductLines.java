@@ -9,7 +9,7 @@ public class FilterProductLines extends FunctionPanel {
     private JPanel ProductLinesPanel;
     private JComboBox<String> filterField;
 
-    public FilterProductLines(JPanel centerPanel, JFrame frame, Factory factory) {
+    public FilterProductLines(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
 
         // Components creation
@@ -17,7 +17,7 @@ public class FilterProductLines extends FunctionPanel {
         JLabel filterLabel = new JLabel("Filter by: ");
         JLabel filterLabel2 = new JLabel("a specific product");
         filterLabel.setFont(Manager.defaultFont(false, false));
-        filterField = new JComboBox<>(factory.getProductNames());
+        filterField = new JComboBox<>(Factory.getProductNames());
         filterField.setFont(Manager.defaultFont(false, false));
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
@@ -26,7 +26,7 @@ public class FilterProductLines extends FunctionPanel {
         // Filter button click
         filterBtn.addActionListener(e -> {
             String filterValue = (String) filterField.getSelectedItem();
-            updateProductLinesPanel(factory, filterValue);
+            updateProductLinesPanel(filterValue);
         });
         
         // Enter key binding
@@ -44,13 +44,13 @@ public class FilterProductLines extends FunctionPanel {
         filterPanel.add(filterBtn);
 
         JPanel topContainer = new JPanel(new BorderLayout());
-        topContainer.add(createTopPanel("Filter ProductLines", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        topContainer.add(createTopPanel("Filter ProductLines", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         topContainer.add(filterPanel, BorderLayout.SOUTH);
         add(topContainer, BorderLayout.NORTH);
 
         ProductLinesPanel = createProductLinesPanel();
         // Load all product lines initially
-        for (core.ProductLine productLine : factory.previewLines()) {
+        for (core.ProductLine productLine : Factory.previewLines()) {
             ProductLinesPanel.add(new ProductLinePanel(productLine));
             ProductLinesPanel.add(Box.createVerticalStrut(5));
         }
@@ -59,10 +59,10 @@ public class FilterProductLines extends FunctionPanel {
     }
 
     // Update product lines panel with filtered results
-    private void updateProductLinesPanel(Factory factory, String filterValue) {
+    private void updateProductLinesPanel(String filterValue) {
         ProductLinesPanel.removeAll();
 
-        java.util.List<core.ProductLine> ProductLines = factory.filterProductLinesByProduct(filterValue);
+        java.util.List<core.ProductLine> ProductLines = Factory.filterProductLinesByProduct(filterValue);
         if (ProductLines != null && !ProductLines.isEmpty()) {
             for (core.ProductLine ProductLine : ProductLines) {
                 ProductLinesPanel.add(new ProductLinePanel(ProductLine));

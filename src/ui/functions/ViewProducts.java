@@ -7,24 +7,24 @@ import ui.components.ProductPanel;
 // ViewProducts panel for displaying all products in the warehouse
 public class ViewProducts extends FunctionPanel {
     
-    public ViewProducts(JPanel centerPanel, JFrame frame, Factory factory) {
+    public ViewProducts(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
         
         // Components
         JPanel productsPanel = new JPanel();
         productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS));
-        for (core.Product product : factory.previewProducts()) {
+        for (core.Product product : Factory.previewProducts()) {
             productsPanel.add(new ProductPanel(product));
             productsPanel.add(Box.createVerticalStrut(5));
         }
-        if (factory.previewProducts().length == 0) {
+        if (Factory.previewProducts().length == 0) {
             productsPanel.add(new JLabel("No products found."));
         }
         
         JScrollPane scrollPane = new JScrollPane(productsPanel);
         
         // Layout setup
-        add(createTopPanel("View All Products", centerPanel, frame, factory, "supervisor"), BorderLayout.NORTH);
+        add(createTopPanel("View All Products", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
 }
