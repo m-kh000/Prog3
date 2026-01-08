@@ -53,7 +53,7 @@ public class AddProductionLine extends FunctionPanel {
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Product line added successfully");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null,"Error while adding productline: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });

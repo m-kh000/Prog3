@@ -34,15 +34,17 @@ public abstract class FunctionPanel extends JPanel {
 
     protected void navigateBack(JPanel centerPanel, JFrame frame, String role) {
         if (role.equals("manager")) {
-            Manager.autorefresh = false;
+            Manager.taskAutorefresh = false;
+            Manager.plAutorefresh = false;
             UI.switchContent(new CenterManager(centerPanel, frame));
         } else {
-            Manager.autorefresh = false;
+            Manager.taskAutorefresh = false;
+            Manager.plAutorefresh = false;
             UI.switchContent(new CenterSupervisor(centerPanel, frame));
         }
     }
 
-    protected  JButton createStyledButton(String text, Color bgColor) {
+    protected JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
         button.setFont(Manager.defaultFont(true, false));
         button.setForeground(Color.WHITE);

@@ -85,8 +85,12 @@ public class AddProduct extends FunctionPanel {
 
                 JOptionPane.showMessageDialog(frame, "Product added successfully.");
                 
-            } catch (Exception ex) {
+            } catch(EmptyFieldException ex){
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
+                FileUtils.log(ex);
+            }
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame,"Error while adding product: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });

@@ -108,7 +108,7 @@ public class CenterSignup extends JPanel {
                 UI.switchContent(new CenterLogin(centerPanel, frame));
                 JOptionPane.showMessageDialog(null, "Signup successful");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error while signing up: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 FileUtils.log(ex);
             }
         });

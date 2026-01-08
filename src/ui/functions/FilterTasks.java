@@ -13,7 +13,6 @@ public class FilterTasks extends FunctionPanel {
     private JComboBox<String> filterField;
 
     public FilterTasks(JPanel centerPanel, JFrame frame) {
-        Manager.autorefresh = true;
         setLayout(new BorderLayout());
 
         // Components creation
@@ -43,7 +42,7 @@ public class FilterTasks extends FunctionPanel {
                 filterField.setEnabled(true);
                 filterField.revalidate();
                 filterField.repaint();
-                
+
             } else if (filterType.equals("Product")) {
                 String[] productNames = Factory.getProductNames();
                 for (String name : productNames) {
@@ -64,7 +63,7 @@ public class FilterTasks extends FunctionPanel {
             String filterValue = (String) filterField.getSelectedItem();
             updateTasksPanel(filterType, filterValue);
         });
-        
+
         // Enter key binding
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "filter");
         getActionMap().put("filter", new AbstractAction() {
@@ -102,7 +101,7 @@ public class FilterTasks extends FunctionPanel {
             tasks = Factory.filterTasksByProduct(filterValue);
         } else if (filterType.equals("ProductLine")) {
             tasks = Factory.filterTasksByProductLine(filterValue);
-        }else if (filterType.equals("InProgress")) {
+        } else if (filterType.equals("InProgress")) {
             tasks = Factory.filterTasksByInprogress();
         } else if (filterType.equals("Completed")) {
             tasks = Factory.filterTasksByCompleted();
@@ -113,8 +112,7 @@ public class FilterTasks extends FunctionPanel {
                 tasksPanel.add(new TaskPanel(task));
                 tasksPanel.add(Box.createVerticalStrut(5));
             }
-        }
-        else {
+        } else {
             tasksPanel.add(new JLabel("No tasks found."));
         }
 

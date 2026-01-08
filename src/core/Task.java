@@ -37,22 +37,10 @@ public class Task {
         this.status = status;
     }
 
-    // public boolean doTask() {
-    // }
-
-    // public boolean isCompleted() {
-    // }
-
-    // public double percentage() {
-    // }
-
-    // public void cancelTask() {
-    // }
-
     // GETTERS : 
 
     public double getCompletionPercentage() {
-        return ((ready * 100) / requiredQuantity);
+        return ((double) ready / requiredQuantity);
     }
     
     public String getCustomerName() {

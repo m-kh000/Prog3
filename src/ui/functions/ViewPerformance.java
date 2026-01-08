@@ -3,7 +3,6 @@ import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 import ui.components.ProductLinePanel;
-import utils.FileUtils;
 
 // ViewPerformance panel for displaying production line performance with real-time updates
 public class ViewPerformance extends FunctionPanel {

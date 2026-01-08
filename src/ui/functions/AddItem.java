@@ -63,7 +63,7 @@ public class AddItem extends FunctionPanel {
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Item added successfully");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null,"Error while adding Item: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });

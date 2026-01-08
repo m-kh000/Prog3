@@ -64,7 +64,7 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Status modified successfully");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null,"Error while modifying productlines: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });

@@ -132,8 +132,6 @@ public class FileUtils {
      * inprogress.json </li>
      * <li> - reads the content of the completed {@code List<Task>} from
      * completed.json </li>
-     * <li> - reads the content of the canceled {@code List<Task>} from
-     * canceled.json </li>
      *
      * It uses a {@code BufferedReader} that wraps a {@code FileReader} in a
      * class level synchronization to make the reading process thread safe.
@@ -175,7 +173,6 @@ public class FileUtils {
                     List<Task> inline = new ArrayList<>();
                     List<Task> inprogress = new ArrayList<>();
                     List<Task> completed = new ArrayList<>();
-                    List<Task> canceled = new ArrayList<>();
                     for (File f : plFiles) {
                         String fileName = f.getName();
                         switch (fileName) {
@@ -194,16 +191,11 @@ public class FileUtils {
                                 Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
                                 completed = Arrays.asList(completedArr);
                                 break;
-                            case "canceled.json":
-                                Task[] canceledArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
-                                canceled = Arrays.asList(canceledArr);
-                                break;
                         }
                     }
                     pl.setInline(inline);
                     pl.setInprogress(inprogress);
                     pl.setCompleted(completed);
-                    pl.setCanceled(canceled);
 
                     productLines.add(pl);
                 }
@@ -363,9 +355,6 @@ public class FileUtils {
                     createFile(file);
                     writeData(file, JsonParser.toJson(pl.getCompletedTasks()), false);
 
-                    file = new File(plPath, "canceled.json");
-                    createFile(file);
-                    writeData(file, JsonParser.toJson(pl.getCanceledTasks()), false);
                 }
                 writeData(PRODUCTLINESPATHS_FILE, JsonParser.toJson(productLinesPaths), false);
             } catch (IllegalAccessException e) {

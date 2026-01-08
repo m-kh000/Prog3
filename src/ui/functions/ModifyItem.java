@@ -112,7 +112,7 @@ public class ModifyItem extends FunctionPanel {
                 JOptionPane.showMessageDialog(null, "Please enter valid numbers for price and quantities");
                 FileUtils.log(ex);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error updating item: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error while modifying items: " + ex.getMessage());
                 FileUtils.log(ex);
             }
         });

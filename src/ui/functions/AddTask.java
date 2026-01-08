@@ -83,8 +83,14 @@ public class AddTask extends FunctionPanel {
 
                 JOptionPane.showMessageDialog(frame, "Task added successfully");
                 
-            } catch (Exception ex) {
+            } catch (EmptyFieldException ex) {
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
+                FileUtils.log(ex);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Quantity must be a number");
+                FileUtils.log(ex);
+            }catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame,"Error while adding task: "+ ex.getMessage());
                 FileUtils.log(ex);
             }
         });

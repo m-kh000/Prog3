@@ -149,7 +149,7 @@ public class CenterLogin extends JPanel {
                     }
                 } 
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);                
+                JOptionPane.showMessageDialog(null,"Error while logging in: "+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);                
                 FileUtils.log(e);
             }
             System.exit(0);

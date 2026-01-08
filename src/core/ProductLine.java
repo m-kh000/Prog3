@@ -27,8 +27,6 @@ public class ProductLine implements Runnable {
     private List<Task> inprogress;
     @JsonIgnore
     private List<Task> inline;
-    @JsonIgnore
-    private List<Task> canceled;
 
     static {
         nextId = IDInitializer.getProductlinesGlobalID();
@@ -48,7 +46,6 @@ public class ProductLine implements Runnable {
         this.completed = new ArrayList<>();
         this.inprogress = new ArrayList<>();
         this.inline = new ArrayList<>();
-        this.canceled = new ArrayList<>();
     }
 
     @Override
@@ -75,7 +72,7 @@ public class ProductLine implements Runnable {
                 }
             }
 
-            if (runningTask.getCompletionPercentage() == 100.00) {
+            if (runningTask.getCompletionPercentage() == 1) {
                 completed.add(runningTask);
                 inprogress.remove(runningTask);
             }
@@ -86,16 +83,15 @@ public class ProductLine implements Runnable {
     public void cancelTask(Task task) {
         int index = inprogress.indexOf(task);
         if (index != -1) {
-            canceled.add(inprogress.remove(index));
+            inprogress.remove(index);
         } else {
             index = inline.indexOf(task);
             if (index != -1) {
-                canceled.add(inline.remove(index));
+                inline.remove(index);
             } else {
                 throw new NoSuchElementException("Task not found in the specified product line.");
             }
         }
-        task.setStatus("Canceled");
     }
 
     //GETTERS
@@ -147,10 +143,6 @@ public class ProductLine implements Runnable {
         return this.inline;
     }
 
-    public List<Task> getCanceledTasks() {
-        return this.canceled;
-    }
-
     public String getNote() {
         return this.note;
     }
@@ -171,9 +163,6 @@ public class ProductLine implements Runnable {
         return this.inprogress;
     }
 
-    public List<Task> getCanceled() {
-        return this.canceled;
-    }
 
     public void addTask(Task task) {
         this.inline.add(task);
@@ -189,10 +178,6 @@ public class ProductLine implements Runnable {
 
     public void setCompleted(List<Task> tasks) {
         this.completed = new ArrayList<>(tasks);
-    }
-
-    public void setCanceled(List<Task> tasks) {
-        this.canceled = new ArrayList<>(tasks);
     }
 
     public void setNote(String note) {
@@ -263,13 +248,12 @@ public class ProductLine implements Runnable {
     }
 
     public double getCompletionRate() {
-        double num = inprogress.size() + inline.size();
-        double sum = 0;
+        double num = inprogress.size() + inline.size() + completed.size();
+        double sum = completed.size();
         for(Task t : inprogress) {
             sum += t.getCompletionPercentage();
         }
-        double rate = num / sum;
-        rate /= 100.0;
+        double rate = sum / num;
         return rate;
     }
 
