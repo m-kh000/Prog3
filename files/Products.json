@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 190,
+        "quantityAvailable": 445,
         "requiredItems": [
             {
                 "key": {
@@ -19,16 +19,30 @@
         "orderedIn": [
             "2025-12-22",
             "1111-11-11",
+            "2026-11-11",
+            "2026-01-11",
             "2002-02-22",
+            "2026-01-02",
             "2026-01-01"
         ],
-        "purchaseFrequency": 4
+        "purchaseFrequency": 8
     },
     {
         "id": 2,
         "name": "Bed",
         "quantityAvailable": 3,
         "requiredItems": [
+            {
+                "key": {
+                    "id": 4,
+                    "name": "Wood",
+                    "category": "Material",
+                    "price": 10.0,
+                    "quantityAvailable": 500,
+                    "minQuantity": 50
+                },
+                "value": 20
+            },
             {
                 "key": {
                     "id": 3,
@@ -50,17 +64,6 @@
                     "minQuantity": 200
                 },
                 "value": 10
-            },
-            {
-                "key": {
-                    "id": 4,
-                    "name": "Wood",
-                    "category": "Material",
-                    "price": 10.0,
-                    "quantityAvailable": 500,
-                    "minQuantity": 50
-                },
-                "value": 20
             }
         ],
         "orderedIn": [
@@ -143,7 +146,8 @@
             }
         ],
         "orderedIn": [
+            "2026-01-09"
         ],
-        "purchaseFrequency": 0
+        "purchaseFrequency": 1
     }
 ]

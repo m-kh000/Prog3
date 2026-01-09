@@ -4,7 +4,7 @@
         "name": "Cotton",
         "category": "Fabrics",
         "price": 1.0,
-        "quantityAvailable": 1201,
+        "quantityAvailable": 2,
         "minQuantity": 200
     },
     {
@@ -36,7 +36,7 @@
         "name": "POTATOO",
         "category": "vegetable",
         "price": 5.0,
-        "quantityAvailable": 3,
+        "quantityAvailable": 10103,
         "minQuantity": 5
     }
 ]
