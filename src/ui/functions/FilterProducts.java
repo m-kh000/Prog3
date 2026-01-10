@@ -92,7 +92,7 @@ public class FilterProducts extends FunctionPanel {
         if (filterType.equals("One ProductLine")) {
             Products = Factory.getWarehouse().filterProductsByProductLine(filterValue);
         } else {
-            Products = Factory.getWarehouse().getTopSaleProducts();
+            Products = Factory.getWarehouse().getTopSaleProduct();
             colorful = true;
         }
 

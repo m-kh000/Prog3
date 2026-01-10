@@ -25,8 +25,13 @@ public class Factory {
         Factory.allLines = new HashSet<>(allLines);
         Factory.warehouse = warehouse;
     }
-//TODO make sure names are unique here or in warehouse and throw exception
-    public static synchronized void add(Product p) {
+    
+    public static synchronized void add(Product p) throws InvalidValuesException {
+        for(Product pr : warehouse.getProducts()) {
+            if(p.getName().trim().toLowerCase().equals(pr.getName().trim().toLowerCase())) {
+                throw new InvalidValuesException();
+            }
+        }
         warehouse.addProduct(p);
     }
 

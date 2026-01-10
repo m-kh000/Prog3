@@ -120,4 +120,14 @@ public class Product {
     public int reqItemCount() {
         return requiredItems.size();
     }
+
+    public int getPurchaseFrequencyBetween(LocalDate begDate, LocalDate enDate) {
+        int freq = 0;
+        for(LocalDate ordered : orderedIn) {
+            if(Dates.isBetween(ordered, begDate, enDate)) {
+                freq++;
+            }
+        }
+        return freq;
+    }
 }
