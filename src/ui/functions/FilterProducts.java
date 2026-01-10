@@ -24,8 +24,10 @@ public class FilterProducts extends FunctionPanel {
         filterLabel.setFont(Manager.defaultFont(false, false));
         JComboBox<String> filterCombo = new JComboBox<>(new String[]{"One ProductLine", "Top Sales"});
         filterCombo.setFont(Manager.defaultFont(false, false));
+        filterCombo.setSelectedItem(null);
         filterField = new JComboBox<>(Factory.getProductLineNames());
         filterField.setFont(Manager.defaultFont(false, false));
+        filterField.setEnabled(false);
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 

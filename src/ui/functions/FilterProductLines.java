@@ -21,6 +21,7 @@ public class FilterProductLines extends FunctionPanel {
         filterLabel.setFont(Manager.defaultFont(false, false));
         filterField = new JComboBox<>(Factory.getProductNames());
         filterField.setFont(Manager.defaultFont(false, false));
+        filterField.setSelectedItem(null);
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 
@@ -53,7 +54,7 @@ public class FilterProductLines extends FunctionPanel {
         ProductLinesPanel = createProductLinesPanel();
         // Load all product lines initially
         for (core.ProductLine productLine : Factory.previewLines()) {
-            ProductLinesPanel.add(new ProductLinePanel(productLine));
+            ProductLinesPanel.add(new ProductLinePanel(productLine,"supervisor"));
             ProductLinesPanel.add(Box.createVerticalStrut(5));
         }
         
@@ -67,7 +68,7 @@ public class FilterProductLines extends FunctionPanel {
         java.util.List<core.ProductLine> ProductLines = Factory.filterProductLinesByProduct(filterValue);
         if (ProductLines != null && !ProductLines.isEmpty()) {
             for (core.ProductLine ProductLine : ProductLines) {
-                ProductLinesPanel.add(new ProductLinePanel(ProductLine));
+                ProductLinesPanel.add(new ProductLinePanel(ProductLine,"supervisor"));
                 ProductLinesPanel.add(Box.createVerticalStrut(5));
             }
         }

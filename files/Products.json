@@ -45,17 +45,6 @@
             },
             {
                 "key": {
-                    "id": 3,
-                    "name": "Screws",
-                    "category": "Material",
-                    "price": 1.0,
-                    "quantityAvailable": 2000,
-                    "minQuantity": 500
-                },
-                "value": 35
-            },
-            {
-                "key": {
                     "id": 1,
                     "name": "Cotton",
                     "category": "Fabrics",
@@ -64,6 +53,17 @@
                     "minQuantity": 200
                 },
                 "value": 10
+            },
+            {
+                "key": {
+                    "id": 3,
+                    "name": "Screws",
+                    "category": "Material",
+                    "price": 1.0,
+                    "quantityAvailable": 2000,
+                    "minQuantity": 500
+                },
+                "value": 35
             }
         ],
         "orderedIn": [

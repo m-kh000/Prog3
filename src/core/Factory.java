@@ -300,12 +300,9 @@ public class Factory {
     }
 
     public static void modifyStatus(String selectedLineName, String selectedStatus) {
+        ProductLine pl = findPLByName(selectedLineName);
         selectedStatus = selectedStatus.trim().toLowerCase();
-        for (ProductLine pl : allLines) {
-            if (pl.getName().trim().toLowerCase().equals(selectedLineName)) {
-                pl.setStatus(selectedStatus);
-            }
-        }
+        pl.setStatus(selectedStatus);
     }
 
     public static String[] getCompletedTasksNames() {
