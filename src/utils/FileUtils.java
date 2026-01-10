@@ -385,11 +385,6 @@ public class FileUtils {
             }
         }
     }
-    public static void saveNote(int plId, String note) {
-        synchronized (FILE_LOCK) {
-            
-        }
-    }
 
     /**
      * Logs an {@code Exception} along with its message in
