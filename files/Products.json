@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 190,
+        "quantityAvailable": 445,
         "requiredItems": [
             {
                 "key": {
@@ -19,15 +19,18 @@
         "orderedIn": [
             "2025-12-22",
             "1111-11-11",
+            "2026-11-11",
+            "2026-01-11",
             "2002-02-22",
+            "2026-01-02",
             "2026-01-01"
         ],
-        "purchaseFrequency": 4
+        "purchaseFrequency": 8
     },
     {
         "id": 2,
         "name": "Bed",
-        "quantityAvailable": 1,
+        "quantityAvailable": 3,
         "requiredItems": [
             {
                 "key": {
@@ -65,26 +68,16 @@
         ],
         "orderedIn": [
             "2011-11-11",
+            "1111-11-11",
             "2026-01-01"
         ],
-        "purchaseFrequency": 2
+        "purchaseFrequency": 3
     },
     {
         "id": 3,
         "name": "chair",
         "quantityAvailable": 200,
         "requiredItems": [
-            {
-                "key": {
-                    "id": 4,
-                    "name": "Wood",
-                    "category": "Material",
-                    "price": 10.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 50
-                },
-                "value": 20
-            },
             {
                 "key": {
                     "id": 3,
@@ -95,10 +88,20 @@
                     "minQuantity": 500
                 },
                 "value": 100
+            },
+            {
+                "key": {
+                    "id": 4,
+                    "name": "Wood",
+                    "category": "Material",
+                    "price": 10.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 50
+                },
+                "value": 20
             }
         ],
         "orderedIn": [
-            "1111-11-11",
             "1111-11-11"
         ],
         "purchaseFrequency": 3
@@ -122,6 +125,28 @@
         ],
         "orderedIn": [
             "2022-02-22"
+        ],
+        "purchaseFrequency": 1
+    },
+    {
+        "id": 5,
+        "name": "Fries",
+        "quantityAvailable": 0,
+        "requiredItems": [
+            {
+                "key": {
+                    "id": 5,
+                    "name": "POTATOO",
+                    "category": "vegetable",
+                    "price": 5.0,
+                    "quantityAvailable": 3,
+                    "minQuantity": 5
+                },
+                "value": 100
+            }
+        ],
+        "orderedIn": [
+            "2026-01-09"
         ],
         "purchaseFrequency": 1
     }

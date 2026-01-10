@@ -97,12 +97,12 @@ public class Warehouse {
     public void makeProduct(Product p) {
         getProduct(p.getName()).make();
         for (Map.Entry<Item, Integer> e : p.getRequiredItems().entrySet()) {
-            int index = items.indexOf(e.getKey());
-            if (index == -1) {
+            Item i = getItem(e.getKey().getName());
+            if (i == null) {
                 continue;
             }
 
-            items.get(index).take(e.getValue());
+            i.take(e.getValue());
         }
     }
     public String[] getProductsNames() {
@@ -129,7 +129,20 @@ public class Warehouse {
     public List<Product> filterProductsByProductLine(String filter) {
         List<Product> filteredList = new ArrayList<>();
         filter = filter.trim().toLowerCase();
-        //TODO no idea how you organized the pls but make this work :)
+        for(ProductLine pl : Factory.getAllLines()) {
+            if(pl.getName().trim().toLowerCase().equals(filter)) {
+                for(Task t : pl.getCompletedTasks()) {
+                    filteredList.add(t.getProduct());
+                }
+                for(Task t : pl.getInprogress()) {
+                    filteredList.add(t.getProduct());
+                }
+                for(Task t : pl.getInline()) {
+                    filteredList.add(t.getProduct());
+                }
+                break;
+            }
+        }
         return filteredList;
     }
 }

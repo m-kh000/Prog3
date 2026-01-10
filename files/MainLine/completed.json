@@ -70,11 +70,53 @@
             "requiredItems": [
                 {
                     "key": {
+                        "id": 3,
+                        "name": "Screws",
+                        "category": "Material",
+                        "price": 1.0,
+                        "quantityAvailable": 2050,
+                        "minQuantity": 500
+                    },
+                    "value": 100
+                },
+                {
+                    "key": {
                         "id": 4,
                         "name": "Wood",
                         "category": "Material",
                         "price": 10.0,
                         "quantityAvailable": 1000,
+                        "minQuantity": 50
+                    },
+                    "value": 20
+                }
+            ],
+            "orderedIn": [
+                "1111-11-11"
+            ],
+            "purchaseFrequency": 3
+        },
+        "requiredQuantity": 100,
+        "ready": 100,
+        "customerName": "mk",
+        "startDate": "1111-11-11",
+        "deliveryDate": "1111-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 10,
+        "product": {
+            "id": 2,
+            "name": "Bed",
+            "quantityAvailable": 3,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 4,
+                        "name": "Wood",
+                        "category": "Material",
+                        "price": 10.0,
+                        "quantityAvailable": 500,
                         "minQuantity": 50
                     },
                     "value": 20
@@ -85,23 +127,71 @@
                         "name": "Screws",
                         "category": "Material",
                         "price": 1.0,
-                        "quantityAvailable": 2050,
+                        "quantityAvailable": 2000,
                         "minQuantity": 500
                     },
-                    "value": 100
+                    "value": 35
+                },
+                {
+                    "key": {
+                        "id": 1,
+                        "name": "Cotton",
+                        "category": "Fabrics",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 200
+                    },
+                    "value": 10
                 }
             ],
             "orderedIn": [
+                "2011-11-11",
                 "1111-11-11",
-                "1111-11-11"
+                "2026-01-01"
             ],
             "purchaseFrequency": 3
         },
-        "requiredQuantity": 100,
-        "ready": 100,
-        "customerName": "mk",
+        "requiredQuantity": 2,
+        "ready": 2,
+        "customerName": "zein and zeid",
         "startDate": "1111-11-11",
         "deliveryDate": "1111-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 13,
+        "product": {
+            "id": 1,
+            "name": "Hoodie",
+            "quantityAvailable": 325,
+            "requiredItems": [
+                {
+                    "key": {
+                        "id": 1,
+                        "name": "Cotton",
+                        "category": "Fabrics",
+                        "price": 1.0,
+                        "quantityAvailable": 1000,
+                        "minQuantity": 200
+                    },
+                    "value": 10
+                }
+            ],
+            "orderedIn": [
+                "2025-12-22",
+                "1111-11-11",
+                "2026-11-11",
+                "2026-01-11",
+                "2002-02-22",
+                "2026-01-01"
+            ],
+            "purchaseFrequency": 7
+        },
+        "requiredQuantity": 100,
+        "ready": 100,
+        "customerName": "Mira",
+        "startDate": "2026-01-11",
+        "deliveryDate": "2026-01-31",
         "status": "inline"
     }
 ]
