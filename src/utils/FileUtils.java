@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import core.Factory;
 import core.Item;
@@ -112,6 +113,12 @@ public class FileUtils {
             }
 
             Product[] products = JsonParser.fromJson(readData(PRODUCTS_FILE), Product[].class, Item.class, Integer.class, null);
+            for (Product p : products) {
+                for (Map.Entry<Item, Integer> e : p.getRequiredItems().entrySet()) {
+                    Item newKey = Factory.findItemByName(e.getKey().getName());
+                    p.getRequiredItems().put(newKey, e.getValue());
+                }
+            }
             return new ArrayList<>(Arrays.asList(products));
         }
     }

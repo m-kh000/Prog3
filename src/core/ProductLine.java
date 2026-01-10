@@ -128,7 +128,7 @@ public class ProductLine implements Runnable {
 
     /**
      * both inprogress and inline tasks are returned
- *
+     *
      */
     public List<Task> get0PCTasks() {
         List<Task> tasks = new ArrayList<>();
@@ -241,7 +241,7 @@ public class ProductLine implements Runnable {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("The productline: " + getName() + " completed list does not contains a task with the id: " + taskId);
     }
 
     public List<Task> getBothInPInL() {
