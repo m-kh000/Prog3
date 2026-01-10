@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 445,
+        "quantityAvailable": 470,
         "requiredItems": [
             {
                 "key": {
@@ -17,6 +17,7 @@
             }
         ],
         "orderedIn": [
+            "2026-01-11",
             "2025-12-22",
             "1111-11-11",
             "2026-11-11",
@@ -25,7 +26,7 @@
             "2026-01-02",
             "2026-01-01"
         ],
-        "purchaseFrequency": 8
+        "purchaseFrequency": 9
     },
     {
         "id": 2,
@@ -45,17 +46,6 @@
             },
             {
                 "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 200
-                },
-                "value": 10
-            },
-            {
-                "key": {
                     "id": 3,
                     "name": "Screws",
                     "category": "Material",
@@ -64,6 +54,17 @@
                     "minQuantity": 500
                 },
                 "value": 35
+            },
+            {
+                "key": {
+                    "id": 1,
+                    "name": "Cotton",
+                    "category": "Fabrics",
+                    "price": 1.0,
+                    "quantityAvailable": 1000,
+                    "minQuantity": 200
+                },
+                "value": 10
             }
         ],
         "orderedIn": [
