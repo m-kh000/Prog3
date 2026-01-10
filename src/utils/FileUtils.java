@@ -467,4 +467,14 @@ public class FileUtils {
 
         return sb.toString();
     }
+
+    public static String readNote(int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
+    }
+
+    public static void writeNote(int id, String text) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
+    }
 }

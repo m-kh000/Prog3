@@ -16,7 +16,7 @@ public class ViewPerformance extends FunctionPanel {
         JPanel linesPanel = new JPanel();
         linesPanel.setLayout(new BoxLayout(linesPanel, BoxLayout.Y_AXIS));
         for (core.ProductLine line : Factory.previewLines()) {
-            linesPanel.add(new ProductLinePanel(line));
+            linesPanel.add(new ProductLinePanel(line,"manager"));
             linesPanel.add(Box.createVerticalStrut(5));
         }
         if (Factory.previewLines().length == 0) {
@@ -24,6 +24,7 @@ public class ViewPerformance extends FunctionPanel {
         }
         
         JScrollPane scrollPane = new JScrollPane(linesPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
         // Layout setup
         add(createTopPanel("View Performance", centerPanel, frame, "manager"), BorderLayout.NORTH);

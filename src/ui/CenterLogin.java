@@ -79,23 +79,26 @@ public class CenterLogin extends JPanel {
             Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
             Factory Factory = null;
             boolean successful = false;
-            centerPanel.removeAll();
             switch (r.getState().toLowerCase()) {
                 case "manager":
+                    centerPanel.removeAll();
                     centerPanel.add(new CenterManager(centerPanel, frame ));
                     successfulyIn(centerPanel,r,frame);
                     break;
                 case "supervisor":
+                    centerPanel.removeAll();
                     centerPanel.add(new CenterSupervisor(centerPanel, frame ));
                     successfulyIn(centerPanel,r,frame);
                     break;
                 case "signup":
+                    centerPanel.removeAll();
                     centerPanel.add(new CenterSignup(centerPanel, frame ,email, passord));
                     JOptionPane.showMessageDialog(null, r.getMessage(), "Message", JOptionPane.INFORMATION_MESSAGE);
                     centerPanel.revalidate();
                     centerPanel.repaint();
                     break;
-            
+                default:
+                    JOptionPane.showMessageDialog(null, r.getMessage());
             }
             
         } catch (Exception ex) {

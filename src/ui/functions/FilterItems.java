@@ -3,7 +3,6 @@ import core.Factory;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
-
 import ui.FunctionPanel;
 import ui.components.ItemPanel;
 
@@ -19,8 +18,10 @@ public class FilterItems extends FunctionPanel {
         filterLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         JComboBox<String> filterCombo = new JComboBox<>(new String[]{"Name", "Category", "Available","Under min","Out"});
         filterCombo.setFont(new Font("Arial", Font.PLAIN, 16));
+        filterCombo.setSelectedItem(null);
         JTextField filterField = new JTextField(20);
         filterField.setFont(new Font("Arial", Font.PLAIN, 16));
+        filterField.setEnabled(false);
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(new Font("Arial", Font.BOLD, 16));
         

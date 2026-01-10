@@ -17,15 +17,19 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
         // Components
         JPanel linePanel = new JPanel(new GridLayout(1, 2));
         JLabel lineLabel = new JLabel("Select Production Line:");
+        lineLabel.setFont(Manager.defaultFont(false, false));   
         JComboBox<String> lineComboBox = new JComboBox<>(Factory.getProductLineNames());
+        lineComboBox.setSelectedItem(null);
         
         JPanel statusPanel = new JPanel(new GridLayout(1, 2));
         JLabel statusLabel = new JLabel("New Status:");
+        statusLabel.setFont(Manager.defaultFont(false, false));
         JComboBox<String> statusComboBox = new JComboBox<>(new String[] { "Active","Maintenance","Stopped" });
+        statusComboBox.setEnabled(false);;
         
         JLabel hint = new JLabel();
         hint.setFont(Manager.defaultFont(false, false));
-        hint.setForeground(Color.LIGHT_GRAY);
+        hint.setForeground(Color.GRAY);
         
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 20));
@@ -34,6 +38,7 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
         // Line selection listener - update hint
         lineComboBox.addActionListener(e -> {
             String selectedLineName = (String)lineComboBox.getSelectedItem();
+            statusComboBox.setEnabled(true);
             if (selectedLineName != null) {
                 hint.setText("Current Status: " + Factory.getProductLine(selectedLineName).getLineStatus());
                 revalidate();
@@ -60,8 +65,9 @@ public class ModifyStatusOfAProductionLine extends FunctionPanel {
                 String selectedStatus = (String)statusComboBox.getSelectedItem();
                 Factory.modifyStatus(selectedLineName, selectedStatus);
                 
-                lineComboBox.setSelectedIndex(0);
-                statusComboBox.setSelectedIndex(0);
+                lineComboBox.setSelectedItem(null);
+                statusComboBox.setEnabled(false);
+                hint.setText("");
                 
                 Manager.isEdited = true;
                 JOptionPane.showMessageDialog(null, "Status modified successfully");

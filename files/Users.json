@@ -16,5 +16,11 @@
         "password": "12345678",
         "isManager": false,
         "lastSeen": "2026-01-01"
+    },
+    {
+        "email": "a@gmail.com",
+        "password": "123456789",
+        "isManager": true,
+        "lastSeen": "2026-01-10"
     }
 ]

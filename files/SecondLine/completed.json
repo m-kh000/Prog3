@@ -8,17 +8,6 @@
             "requiredItems": [
                 {
                     "key": {
-                        "id": 3,
-                        "name": "Screws",
-                        "category": "Material",
-                        "price": 1.0,
-                        "quantityAvailable": 2050,
-                        "minQuantity": 500
-                    },
-                    "value": 100
-                },
-                {
-                    "key": {
                         "id": 4,
                         "name": "Wood",
                         "category": "Material",
@@ -27,6 +16,17 @@
                         "minQuantity": 50
                     },
                     "value": 20
+                },
+                {
+                    "key": {
+                        "id": 3,
+                        "name": "Screws",
+                        "category": "Material",
+                        "price": 1.0,
+                        "quantityAvailable": 2050,
+                        "minQuantity": 500
+                    },
+                    "value": 100
                 }
             ],
             "orderedIn": [
