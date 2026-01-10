@@ -20,6 +20,7 @@ public class ProductLine implements Runnable {
     private int priority;
     private String name;
     private String status;
+    private String note;
     @JsonIgnore
     private List<Task> completed;
     @JsonIgnore
@@ -49,7 +50,7 @@ public class ProductLine implements Runnable {
 
     @Override
     public void run() {
-        while (!inline.isEmpty()) {
+        while (!inline.isEmpty()) {            
             Manager.isEdited = true;
 
             inprogress.add(inline.removeFirst());
@@ -61,6 +62,10 @@ public class ProductLine implements Runnable {
             }
 
             while (canProceedWith(runningTask) && !isTaskFinished(runningTask)) {
+                if (!getLineStatus().toLowerCase().equals("active")) {
+                    return;
+                }
+
                 Factory.makeProduct(runningTask.getProduct());
                 runningTask.increaseReady();
 
@@ -142,6 +147,10 @@ public class ProductLine implements Runnable {
         return this.inline;
     }
 
+    public String getNote() {
+        return this.note;
+    }
+
     public int getId() {
         return id;
     }
@@ -173,6 +182,10 @@ public class ProductLine implements Runnable {
 
     public void setCompleted(List<Task> tasks) {
         this.completed = new ArrayList<>(tasks);
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public void setPriority(int priority) throws InvalidValuesException {
