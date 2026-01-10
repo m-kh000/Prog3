@@ -55,28 +55,28 @@ public class AddProduct extends FunctionPanel {
         
         // Add product button listener
         addProductButton.addActionListener(e -> {
-            String productName = productNameBox.getText().trim();
-            
             try {
+                String productName = productNameBox.getText().trim();
                 if (productName.isEmpty()) {
                     throw new EmptyFieldException();
                 }
                 
                 HashMap<Item, Integer> itemRequirements = new HashMap<>();
+                core.Product newP = new core.Product(productName, itemRequirements, new HashSet<LocalDate>());
                 for (Component component : itemRequirementsPanel.getComponents()) {
                     if (component instanceof ItemRequirementRow) {
                         ItemRequirementRow row = (ItemRequirementRow) component;
                         if (row.itemDropdown.getSelectedItem() != null && !row.quantityInput.getText().trim().isEmpty()) {
                             Item selectedItem = Factory.findItemByName(row.itemDropdown.getSelectedItem().toString());
                             int quantity = Integer.parseInt(row.quantityInput.getText().trim());
-                            itemRequirements.put(selectedItem, quantity);
+                            newP.addItem(selectedItem, quantity);
                         } else {
                             throw new EmptyFieldException();
                         }
                     }
                 }
                 
-                Factory.add(new core.Product(productName, itemRequirements, new HashSet<LocalDate>()));
+                Factory.add(newP);
                 Manager.isEdited = true;
                 
                 productNameBox.reset();
