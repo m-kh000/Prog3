@@ -96,6 +96,15 @@ public class Factory {
 
         return null;
     }
+    public static ProductLine getProductLine(int id) {
+        for (ProductLine pl : allLines) {
+            if (pl.getId() == id) {
+                return pl;
+            }
+        }
+
+        return null;
+    }
 
     public static void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) throws InvalidValuesException, NoSuchElementException {
         if (!warehouse.getItems().contains(i)) {

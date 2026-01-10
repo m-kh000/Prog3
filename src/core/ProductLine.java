@@ -50,7 +50,7 @@ public class ProductLine implements Runnable {
 
     @Override
     public void run() {
-        while (!inline.isEmpty()) {
+        while (!inline.isEmpty()) {            
             Manager.isEdited = true;
 
             inprogress.add(inline.removeFirst());
@@ -62,6 +62,10 @@ public class ProductLine implements Runnable {
             }
 
             while (canProceedWith(runningTask) && !isTaskFinished(runningTask)) {
+                if (!getLineStatus().toLowerCase().equals("active")) {
+                    return;
+                }
+
                 Factory.makeProduct(runningTask.getProduct());
                 runningTask.increaseReady();
 
