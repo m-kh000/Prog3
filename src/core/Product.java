@@ -33,12 +33,11 @@ public class Product {
         this.id = nextId++;
         this.name = name;
         this.orderedIn = orderedIn;
-        //TODO make sure that all items are unique
         this.requiredItems = new HashMap<>(requiredItems);
     }
 
     public void addItem(Item i, int quantity) throws InvalidValuesException {
-        if(quantity <= 0) {
+        if(quantity <= 0 || requiredItems.containsKey(i)) {
             throw new InvalidValuesException("Invalid values!");
         }
         requiredItems.put(i, quantity);

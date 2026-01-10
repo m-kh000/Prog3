@@ -103,3 +103,8 @@ NoSuchElementException occurred, Exception's message: nullException's cause: nul
 NoSuchElementException occurred, Exception's message: nullException's cause: null
 ConcurrentModificationException occurred, Exception's message: null
 ConcurrentModificationException occurred, Exception's message: null
+InvalidValuesException occurred, Exception's message: Invalid values!
+InvalidValuesException occurred, Exception's message: Invalid values!
+InvalidValuesException occurred, Exception's message: Invalid values!
+InvalidValuesException occurred, Exception's message: Invalid values!
+InvalidValuesException occurred, Exception's message: Invalid values!
