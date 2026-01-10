@@ -2,6 +2,7 @@ package core;
 
 import exceptions.StorageInitializationException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -112,14 +113,14 @@ public class Warehouse {
         }
         return names.toArray(new String[names.size()]);
     }
-    public List<Product> getTopSaleProducts() {
+    public List<Product> getTopSaleProduct(LocalDate begDate,LocalDate enDate) {
         List<Product> filteredList = new ArrayList<>();
         List<Product> freq = new ArrayList<>();
         for(Product p : products){
-            if(p.getPurchaseFrequency() > 0)
+            if(p.getPurchaseFrequencyBetween(begDate, enDate) > 0)
                 freq.add(p);
         }
-        Collections.sort(freq, (p1, p2) -> {return p2.getPurchaseFrequency() - p1.getPurchaseFrequency();});
+        Collections.sort(freq, (p1, p2) -> {return p2.getPurchaseFrequencyBetween(begDate,enDate) - p1.getPurchaseFrequencyBetween(begDate,enDate);});
         for(Product p : freq){
             filteredList.add(p);
             if(filteredList.size() == 10) break;
