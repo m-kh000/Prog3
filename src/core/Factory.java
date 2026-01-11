@@ -284,7 +284,10 @@ public class Factory {
      * Deliver a specific completed task by removing it from the completed list
      * in its productline.
      *
-     * @param t the task to deliver
+     * @param pl the productline that contains the task
+     * @param taskId the id of the task to be delivered
+     * 
+     * @throws NoSuchElementException if the task is not found
      */
     public static void deliverTask(ProductLine pl, int taskId) throws NoSuchElementException {
         pl.removeCompletedTask(taskId);
@@ -329,6 +332,7 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
+    @Deprecated
     public static void deliverTask(String selectedItem) {
         selectedItem = selectedItem.trim().toLowerCase();
         for (ProductLine pl : allLines) {

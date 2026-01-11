@@ -44,6 +44,8 @@ public class DeliverTask extends FunctionPanel {
             if (taskCombo.getSelectedItem() == null) {
                 throw new EmptyFieldException();
             }
+            //  TODO: use Factory.deliverTask(pl, taskID);
+            //  WARNING: the method you are currently using is deprecated and will be removed soon!!!
             Factory.deliverTask((String)taskCombo.getSelectedItem());
             taskCombo.removeAllItems();
             for(String task : Factory.getCompletedTasksNames()) {
