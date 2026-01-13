@@ -104,7 +104,7 @@ public class CenterSignup extends JPanel {
                     return;
                 }
                 User newUser = new User(email, password, manager.isSelected());
-                utils.FileUtils.saveUsers(newUser);
+                utils.FileUtils.saveUser(newUser);
                 UI.switchContent(new CenterLogin(centerPanel, frame));
                 JOptionPane.showMessageDialog(null, "Signup successful");
             } catch (Exception ex) {

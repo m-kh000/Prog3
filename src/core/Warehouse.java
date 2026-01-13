@@ -1,17 +1,23 @@
 package core;
 
 import exceptions.StorageInitializationException;
+import jsonParser.annotations.JsonIgnore;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+
 import utils.FileUtils;
 
 public class Warehouse {
     private List<Item> items;
     private List<Product> products;
+    @JsonIgnore
+    private boolean isInit = false;
 
     public Warehouse() {
         try {
@@ -24,6 +30,22 @@ public class Warehouse {
     public Warehouse(List<Item> items, List<Product> products) {
         this.items = new ArrayList<>(items);
         this.products = new ArrayList<>(products);
+    }
+    
+    public synchronized void initializeProducts() {
+        if (this.isInit) {
+            return;
+        }
+
+        for (Product p : products) {
+            try {
+                p.initializeRequiredItems();
+            } catch (NoSuchElementException e) {
+                FileUtils.log(e);
+            }
+        }
+        
+        this.isInit = true;
     }
 
     public void addItem(Item item) {

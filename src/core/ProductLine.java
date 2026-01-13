@@ -27,6 +27,8 @@ public class ProductLine implements Runnable {
     private List<Task> inprogress;
     @JsonIgnore
     private List<Task> inline;
+    @JsonIgnore
+    private boolean isInit = false;
 
     static {
         nextId = IDInitializer.getProductlinesGlobalID();
@@ -47,6 +49,24 @@ public class ProductLine implements Runnable {
         this.inprogress = new ArrayList<>();
         this.inline = new ArrayList<>();
     }
+
+    public void initializeTasks() {
+        if (this.isInit) {
+            return;
+        }
+
+        for (Task t : inline) {
+            t.initializeTask();
+        }
+        for (Task t : inprogress) {
+            t.initializeTask();
+        }
+        for (Task t : completed) {
+            t.initializeTask();
+        }
+
+        this.isInit = true;
+    } 
 
     @Override
     public void run() {

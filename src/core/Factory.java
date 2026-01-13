@@ -15,6 +15,7 @@ public class Factory {
 
     private static HashSet<ProductLine> allLines;
     private static Warehouse warehouse;
+    private static boolean isInit = false;
 
     public Factory() {
         Factory.allLines = new HashSet<>();
@@ -33,6 +34,30 @@ public class Factory {
             }
         }
         warehouse.addProduct(p);
+    }
+
+    public static synchronized void initializeAll() {
+        if (isInit) {
+            return;
+        }
+        
+        try {
+            FileUtils.readItems();
+            FileUtils.readProducts();
+            FileUtils.readProductLines();
+
+            warehouse.initializeProducts();
+            Factory.initializeProductLines();
+        } catch (IOException e) {
+            FileUtils.log(e);
+        }
+
+        isInit = true;
+    }
+    private static synchronized void initializeProductLines() {
+        for (ProductLine pl : allLines) {
+            pl.initializeTasks();
+        }
     }
 
     public static synchronized void add(Item i) {
@@ -360,7 +385,7 @@ public class Factory {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("Couldn\'t find the item " + itemName + " in the warehouse");
     }
 
     public static Product findProductByName(String productName) throws NoSuchElementException {
