@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import core.Factory;
 import core.Item;
@@ -112,13 +111,7 @@ public class FileUtils {
                 return new ArrayList<>();
             }
 
-            Product[] products = JsonParser.fromJson(readData(PRODUCTS_FILE), Product[].class, Item.class, Integer.class, null);
-            for (Product p : products) {
-                for (Map.Entry<Item, Integer> e : p.getRequiredItems().entrySet()) {
-                    Item newKey = Factory.findItemByName(e.getKey().getName());
-                    p.getRequiredItems().put(newKey, e.getValue());
-                }
-            }
+            Product[] products = JsonParser.fromJson(readData(PRODUCTS_FILE), Product[].class, String.class, Integer.class, null);
             return new ArrayList<>(Arrays.asList(products));
         }
     }
@@ -187,15 +180,15 @@ public class FileUtils {
                                 pl = JsonParser.fromJson(readData(f), ProductLine.class);
                                 break;
                             case "inline.json":
-                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
+                                Task[] inlineArr = JsonParser.fromJson(readData(f), Task[].class);
                                 inline = Arrays.asList(inlineArr);
                                 break;
                             case "inprogress.json":
-                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
+                                Task[] inprogressArr = JsonParser.fromJson(readData(f), Task[].class);
                                 inprogress = Arrays.asList(inprogressArr);
                                 break;
                             case "completed.json":
-                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class, Item.class, Integer.class, null);
+                                Task[] completedArr = JsonParser.fromJson(readData(f), Task[].class);
                                 completed = Arrays.asList(completedArr);
                                 break;
                         }
@@ -232,7 +225,7 @@ public class FileUtils {
     }
 
     /**
-     * This method saves all users in the users list in the provided factory.
+     * This method saves the provided user to ./files/Users.json .
      *
      * <p>
      * Writes the data to ./files/Users.json using a {@code BufferedWriter} that
@@ -244,9 +237,9 @@ public class FileUtils {
      * directories if it does not exist.
      * </p>
      *
-     * @param factory the factory that holds the users list
+     * @param newUser the new user to save
      */
-    public static void saveUsers(User newUser) throws IOException {
+    public static void saveUser(User newUser) throws IOException {
         synchronized (FILE_LOCK) {
             List<User> users = readUsers();
             users.add(newUser);
@@ -261,7 +254,7 @@ public class FileUtils {
     }
 
     /**
-     * This method saves all items in the items list in the provided factory.
+     * This method saves all the items in the warehouse in the factory.
      *
      * <p>
      * Writes the data to ./files/Items.json using a {@code BufferedWriter} that
@@ -288,8 +281,7 @@ public class FileUtils {
     }
 
     /**
-     * This method saves all products in the products hashmap in the provided
-     * factory.
+     * This method saves all products in the warehouse in the factory.
      *
      * <p>
      * Writes the data to ./files/Products.json using a {@code BufferedWriter}
@@ -418,7 +410,7 @@ public class FileUtils {
     /**
      * Creates the specified file along with its necessary directories.
      *
-     * @param file
+     * @param file the file to create
      * @throws IOException
      */
     private static void createFile(File file) throws IOException {
