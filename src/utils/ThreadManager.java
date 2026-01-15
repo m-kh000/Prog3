@@ -65,13 +65,10 @@ public class ThreadManager {
      * </p>
      */
     public static void statrtInitialization() {
-        //TODO i think its not working properly
         Thread initializingThread = new Thread(() -> {
             Factory.initializeAll();
-        });
-        //TODO oh no I KNOW IT IS NOT WORKING PROPERLY
-        //TODO good luck fixing it
-        //TODO Bye :)
+        }, "Initializing Thread");
+
         initializingThread.start();
 
         try {

@@ -4,7 +4,7 @@
         "name": "Cotton",
         "category": "Fabric",
         "price": 1.0,
-        "quantityAvailable": 500,
+        "quantityAvailable": 525,
         "minQuantity": 100
     },
     {
@@ -12,7 +12,31 @@
         "name": "Potato",
         "category": "Vegtables",
         "price": 1.0,
-        "quantityAvailable": 400,
+        "quantityAvailable": 500,
         "minQuantity": 100
+    },
+    {
+        "id": 3,
+        "name": "Wood",
+        "category": "Material",
+        "price": 10.0,
+        "quantityAvailable": 375,
+        "minQuantity": 200
+    },
+    {
+        "id": 4,
+        "name": "Screws",
+        "category": "Material",
+        "price": 3.0,
+        "quantityAvailable": 385,
+        "minQuantity": 100
+    },
+    {
+        "id": 5,
+        "name": "Cloth",
+        "category": "Fabrics",
+        "price": 3.0,
+        "quantityAvailable": 125,
+        "minQuantity": 50
     }
 ]

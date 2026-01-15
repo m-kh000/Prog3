@@ -92,6 +92,7 @@ public class AddTask extends FunctionPanel {
                 JOptionPane.showMessageDialog(frame, "Quantity must be a number");
                 FileUtils.log(ex);
             }catch (Exception ex) {
+                ex.printStackTrace();
                 JOptionPane.showMessageDialog(frame,"Error while adding task: "+ ex.getMessage());
                 FileUtils.log(ex);
             }

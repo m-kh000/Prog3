@@ -70,10 +70,12 @@ public class ProductLine implements Runnable {
 
     @Override
     public void run() {
-        while (!inline.isEmpty()) {            
+        while (!inline.isEmpty() || !inprogress.isEmpty()) {            
             Manager.isEdited = true;
 
-            inprogress.add(inline.removeFirst());
+            if (!inline.isEmpty()) {
+                inprogress.add(inline.removeFirst());
+            }
 
             Task runningTask = getFirstAvailableInprogressTask();
 

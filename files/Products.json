@@ -1,45 +1,88 @@
 [
     {
-        "id": 2,
-        "name": "Fries",
-        "quantityAvailable": 20,
-        "requiredItems": [
+        "id": 1,
+        "name": "Hoodie",
+        "quantityAvailable": 60,
+        "requiredItemsNames": [
             {
-                "key": {
-                    "id": 2,
-                    "name": "Potato",
-                    "category": "Vegtables",
-                    "price": 1.0,
-                    "quantityAvailable": 400,
-                    "minQuantity": 100
-                },
-                "value": 5
+                "key": "Cotton",
+                "value": 10
             }
         ],
-        "orderedIn": [
-            "2026-01-11"
+        "orderRegistry": [
+            "2026-01-15",
+            "2026-01-16",
+            "2026-01-15"
+        ],
+        "purchaseFrequency": 3
+    },
+    {
+        "id": 2,
+        "name": "Fries",
+        "quantityAvailable": 369,
+        "requiredItemsNames": [
+            {
+                "key": "Potato",
+                "value": 10
+            }
+        ],
+        "orderRegistry": [
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2025-11-11",
+            "2025-11-11"
+        ],
+        "purchaseFrequency": 8
+    },
+    {
+        "id": 3,
+        "name": "Bed",
+        "quantityAvailable": 15,
+        "requiredItemsNames": [
+            {
+                "key": "Wood",
+                "value": 15
+            },
+            {
+                "key": "Screws",
+                "value": 5
+            },
+            {
+                "key": "Cloth",
+                "value": 5
+            },
+            {
+                "key": "Cotton",
+                "value": 25
+            }
+        ],
+        "orderRegistry": [
+            "2026-01-15"
         ],
         "purchaseFrequency": 1
     },
     {
-        "id": 3,
-        "name": "Hoodie",
-        "quantityAvailable": 0,
-        "requiredItems": [
+        "id": 4,
+        "name": "Chair",
+        "quantityAvailable": 40,
+        "requiredItemsNames": [
             {
-                "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabric",
-                    "price": 1.0,
-                    "quantityAvailable": 500,
-                    "minQuantity": 100
-                },
+                "key": "Wood",
                 "value": 10
+            },
+            {
+                "key": "Screws",
+                "value": 1
             }
         ],
-        "orderedIn": [
+        "orderRegistry": [
+            "2026-01-15"
         ],
-        "purchaseFrequency": 0
+        "purchaseFrequency": 1
     }
 ]

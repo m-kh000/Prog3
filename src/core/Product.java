@@ -1,8 +1,8 @@
 package core;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -20,7 +20,7 @@ public class Product {
     private HashMap<String, Integer> requiredItemsNames;
     @JsonIgnore
     private HashMap<Item, Integer> requiredItems;
-    private HashSet<LocalDate> orderedIn;
+    private ArrayList<LocalDate> orderRegistry;
     private int purchaseFrequency;
     @JsonIgnore
     private boolean isInit = false;
@@ -36,12 +36,12 @@ public class Product {
         this.name = name;
         this.requiredItemsNames = new HashMap<>();
         this.requiredItems = new HashMap<>();
-        this.orderedIn = new HashSet<>();
+        this.orderRegistry = new ArrayList<>();
     }
-    public Product(String name, HashMap<String, Integer> requiredItemsNames,HashSet<LocalDate> orderedIn) throws NoSuchElementException {
+    public Product(String name, HashMap<String, Integer> requiredItemsNames,ArrayList<LocalDate> orderRegistry) throws NoSuchElementException {
         this.id = nextId++;
         this.name = name;
-        this.orderedIn = orderedIn;
+        this.orderRegistry = orderRegistry;
         this.requiredItemsNames = new HashMap<>(requiredItemsNames);
         initializeRequiredItems();
     }
@@ -72,11 +72,11 @@ public class Product {
     }
 
     public void order(LocalDate date) {
-        orderedIn.add(date);
+        orderRegistry.add(date);
     }
 
     public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
-        for(LocalDate l : getOrderedIn()){
+        for(LocalDate l : getOrderRegistry()){
             if(Dates.isBetween(l, start, end)){
                 return true;
             }
@@ -104,8 +104,8 @@ public class Product {
         return nextId;
     }
 
-    public HashSet<LocalDate> getOrderedIn() {
-        return orderedIn;
+    public ArrayList<LocalDate> getOrderRegistry() {
+        return orderRegistry;
     }
 
     public HashMap<Item, Integer> getRequiredItems() {
@@ -150,14 +150,13 @@ public class Product {
 
     public int getPurchaseFrequencyBetween(LocalDate begDate, LocalDate enDate) {
         int freq = 0;
-        System.out.println("Calculating purchase frequency for product: " + this.name);
-        for(LocalDate ordered : orderedIn) {
-            System.out.println("Checking date: ");
+        
+        for(LocalDate ordered : orderRegistry) {
             if(Dates.isBetween(ordered, begDate, enDate)) {
-                System.out.println("Date " + ordered + " is between " + begDate + " and " + enDate);
                 freq++;
             }
         }
+        
         return freq;
     }
 }

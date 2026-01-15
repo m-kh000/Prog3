@@ -2,8 +2,8 @@ package ui.functions;
 import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import javax.swing.*;
 import ui.FunctionPanel;
 import ui.LabelBox;
@@ -72,7 +72,7 @@ public class AddProduct extends FunctionPanel {
                     }
                 }
                 
-                core.Product newP = new core.Product(productName, itemRequirements, new HashSet<>());
+                core.Product newP = new core.Product(productName, itemRequirements, new ArrayList<>());
                 Factory.add(newP);
                 Manager.isEdited = true;
                 
