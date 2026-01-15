@@ -1,17 +1,14 @@
 package ui.functions;
 import core.Factory;
-import core.Item;
-import utils.FileUtils;
 import exceptions.EmptyFieldException;
 import java.awt.*;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import javax.swing.*;
-
 import ui.FunctionPanel;
 import ui.LabelBox;
 import ui.Manager;
+import utils.FileUtils;
 
 // AddProduct panel for creating new products with item requirements
 public class AddProduct extends FunctionPanel {
@@ -61,21 +58,21 @@ public class AddProduct extends FunctionPanel {
                     throw new EmptyFieldException();
                 }
                 
-                HashMap<Item, Integer> itemRequirements = new HashMap<>();
-                core.Product newP = new core.Product(productName, itemRequirements, new HashSet<LocalDate>());
+                HashMap<String, Integer> itemRequirements = new HashMap<>();
                 for (Component component : itemRequirementsPanel.getComponents()) {
                     if (component instanceof ItemRequirementRow) {
                         ItemRequirementRow row = (ItemRequirementRow) component;
                         if (row.itemDropdown.getSelectedItem() != null && !row.quantityInput.getText().trim().isEmpty()) {
-                            Item selectedItem = Factory.findItemByName(row.itemDropdown.getSelectedItem().toString());
+                            String selectedItem = row.itemDropdown.getSelectedItem().toString();
                             int quantity = Integer.parseInt(row.quantityInput.getText().trim());
-                            newP.addItem(selectedItem, quantity);
+                            itemRequirements.put(selectedItem, quantity);
                         } else {
                             throw new EmptyFieldException();
                         }
                     }
                 }
                 
+                core.Product newP = new core.Product(productName, itemRequirements, new HashSet<>());
                 Factory.add(newP);
                 Manager.isEdited = true;
                 

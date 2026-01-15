@@ -1,49 +1,82 @@
 package ui.functions;
 
 import core.Factory;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.*;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.*;
-
+import utils.Validator;
 import ui.FunctionPanel;
 import ui.Manager;
+import ui.LabelBox;
 import ui.components.ProductPanel;
+import utils.FileUtils;
 
 public class FilterProducts extends FunctionPanel {
-    private JPanel ProductsPanel;
+
+    private JPanel productsPanel;
     private JComboBox<String> filterField;
+    private JFrame datesFrame;
+    private LabelBox fromDateBox;
+    private LabelBox toDateBox;
+    private JComboBox<String> filterCombo;
 
     public FilterProducts(JPanel centerPanel, JFrame frame) {
         setLayout(new BorderLayout());
 
-        // Components creation
-        JPanel filterPanel = new JPanel(new GridLayout(1, 4));
+        // Filter panel
+        JPanel filterPanel = createFilterPanel();
+        JPanel topContainer = new JPanel(new BorderLayout());
+        topContainer.add(createTopPanel("Filter Products", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
+        topContainer.add(filterPanel, BorderLayout.SOUTH);
+        add(topContainer, BorderLayout.NORTH);
+
+        // Products panel
+        productsPanel = new JPanel();
+        productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS));
+        loadAllProducts();
+        add(new JScrollPane(productsPanel), BorderLayout.CENTER);
+    }
+
+    //Top Panel
+    private JPanel createFilterPanel() {
+        JPanel panel = new JPanel(new GridLayout(1, 4));
+
         JLabel filterLabel = new JLabel("Filter by:");
         filterLabel.setFont(Manager.defaultFont(false, false));
-        JComboBox<String> filterCombo = new JComboBox<>(new String[]{"One ProductLine", "Top Sales"});
+
+        filterCombo = new JComboBox<>(new String[]{"One ProductLine", "Top Sales"});
         filterCombo.setFont(Manager.defaultFont(false, false));
         filterCombo.setSelectedItem(null);
+
         filterField = new JComboBox<>(Factory.getProductLineNames());
         filterField.setFont(Manager.defaultFont(false, false));
         filterField.setEnabled(false);
+
         JButton filterBtn = new JButton("Filter");
         filterBtn.setFont(Manager.defaultFont(true, false));
 
-        // Listeners
-        // Filter combo selection changes
+        // Filter combo listener
         filterCombo.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
-            filterField.removeAllItems();
-            if (filterType.equals("One ProductLine")) {
+            if ("One ProductLine".equals(filterType)) {
                 filterField.setEnabled(true);
-                filterCombo.removeAll();
-                for (String productLineName : Factory.getProductLineNames()) {
-                    filterField.addItem(productLineName);
+                filterField.removeAllItems();
+                for (String name : Factory.getProductLineNames()) {
+                    filterField.addItem(name);
                 }
             } else {
                 filterField.setEnabled(false);
+                showDatesDialog();
+            }
+        });
+
+        // Filter button listener
+        filterBtn.addActionListener(e -> {
+            String filterType = (String) filterCombo.getSelectedItem();
+            if ("One ProductLine".equals(filterType)) {
+                String productLine = (String) filterField.getSelectedItem();
+                updateProductsPanel(Factory.getWarehouse().filterProductsByProductLine(productLine), false);
             }
         });
 
@@ -55,78 +88,97 @@ public class FilterProducts extends FunctionPanel {
             }
         });
 
-        // Filter button click
-        filterBtn.addActionListener(e -> {
-            String filterType = (String) filterCombo.getSelectedItem();
-            String filterValue = (String) filterField.getSelectedItem();
-            updateProductsPanel(filterType, filterValue);
-        });
-
-        // Layout setup
-        filterPanel.add(filterLabel);
-        filterPanel.add(filterCombo);
-        filterPanel.add(filterField);
-        filterPanel.add(filterBtn);
-
-        JPanel topContainer = new JPanel(new BorderLayout());
-        topContainer.add(createTopPanel("Filter Products", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
-        topContainer.add(filterPanel, BorderLayout.SOUTH);
-        add(topContainer, BorderLayout.NORTH);
-
-        ProductsPanel = createProductsPanel();
-        // Load all products initially
-        for (core.Product product : Factory.previewProducts()) {
-            ProductsPanel.add(new ProductPanel(product));
-            ProductsPanel.add(Box.createVerticalStrut(5));
-        }
-        
-        add(new JScrollPane(ProductsPanel), BorderLayout.CENTER);
-    }
-
-    // Update products panel with filtered results
-    private void updateProductsPanel(String filterType, String filterValue) {
-        ProductsPanel.removeAll();
-        boolean colorful = false;
-        int counter = 0;
-        List<core.Product> Products = null;
-        if (filterType.equals("One ProductLine")) {
-            Products = Factory.getWarehouse().filterProductsByProductLine(filterValue);
-        } else {
-            Products = Factory.getWarehouse().getTopSaleProduct();
-            colorful = true;
-        }
-
-        if (Products != null && !Products.isEmpty()) {
-            for (core.Product Product : Products) {
-                ProductPanel ppanel = new ProductPanel(Product);
-                if(colorful){
-                    if(counter == 0){
-                        ppanel.purchaseFrequency.setForeground(new Color(0xaa0000));
-                        counter++;
-                    }else if(counter == 1){
-                        ppanel.purchaseFrequency.setForeground(new Color(0x0000bb));
-                        counter++;
-                    }else if(counter == 2){
-                        ppanel.purchaseFrequency.setForeground(new Color(0x00cc00));
-                        colorful=false;
-                    }
-                }
-                ProductsPanel.add(ppanel);
-                ProductsPanel.add(Box.createVerticalStrut(5));
-            }
-        }
-        else {
-            ProductsPanel.add(new JLabel("No products found."));
-        }
-
-        ProductsPanel.revalidate();
-        ProductsPanel.repaint();
-    }
-
-    // Create products panel with vertical layout
-    private JPanel createProductsPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(filterLabel);
+        panel.add(filterCombo);
+        panel.add(filterField);
+        panel.add(filterBtn);
         return panel;
+    }
+
+    private void showDatesDialog() {
+        if (datesFrame == null) {
+            datesFrame = new JFrame("Select Date Range");
+            datesFrame.setLayout(new BorderLayout());
+            datesFrame.setSize(400, 250);
+            datesFrame.setLocationRelativeTo(null);
+            datesFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            datesFrame.add(new Label(),BorderLayout.WEST);
+            datesFrame.add(new Label(),BorderLayout.EAST);
+
+            JPanel datesMainPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+
+            fromDateBox = new LabelBox("from: ", false, true);
+            toDateBox = new LabelBox("to: ", false, true);
+
+            JButton submitBtn = createDialogButton("Submit");
+            JButton cancelBtn = createDialogButton("Cancel");
+
+            submitBtn.addActionListener(e -> {
+                try {
+                    LocalDate from = Validator.validateDate(fromDateBox.getText());
+                    LocalDate to = Validator.validateDate(toDateBox.getText());
+                    updateProductsPanel(Factory.getWarehouse().getTopSaleProduct(from, to), true);
+                    datesFrame.setVisible(false);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error in dates: " + ex.getMessage());
+                    FileUtils.log(ex);
+                }
+            });
+
+            cancelBtn.addActionListener(e -> {
+                datesFrame.setVisible(false);
+                filterCombo.setSelectedIndex(0);
+            });
+
+            JPanel btnPanel = new JPanel(new GridLayout(1, 2, 0, 10));
+            btnPanel.add(submitBtn);
+            btnPanel.add(cancelBtn);
+
+            datesMainPanel.add(fromDateBox);
+            datesMainPanel.add(toDateBox);
+            datesMainPanel.add(btnPanel);
+            datesFrame.add(datesMainPanel,BorderLayout.CENTER);
+        }
+        datesFrame.setVisible(true);
+    }
+
+    private JButton createDialogButton(String text) {
+        JButton btn = new JButton(text);
+        btn.setFont(Manager.defaultFont(false, false));
+        btn.setForeground(Color.decode("#5294ff"));
+        btn.setFocusPainted(false);
+        btn.setBorderPainted(false);
+        btn.setContentAreaFilled(false);
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return btn;
+    }
+
+    private void loadAllProducts() {
+        for (core.Product product : Factory.previewProducts()) {
+            productsPanel.add(new ProductPanel(product));
+            productsPanel.add(Box.createVerticalStrut(5));
+        }
+    }
+
+    private void updateProductsPanel(List<core.Product> products, boolean highlightTop3) {
+        productsPanel.removeAll();
+
+        if (products != null && !products.isEmpty()) {
+            Color[] topColors = {new Color(0xaa0000), new Color(0x0000bb), new Color(0x00cc00)};
+            
+            for (int i = 0; i < products.size(); i++) {
+                ProductPanel panel = new ProductPanel(products.get(i));
+                if (highlightTop3 && i < 3) {
+                    panel.purchaseFrequency.setForeground(topColors[i]);
+                }
+                productsPanel.add(panel);
+                productsPanel.add(Box.createVerticalStrut(5));
+            }
+        } else {
+            productsPanel.add(new JLabel("No products found."));
+        }
+
+        productsPanel.revalidate();
+        productsPanel.repaint();
     }
 }

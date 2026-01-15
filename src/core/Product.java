@@ -150,8 +150,11 @@ public class Product {
 
     public int getPurchaseFrequencyBetween(LocalDate begDate, LocalDate enDate) {
         int freq = 0;
+        System.out.println("Calculating purchase frequency for product: " + this.name);
         for(LocalDate ordered : orderedIn) {
+            System.out.println("Checking date: ");
             if(Dates.isBetween(ordered, begDate, enDate)) {
+                System.out.println("Date " + ordered + " is between " + begDate + " and " + enDate);
                 freq++;
             }
         }
