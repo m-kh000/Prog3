@@ -40,13 +40,4 @@ public class UI extends JFrame {
 
     
 }
-//  TODO: do the todo in ui.functions.DeliverTask
 //  TODO: use ThreadManager.StartInitialization() to read the data when someone logs in
-//  TODO: when use new Product(...) pass HashMap<String, Integer> instead of HashMap<Item, Integer>
-//  TODO: when use new Task(...) pass the product name instead of the product itself
-//  TODO: two LocalDates on top sales and deliver task to do and load screen and make sure of directly sorting file reading
-//  TODO: it is not important to make sure of sorting the file reading because you now call just ThreadManager.startInitialization() and it will handle all the work for you
-//  TODO: do all the todos
-
-//  TODO: I think the next todo is already done
-//  TODO: cancel and deliver task

@@ -2,11 +2,14 @@ package ui.functions;
 import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
+import java.util.HashMap;
 import javax.swing.*;
 
 import ui.FunctionPanel;
 import ui.Manager;
 import utils.FileUtils;
+import core.Factory.Task_id_pl;
+import core.ProductLine;
 
 public class DeliverTask extends FunctionPanel {
     public DeliverTask(JPanel centerPanel, JFrame frame) {
@@ -26,7 +29,8 @@ public class DeliverTask extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select a completed Task to deliver:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        JComboBox<String> taskCombo = new JComboBox<>(Factory.getCompletedTasksNames());
+        HashMap<String, Task_id_pl> completeTasksHashMap = Factory.getCompletedTasksNames_ids_pls();
+        JComboBox<String> taskCombo = new JComboBox<>(completeTasksHashMap.keySet().toArray(new String[0]));
         taskCombo.setFont(Manager.defaultFont(false, false));
         taskCombo.setSelectedItem(null);
         
@@ -44,11 +48,11 @@ public class DeliverTask extends FunctionPanel {
             if (taskCombo.getSelectedItem() == null) {
                 throw new EmptyFieldException();
             }
-            //  TODO: use Factory.deliverTask(pl, taskID);
-            //  WARNING: the method you are currently using is deprecated and will be removed soon!!!
-            Factory.deliverTask((String)taskCombo.getSelectedItem());
+            int taskId = completeTasksHashMap.get((String)taskCombo.getSelectedItem()).taskId;
+            ProductLine pl = completeTasksHashMap.get((String)taskCombo.getSelectedItem()).pl;
+            Factory.deliverTask(pl, taskId);
             taskCombo.removeAllItems();
-            for(String task : Factory.getCompletedTasksNames()) {
+            for(String task : Factory.getCompletedTasksNames_ids_pls().keySet()) {
                 taskCombo.addItem(task);
             }
             taskCombo.setSelectedItem(null);

@@ -6,6 +6,7 @@ import exceptions.InvalidValuesException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -40,7 +41,9 @@ public class Factory {
         if (isInit) {
             return;
         }
-        
+        //TODO some thing is definitly wrong here
+        //TODO fix it later
+        //TODO oh wait fix it NOW :)
         try {
             FileUtils.readItems();
             FileUtils.readProducts();
@@ -347,14 +350,14 @@ public class Factory {
         pl.setStatus(selectedStatus);
     }
 
-    public static String[] getCompletedTasksNames() {
-        List<String> names = new ArrayList<>();
+    public static HashMap<String, Task_id_pl> getCompletedTasksNames_ids_pls() {
+        HashMap<String, Task_id_pl> names = new HashMap<>();
         for (ProductLine pl : allLines) {
             for (Task t : pl.getCompleted()) {
-                names.add(t.getName());
+                names.put(t.getName(), new Task_id_pl(t.getId(), pl));
             }
         }
-        return names.toArray(new String[names.size()]);
+        return names;
     }
 
     @Deprecated
@@ -407,5 +410,15 @@ public class Factory {
             }
         }
         throw new NoSuchElementException();
+    }
+
+    public static class Task_id_pl{
+        public int taskId;
+        public ProductLine pl;
+
+        public Task_id_pl(int taskId, ProductLine pl) {
+            this.taskId = taskId;
+            this.pl = pl;
+        }
     }
 }

@@ -73,7 +73,7 @@ public class AddTask extends FunctionPanel {
                 String startText = start.getText();
                 String deliveryText = delivery.getText();
                 
-                Factory.add(new Task(Factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
+                Factory.add(new Task(productName, Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
                 Manager.isEdited = true;
 
                 product.setSelectedItem(null);
