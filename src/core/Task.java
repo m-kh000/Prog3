@@ -36,15 +36,15 @@ public class Task {
         }
         this.id = nextId++;
         this.productName = productName;
-        this.product.increasePurchases();
         this.requiredQuantity = requiredQuantity;
         this.ready = 0;
         this.customerName = customerName;
         this.startDate = startDate;
-        this.product.order(startDate);
         this.deliveryDate = deliveryDate;
         this.status = status;
         initializeTask();
+        this.product.increasePurchases();
+        this.product.order(startDate);
     }
 
     public synchronized void initializeTask() {

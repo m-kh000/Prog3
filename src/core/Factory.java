@@ -17,15 +17,24 @@ public class Factory {
     private static HashSet<ProductLine> allLines;
     private static Warehouse warehouse;
     private static boolean isInit = false;
+    
+    public static synchronized void initializeAll() {
+        if (isInit) {
+            return;
+        }
 
-    public Factory() {
-        Factory.allLines = new HashSet<>();
-        Factory.warehouse = new Warehouse();
+        warehouse = new Warehouse();
+        allLines = FileUtils.readProductLines();
+
+        warehouse.initializeProducts();
+        Factory.initializeProductLines();
+
+        isInit = true;
     }
-
-    public Factory(HashSet<ProductLine> allLines, Warehouse warehouse) {
-        Factory.allLines = new HashSet<>(allLines);
-        Factory.warehouse = warehouse;
+    private static synchronized void initializeProductLines() {
+        for (ProductLine pl : allLines) {
+            pl.initializeTasks();
+        }
     }
     
     public static synchronized void add(Product p) throws InvalidValuesException {
@@ -35,32 +44,6 @@ public class Factory {
             }
         }
         warehouse.addProduct(p);
-    }
-
-    public static synchronized void initializeAll() {
-        if (isInit) {
-            return;
-        }
-        //TODO some thing is definitly wrong here
-        //TODO fix it later
-        //TODO oh wait fix it NOW :)
-        try {
-            FileUtils.readItems();
-            FileUtils.readProducts();
-            FileUtils.readProductLines();
-
-            warehouse.initializeProducts();
-            Factory.initializeProductLines();
-        } catch (IOException e) {
-            FileUtils.log(e);
-        }
-
-        isInit = true;
-    }
-    private static synchronized void initializeProductLines() {
-        for (ProductLine pl : allLines) {
-            pl.initializeTasks();
-        }
     }
 
     public static synchronized void add(Item i) {

@@ -1,0 +1,102 @@
+[
+    {
+        "id": 6,
+        "productName": "Fries",
+        "requiredQuantity": 50,
+        "ready": 50,
+        "customerName": "Zein",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-01-17",
+        "status": "inline"
+    },
+    {
+        "id": 7,
+        "productName": "Fries",
+        "requiredQuantity": 10,
+        "ready": 10,
+        "customerName": "Joseph",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-02-16",
+        "status": "inline"
+    },
+    {
+        "id": 8,
+        "productName": "Fries",
+        "requiredQuantity": 100,
+        "ready": 100,
+        "customerName": "Zein",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-02-28",
+        "status": "inline"
+    },
+    {
+        "id": 9,
+        "productName": "Fries",
+        "requiredQuantity": 100,
+        "ready": 100,
+        "customerName": "Zein",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-02-28",
+        "status": "inline"
+    },
+    {
+        "id": 10,
+        "productName": "Fries",
+        "requiredQuantity": 10,
+        "ready": 10,
+        "customerName": "Zein",
+        "startDate": "2025-11-11",
+        "deliveryDate": "2026-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 11,
+        "productName": "Fries",
+        "requiredQuantity": 10,
+        "ready": 10,
+        "customerName": "Zein",
+        "startDate": "2025-11-11",
+        "deliveryDate": "2026-11-11",
+        "status": "inline"
+    },
+    {
+        "id": 12,
+        "productName": "Fries",
+        "requiredQuantity": 40,
+        "ready": 40,
+        "customerName": "Zein",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-02-03",
+        "status": "inline"
+    },
+    {
+        "id": 13,
+        "productName": "Fries",
+        "requiredQuantity": 30,
+        "ready": 30,
+        "customerName": "Mira",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-01-30",
+        "status": "inline"
+    },
+    {
+        "id": 14,
+        "productName": "Fries",
+        "requiredQuantity": 30,
+        "ready": 30,
+        "customerName": "Mira",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-01-30",
+        "status": "inline"
+    },
+    {
+        "id": 15,
+        "productName": "Hoodie",
+        "requiredQuantity": 25,
+        "ready": 25,
+        "customerName": "Joseph",
+        "startDate": "2026-01-15",
+        "deliveryDate": "2026-01-30",
+        "status": "inline"
+    }
+]

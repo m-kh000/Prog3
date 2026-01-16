@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -111,7 +112,7 @@ public class FileUtils {
                 return new ArrayList<>();
             }
 
-            Product[] products = JsonParser.fromJson(readData(PRODUCTS_FILE), Product[].class, String.class, Integer.class, null);
+            Product[] products = JsonParser.fromJson(readData(PRODUCTS_FILE), Product[].class, String.class, Integer.class, LocalDate.class);
             return new ArrayList<>(Arrays.asList(products));
         }
     }

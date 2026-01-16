@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -150,22 +151,24 @@ public class Warehouse {
         return filteredList;
     }
     public List<Product> filterProductsByProductLine(String filter) {
-        List<Product> filteredList = new ArrayList<>();
+        HashSet<Product> filteredSet = new HashSet<>();
         filter = filter.trim().toLowerCase();
         for(ProductLine pl : Factory.getAllLines()) {
             if(pl.getName().trim().toLowerCase().equals(filter)) {
                 for(Task t : pl.getCompletedTasks()) {
-                    filteredList.add(t.getProduct());
+                    filteredSet.add(t.getProduct());
                 }
                 for(Task t : pl.getInprogress()) {
-                    filteredList.add(t.getProduct());
+                    filteredSet.add(t.getProduct());
                 }
                 for(Task t : pl.getInline()) {
-                    filteredList.add(t.getProduct());
+                    filteredSet.add(t.getProduct());
                 }
                 break;
             }
         }
-        return filteredList;
+        List<Product> filteredList = new ArrayList<>();
+        filteredList.addAll(filteredSet);
+        return filteredList;        
     }
 }
