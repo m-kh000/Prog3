@@ -23,7 +23,8 @@ public class TaskPanel extends JPanel {
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         JPanel idIconPanel = new JPanel();
         idIconPanel.setLayout(new BoxLayout(idIconPanel, BoxLayout.X_AXIS));
-        JLabel idValue = new JLabel(String.valueOf(task.getId()) + "  ");
+        JLabel idValue = new JLabel(String.format("#%04d ", task.getId())+" ");
+        idValue.setSize(new Dimension(60,60));
         idValue.setForeground(Color.DARK_GRAY);
         idValue.setFont(Manager.defaultFont(false, false));
         idIconPanel.add(idValue);

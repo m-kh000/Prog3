@@ -80,16 +80,6 @@
         "status": "inline"
     },
     {
-        "id": 14,
-        "productName": "Fries",
-        "requiredQuantity": 30,
-        "ready": 30,
-        "customerName": "Mira",
-        "startDate": "2026-01-15",
-        "deliveryDate": "2026-01-30",
-        "status": "inline"
-    },
-    {
         "id": 15,
         "productName": "Hoodie",
         "requiredQuantity": 25,

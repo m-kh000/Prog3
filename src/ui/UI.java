@@ -39,5 +39,4 @@ public class UI extends JFrame {
     }
 
     
-}
-//  TODO: use ThreadManager.StartInitialization() to read the data when someone logs in
+}//delete item

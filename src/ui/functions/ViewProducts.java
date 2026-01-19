@@ -24,6 +24,7 @@ public class ViewProducts extends FunctionPanel {
         }
         
         JScrollPane scrollPane = new JScrollPane(productsPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
         // Layout setup
         add(createTopPanel("View All Products", centerPanel, frame, "supervisor"), BorderLayout.NORTH);
