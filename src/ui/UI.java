@@ -40,7 +40,7 @@ public class UI extends JFrame {
     }
 
     public static void notify(Item i){
-        JOptionPane.showMessageDialog(null, "item " + i.getName() +"is out you must restock it");
+        JOptionPane.showMessageDialog(null, "item " + i.getName() +" is insufficient!");
     }
 
     

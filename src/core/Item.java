@@ -1,7 +1,6 @@
 package core;
 
 import exceptions.InvalidValuesException;
-import ui.UI;
 import utils.IDInitializer;
 
 public class Item {
@@ -33,7 +32,6 @@ public class Item {
 
     public void take(int quantity) {
         if(!canTake(quantity)){
-            UI.notify(this);
             return;
         }
         quantityAvailable -= quantity;

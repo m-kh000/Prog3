@@ -1,7 +1,10 @@
 package ui;
 import java.awt.*;
 import javax.swing.*;
+
+import core.Factory;
 import ui.functions.*;
+import utils.FileUtils;
 
 public class CenterManager extends JPanel {
     public CenterManager(JPanel centerPanel, JFrame frame) {
@@ -26,6 +29,7 @@ public class CenterManager extends JPanel {
         JButton modifyStatus = createStyledButton("Modify Status of a Production Line", buttonColor);
         JButton viewPerformance = createStyledButton("View Performance", buttonColor);
         JButton deliverTask = createStyledButton("Deliver Task", buttonColor);
+        JButton save = createStyledButton("Save to TXT", buttonColor);
 
         // Listeners
         // Add production line button click
@@ -40,11 +44,28 @@ public class CenterManager extends JPanel {
         // Deliver task button click
         deliverTask.addActionListener(e -> UI.switchContent(new DeliverTask(centerPanel, frame)));
 
+        //save
+        save.addActionListener(e -> {
+            if(Manager.isEdited)
+            try {
+                Factory.saveToTXT();
+                Manager.isEdited = false;
+                JOptionPane.showMessageDialog(frame, "Data saved successfully to TXT files.");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, "Error saving data: " + ex.getMessage());
+                FileUtils.log(ex);
+            }
+            else{
+                JOptionPane.showMessageDialog(frame, "No edits to save.");
+            }
+        });
+
         // Layout setup
         mainPanel.add(title);
         mainPanel.add(addLine);
         mainPanel.add(modifyStatus);
         mainPanel.add(viewPerformance);
+        mainPanel.add(save);
         
         add(mainPanel, BorderLayout.CENTER);
     }

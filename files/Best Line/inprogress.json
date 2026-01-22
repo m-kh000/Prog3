@@ -1,42 +1,12 @@
 [
     {
-        "id": 18,
-        "productName": "Hoodie",
-        "requiredQuantity": 350,
-        "ready": 285,
-        "customerName": "MK",
-        "startDate": "2026-01-22",
-        "deliveryDate": "2026-02-22",
-        "status": "inline"
-    },
-    {
-        "id": 19,
-        "productName": "Fries",
-        "requiredQuantity": 250,
-        "ready": 101,
-        "customerName": "Joe",
-        "startDate": "2026-01-20",
-        "deliveryDate": "2026-02-15",
-        "status": "inline"
-    },
-    {
         "id": 21,
         "productName": "Hoodie",
         "requiredQuantity": 300,
-        "ready": 0,
+        "ready": 140,
         "customerName": "MK",
         "startDate": "2026-01-22",
         "deliveryDate": "2026-02-20",
-        "status": "inline"
-    },
-    {
-        "id": 22,
-        "productName": "Fries",
-        "requiredQuantity": 200,
-        "ready": 0,
-        "customerName": "Zein",
-        "startDate": "2026-01-20",
-        "deliveryDate": "2026-02-10",
         "status": "inline"
     }
 ]
