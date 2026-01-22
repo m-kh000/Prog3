@@ -1,5 +1,6 @@
 package core;
 
+import exceptions.ItemInUseException;
 import exceptions.StorageInitializationException;
 import jsonParser.annotations.JsonIgnore;
 
@@ -61,8 +62,33 @@ public class Warehouse {
      * 
      * @param itemName the name of the item to remove
      */
-    public void removeItem(String itemName) {
-        items.removeIf(i -> i.getName().equals(itemName));
+    public void removeItem(String itemName) throws ItemInUseException {
+        if(Factory.itemInUse(itemName)) {
+            throw new ItemInUseException();
+        }
+        Factory.cancelTasksByItemName(itemName);
+        removeProductsByItemName(itemName);
+        Item toRemove = new Item();
+        for(Item i : items) {
+            if(i.getName().equals(itemName)) {
+                toRemove = i;
+                break;
+            }
+        }
+        items.remove(toRemove);
+    }
+
+    private void removeProductsByItemName(String itemName) {
+        List <Product> toRemove = new ArrayList<>();
+        for(Product p : products) {
+            for(Item i : p.getRequiredItems().keySet()) {
+                if(i.getName().equals(itemName)) {
+                    toRemove.add(p);
+                    break;
+                }
+            }
+        }
+        products.removeAll(toRemove);
     }
     /**
      * Removes a specific product from the products list.
