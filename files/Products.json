@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 80,
+        "quantityAvailable": 110,
         "requiredItemsNames": [
             {
                 "key": "Cotton",

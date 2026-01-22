@@ -2,6 +2,8 @@ package core;
 
 import core.User.UserInfo;
 import exceptions.InvalidValuesException;
+import exceptions.ItemInUseException;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -127,7 +129,7 @@ public class Factory {
         i.setMinQuantity(minQuantity);
     }
 
-    public static synchronized void deleteItem(String name) {
+    public static synchronized void deleteItem(String name) throws ItemInUseException {
         warehouse.removeItem(name);
     }
 
@@ -402,5 +404,19 @@ public class Factory {
             this.taskId = taskId;
             this.pl = pl;
         }
+    }
+    
+    public static void cancelTasksByItemName(String itemName) {
+        for(ProductLine pl : allLines) {
+            pl.removeByItemName(itemName);
+        }
+    }
+
+    public static boolean itemInUse(String itemName) {
+        boolean inUse = false;
+        for(ProductLine pl : allLines) {
+            inUse |= pl.itemInUse(itemName);
+        }
+        return inUse;
     }
 }
