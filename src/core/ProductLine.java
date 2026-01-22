@@ -312,4 +312,28 @@ public class ProductLine implements Runnable {
         }
         return false;
     }
+
+    public void removeByItemName(String itemName) {
+        List <Task> toRemove = new ArrayList<>();
+        for(Task t : inline) {
+            for(Item i : t.getProduct().getRequiredItems().keySet()) {
+                if(i.getName().equals(itemName)) {
+                    toRemove.add(t);
+                    break;
+                }
+            }
+        }
+        inline.removeAll(toRemove);
+    }
+
+    public boolean itemInUse(String itemName) {
+        for(Task t : inline) {
+            for(Item i : t.getProduct().getRequiredItems().keySet()) {
+                if(i.getName().equals(itemName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

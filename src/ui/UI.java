@@ -1,6 +1,7 @@
 package ui;
 import java.awt.*;
 import javax.swing.*;
+import core.Item;
 
 public class UI extends JFrame {
     private static JPanel centerPanel;
@@ -38,5 +39,12 @@ public class UI extends JFrame {
         centerPanel.repaint();
     }
 
+    public static void notify(Item i){
+        JOptionPane.showMessageDialog(null, "item " + i.getName() +"is out you must restock it");
+    }
+
     
 }//delete item
+//pl
+//log 
+//joption pane
