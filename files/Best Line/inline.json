@@ -1,12 +1,2 @@
 [
-    {
-        "id": 16,
-        "productName": "Hoodie",
-        "requiredQuantity": 30,
-        "ready": 0,
-        "customerName": "mk",
-        "startDate": "1111-11-11",
-        "deliveryDate": "2222-02-20",
-        "status": "inline"
-    }
 ]

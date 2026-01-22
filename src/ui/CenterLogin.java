@@ -242,8 +242,7 @@ public class CenterLogin extends JPanel {
             String passord = passwordbox.getText();
             String response = utils.Validator.validateEmail(email, passord);
             Validator.Response r = JsonParser.fromJson(response, Validator.Response.class);
-            Factory Factory = null;
-            boolean successful = false;
+
             switch (r.getState().toLowerCase()) {
                 case "manager":
                     centerPanel.removeAll();
