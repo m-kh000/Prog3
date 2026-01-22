@@ -31,7 +31,7 @@ public class FileUtils {
     private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
     private static final File EXCEPTIONS_FILE = new File("./files/Exceptions.txt");
     private static final File IDS_FILE = new File("./files/IDs.json");
-    private static final File TASKSLOG_FILE = new File("./files/TasksLog.json");
+    private static final File TASKSLOG_FILE = new File("./files/TasksLog.txt");
 
     /**
      * This method reads users from the Users.json file.
@@ -405,6 +405,36 @@ public class FileUtils {
                 writeData(EXCEPTIONS_FILE, logString, true);
             } catch (Exception e) {
                 System.out.println("Exception occurred while logging the exception. LOL :)");
+            }
+        }
+    }
+
+    /**
+     * Logs a {@code Task task} to ./files/TasksLog.txt
+     * 
+     * @param task the task to log
+     * @param status the status of the task (add-cancel-deliver)
+     */
+    public static void log(Task task, String status) {
+        synchronized (FILE_LOCK) {
+            try {
+                createFile(TASKSLOG_FILE);
+                String fileStatus = ((status.toLowerCase().equals("add")) ? "Added" : (status.toLowerCase().equals("cancel")) ? "Canceled" : "Delivered");
+                StringBuilder sb = new StringBuilder();
+
+                sb.append("Task: ")
+                  .append(task.getName())
+                  .append(", Customer: ")
+                  .append(task.getCustomerName())
+                  .append(", ")
+                  .append(fileStatus)
+                  .append(" on ")
+                  .append(LocalDate.now().toString())
+                  .append("\n");
+                
+                writeData(TASKSLOG_FILE, sb.toString(), true);
+            } catch (IOException e) {
+                log(e);
             }
         }
     }

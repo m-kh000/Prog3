@@ -4,7 +4,7 @@
         "name": "Cotton",
         "category": "Fabric",
         "price": 1.0,
-        "quantityAvailable": 280,
+        "quantityAvailable": 2170,
         "minQuantity": 100
     },
     {
@@ -12,7 +12,7 @@
         "name": "Potato",
         "category": "Vegtables",
         "price": 1.0,
-        "quantityAvailable": 500,
+        "quantityAvailable": 3000,
         "minQuantity": 100
     },
     {

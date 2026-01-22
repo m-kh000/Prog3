@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 110,
+        "quantityAvailable": 977,
         "requiredItemsNames": [
             {
                 "key": "Cotton",
@@ -14,14 +14,22 @@
             "2026-01-16",
             "2026-01-15",
             "1111-11-11",
-            "1111-11-11"
+            "2026-01-22",
+            "1111-11-11",
+            "2026-01-22",
+            "1111-11-11",
+            "2026-01-20",
+            "2026-01-22",
+            "2026-01-22",
+            "2026-01-22",
+            "2026-01-22"
         ],
-        "purchaseFrequency": 5
+        "purchaseFrequency": 13
     },
     {
         "id": 2,
         "name": "Fries",
-        "quantityAvailable": 369,
+        "quantityAvailable": 1173,
         "requiredItemsNames": [
             {
                 "key": "Potato",
@@ -38,9 +46,15 @@
             "2026-01-15",
             "2025-11-11",
             "2025-11-11",
-            "1111-11-11"
+            "1111-11-11",
+            "1111-11-11",
+            "1111-11-11",
+            "1111-11-11",
+            "2026-01-22",
+            "2026-01-20",
+            "2026-01-20"
         ],
-        "purchaseFrequency": 9
+        "purchaseFrequency": 15
     },
     {
         "id": 3,
