@@ -40,3 +40,5 @@ public class UI extends JFrame {
 
     
 }//delete item
+//pl
+//log 
