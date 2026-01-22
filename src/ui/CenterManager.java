@@ -45,7 +45,6 @@ public class CenterManager extends JPanel {
         mainPanel.add(addLine);
         mainPanel.add(modifyStatus);
         mainPanel.add(viewPerformance);
-        mainPanel.add(deliverTask);
         
         add(mainPanel, BorderLayout.CENTER);
     }

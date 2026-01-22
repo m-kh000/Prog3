@@ -1,6 +1,10 @@
 package ui.functions;
 import core.Factory;
+import core.Factory.Task_id_pl;
+
 import java.awt.*;
+import java.util.HashMap;
+
 import javax.swing.*;
 
 import ui.FunctionPanel;
@@ -24,7 +28,8 @@ public class CancelTask extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Task:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        JComboBox<String> taskCombo = new JComboBox<>(Factory.get0PCTasksNames());
+        HashMap<String, Task_id_pl> completeTasksHashMap = Factory.get0PCTasksNames_ids();
+        JComboBox<String> taskCombo = new JComboBox<>(completeTasksHashMap.keySet().toArray(new String[0]));
         taskCombo.setFont(Manager.defaultFont(true, false));
         taskCombo.setSelectedItem(null);
         
@@ -46,7 +51,8 @@ public class CancelTask extends FunctionPanel {
 
         // Cancel button click
         cancelBtn.addActionListener(e -> {
-            Factory.cancelTask((String)taskCombo.getSelectedItem());
+            int taskId = completeTasksHashMap.get((String)taskCombo.getSelectedItem()).taskId;
+            Factory.cancelTask(taskId);
             taskCombo.removeAllItems();
             for(String task : Factory.get0PCTasksNames()) {
                 taskCombo.addItem(task);

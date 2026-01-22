@@ -74,12 +74,16 @@ public class ProductLine implements Runnable {
             Manager.isEdited = true;
 
             if (!inline.isEmpty()) {
-                inprogress.add(inline.removeFirst());
+                inprogress.add(inline.remove(0));
             }
 
             Task runningTask = getFirstAvailableInprogressTask();
 
             if (runningTask == null) {
+                if (inline.isEmpty()) {
+                    break;
+                }
+
                 continue;
             }
 
@@ -103,6 +107,11 @@ public class ProductLine implements Runnable {
                 inprogress.remove(runningTask);
             }
         }
+        ThreadManager.assign();
+    }
+
+    public void startWorking() {
+        ThreadManager.employ(this);
         ThreadManager.assign();
     }
 
@@ -222,7 +231,9 @@ public class ProductLine implements Runnable {
     }
 
     public void removeCompletedTask(int id) throws NoSuchElementException {
-        this.completed.remove(getCompletedTask(id));
+        Task t = getCompletedTask(id);
+        this.completed.remove(t);
+        FileUtils.log(t, "deliver");
     }
 
     private boolean isTaskFinished(Task t) {
@@ -248,7 +259,7 @@ public class ProductLine implements Runnable {
 
     private Task getFirstAvailableInprogressTask() {
         for (Task t : inprogress) {
-            if (canProceedWith(t)) {
+            if (t != null && canProceedWith(t)) {
                 return t;
             }
         }

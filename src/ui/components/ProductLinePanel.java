@@ -14,7 +14,7 @@ public class ProductLinePanel extends JPanel {
 
     public ProductLinePanel(core.ProductLine line, String role) {
         this.line = line;
-        setLayout(new GridLayout(1, role.startsWith("m") ? 5 : 4, 10, 0));
+        setLayout(new GridLayout(1,  5 , 10, 0));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         Manager.plAutorefresh = true;
@@ -74,6 +74,16 @@ public class ProductLinePanel extends JPanel {
         inprogressPanel.add(inprogressHint);
         add(inprogressPanel);
 
+        JPanel note_start = new JPanel(new GridLayout(1, role.startsWith("m") ? 2 : 1)); 
+        JButton start = new JButton();
+        start.setBorderPainted(false);
+        start.setFocusPainted(false);
+        start.setContentAreaFilled(false);
+        Image startimg = new ImageIcon("icons/note.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        start.setIcon(new ImageIcon(startimg));
+        start.addActionListener(e -> line.startWorking());
+        note_start.add(start);
+
         if (role.startsWith("m")) {
             JButton addNoteButton = new JButton();
             addNoteButton.setBorderPainted(false);
@@ -82,9 +92,10 @@ public class ProductLinePanel extends JPanel {
             Image noteimg = new ImageIcon("icons/note.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
             addNoteButton.setIcon(new ImageIcon(noteimg));
             addNoteButton.addActionListener(e -> addnote());
-            add(addNoteButton);
+            note_start.add(addNoteButton);
         }
 
+        add(note_start);
         // Auto-refresh timer (every 1.2 seconds)
         refreshTimer = new Timer(1200, e -> refreshTasksPanel());
         refreshTimer.start();
@@ -110,15 +121,16 @@ public class ProductLinePanel extends JPanel {
         JFrame frame = new JFrame("Notes");
         frame.setSize(300, 200);
         frame.setLocationRelativeTo(null);
-        // String note = FileUtils.readNote(line.getId());
-        String note = "old note";
-        frame.add(new JTextArea(note));
+        String note = line.getNote();
+        JTextArea tx = new JTextArea(note);
+        frame.add(tx);
 
         //save back to json
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                // FileUtils.writeNote(line.getId(), ((JTextArea)frame.getContentPane().getComponent(0)).getText());
+            line.setNote(tx.getText());
+            Manager.isEdited=true;
             frame.dispose();
         }});
 

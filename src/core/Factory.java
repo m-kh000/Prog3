@@ -62,7 +62,7 @@ public class Factory {
                 break;
             }
         }
-        employAndAssignProductLines();
+        FileUtils.log(task, "add");
     }
 
     // PREVIEWS : 
@@ -260,12 +260,21 @@ public class Factory {
         return names.toArray(new String[names.size()]);
     }
 
-    public static void cancelTask(String taskToBeCanceled) {
+    public static void cancelTask(int taskId) {
+        Task t = null;
+        boolean flag = false;
         for (ProductLine pl : allLines) {
             for (Task task : pl.get0PCTasks()) {
-                if (task.getName().equals(taskToBeCanceled)) {
-                    pl.cancelTask(task);
+                if (task.getId() == taskId) {
+                    t = task;
+                    flag = true;
+                    break;
                 }
+            }
+            if (flag) {
+                pl.cancelTask(t);
+                FileUtils.log(t, "cancel");
+                break;
             }
         }
     }
@@ -317,13 +326,6 @@ public class Factory {
         FileUtils.saveProducts();
         FileUtils.saveProductLines();
         FileUtils.saveIDs();
-    }
-
-    public static void employAndAssignProductLines() {
-        for (ProductLine pl : allLines) {
-            utils.ThreadManager.employ(pl);
-        }
-        utils.ThreadManager.assign();
     }
 
     public static void modifyStatus(String selectedLineName, String selectedStatus) {
@@ -394,6 +396,15 @@ public class Factory {
         throw new NoSuchElementException();
     }
 
+    public static HashMap<String, Task_id_pl> get0PCTasksNames_ids() {
+        HashMap<String, Task_id_pl> names = new HashMap<>();
+        for (ProductLine pl : allLines) {
+            for (Task t : pl.get0PCTasks()) {
+                names.put(t.getName(), new Task_id_pl(t.getId(), pl));
+            }
+        }
+        return names;
+    }
     public static class Task_id_pl{
         public int taskId;
         public ProductLine pl;
@@ -403,4 +414,5 @@ public class Factory {
             this.pl = pl;
         }
     }
+
 }

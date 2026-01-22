@@ -317,7 +317,6 @@ public class CenterLogin extends JPanel {
             blue.setBackground(new Color(0x1122aa));
             centerPanel.add(blue, BorderLayout.WEST);
             ThreadManager.statrtInitialization();
-            Factory.employAndAssignProductLines();
             centerPanel.removeAll();
             if(r.getState().toLowerCase().equals("manager")) {
                 centerPanel.add(new CenterManager(centerPanel, frame));
