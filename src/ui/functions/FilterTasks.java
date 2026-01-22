@@ -111,7 +111,7 @@ public class FilterTasks extends FunctionPanel {
             tasks = Factory.filterTasksByCompleted();
         }
 
-        if (tasks != null || !tasks.isEmpty()) {
+        if (tasks != null && !tasks.isEmpty()) {
             for (core.Task task : tasks) {
                 tasksPanel.add(new TaskPanel(task));
                 tasksPanel.add(Box.createVerticalStrut(5));

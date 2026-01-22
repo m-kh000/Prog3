@@ -31,6 +31,7 @@ public class FileUtils {
     private static final File PRODUCTLINESPATHS_FILE = new File("./files/ProductlinesPaths.json");
     private static final File EXCEPTIONS_FILE = new File("./files/Exceptions.txt");
     private static final File IDS_FILE = new File("./files/IDs.json");
+    private static final File TASKSLOG_FILE = new File("./files/TasksLog.json");
 
     /**
      * This method reads users from the Users.json file.
