@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import exceptions.InvalidValuesException;
 import jsonParser.annotations.JsonIgnore;
 import ui.Manager;
+import ui.UI;
 import utils.FileUtils;
 import utils.IDInitializer;
 import utils.ThreadManager;
@@ -87,7 +88,7 @@ public class ProductLine implements Runnable {
                 continue;
             }
 
-            while (canProceedWith(runningTask) && !isTaskFinished(runningTask)) {
+            while (canProceedWith(runningTask, true) && !isTaskFinished(runningTask)) {
                 if (!getLineStatus().toLowerCase().equals("active")) {
                     return;
                 }
@@ -240,7 +241,7 @@ public class ProductLine implements Runnable {
         return t.getReady() == t.getRequiredQuantity();
     }
 
-    private boolean canProceedWith(Task t) {
+    private boolean canProceedWith(Task t, boolean notify) {
         boolean test = true;
 
         HashMap<Item, Integer> requiredItems = t.getProduct().getRequiredItems();
@@ -250,6 +251,7 @@ public class ProductLine implements Runnable {
 
             if (v > i.getQuantityAvailable()) {
                 test = false;
+                if (notify) UI.notify(i);
                 break;
             }
         }
@@ -259,7 +261,7 @@ public class ProductLine implements Runnable {
 
     private Task getFirstAvailableInprogressTask() {
         for (Task t : inprogress) {
-            if (t != null && canProceedWith(t)) {
+            if (t != null && canProceedWith(t, false)) {
                 return t;
             }
         }

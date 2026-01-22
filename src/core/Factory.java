@@ -346,18 +346,6 @@ public class Factory {
         return names;
     }
 
-    @Deprecated
-    public static void deliverTask(String selectedItem) {
-        selectedItem = selectedItem.trim().toLowerCase();
-        for (ProductLine pl : allLines) {
-            for (Task t : pl.getCompleted()) {
-                if (t.getName().trim().toLowerCase().equals(selectedItem)) {
-                    pl.getCompleted().remove(t);
-                }
-            }
-        }
-    }
-
     public static String[] getItemNames() {
         List<String> names = new ArrayList<>();
         for (Item i : warehouse.getItems()) {

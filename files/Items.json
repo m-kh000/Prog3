@@ -4,15 +4,7 @@
         "name": "Cotton",
         "category": "Fabric",
         "price": 1.0,
-        "quantityAvailable": 2170,
-        "minQuantity": 100
-    },
-    {
-        "id": 2,
-        "name": "Potato",
-        "category": "Vegtables",
-        "price": 1.0,
-        "quantityAvailable": 3000,
+        "quantityAvailable": 6,
         "minQuantity": 100
     },
     {
