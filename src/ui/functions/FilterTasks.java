@@ -91,7 +91,9 @@ public class FilterTasks extends FunctionPanel {
             tasksPanel.add(new TaskPanel(task));
             tasksPanel.add(Box.createVerticalStrut(5));
         }
-        add(new JScrollPane(tasksPanel), BorderLayout.CENTER);
+        add(new JScrollPane(tasksPanel) {{
+            setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        }}, BorderLayout.CENTER);
     }
 
     // Update tasks panel with filtered results

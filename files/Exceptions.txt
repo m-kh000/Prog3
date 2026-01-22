@@ -143,3 +143,4 @@ NullPointerException occurred, Exception's message: Cannot invoke "java.util.Arr
 NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
 NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
 NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
+InvalidEmailException occurred, Exception's message: Invalid Email Format.

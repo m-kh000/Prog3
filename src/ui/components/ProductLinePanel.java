@@ -20,13 +20,17 @@ public class ProductLinePanel extends JPanel {
         Manager.plAutorefresh = true;
 
         //id, icon and name
+        JLabel idLable = new JLabel(String.format("#%04d ", line.getId())+" ");
+        idLable.setFont(Manager.defaultFont(false, false));
         ImageIcon icon = new ImageIcon("icons/pl.png");
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        JLabel nameLable = new JLabel(" " + line.getName() + " ");
+        nameLable.setFont(Manager.defaultFont(false, false));
         JPanel iconPanel = new JPanel();
         iconPanel.setLayout(new BoxLayout(iconPanel, BoxLayout.X_AXIS));
-        iconPanel.add(new JLabel(line.getId() + "  "));
+        iconPanel.add(idLable);
         iconPanel.add(new JLabel(new ImageIcon(img)));
-        iconPanel.add(new JLabel("   " + line.getName()));
+        iconPanel.add(nameLable);
         add(iconPanel);
 
         //completion rate with hint

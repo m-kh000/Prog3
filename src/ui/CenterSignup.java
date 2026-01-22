@@ -48,10 +48,10 @@ public class CenterSignup extends JPanel {
         JRadioButton manager = new JRadioButton("Manager");
         JRadioButton supervisor = new JRadioButton("Supervisor");
         ButtonGroup m_sGroup = new ButtonGroup();
-        manager.setFont(Manager.defaultFont(true, true));
+        manager.setFont(Manager.defaultFont(true, false));
         manager.setBorder(null);
         manager.setFocusable(false);
-        supervisor.setFont(Manager.defaultFont(true, true));
+        supervisor.setFont(Manager.defaultFont(true, false));
         supervisor.setBorder(null);
         supervisor.setFocusable(false);
         m_sGroup.add(manager);

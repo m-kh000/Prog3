@@ -2,7 +2,6 @@ package core;
 
 import core.User.UserInfo;
 import exceptions.InvalidValuesException;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
