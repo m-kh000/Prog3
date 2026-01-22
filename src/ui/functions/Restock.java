@@ -28,6 +28,7 @@ public class Restock extends FunctionPanel {
         
         JScrollPane scrollPane = new JScrollPane(mainPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
         // Layout setup
         add(createTopPanel("Restock Items", centerPanel, frame, "supervisor"), BorderLayout.NORTH);

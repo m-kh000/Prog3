@@ -4,12 +4,21 @@ import java.awt.*;
 import javax.swing.*;
 
 public abstract class FunctionPanel extends JPanel {
+    
+    private static ImageIcon cachedBackIcon = null;
+    
+    private static ImageIcon getBackIcon() {
+        if (cachedBackIcon == null) {
+            ImageIcon backIcon = new ImageIcon("icons/back.png");
+            Image img = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            cachedBackIcon = new ImageIcon(img);
+        }
+        return cachedBackIcon;
+    }
 
     protected JButton BackBtn(JPanel centerPanel, JFrame frame, String role) {
         JButton backBtn = new JButton();
-        ImageIcon backIcon = new ImageIcon("icons/back.png");
-        Image img = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        backBtn.setIcon(new ImageIcon(img));
+        backBtn.setIcon(getBackIcon());
         backBtn.setFont(Manager.defaultFont(true, false));
         backBtn.setBackground(Color.GRAY);
         backBtn.setForeground(Color.WHITE);

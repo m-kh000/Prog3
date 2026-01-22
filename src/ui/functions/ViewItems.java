@@ -24,6 +24,7 @@ public class ViewItems extends FunctionPanel {
         }
         
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
         // Layout setup
         add(createTopPanel("View All Items", centerPanel, frame, "supervisor"), BorderLayout.NORTH);

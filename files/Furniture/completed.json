@@ -8,15 +8,5 @@
         "startDate": "2026-01-15",
         "deliveryDate": "2026-03-30",
         "status": "inline"
-    },
-    {
-        "id": 5,
-        "productName": "Chair",
-        "requiredQuantity": 40,
-        "ready": 40,
-        "customerName": "Mira",
-        "startDate": "2026-01-15",
-        "deliveryDate": "2026-03-30",
-        "status": "inline"
     }
 ]

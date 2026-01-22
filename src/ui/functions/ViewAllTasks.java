@@ -25,6 +25,7 @@ public class ViewAllTasks extends FunctionPanel {
         }
 
         JScrollPane scrollPane = new JScrollPane(tasksPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         // Layout setup
         add(createTopPanel("View All Tasks", centerPanel, frame, "supervisor"), BorderLayout.NORTH);

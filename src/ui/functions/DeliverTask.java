@@ -42,6 +42,14 @@ public class DeliverTask extends FunctionPanel {
         deliverBtn.setOpaque(true);
 
         // Listeners
+        // Enter key binding
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "deliver");
+        getActionMap().put("deliver", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                deliverBtn.doClick();
+            }
+        });
+
         // Deliver button click
         deliverBtn.addActionListener(e -> {
             try {

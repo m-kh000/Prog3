@@ -35,7 +35,9 @@ public class FilterProducts extends FunctionPanel {
         productsPanel = new JPanel();
         productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS));
         loadAllProducts();
-        add(new JScrollPane(productsPanel), BorderLayout.CENTER);
+        add(new JScrollPane(productsPanel) {{
+            setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        }}, BorderLayout.CENTER);
     }
 
     //Top Panel
@@ -164,7 +166,7 @@ public class FilterProducts extends FunctionPanel {
         productsPanel.removeAll();
 
         if (products != null && !products.isEmpty()) {
-            Color[] topColors = {new Color(0xaa0000), new Color(0x0000bb), new Color(0x00cc00)};
+            Color[] topColors = {new Color(0x77aaff), new Color(0x4499ff), new Color(0x2244ff)};
             
             for (int i = 0; i < products.size(); i++) {
                 ProductPanel panel = new ProductPanel(products.get(i));

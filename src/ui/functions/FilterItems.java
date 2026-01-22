@@ -68,7 +68,9 @@ public class FilterItems extends FunctionPanel {
             itemsPanel.add(new ItemPanel(item));
             itemsPanel.add(Box.createVerticalStrut(5));
         }
-        add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
+        add(new JScrollPane(itemsPanel) {{
+            setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        }}, BorderLayout.CENTER);
     }
     
     // Update items panel with filtered results

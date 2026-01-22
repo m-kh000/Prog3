@@ -58,7 +58,9 @@ public class FilterProductLines extends FunctionPanel {
             ProductLinesPanel.add(Box.createVerticalStrut(5));
         }
         
-        add(new JScrollPane(ProductLinesPanel), BorderLayout.CENTER);
+        add(new JScrollPane(ProductLinesPanel) {{
+            setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        }}, BorderLayout.CENTER);
     }
 
     // Update product lines panel with filtered results

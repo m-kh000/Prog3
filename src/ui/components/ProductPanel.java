@@ -15,7 +15,7 @@ public class ProductPanel extends JPanel {
         Image img = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         JPanel idIconPanel = new JPanel();
         idIconPanel.setLayout(new BoxLayout(idIconPanel, BoxLayout.X_AXIS));
-        JLabel idValue = new JLabel(String.valueOf(product.getId()) + "  ");
+        JLabel idValue = new JLabel(String.format("#%04d ", product.getId())+" ");
         idValue.setForeground(Color.DARK_GRAY);
         idValue.setFont(Manager.defaultFont(false, false));
         idIconPanel.add(idValue);
