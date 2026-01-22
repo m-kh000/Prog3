@@ -2,152 +2,86 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 470,
-        "requiredItems": [
+        "quantityAvailable": 60,
+        "requiredItemsNames": [
             {
-                "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 200
-                },
+                "key": "Cotton",
                 "value": 10
             }
         ],
-        "orderedIn": [
-            "2026-01-11",
-            "2025-12-22",
-            "1111-11-11",
-            "2026-11-11",
-            "2026-01-11",
-            "2002-02-22",
-            "2026-01-02",
-            "2026-01-01"
+        "orderRegistry": [
+            "2026-01-15",
+            "2026-01-16",
+            "2026-01-15"
         ],
-        "purchaseFrequency": 9
+        "purchaseFrequency": 3
     },
     {
         "id": 2,
-        "name": "Bed",
-        "quantityAvailable": 3,
-        "requiredItems": [
+        "name": "Fries",
+        "quantityAvailable": 369,
+        "requiredItemsNames": [
             {
-                "key": {
-                    "id": 4,
-                    "name": "Wood",
-                    "category": "Material",
-                    "price": 10.0,
-                    "quantityAvailable": 500,
-                    "minQuantity": 50
-                },
-                "value": 20
-            },
-            {
-                "key": {
-                    "id": 3,
-                    "name": "Screws",
-                    "category": "Material",
-                    "price": 1.0,
-                    "quantityAvailable": 2000,
-                    "minQuantity": 500
-                },
-                "value": 35
-            },
-            {
-                "key": {
-                    "id": 1,
-                    "name": "Cotton",
-                    "category": "Fabrics",
-                    "price": 1.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 200
-                },
+                "key": "Potato",
                 "value": 10
             }
         ],
-        "orderedIn": [
-            "2011-11-11",
-            "1111-11-11",
-            "2026-01-01"
+        "orderRegistry": [
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2026-01-15",
+            "2025-11-11",
+            "2025-11-11"
         ],
-        "purchaseFrequency": 3
+        "purchaseFrequency": 8
     },
     {
         "id": 3,
-        "name": "chair",
-        "quantityAvailable": 200,
-        "requiredItems": [
+        "name": "Bed",
+        "quantityAvailable": 15,
+        "requiredItemsNames": [
             {
-                "key": {
-                    "id": 3,
-                    "name": "Screws",
-                    "category": "Material",
-                    "price": 1.0,
-                    "quantityAvailable": 2050,
-                    "minQuantity": 500
-                },
-                "value": 100
+                "key": "Wood",
+                "value": 15
             },
             {
-                "key": {
-                    "id": 4,
-                    "name": "Wood",
-                    "category": "Material",
-                    "price": 10.0,
-                    "quantityAvailable": 1000,
-                    "minQuantity": 50
-                },
-                "value": 20
-            }
-        ],
-        "orderedIn": [
-            "1111-11-11"
-        ],
-        "purchaseFrequency": 3
-    },
-    {
-        "id": 4,
-        "name": "pillow case",
-        "quantityAvailable": 8,
-        "requiredItems": [
+                "key": "Screws",
+                "value": 5
+            },
             {
-                "key": {
-                    "id": 2,
-                    "name": "Wool",
-                    "category": "Fabrics",
-                    "price": 2.0,
-                    "quantityAvailable": 502,
-                    "minQuantity": 100
-                },
-                "value": 2
+                "key": "Cloth",
+                "value": 5
+            },
+            {
+                "key": "Cotton",
+                "value": 25
             }
         ],
-        "orderedIn": [
-            "2022-02-22"
+        "orderRegistry": [
+            "2026-01-15"
         ],
         "purchaseFrequency": 1
     },
     {
-        "id": 5,
-        "name": "Fries",
-        "quantityAvailable": 0,
-        "requiredItems": [
+        "id": 4,
+        "name": "Chair",
+        "quantityAvailable": 40,
+        "requiredItemsNames": [
             {
-                "key": {
-                    "id": 5,
-                    "name": "POTATOO",
-                    "category": "vegetable",
-                    "price": 5.0,
-                    "quantityAvailable": 3,
-                    "minQuantity": 5
-                },
-                "value": 100
+                "key": "Wood",
+                "value": 10
+            },
+            {
+                "key": "Screws",
+                "value": 1
             }
         ],
-        "orderedIn": [
-            "2026-01-09"
+        "orderRegistry": [
+            "2026-01-15"
         ],
         "purchaseFrequency": 1
     }

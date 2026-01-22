@@ -1,7 +1,7 @@
 {
     "id": 2,
-    "priority": 9,
-    "name": "SecondLine",
+    "priority": 5,
+    "name": "Furniture",
     "status": "Active",
     "note": null
 }

@@ -1,6 +1,5 @@
 package ui;
 
-import core.Factory;
 import java.awt.*;
 import javax.swing.*;
 

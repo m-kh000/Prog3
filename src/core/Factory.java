@@ -6,6 +6,7 @@ import exceptions.InvalidValuesException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,15 +16,25 @@ public class Factory {
 
     private static HashSet<ProductLine> allLines;
     private static Warehouse warehouse;
+    private static boolean isInit = false;
+    
+    public static synchronized void initializeAll() {
+        if (isInit) {
+            return;
+        }
 
-    public Factory() {
-        Factory.allLines = new HashSet<>();
-        Factory.warehouse = new Warehouse();
+        warehouse = new Warehouse();
+        allLines = FileUtils.readProductLines();
+
+        warehouse.initializeProducts();
+        Factory.initializeProductLines();
+
+        isInit = true;
     }
-
-    public Factory(HashSet<ProductLine> allLines, Warehouse warehouse) {
-        Factory.allLines = new HashSet<>(allLines);
-        Factory.warehouse = warehouse;
+    private static synchronized void initializeProductLines() {
+        for (ProductLine pl : allLines) {
+            pl.initializeTasks();
+        }
     }
     
     public static synchronized void add(Product p) throws InvalidValuesException {
@@ -284,7 +295,10 @@ public class Factory {
      * Deliver a specific completed task by removing it from the completed list
      * in its productline.
      *
-     * @param t the task to deliver
+     * @param pl the productline that contains the task
+     * @param taskId the id of the task to be delivered
+     * 
+     * @throws NoSuchElementException if the task is not found
      */
     public static void deliverTask(ProductLine pl, int taskId) throws NoSuchElementException {
         pl.removeCompletedTask(taskId);
@@ -319,16 +333,17 @@ public class Factory {
         pl.setStatus(selectedStatus);
     }
 
-    public static String[] getCompletedTasksNames() {
-        List<String> names = new ArrayList<>();
+    public static HashMap<String, Task_id_pl> getCompletedTasksNames_ids_pls() {
+        HashMap<String, Task_id_pl> names = new HashMap<>();
         for (ProductLine pl : allLines) {
             for (Task t : pl.getCompleted()) {
-                names.add(t.getName());
+                names.put(t.getName(), new Task_id_pl(t.getId(), pl));
             }
         }
-        return names.toArray(new String[names.size()]);
+        return names;
     }
 
+    @Deprecated
     public static void deliverTask(String selectedItem) {
         selectedItem = selectedItem.trim().toLowerCase();
         for (ProductLine pl : allLines) {
@@ -356,7 +371,7 @@ public class Factory {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("Couldn\'t find the item " + itemName + " in the warehouse");
     }
 
     public static Product findProductByName(String productName) throws NoSuchElementException {
@@ -378,5 +393,15 @@ public class Factory {
             }
         }
         throw new NoSuchElementException();
+    }
+
+    public static class Task_id_pl{
+        public int taskId;
+        public ProductLine pl;
+
+        public Task_id_pl(int taskId, ProductLine pl) {
+            this.taskId = taskId;
+            this.pl = pl;
+        }
     }
 }

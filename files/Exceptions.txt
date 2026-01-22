@@ -109,3 +109,37 @@ InvalidValuesException occurred, Exception's message: Invalid values!
 InvalidValuesException occurred, Exception's message: Invalid values!
 InvalidValuesException occurred, Exception's message: Invalid values!
 InvalidValuesException occurred, Exception's message: Invalid values!
+InvalidValuesException occurred, Exception's message: Invalid values!
+ConcurrentModificationException occurred, Exception's message: null
+ConcurrentModificationException occurred, Exception's message: null
+ConcurrentModificationException occurred, Exception's message: null
+ConcurrentModificationException occurred, Exception's message: null
+ConcurrentModificationException occurred, Exception's message: null
+IOException occurred, Exception's message: Couldn't find the path: C:\Users\JOSEPH\Desktop\Programming Projects\Java Projects\Prog3\.\files\ProductlinesPaths.json
+InvalidValuesException occurred, Exception's message: Invalid values!
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.HashSet.iterator()" because "core.Factory.allLines" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.HashSet.iterator()" because "core.Factory.allLines" is null
+NullPointerException occurred, Exception's message: Cannot invoke "core.Product.increasePurchases()" because "this.product" is null
+NullPointerException occurred, Exception's message: Cannot invoke "core.Product.increasePurchases()" because "this.product" is null
+NullPointerException occurred, Exception's message: Cannot invoke "core.Product.increasePurchases()" because "this.product" is null
+NullPointerException occurred, Exception's message: Cannot invoke "core.Product.order(java.time.LocalDate)" because "this.product" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.HashSet.iterator()" because "core.Factory.allLines" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.HashSet.iterator()" because "core.Factory.allLines" is null
+ClassCastException occurred, Exception's message: class java.lang.String cannot be cast to class java.time.LocalDate (java.lang.String and java.time.LocalDate are in module java.base of loader 'bootstrap')
+NumberFormatException occurred, Exception's message: For input string: "Enter quantity"
+NoSuchElementException occurred, Exception's message: null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null
+NullPointerException occurred, Exception's message: Cannot invoke "java.util.ArrayList.iterator()" because "this.orderRegistry" is null

@@ -1,11 +1,15 @@
 package core;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 import exceptions.InvalidValuesException;
+import jsonParser.annotations.JsonIgnore;
 import utils.Dates;
+import utils.FileUtils;
 import utils.IDInitializer;
 
 public class Product {
@@ -13,9 +17,13 @@ public class Product {
     private int id;
     private String name;
     private int quantityAvailable;
+    private HashMap<String, Integer> requiredItemsNames;
+    @JsonIgnore
     private HashMap<Item, Integer> requiredItems;
-    private HashSet<LocalDate> orderedIn;
+    private ArrayList<LocalDate> orderRegistry;
     private int purchaseFrequency;
+    @JsonIgnore
+    private boolean isInit = false;
 
     static {
         nextId = IDInitializer.getProductsGlobalID();
@@ -26,14 +34,34 @@ public class Product {
     public Product(String name) {
         this.id = nextId++;
         this.name = name;
+        this.requiredItemsNames = new HashMap<>();
         this.requiredItems = new HashMap<>();
-        this.orderedIn = new HashSet<>();
+        this.orderRegistry = new ArrayList<>();
     }
-    public Product(String name,HashMap<Item, Integer> requiredItems,HashSet<LocalDate> orderedIn){
+    public Product(String name, HashMap<String, Integer> requiredItemsNames,ArrayList<LocalDate> orderRegistry) throws NoSuchElementException {
         this.id = nextId++;
         this.name = name;
-        this.orderedIn = orderedIn;
-        this.requiredItems = new HashMap<>(requiredItems);
+        this.orderRegistry = orderRegistry;
+        this.requiredItemsNames = new HashMap<>(requiredItemsNames);
+        initializeRequiredItems();
+    }
+
+    public void initializeRequiredItems() {
+        if (isInit) {
+            return;
+        }
+
+        HashMap<Item, Integer> hm = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : requiredItemsNames.entrySet()) {
+            try {
+                hm.put(Factory.findItemByName(entry.getKey()), entry.getValue());
+            } catch (NoSuchElementException e) {
+                FileUtils.log(e);
+            }
+        }
+        this.requiredItems = hm;
+        
+        this.isInit = true;
     }
 
     public void addItem(Item i, int quantity) throws InvalidValuesException {
@@ -44,11 +72,11 @@ public class Product {
     }
 
     public void order(LocalDate date) {
-        orderedIn.add(date);
+        orderRegistry.add(date);
     }
 
     public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
-        for(LocalDate l : getOrderedIn()){
+        for(LocalDate l : getOrderRegistry()){
             if(Dates.isBetween(l, start, end)){
                 return true;
             }
@@ -76,8 +104,8 @@ public class Product {
         return nextId;
     }
 
-    public HashSet<LocalDate> getOrderedIn() {
-        return orderedIn;
+    public ArrayList<LocalDate> getOrderRegistry() {
+        return orderRegistry;
     }
 
     public HashMap<Item, Integer> getRequiredItems() {
@@ -122,11 +150,13 @@ public class Product {
 
     public int getPurchaseFrequencyBetween(LocalDate begDate, LocalDate enDate) {
         int freq = 0;
-        for(LocalDate ordered : orderedIn) {
+        
+        for(LocalDate ordered : orderRegistry) {
             if(Dates.isBetween(ordered, begDate, enDate)) {
                 freq++;
             }
         }
+        
         return freq;
     }
 }

@@ -1,12 +1,19 @@
 package core;
 
 import exceptions.InvalidValuesException;
+import jsonParser.annotations.JsonIgnore;
+
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
+
+import utils.FileUtils;
 import utils.IDInitializer;
 
 public class Task {
     private static int nextId = 1;
     private int id;
+    private String productName;
+    @JsonIgnore
     private Product product;
     private int requiredQuantity;
     private int ready;
@@ -14,6 +21,8 @@ public class Task {
     private LocalDate startDate;
     private LocalDate deliveryDate;
     private String status;
+    @JsonIgnore
+    private boolean isInit = false;
 
     static {
         nextId = IDInitializer.getTasksGlobalID();
@@ -21,20 +30,35 @@ public class Task {
 
     public Task() {}
     
-    public Task(Product product, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) throws InvalidValuesException {
+    public Task(String productName, int requiredQuantity, String customerName, LocalDate startDate, LocalDate deliveryDate, String status) throws InvalidValuesException {
         if(requiredQuantity <= 0 || startDate.isAfter(deliveryDate)) {
             throw new InvalidValuesException("Invalid values in class Task!");
         }
         this.id = nextId++;
-        this.product = product;
-        this.product.increasePurchases();
+        this.productName = productName;
         this.requiredQuantity = requiredQuantity;
         this.ready = 0;
         this.customerName = customerName;
         this.startDate = startDate;
-        this.product.order(startDate);
         this.deliveryDate = deliveryDate;
         this.status = status;
+        initializeTask();
+        this.product.increasePurchases();
+        this.product.order(startDate);
+    }
+
+    public synchronized void initializeTask() {
+        if (this.isInit) {
+            return;
+        }
+
+        try {
+            this.product = Factory.findProductByName(productName);
+        } catch (NoSuchElementException e) {
+            FileUtils.log(e);
+        }
+
+        this.isInit = true;
     }
 
     // GETTERS : 

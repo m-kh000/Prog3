@@ -73,7 +73,7 @@ public class AddTask extends FunctionPanel {
                 String startText = start.getText();
                 String deliveryText = delivery.getText();
                 
-                Factory.add(new Task(Factory.findProductByName(productName), Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
+                Factory.add(new Task(productName, Integer.parseInt(quantityText), customerText, utils.Validator.validateDate(startText), utils.Validator.validateDate(deliveryText),"inline"),PLtext);
                 Manager.isEdited = true;
 
                 product.setSelectedItem(null);
@@ -92,6 +92,7 @@ public class AddTask extends FunctionPanel {
                 JOptionPane.showMessageDialog(frame, "Quantity must be a number");
                 FileUtils.log(ex);
             }catch (Exception ex) {
+                ex.printStackTrace();
                 JOptionPane.showMessageDialog(frame,"Error while adding task: "+ ex.getMessage());
                 FileUtils.log(ex);
             }

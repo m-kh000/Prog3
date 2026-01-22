@@ -3,7 +3,6 @@ package ui.components;
 import java.awt.*;
 import javax.swing.*;
 import ui.Manager;
-import utils.FileUtils;
 
 public class ProductLinePanel extends JPanel {
 

@@ -40,5 +40,4 @@ public class UI extends JFrame {
 
     
 }
-//TODO
-//cancel and deliver task 
+//  TODO: use ThreadManager.StartInitialization() to read the data when someone logs in

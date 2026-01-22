@@ -27,6 +27,8 @@ public class ProductLine implements Runnable {
     private List<Task> inprogress;
     @JsonIgnore
     private List<Task> inline;
+    @JsonIgnore
+    private boolean isInit = false;
 
     static {
         nextId = IDInitializer.getProductlinesGlobalID();
@@ -48,12 +50,32 @@ public class ProductLine implements Runnable {
         this.inline = new ArrayList<>();
     }
 
+    public void initializeTasks() {
+        if (this.isInit) {
+            return;
+        }
+
+        for (Task t : inline) {
+            t.initializeTask();
+        }
+        for (Task t : inprogress) {
+            t.initializeTask();
+        }
+        for (Task t : completed) {
+            t.initializeTask();
+        }
+
+        this.isInit = true;
+    } 
+
     @Override
     public void run() {
-        while (!inline.isEmpty()) {            
+        while (!inline.isEmpty() || !inprogress.isEmpty()) {            
             Manager.isEdited = true;
 
-            inprogress.add(inline.removeFirst());
+            if (!inline.isEmpty()) {
+                inprogress.add(inline.removeFirst());
+            }
 
             Task runningTask = getFirstAvailableInprogressTask();
 
@@ -128,7 +150,7 @@ public class ProductLine implements Runnable {
 
     /**
      * both inprogress and inline tasks are returned
- *
+     *
      */
     public List<Task> get0PCTasks() {
         List<Task> tasks = new ArrayList<>();
@@ -241,7 +263,7 @@ public class ProductLine implements Runnable {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("The productline: " + getName() + " completed list does not contains a task with the id: " + taskId);
     }
 
     public List<Task> getBothInPInL() {
