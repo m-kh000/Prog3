@@ -3,7 +3,6 @@ import core.Factory;
 import exceptions.EmptyFieldException;
 import java.awt.*;
 import javax.swing.*;
-
 import ui.FunctionPanel;
 import ui.Manager;
 import utils.FileUtils;
@@ -51,6 +50,11 @@ public class DeleteItem extends FunctionPanel {
         deleteBtn.addActionListener (e -> {
             try {
                 if(itemCombo.getSelectedItem()!= null){
+                    //confirm message
+                    int confirm = JOptionPane.showConfirmDialog(null, "Are you sure?\ndeleting this item will delete all related products and tasks.", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                if (confirm != JOptionPane.YES_OPTION) {
+                    return;
+                }
                 Factory.deleteItem((String)itemCombo.getSelectedItem());
                 itemCombo.removeAllItems();
                 for(String item : Factory.getItemsNames()) {
