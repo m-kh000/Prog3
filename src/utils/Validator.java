@@ -26,7 +26,7 @@ public class Validator {
      *         If the user is not found then the role will be null. 
      * 
      * @throws InvalidEmailException if the email format is incorrect
-     * @throws EmptyFieldException if either the email or the password is empty
+     * @throws EmptyFieldException if either the email or the password is empty or null
      */
     public static String validateEmail(String email, String password) throws InvalidEmailException, EmptyFieldException {
         try {

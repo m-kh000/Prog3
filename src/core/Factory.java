@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 import utils.FileUtils;
 
 public class Factory {
-
     private static HashSet<ProductLine> allLines;
     private static Warehouse warehouse;
     private static boolean isInit = false;
@@ -120,7 +119,7 @@ public class Factory {
 
     public static void resetItem(Item i, String name, String category, double price, int quantityAvailable, int minQuantity) throws InvalidValuesException, NoSuchElementException {
         if (!warehouse.getItems().contains(i)) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Item not found, thrown in: Factory.resetItem(...)");
         }
         i.setName(name);
         i.setCategory(category);
@@ -373,7 +372,7 @@ public class Factory {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("Cannot find a product with the specified name.");
     }
 
     private static ProductLine findPLByName(String filterValue) {
@@ -383,7 +382,7 @@ public class Factory {
                 return pl;
             }
         }
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("Cannot find a ProductLine with the specified name.");
     }
 
     public static HashMap<String, Task_id_pl> get0PCTasksNames_ids() {

@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 1202,
+        "quantityAvailable": 1382,
         "requiredItemsNames": [
             {
                 "key": "Cotton",
@@ -22,14 +22,16 @@
             "2026-01-22",
             "2026-01-22",
             "2026-01-22",
-            "2026-01-22"
+            "2026-01-22",
+            "2026-01-23",
+            "2026-01-23"
         ],
-        "purchaseFrequency": 13
+        "purchaseFrequency": 15
     },
     {
         "id": 3,
         "name": "Bed",
-        "quantityAvailable": 15,
+        "quantityAvailable": 25,
         "requiredItemsNames": [
             {
                 "key": "Wood",
@@ -49,14 +51,16 @@
             }
         ],
         "orderRegistry": [
-            "2026-01-15"
+            "2026-01-15",
+            "2026-01-23",
+            "2026-01-23"
         ],
-        "purchaseFrequency": 1
+        "purchaseFrequency": 3
     },
     {
         "id": 4,
         "name": "Chair",
-        "quantityAvailable": 40,
+        "quantityAvailable": 90,
         "requiredItemsNames": [
             {
                 "key": "Wood",
@@ -68,8 +72,24 @@
             }
         ],
         "orderRegistry": [
-            "2026-01-15"
+            "2026-01-15",
+            "2026-01-23",
+            "2026-01-23"
         ],
-        "purchaseFrequency": 1
+        "purchaseFrequency": 3
+    },
+    {
+        "id": 5,
+        "name": "Fries",
+        "quantityAvailable": 0,
+        "requiredItemsNames": [
+            {
+                "key": "Potato",
+                "value": 10
+            }
+        ],
+        "orderRegistry": [
+        ],
+        "purchaseFrequency": 0
     }
 ]

@@ -46,8 +46,8 @@ public class FileUtils {
      * {@code List<User>}.
      * </p>
      *
-     * @return a {@code new ArrayList<User>} with the users if the file is found
-     * and is not empty, or else returns an empty {@code ArrayList<User>}
+     * @return a {@code new List<User>} with the users if the file is found
+     * and is not empty, or else returns an empty {@code List<User>}
      * @throws IOException
      */
     public static List<User> readUsers() throws IOException {

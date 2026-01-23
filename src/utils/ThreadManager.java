@@ -36,16 +36,16 @@ public class ThreadManager {
      * the method does nothing.
      */
     public static void assign() {
+        if (waiting.isEmpty()) {
+            return;
+        }
+
         for (Thread t : threadPool) {
-            if (waiting.isEmpty()) {
-                return;
-            }
-            if (!t.isAlive()) {
+            if (!t.isAlive() || t.equals(Thread.currentThread())) {
                 try {
                     t = new Thread(waiting.remove());
                     t.start();
                 } catch (NoSuchElementException e) {
-                    System.out.println("The waiting queue is empty.");
                     FileUtils.log(e);
                 }
             }
