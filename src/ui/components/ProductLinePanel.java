@@ -79,7 +79,7 @@ public class ProductLinePanel extends JPanel {
         start.setBorderPainted(false);
         start.setFocusPainted(false);
         start.setContentAreaFilled(false);
-        Image startimg = new ImageIcon("icons/note.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        Image startimg = new ImageIcon("icons/start.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         start.setIcon(new ImageIcon(startimg));
         start.addActionListener(e -> line.startWorking());
         note_start.add(start);

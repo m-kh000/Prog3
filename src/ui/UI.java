@@ -1,7 +1,7 @@
 package ui;
+import core.Item;
 import java.awt.*;
 import javax.swing.*;
-import core.Item;
 
 public class UI extends JFrame {
     private static JPanel centerPanel;
@@ -29,12 +29,19 @@ public class UI extends JFrame {
         centerPanel = new JPanel(new BorderLayout());
         centerPanel.add(new CenterLogin(centerPanel, this));
         add(centerPanel, BorderLayout.CENTER);
+        //logo
+        ImageIcon icon = new ImageIcon("icons/fire3.png");
+        setIconImage(icon.getImage());
+        setTitle("Production Management System");
+
         setVisible(true);
     }
     
     public static void switchContent(JPanel newPanel) {
         centerPanel.removeAll();
         centerPanel.add(newPanel);
+        JFrame f = (JFrame)SwingUtilities.getWindowAncestor(centerPanel);
+        f.setTitle(newPanel.getName());
         centerPanel.revalidate();
         centerPanel.repaint();
     }

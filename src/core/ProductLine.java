@@ -298,17 +298,17 @@ public class ProductLine implements Runnable {
 
     public boolean hasProduct(String filterValue) {
         for (Task t : inline) {
-            if (t.getProduct().getName().equals(filterValue)) {
+            if (t.getProductName().equals(filterValue)) {
                 return true;
             }
         }
         for (Task t : inprogress) {
-            if (t.getProduct().getName().equals(filterValue)) {
+            if (t.getProductName().equals(filterValue)) {
                 return true;
             }
         }
         for (Task t : completed) {
-            if (t.getProduct().getName().equals(filterValue)) {
+            if (t.getProductName().equals(filterValue)) {
                 return true;
             }
         }
@@ -329,7 +329,7 @@ public class ProductLine implements Runnable {
     }
 
     public boolean itemInUse(String itemName) {
-        for(Task t : inline) {
+        for(Task t : inprogress) {
             for(Item i : t.getProduct().getRequiredItems().keySet()) {
                 if(i.getName().equals(itemName)) {
                     return true;
