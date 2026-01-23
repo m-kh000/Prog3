@@ -1,13 +1,13 @@
 package ui;
+import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-
-import core.Factory;
 import ui.functions.*;
 import utils.FileUtils;
 
 public class CenterManager extends JPanel {
     public CenterManager(JPanel centerPanel, JFrame frame) {
+        setName("Production Management System: Manager");
         setLayout(new BorderLayout());
         
         // Side panels

@@ -32,10 +32,10 @@ public class TaskPanel extends JPanel {
         add(idIconPanel);
 
         // Product name
-        JLabel nameLabel = new JLabel(task.getProduct().getName());
+        JLabel nameLabel = new JLabel(task.getProductName());
         nameLabel.setFont(Manager.defaultFont(false, false));
         add(nameLabel);
-
+    
         // Required quantity with hint
         JLabel quantityValue = new JLabel(String.valueOf(task.getRequiredQuantity()));
         quantityValue.setForeground(Color.BLUE);
@@ -94,8 +94,10 @@ public class TaskPanel extends JPanel {
             statusValue.setText("Completed");
             refreshTimer.stop();
         }
+        if(getParent() != null){
         getParent().revalidate();
         getParent().repaint();
+        }
 
     }
 }

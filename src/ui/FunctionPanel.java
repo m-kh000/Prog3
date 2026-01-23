@@ -36,6 +36,7 @@ public abstract class FunctionPanel extends JPanel {
         title.setHorizontalAlignment(JLabel.CENTER);
         topPanel.add(title, BorderLayout.CENTER);
         topPanel.add(BackBtn(centerPanel, frame, role), BorderLayout.WEST);
+        setName(titleText);
         return topPanel;
     }
 

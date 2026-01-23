@@ -8,6 +8,7 @@ import utils.FileUtils;
 public class CenterSupervisor extends JPanel {
 
     public CenterSupervisor(JPanel centerPanel, JFrame frame) {
+        setName("Production Management System: Supervisor");
         setLayout(new BorderLayout());
         
         // Side panels

@@ -15,7 +15,7 @@ public class CenterSignup extends JPanel {
     }
     
     public CenterSignup(JPanel centerPanel, JFrame frame,String autoEmail, String autoPassword) {
-        Color bg = frame.getBackground();
+        setName("Sign Up");
         setLayout(new BorderLayout());
         
         // Side panels
@@ -34,7 +34,6 @@ public class CenterSignup extends JPanel {
         loginButton.setFont(Manager.defaultFont(false, true));
         loginButton.setForeground(new Color(0xaabbff));
         loginButton.setBorder(BorderFactory.createLineBorder(new Color(0xaabbff), 2));
-        loginButton.setBackground(bg);
         loginButton.setFocusable(false);
         loginButton.setContentAreaFilled(false);
         
@@ -48,10 +47,10 @@ public class CenterSignup extends JPanel {
         JRadioButton manager = new JRadioButton("Manager");
         JRadioButton supervisor = new JRadioButton("Supervisor");
         ButtonGroup m_sGroup = new ButtonGroup();
-        manager.setFont(Manager.defaultFont(true, false));
+        manager.setFont(Manager.defaultFont(false, false));
         manager.setBorder(null);
         manager.setFocusable(false);
-        supervisor.setFont(Manager.defaultFont(true, false));
+        supervisor.setFont(Manager.defaultFont(false, false));
         supervisor.setBorder(null);
         supervisor.setFocusable(false);
         m_sGroup.add(manager);
@@ -62,7 +61,7 @@ public class CenterSignup extends JPanel {
         m_spanel.add(supervisor);
         JPanel role = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel roleLable = new JLabel("Role:");
-        roleLable.setFont(Manager.defaultFont(false, true));
+        roleLable.setFont(Manager.defaultFont(true, false));
         role.add(roleLable);
         role.add(m_spanel);
         
@@ -75,7 +74,6 @@ public class CenterSignup extends JPanel {
         signupButton.setIcon(new ImageIcon("icons/s.png"));
         signupButton.setFocusable(false);
         signupButton.setBorder(null);
-        signupButton.setBackground(bg);
         signupButton.setContentAreaFilled(false);
 
         // Listeners

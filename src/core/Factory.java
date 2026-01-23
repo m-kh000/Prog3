@@ -217,7 +217,7 @@ public class Factory {
         filterValue = filterValue.trim().toLowerCase();
         List<Task> filteredList = new ArrayList<>();
         for(Task t : previewTasks()) {
-            if(t.getProduct().getName().trim().toLowerCase().contains(filterValue)) {
+            if(t.getProductName().trim().toLowerCase().contains(filterValue)) {
                 filteredList.add(t);
             }
         }
@@ -415,7 +415,10 @@ public class Factory {
     public static boolean itemInUse(String itemName) {
         boolean inUse = false;
         for(ProductLine pl : allLines) {
-            inUse |= pl.itemInUse(itemName);
+            if(pl.itemInUse(itemName)) {
+                inUse = true;
+                break;
+            }
         }
         return inUse;
     }

@@ -1,11 +1,9 @@
 package core;
 
 import exceptions.InvalidValuesException;
-import jsonParser.annotations.JsonIgnore;
-
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
-
+import jsonParser.annotations.JsonIgnore;
 import utils.FileUtils;
 import utils.IDInitializer;
 
@@ -82,9 +80,13 @@ public class Task {
     public static int getNextId() {
         return nextId;
     }
-    
+
     public Product getProduct() {
         return product;
+    }
+    
+    public String getProductName() {
+        return productName;
     }
 
     public int getReady() {
@@ -104,7 +106,7 @@ public class Task {
     }
 
     public String getName() {
-        return requiredQuantity + " " + product.getName() + "(s) due to " + deliveryDate;
+        return requiredQuantity + " " + productName + "(s) due to " + deliveryDate;
     }
 
     // SETTERS : 

@@ -8,15 +8,5 @@
         "startDate": "2026-01-15",
         "deliveryDate": "2026-03-30",
         "status": "inline"
-    },
-    {
-        "id": 17,
-        "productName": "Hoodie",
-        "requiredQuantity": 20,
-        "ready": 20,
-        "customerName": "mk",
-        "startDate": "1111-11-11",
-        "deliveryDate": "2002-02-02",
-        "status": "inline"
     }
 ]

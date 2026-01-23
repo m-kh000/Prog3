@@ -182,12 +182,15 @@ public class Warehouse {
         for(ProductLine pl : Factory.getAllLines()) {
             if(pl.getName().trim().toLowerCase().equals(filter)) {
                 for(Task t : pl.getCompletedTasks()) {
+                    if(t.getProduct() == null) continue;
                     filteredSet.add(t.getProduct());
                 }
                 for(Task t : pl.getInprogress()) {
+                    if(t.getProduct() == null) continue;
                     filteredSet.add(t.getProduct());
                 }
                 for(Task t : pl.getInline()) {
+                    if(t.getProduct() == null) continue;
                     filteredSet.add(t.getProduct());
                 }
                 break;
