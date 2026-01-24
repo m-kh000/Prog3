@@ -59,7 +59,6 @@ public class FilterProductLines extends FunctionPanel {
         for (core.ProductLine productLine : Factory.previewLines()) {
             ProductLinesPanel.add(new ProductLinePanel(productLine,"supervisor"));
             ProductLinesPanel.add(Box.createVerticalStrut(5));
-            System.out.println("hi");
         }
         
         add(new JScrollPane(ProductLinesPanel) {{

@@ -77,7 +77,6 @@ public class ProductLinePanel extends JPanel {
         JPanel note_start = new JPanel(new GridLayout(1, role.startsWith("m") ? 2 : 1)); 
         JButton start = new JButton();
         start.setBorderPainted(false);
-        start.setFocusPainted(false);
         start.setContentAreaFilled(false);
         Image startimg = new ImageIcon("icons/start.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         start.setIcon(new ImageIcon(startimg));
