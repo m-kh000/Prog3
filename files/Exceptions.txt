@@ -404,3 +404,107 @@ NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+IOException occurred, Exception's message: Couldn't find directory or directory is empty: c:\Users\DELL\Desktop\Prog3\.\files\Best Line
+IOException occurred, Exception's message: Couldn't find directory or directory is empty: c:\Users\DELL\Desktop\Prog3\.\files\Best Line
+IOException occurred, Exception's message: Couldn't find directory or directory is empty: c:\Users\DELL\Desktop\Prog3\.\files\Best Line
+NumberFormatException occurred, Exception's message: For input string: "Enter quantity"
+InvalidValuesException occurred, Exception's message: Item duplicated.
+InvalidDateFormatException occurred, Exception's message: Must be exactly DD-MM-YYYY
+InvalidValuesException occurred, Exception's message: Invalid values in class Task!
+InvalidValuesException occurred, Exception's message: Invalid values in class Task!
+InvalidValuesException occurred, Exception's message: Invalid values in class Task!
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null

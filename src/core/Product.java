@@ -1,12 +1,11 @@
 package core;
 
+import exceptions.InvalidValuesException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
-import exceptions.InvalidValuesException;
 import jsonParser.annotations.JsonIgnore;
 import utils.Dates;
 import utils.FileUtils;
@@ -31,13 +30,6 @@ public class Product {
 
     public Product() {}
     
-    public Product(String name) {
-        this.id = nextId++;
-        this.name = name;
-        this.requiredItemsNames = new HashMap<>();
-        this.requiredItems = new HashMap<>();
-        this.orderRegistry = new ArrayList<>();
-    }
     public Product(String name, HashMap<String, Integer> requiredItemsNames,ArrayList<LocalDate> orderRegistry) throws NoSuchElementException {
         this.id = nextId++;
         this.name = name;
@@ -66,7 +58,7 @@ public class Product {
 
     public void addItem(Item i, int quantity) throws InvalidValuesException {
         if(quantity <= 0 || requiredItems.containsKey(i)) {
-            throw new InvalidValuesException("Invalid values!");
+            throw new InvalidValuesException("Item duplicated.");
         }
         requiredItems.put(i, quantity);
     }
@@ -75,21 +67,9 @@ public class Product {
         orderRegistry.add(date);
     }
 
-    public boolean wasOrderedBetween(LocalDate start, LocalDate end) { 
-        for(LocalDate l : getOrderRegistry()){
-            if(Dates.isBetween(l, start, end)){
-                return true;
-            }
-        }
-        return false;
-    }
-
     void increasePurchases(){
         purchaseFrequency++;
     }
-
-    // PREVIEWS : 
-
     // GETTERS : 
     
     public int getId() {
@@ -102,10 +82,6 @@ public class Product {
     
     public static int getNextId() {
         return nextId;
-    }
-
-    public ArrayList<LocalDate> getOrderRegistry() {
-        return orderRegistry;
     }
 
     public HashMap<Item, Integer> getRequiredItems() {
@@ -121,23 +97,8 @@ public class Product {
         return null;
     }
 
-    public int getRequiredQuantityOf(String name) {
-        Integer temp = requiredItems.get(getItem(name));
-        return (temp == null) ? 0 : temp;
-    }
-
-    public int getQuantityAvailable() {
-        return quantityAvailable;
-    }
-
     public int getPurchaseFrequency() {
         return purchaseFrequency;
-    }
-
-    // SETTERS : 
-    
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void make() {

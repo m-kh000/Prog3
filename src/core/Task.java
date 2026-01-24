@@ -69,10 +69,6 @@ public class Task {
         return customerName;
     }
 
-    public LocalDate getDeliveryDate() {
-        return deliveryDate;
-    }
-
     public int getId() {
         return id;
     }
@@ -97,59 +93,8 @@ public class Task {
         return requiredQuantity;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public String getName() {
-        return requiredQuantity + " " + productName + "(s) due to " + deliveryDate;
-    }
-
-    // SETTERS : 
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public void setDeliveryDate(LocalDate deliveryDate) throws InvalidValuesException {
-        if(startDate.isAfter(deliveryDate)) {
-            throw new InvalidValuesException("Invalid values!");
-        }
-        this.deliveryDate = deliveryDate;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public static void setNextId(int nextId) {
-        Task.nextId = nextId;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public void setRequiredQuantity(int requiredQuantity) throws InvalidValuesException {
-        if(requiredQuantity <= 0) {
-            throw new InvalidValuesException("Invalid values!");
-        }
-        this.requiredQuantity = requiredQuantity;
-    }
-
-    public void setStartDate(LocalDate startDate) throws InvalidValuesException {
-        if(startDate.isAfter(deliveryDate)) {
-            throw new InvalidValuesException("Invalid values!");
-        }
-        this.startDate = startDate;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        return String.format("#%04d", id ) + " " + requiredQuantity + " " + productName + "(s) due to " + deliveryDate;
     }
 
     public void increaseReady() {

@@ -4,7 +4,6 @@ import core.User;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateFormatException;
 import exceptions.InvalidEmailException;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -71,7 +70,6 @@ public class Validator {
             }
 
             String role = foundUser.isManager() ? "Manager" : "Supervisor";
-            foundUser.resetLastSeen();
             return JsonParser.toJson(new Response("Welcome " + role, role));
         } catch (IllegalAccessException e) {
             FileUtils.log(e);

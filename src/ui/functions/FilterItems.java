@@ -40,6 +40,10 @@ public class FilterItems extends FunctionPanel {
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
             String filterValue = filterField.getText();
+            if(filterType == null || filterValue == null) {
+                JOptionPane.showMessageDialog(null, "please fill out all fields");
+                return;
+            }
             updatePanel(filterType, filterValue);
         });
         

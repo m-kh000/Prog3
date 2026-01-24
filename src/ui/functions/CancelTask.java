@@ -1,20 +1,17 @@
 package ui.functions;
+
 import core.Factory;
-import core.Factory.Task_id_pl;
-
 import java.awt.*;
-import java.util.HashMap;
-
 import javax.swing.*;
-
 import ui.FunctionPanel;
 import ui.Manager;
 
 public class CancelTask extends FunctionPanel {
+
     public CancelTask(JPanel centerPanel, JFrame frame) {
-        
+
         setLayout(new BorderLayout());
-        
+
         // Side panels
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
@@ -22,21 +19,20 @@ public class CancelTask extends FunctionPanel {
         rightPanel.setPreferredSize(new Dimension(100, 0));
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.EAST);
-        
+
         // Components creation
         JPanel mainPanel = new JPanel(new GridLayout(8, 1, 20, 20));
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select Task:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        HashMap<String, Task_id_pl> completeTasksHashMap = Factory.get0PCTasksNames_ids();
-        JComboBox<String> taskCombo = new JComboBox<>(completeTasksHashMap.keySet().toArray(new String[0]));
+        JComboBox<String> taskCombo = new JComboBox<>(Factory.get0PCTasksNames());
         taskCombo.setFont(Manager.defaultFont(true, false));
         taskCombo.setSelectedItem(null);
-        
+
         JButton cancelBtn = new JButton("Cancel Task");
         cancelBtn.setFont(Manager.defaultFont(true, true));
         cancelBtn.setBackground(Color.RED);
-        cancelBtn.setForeground(Color.WHITE);        
+        cancelBtn.setForeground(Color.WHITE);
         cancelBtn.setFocusPainted(false);
         cancelBtn.setOpaque(true);
 
@@ -51,21 +47,30 @@ public class CancelTask extends FunctionPanel {
 
         // Cancel button click
         cancelBtn.addActionListener(e -> {
-            int taskId = completeTasksHashMap.get((String)taskCombo.getSelectedItem()).taskId;
+            String taskName = (String) taskCombo.getSelectedItem();
+            if (taskName == null) {
+                JOptionPane.showMessageDialog(null, "Please select a task to cancel.");
+                return;
+            }
+            try{
+            int taskId = Integer.parseInt(taskName.substring(1, taskName.indexOf(" ")));
             Factory.cancelTask(taskId);
             taskCombo.removeAllItems();
-            for(String task : Factory.get0PCTasksNames()) {
+            for (String task : Factory.get0PCTasksNames()) {
                 taskCombo.addItem(task);
             }
             taskCombo.setSelectedItem(null);
             Manager.isEdited = true;
             JOptionPane.showMessageDialog(null, "Task cancelled successfully");
-        });
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "An error occurred while cancelling the task: " + ex.getMessage());
+            }
+            });
 
         // Layout setup
         selectPanel.add(selectLabel);
         selectPanel.add(taskCombo);
-        
+
         mainPanel.add(createTopPanel("Cancel Tasks", centerPanel, frame, "supervisor"));
         mainPanel.add(selectPanel);
         mainPanel.add(new JPanel());
@@ -74,7 +79,7 @@ public class CancelTask extends FunctionPanel {
         mainPanel.add(new JPanel());
         mainPanel.add(new JPanel());
         mainPanel.add(cancelBtn);
-        
+
         add(mainPanel, BorderLayout.CENTER);
     }
 }

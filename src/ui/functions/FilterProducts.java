@@ -5,12 +5,12 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.*;
-import utils.Validator;
 import ui.FunctionPanel;
-import ui.Manager;
 import ui.LabelBox;
+import ui.Manager;
 import ui.components.ProductPanel;
 import utils.FileUtils;
+import utils.Validator;
 
 public class FilterProducts extends FunctionPanel {
 
@@ -76,6 +76,10 @@ public class FilterProducts extends FunctionPanel {
         // Filter button listener
         filterBtn.addActionListener(e -> {
             String filterType = (String) filterCombo.getSelectedItem();
+            if(filterType == null) {
+                JOptionPane.showMessageDialog(null, "please fill out all fields");
+                return;
+            }
             if ("One ProductLine".equals(filterType)) {
                 String productLine = (String) filterField.getSelectedItem();
                 updateProductsPanel(Factory.getWarehouse().filterProductsByProductLine(productLine), false);

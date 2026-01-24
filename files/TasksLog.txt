@@ -47,3 +47,5 @@ Task: 10 Bed(s) due to 2026-02-15, Customer: Joseph, Added on 2026-01-24
 Task: 10 Bed(s) due to 2026-02-15, Customer: Joseph, Canceled on 2026-01-24
 Task: 10 Bed(s) due to 2026-02-15, Customer: Joseph, Added on 2026-01-24
 Task: 10 Bed(s) due to 2026-02-15, Customer: Joseph, Delivered on 2026-01-24
+Task: #0030 40 Hoodie(s) due to 2001-02-20, Customer: mk, Added on 2026-01-24
+Task: #0030 40 Hoodie(s) due to 2001-02-20, Customer: mk, Delivered on 2026-01-24

@@ -41,13 +41,6 @@ public class Item {
         return quantity <= quantityAvailable;
     }
 
-    public void add(int quantity) throws InvalidValuesException {
-        if(quantity <= 0) {
-            throw new InvalidValuesException();
-        }
-        quantityAvailable += quantity;
-    }
-
     public boolean isAvailable() { 
         return quantityAvailable != 0;
     }
@@ -123,7 +116,7 @@ public class Item {
 
     public void restock(int addQuantity) throws InvalidValuesException {
         if (addQuantity <= 0) {
-            throw new InvalidValuesException();
+            throw new InvalidValuesException("Quantity to add must be positive.");
         }
         quantityAvailable += addQuantity;
     }

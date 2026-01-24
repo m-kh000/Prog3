@@ -4,7 +4,6 @@ import core.Factory;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
-
 import ui.FunctionPanel;
 import ui.Manager;
 import ui.components.TaskPanel;
@@ -59,19 +58,23 @@ public class FilterTasks extends FunctionPanel {
             }
         });
 
-        // Filter button click
-        filterBtn.addActionListener(e -> {
-            String filterType = (String) filterCombo.getSelectedItem();
-            String filterValue = (String) filterField.getSelectedItem();
-            updateTasksPanel(filterType, filterValue);
-        });
-
         // Enter key binding
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "filter");
         getActionMap().put("filter", new AbstractAction() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 filterBtn.doClick();
             }
+        });
+
+        // Filter button click
+        filterBtn.addActionListener(e -> {
+            String filterType = (String) filterCombo.getSelectedItem();
+            String filterValue = (String) filterField.getSelectedItem();
+            if(filterType == null || filterValue == null) {
+                JOptionPane.showMessageDialog(null, "please fill out all fields");
+                return;
+            }
+            updateTasksPanel(filterType, filterValue);
         });
 
         // Layout setup
@@ -101,7 +104,6 @@ public class FilterTasks extends FunctionPanel {
         tasksPanel.removeAll();
 
         List<core.Task> tasks = null;
-        //TODO: handle the case where filterType is null because it is throwing a NullPointerException
         if (filterType.equals("Product")) {
             tasks = Factory.filterTasksByProduct(filterValue);
         } else if (filterType.equals("ProductLine")) {

@@ -1,5 +1,11 @@
 package utils;
 
+import core.Factory;
+import core.Item;
+import core.Product;
+import core.ProductLine;
+import core.Task;
+import core.User;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,13 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
-import core.Factory;
-import core.Item;
-import core.Product;
-import core.ProductLine;
-import core.Task;
-import core.User;
 import jsonParser.*;
 
 public class FileUtils {
@@ -161,14 +160,14 @@ public class FileUtils {
                 HashSet<ProductLine> productLines = new HashSet<>();
 
                 for (int i = 0; i < productLinesPaths.length; i++) {
-                    File file = new File(productLinesPaths[i]);
-                    if (!file.exists() || !file.isDirectory()) {
-                        throw new IOException("Path does not exist or is not a directory: " + file.getAbsolutePath());
+                    File folder = new File(productLinesPaths[i]);
+                    if (!folder.exists() || !folder.isDirectory()) {
+                        throw new IOException("Path does not exist or is not a directory: " + folder.getAbsolutePath());
                     }
 
-                    File[] plFiles = file.listFiles();
+                    File[] plFiles = folder.listFiles();
                     if (plFiles == null || plFiles.length <= 0) {
-                        throw new IOException("Couldn\'t find directory or directory is empty: " + file.getAbsolutePath());
+                        throw new IOException("Couldn\'t find directory or directory is empty: " + folder.getAbsolutePath());
                     }
 
                     ProductLine pl = new ProductLine();
@@ -334,7 +333,7 @@ public class FileUtils {
 
             try {
                 for (ProductLine pl : productLines) {
-                    String plPath = FILES.toString() + "\\" + pl.getLineName();
+                    String plPath = FILES.toString() + "\\" + pl.getName();
 
                     if (!productLinesPaths.contains(plPath)) {
                         productLinesPaths.add(plPath);
@@ -350,11 +349,11 @@ public class FileUtils {
 
                     file = new File(plPath, "inprogress.json");
                     createFile(file);
-                    writeData(file, JsonParser.toJson(pl.getInprogressTasks()), false);
+                    writeData(file, JsonParser.toJson(pl.getInprogress()), false);
 
                     file = new File(plPath, "completed.json");
                     createFile(file);
-                    writeData(file, JsonParser.toJson(pl.getCompletedTasks()), false);
+                    writeData(file, JsonParser.toJson(pl.getCompleted()), false);
 
                 }
                 writeData(PRODUCTLINESPATHS_FILE, JsonParser.toJson(productLinesPaths), false);

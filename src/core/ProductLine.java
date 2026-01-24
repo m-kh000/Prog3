@@ -1,12 +1,11 @@
 package core;
 
+import exceptions.InvalidValuesException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
-import exceptions.InvalidValuesException;
 import jsonParser.annotations.JsonIgnore;
 import ui.Manager;
 import ui.UI;
@@ -129,9 +128,7 @@ public class ProductLine implements Runnable {
     }
 
     //GETTERS
-    public int getLineId() {
-        return this.id;
-    }
+
     public static int getNextId() {
         return nextId;
     }
@@ -140,20 +137,8 @@ public class ProductLine implements Runnable {
         return this.priority;
     }
 
-    public String getLineName() {
-        return this.name;
-    }
-
     public String getLineStatus() {
         return this.status;
-    }
-
-    public List<Task> getCompletedTasks() {
-        return this.completed;
-    }
-
-    public List<Task> getInprogressTasks() {
-        return this.inprogress;
     }
 
     /**
@@ -216,13 +201,6 @@ public class ProductLine implements Runnable {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public void setPriority(int priority) throws InvalidValuesException {
-        if(priority < 1 || priority > 10) {
-            throw new InvalidValuesException("Invalid values!");
-        }
-        this.priority = priority;
     }
 
     public void setStatus(String status) {
