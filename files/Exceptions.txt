@@ -424,3 +424,64 @@ NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
 NoSuchElementException occurred, Exception's message: null
+InvalidEmailException occurred, Exception's message: Invalid Email Format.
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+NoSuchElementException occurred, Exception's message: null
+InvalidValuesException occurred, Exception's message: Item duplicated.
+InvalidValuesException occurred, Exception's message: Item duplicated.
+InvalidValuesException occurred, Exception's message: Item duplicated.
+InvalidValuesException occurred, Exception's message: Item duplicated.
+InvalidValuesException occurred, Exception's message: Item can not be negative.
+InvalidValuesException occurred, Exception's message: Item can not be negative.
+InvalidValuesException occurred, Exception's message: Item quantity can not be zero.
+InvalidValuesException occurred, Exception's message: Item quantity can not be zero.
+InvalidValuesException occurred, Exception's message: Item quantity can not be zero.
+InvalidValuesException occurred, Exception's message: Item can not be negative.

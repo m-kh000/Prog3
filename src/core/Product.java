@@ -57,7 +57,13 @@ public class Product {
     }
 
     public void addItem(Item i, int quantity) throws InvalidValuesException {
-        if(quantity <= 0 || requiredItems.containsKey(i)) {
+        if(quantity == 0) {
+            throw new InvalidValuesException("Item quantity can not be zero.");
+        }
+        if(quantity < 0) {
+            throw new InvalidValuesException("Item can not be negative.");
+        }
+        if(requiredItems.containsKey(i)) {
             throw new InvalidValuesException("Item duplicated.");
         }
         requiredItems.put(i, quantity);

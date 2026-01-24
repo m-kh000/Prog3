@@ -49,3 +49,7 @@ Task: 10 Bed(s) due to 2026-02-15, Customer: Joseph, Added on 2026-01-24
 Task: 10 Bed(s) due to 2026-02-15, Customer: Joseph, Delivered on 2026-01-24
 Task: #0030 40 Hoodie(s) due to 2001-02-20, Customer: mk, Added on 2026-01-24
 Task: #0030 40 Hoodie(s) due to 2001-02-20, Customer: mk, Delivered on 2026-01-24
+Task: #0031 10 Fries(s) due to 1111-11-22, Customer: zein, Added on 2026-01-24
+Task: #0030 40 Hoodie(s) due to 2001-02-20, Customer: mk, Delivered on 2026-01-24
+Task: #0031 12 Chair(s) due to 1111-11-22, Customer: zein, Added on 2026-01-24
+Task: #0031 12 Chair(s) due to 1111-11-22, Customer: zein, Canceled on 2026-01-24
