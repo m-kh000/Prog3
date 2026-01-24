@@ -2,8 +2,6 @@ package core;
 
 import exceptions.ItemInUseException;
 import exceptions.StorageInitializationException;
-import jsonParser.annotations.JsonIgnore;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
+import jsonParser.annotations.JsonIgnore;
 import utils.FileUtils;
 
 public class Warehouse {
@@ -28,10 +26,6 @@ public class Warehouse {
         } catch (IOException e) {
             throw new StorageInitializationException("Failed to initialize Warehouse.");
         }
-    }
-    public Warehouse(List<Item> items, List<Product> products) {
-        this.items = new ArrayList<>(items);
-        this.products = new ArrayList<>(products);
     }
     
     public synchronized void initializeProducts() {
@@ -90,14 +84,6 @@ public class Warehouse {
         }
         products.removeAll(toRemove);
     }
-    /**
-     * Removes a specific product from the products list.
-     * 
-     * @param productName the name of the product to remove
-     */
-    public void removeProduct(String productName) {
-        products.removeIf(p -> p.getName().equals(productName));
-    }
 
     /**
      * @param itemName the name of the item
@@ -112,13 +98,7 @@ public class Warehouse {
         
         return null;
     }
-    public List<Item> getItems() {
-        return this.items;
-    }
-    public List<Product> getProducts() {
-        return this.products;
-    }
-    
+
     /**
      * @param productName the name of the product
      * @return the wanted product if found or else null
@@ -133,15 +113,12 @@ public class Warehouse {
         return null;
     }
 
-    /**
-     * @param itemName the name of the item
-     * @return {@code true} if the items list contains an {@code Item} with the given name
-     *      and the available quantity is greater than zero or false otherwise
-     */
-    public boolean isItemAvailable(String itemName) {
-        Item temp = this.getItem(itemName);
+    public List<Item> getItems() {
+        return this.items;
+    }
 
-        return ((temp == null) ? false : (temp.getQuantityAvailable() > 0) ? true : false);
+    public List<Product> getProducts() {
+        return this.products;
     }
 
     public void makeProduct(Product p) {
@@ -155,13 +132,7 @@ public class Warehouse {
             i.take(e.getValue());
         }
     }
-    public String[] getProductsNames() {
-        List<String> names = new ArrayList<>();
-        for(Product p : products){
-            names.add(p.getName());
-        }
-        return names.toArray(new String[names.size()]);
-    }
+
     public List<Product> getTopSaleProduct(LocalDate begDate,LocalDate enDate) {
         List<Product> filteredList = new ArrayList<>();
         List<Product> freq = new ArrayList<>();
@@ -176,12 +147,13 @@ public class Warehouse {
         }
         return filteredList;
     }
+    
     public List<Product> filterProductsByProductLine(String filter) {
         HashSet<Product> filteredSet = new HashSet<>();
         filter = filter.trim().toLowerCase();
         for(ProductLine pl : Factory.getAllLines()) {
             if(pl.getName().trim().toLowerCase().equals(filter)) {
-                for(Task t : pl.getCompletedTasks()) {
+                for(Task t : pl.getCompleted()) {
                     if(t.getProduct() == null) continue;
                     filteredSet.add(t.getProduct());
                 }

@@ -2,7 +2,6 @@ package ui.functions;
 import core.Factory;
 import java.awt.*;
 import javax.swing.*;
-
 import ui.FunctionPanel;
 import ui.Manager;
 import ui.components.ProductLinePanel;
@@ -29,6 +28,10 @@ public class FilterProductLines extends FunctionPanel {
         // Filter button click
         filterBtn.addActionListener(e -> {
             String filterValue = (String) filterField.getSelectedItem();
+            if(filterValue == null) {
+                JOptionPane.showMessageDialog(null, "please fill out all fields");
+                return;
+            }
             updateProductLinesPanel(filterValue);
         });
         
@@ -56,6 +59,7 @@ public class FilterProductLines extends FunctionPanel {
         for (core.ProductLine productLine : Factory.previewLines()) {
             ProductLinesPanel.add(new ProductLinePanel(productLine,"supervisor"));
             ProductLinesPanel.add(Box.createVerticalStrut(5));
+            System.out.println("hi");
         }
         
         add(new JScrollPane(ProductLinesPanel) {{

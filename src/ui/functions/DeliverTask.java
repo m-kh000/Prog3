@@ -8,7 +8,7 @@ import javax.swing.*;
 import ui.FunctionPanel;
 import ui.Manager;
 import utils.FileUtils;
-import core.Factory.Task_id_pl;
+import core.Product;
 import core.ProductLine;
 
 public class DeliverTask extends FunctionPanel {
@@ -29,7 +29,7 @@ public class DeliverTask extends FunctionPanel {
         JPanel selectPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         JLabel selectLabel = new JLabel("Select a completed Task to deliver:");
         selectLabel.setFont(Manager.defaultFont(true, false));
-        HashMap<String, Task_id_pl> completeTasksHashMap = Factory.getCompletedTasksNames_ids_pls();
+        HashMap<String, ProductLine> completeTasksHashMap = Factory.getCompletedTasksNames_ids_pls();
         JComboBox<String> taskCombo = new JComboBox<>(completeTasksHashMap.keySet().toArray(new String[0]));
         taskCombo.setFont(Manager.defaultFont(false, false));
         taskCombo.setSelectedItem(null);
@@ -56,8 +56,9 @@ public class DeliverTask extends FunctionPanel {
             if (taskCombo.getSelectedItem() == null) {
                 throw new EmptyFieldException();
             }
-            int taskId = completeTasksHashMap.get((String)taskCombo.getSelectedItem()).taskId;
-            ProductLine pl = completeTasksHashMap.get((String)taskCombo.getSelectedItem()).pl;
+            String taskName = (String) taskCombo.getSelectedItem();
+            int taskId = Integer.parseInt(taskName.substring(1, taskName.indexOf(" ")));
+            ProductLine pl = completeTasksHashMap.get(taskName);
             Factory.deliverTask(pl, taskId);
             taskCombo.removeAllItems();
             for(String task : Factory.getCompletedTasksNames_ids_pls().keySet()) {

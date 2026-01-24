@@ -1,2 +1,12 @@
 [
+    {
+        "id": 30,
+        "productName": "Hoodie",
+        "requiredQuantity": 40,
+        "ready": 40,
+        "customerName": "mk",
+        "startDate": "2000-11-11",
+        "deliveryDate": "2001-02-20",
+        "status": "inline"
+    }
 ]

@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Hoodie",
-        "quantityAvailable": 1382,
+        "quantityAvailable": 1422,
         "requiredItemsNames": [
             {
                 "key": "Cotton",
@@ -24,9 +24,10 @@
             "2026-01-22",
             "2026-01-22",
             "2026-01-23",
-            "2026-01-23"
+            "2026-01-23",
+            "2000-11-11"
         ],
-        "purchaseFrequency": 15
+        "purchaseFrequency": 16
     },
     {
         "id": 3,

@@ -35,8 +35,18 @@ public abstract class FunctionPanel extends JPanel {
         title.setFont(Manager.defaultFont(true, true));
         title.setHorizontalAlignment(JLabel.CENTER);
         topPanel.add(title, BorderLayout.CENTER);
-        topPanel.add(BackBtn(centerPanel, frame, role), BorderLayout.WEST);
+        
+        JButton backBtn = BackBtn(centerPanel, frame, role);
+        topPanel.add(backBtn, BorderLayout.WEST);
         setName(titleText);
+        // ESC key binding for back navigation
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "back");
+        getActionMap().put("back", new AbstractAction() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                backBtn.doClick();
+            }
+        });
+        
         return topPanel;
     }
 
@@ -60,6 +70,5 @@ public abstract class FunctionPanel extends JPanel {
         button.setBorderPainted(false);
         button.setOpaque(true);
         return button;
-    }
-
+    }   
 }
