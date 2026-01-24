@@ -8,7 +8,6 @@ import javax.swing.*;
 import ui.FunctionPanel;
 import ui.Manager;
 import utils.FileUtils;
-import core.Product;
 import core.ProductLine;
 
 public class DeliverTask extends FunctionPanel {

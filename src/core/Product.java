@@ -88,15 +88,6 @@ public class Product {
         return this.requiredItems;
     }
 
-    private Item getItem(String name) {
-        for (Item i : requiredItems.keySet()) {
-            if (name.equals(i.getName())) {
-                return i;
-            }
-        }
-        return null;
-    }
-
     public int getPurchaseFrequency() {
         return purchaseFrequency;
     }
