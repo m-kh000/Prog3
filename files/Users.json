@@ -22,5 +22,17 @@
         "password": "123456789",
         "isManager": true,
         "lastSeen": "2026-01-10"
+    },
+    {
+        "email": "manager@gmail.com",
+        "password": "00000000",
+        "isManager": true,
+        "lastSeen": "2026-01-24"
+    },
+    {
+        "email": "super@gmail.com",
+        "password": "00000000",
+        "isManager": false,
+        "lastSeen": "2026-01-24"
     }
 ]

@@ -101,6 +101,7 @@ public class FilterTasks extends FunctionPanel {
         tasksPanel.removeAll();
 
         List<core.Task> tasks = null;
+        //TODO: handle the case where filterType is null because it is throwing a NullPointerException
         if (filterType.equals("Product")) {
             tasks = Factory.filterTasksByProduct(filterValue);
         } else if (filterType.equals("ProductLine")) {

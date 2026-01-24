@@ -46,7 +46,7 @@ public class UI extends JFrame {
         centerPanel.repaint();
     }
 
-    public static void notify(Item i){
+    public static void notify(Item i) {
         JOptionPane.showMessageDialog(null, "item " + i.getName() +" is insufficient!");
     }
 

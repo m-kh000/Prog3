@@ -1,12 +1,2 @@
 [
-    {
-        "id": 4,
-        "productName": "Bed",
-        "requiredQuantity": 15,
-        "ready": 15,
-        "customerName": "Mira",
-        "startDate": "2026-01-15",
-        "deliveryDate": "2026-03-30",
-        "status": "inline"
-    }
 ]

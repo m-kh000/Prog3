@@ -15,7 +15,6 @@ import utils.IDInitializer;
 import utils.ThreadManager;
 
 public class ProductLine implements Runnable {
-
     private static int nextId = 1;
     private int id;
     private int priority;
@@ -72,8 +71,6 @@ public class ProductLine implements Runnable {
     @Override
     public void run() {
         while (!inline.isEmpty() || !inprogress.isEmpty()) {            
-            Manager.isEdited = true;
-
             if (!inline.isEmpty()) {
                 inprogress.add(inline.remove(0));
             }
@@ -88,13 +85,14 @@ public class ProductLine implements Runnable {
                 continue;
             }
 
-            while (canProceedWith(runningTask, true) && !isTaskFinished(runningTask)) {
+            while (!isTaskFinished(runningTask) && canProceedWith(runningTask, true)) {
                 if (!getLineStatus().toLowerCase().equals("active")) {
                     return;
                 }
 
                 Factory.makeProduct(runningTask.getProduct());
                 runningTask.increaseReady();
+                Manager.isEdited = true;
 
                 try {
                     Thread.sleep(300);

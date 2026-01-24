@@ -47,7 +47,7 @@ public class Product {
     }
 
     public void initializeRequiredItems() {
-        if (isInit) {
+        if (this.isInit) {
             return;
         }
 
