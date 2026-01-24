@@ -75,9 +75,10 @@
         "orderRegistry": [
             "2026-01-15",
             "2026-01-23",
-            "2026-01-23"
+            "2026-01-23",
+            "1111-11-11"
         ],
-        "purchaseFrequency": 3
+        "purchaseFrequency": 4
     },
     {
         "id": 5,

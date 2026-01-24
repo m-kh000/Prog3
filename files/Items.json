@@ -4,7 +4,7 @@
         "name": "Cotton",
         "category": "Fabric",
         "price": 1.0,
-        "quantityAvailable": 9,
+        "quantityAvailable": 180,
         "minQuantity": 100
     },
     {
