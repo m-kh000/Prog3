@@ -97,6 +97,14 @@ public class Task {
         return String.format("#%04d", id ) + " " + requiredQuantity + " " + productName + "(s) due to " + deliveryDate;
     }
 
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
     public void increaseReady() {
         this.ready++;
     }
